@@ -1,0 +1,12 @@
+#footer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+#footer > a {
+    padding: 20px 30px;
+}

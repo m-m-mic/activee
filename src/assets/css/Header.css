@@ -1,0 +1,69 @@
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 15px;
+    background: var(--light-mode-background);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.header.hide {
+    top: -70px;
+}
+
+#header-options {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icon {
+    height: 32px;
+    width: 32px;
+    display: block;
+}
+
+.header-button {
+    cursor: pointer;
+}
+
+#options-popup-button {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.options-popup {
+    position: absolute;
+    top: 60px;
+    right: 12px;
+    background: #d5d5d5;
+    padding: 15px;
+    border-radius: 8px;
+    transition: 100ms ease-out;
+    z-index: 20;
+}
+
+#popup-wrapper {
+    position: absolute;
+}
+
+#popup-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 19;
+}
+
+.options-selection {
+    display: block;
+    padding: 5px 0;
+}
