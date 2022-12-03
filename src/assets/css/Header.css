@@ -43,15 +43,12 @@
     position: absolute;
     top: 60px;
     right: 12px;
-    background: #d5d5d5;
-    padding: 15px;
+    background: var(--light-mode-background);
+    box-shadow: var(--light-mode-elevation-4);
+    padding: 14px 19px;
     border-radius: 8px;
     transition: 100ms ease-out;
     z-index: 20;
-}
-
-#popup-wrapper {
-    position: absolute;
 }
 
 #popup-backdrop {
@@ -64,6 +61,12 @@
 }
 
 .options-selection {
-    display: block;
+    display: flex;
+    width: 100%;
+    align-items: center;
     padding: 5px 0;
+    gap: 19px;
+}
+.options-icon{
+    width: 24px;
 }

@@ -1,24 +1,25 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import AccountIcon from "../assets/svgs/account_icon_black.svg";
+import ActivitiesIcon from "../assets/svgs/your_activities_icon_black.svg";
+import SportsIcon from "../assets/svgs/sports_icon_black.svg";
+import SettingsIcon from "../assets/svgs/settings_icon_black.svg";
+import { PopupOption } from "./PopupOption";
 
 export function OptionsPopup() {
   return (
     <div className="options-popup">
-      <NavLink className="options-selection" to="/profile">
+      <PopupOption ImageSrc={AccountIcon} LinkUrl="profile">
         Dein Profil
-      </NavLink>
-      <hr />
-      <NavLink className="options-selection" to="/my-activities">
+      </PopupOption>
+      <PopupOption ImageSrc={ActivitiesIcon} LinkUrl="activities">
         Deine Aktivitäten
-      </NavLink>
-      <hr />
-      <NavLink className="options-selection" to="/sports">
+      </PopupOption>
+      <PopupOption ImageSrc={SportsIcon} LinkUrl="sports">
         Sportarten
-      </NavLink>
-      <hr />
-      <NavLink className="options-selection" to="/settings">
+      </PopupOption>
+      <PopupOption ImageSrc={SettingsIcon} LinkUrl="settings" isLast>
         Einstellungen
-      </NavLink>
+      </PopupOption>
     </div>
   );
 }
