@@ -95,6 +95,7 @@ h1 {
 }
 
 .h1-subtitle {
+    margin: -15px 0 15px;
     font-family: var(--h1-subtitle-typeface);
     font-size: var(--h1-subtitle-size);
 }
