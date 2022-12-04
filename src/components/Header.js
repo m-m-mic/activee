@@ -6,7 +6,7 @@ import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
 import AccountIconBlack from "../assets/svgs/account_icon_black.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
-import { OptionsPopup } from "./OptionsPopup";
+import { MenuPopup } from "./MenuPopup";
 
 export function Header(userId) {
   const scrollDirection = useScrollDirection();
@@ -43,7 +43,7 @@ export function Header(userId) {
       </div>
       {isOptionsPopupVisible && (
         <>
-          <OptionsPopup />
+          <MenuPopup />
           <div
             id="popup-backdrop"
             onClick={() => {
