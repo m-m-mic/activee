@@ -1,0 +1,16 @@
+.activee-button {
+  border: none;
+  border-radius: 4px;
+  box-shadow: var(--light-mode-elevation-4);
+  font-family: var(--button-typeface);
+  font-size: var(--button-size);
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.primary {
+  color: var(--light-mode-background);
+  background: #4a9d8c;
+}
+.primary:active {
+  background: #6ac8b7;
+}

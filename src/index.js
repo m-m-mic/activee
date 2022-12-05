@@ -7,7 +7,6 @@ import SearchLayout from "./layouts/SearchLayout";
 import "./assets/css/index.css";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
-import { Search } from "./pages/Search";
 import { Activity } from "./pages/Activity";
 
 export default function App() {
@@ -21,9 +20,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="activity/:id" element={<Activity />} />
         </Route>
-        <Route path="/" element={<SearchLayout />}>
-          <Route path="search" element={<Search />} />
-        </Route>
+        <Route path="/search" element={<SearchLayout />} />
       </Routes>
     </BrowserRouter>
   );
