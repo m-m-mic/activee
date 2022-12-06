@@ -8,6 +8,7 @@ import "./assets/css/index.css";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { Activity } from "./pages/Activity";
+import CreateActivity from "./pages/CreateActivity";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="activity/:id" element={<Activity />} />
+          <Route path="activity/new" element={<CreateActivity />} />
         </Route>
         <Route path="/search" element={<SearchLayout />} />
       </Routes>

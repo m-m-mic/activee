@@ -10,6 +10,9 @@ export function Home() {
         <NavLink to="/activity/0">
           <ActiveeButton buttonType="primary">Activity</ActiveeButton>
         </NavLink>
+        <NavLink to="activity/new">
+          <ActiveeButton buttonType="primary">New Activity</ActiveeButton>
+        </NavLink>
       </div>
     </>
   );
