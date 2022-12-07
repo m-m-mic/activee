@@ -1,0 +1,20 @@
+.activee-banner {
+  margin: 25px 0 95px;
+  height: 75px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.activee-name-large {
+  font-family: var(--logo-typeface);
+  font-size: 60px;
+}
+.action-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}

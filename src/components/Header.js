@@ -10,8 +10,8 @@ import { MenuPopup } from "./MenuPopup";
 
 export function Header({ userType }) {
   const scrollDirection = useScrollDirection();
-  const [isShrunk, setShrunk] = useState(false);
-  const [isOptionsPopupVisible, setOptionsPopupVisible] = useState(false);
+  const [isCiVisible, setIsCiVisible] = useState(false);
+  const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -19,17 +19,18 @@ export function Header({ userType }) {
     };
   });
   const handleScroll = () => {
-    setOptionsPopupVisible(false);
-    setShrunk((isShrunk) => {
-      if (!isShrunk && (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)) {
+    setIsOptionsPopupVisible(false);
+    setIsCiVisible((isVisible) => {
+      const minimumHeight = 200;
+      if (!isVisible && (document.body.scrollTop > minimumHeight || document.documentElement.scrollTop > minimumHeight)) {
         return true;
       }
 
-      if (isShrunk && document.body.scrollTop < 4 && document.documentElement.scrollTop < 4) {
+      if (isVisible && document.body.scrollTop < minimumHeight && document.documentElement.scrollTop < minimumHeight) {
         return false;
       }
 
-      return isShrunk;
+      return isVisible;
     });
   };
   if (userType === "participant" || userType === "organisation") {
@@ -49,18 +50,18 @@ export function Header({ userType }) {
             id="options-popup-button"
             className="header-button"
             onClick={() => {
-              setOptionsPopupVisible(!isOptionsPopupVisible);
+              setIsOptionsPopupVisible(!isOptionsPopupVisible);
             }}>
             <img id="account-icon" className="header-icon" src={AccountIconBlack} alt="Account icon" />
           </span>
         </div>
         {isOptionsPopupVisible && (
           <>
-            <MenuPopup userType={userType} />
+            <MenuPopup userType={userType} setOptionsPopupVisible={setIsOptionsPopupVisible} />
             <div
               id="popup-backdrop"
               onClick={() => {
-                setOptionsPopupVisible(false);
+                setIsOptionsPopupVisible(false);
               }}></div>
           </>
         )}
@@ -68,12 +69,12 @@ export function Header({ userType }) {
     );
   } else {
     return (
-      <div className={isShrunk ? "header" : "header maximized-header"}>
-        <div id="activee-ci">
+      <div className={isCiVisible ? "header" : "header no-background"}>
+        <div className={isCiVisible ? "activee-ci" : "activee-ci hide"}>
           <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
           <span className="activee-name">activee</span>
         </div>
-        <span id="languages-popup-button" className="header-button-absolute">
+        <span id="languages-popup-button" className="header-button">
           <img id="language-icon" className="header-icon" src={GermanIcon} alt="Language icon" />
         </span>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useUser } from "../layouts/Layout";
+import { LandingPage } from "../components/LandingPage";
 
 export function Home() {
   const user = useUser();
@@ -31,17 +32,6 @@ export function Home() {
       </>
     );
   } else {
-    return (
-      <div>
-        <h1>Landing page</h1>
-        <NavLink to={`/?user=participant`}>
-          <ActiveeButton buttonType="primary">Als Teilnehmer anmelden</ActiveeButton>
-        </NavLink>
-        <NavLink to={`/?user=organisation`}>
-          <ActiveeButton buttonType="primary">Als Verein anmelden</ActiveeButton>
-        </NavLink>
-        <div className="filler-div"></div>
-      </div>
-    );
+    return <LandingPage />;
   }
 }
