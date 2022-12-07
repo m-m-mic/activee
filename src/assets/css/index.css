@@ -1,142 +1,145 @@
 :root {
-    --light-mode-typeface: #2d2d2d;
-    --light-mode-background: #fffcf9;
-    --light-mode-warning: #e1786c;
-    --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
-    --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
-    --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
-    --light-mode-elevation-4: 1px 2px 9px -5px rgba(0, 0, 0, 0.37);
-    --h1-typeface: Inter Bold, sans-serif;
-    --h1-size: 32px;
-    --h1-subtitle-typeface: Inter SemiBold Italic, sans-serif;
-    --h1-subtitle-size: 20px;
-    --h2-typeface: Inter Bold, sans-serif;
-    --h2-size: 24px;
-    --h3-typeface: Inter Bold, sans-serif;
-    --h3-size: 20px;
-    --h4-typeface: Inter Bold, sans-serif;
-    --h4-size: 16px;
-    --text-typeface: Inter Medium, sans-serif;
-    --text-size: 16px;
-    --button-typeface: Inter Bold, sans-serif;
-    --button-size: 16px;
+  --light-mode-typeface: #2d2d2d;
+  --light-mode-background: #fffcf9;
+  --light-mode-warning: #e1786c;
+  --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
+  --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
+  --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
+  --light-mode-elevation-4: 1px 2px 9px -5px rgba(0, 0, 0, 0.37);
+  --h1-typeface: Inter Bold, sans-serif;
+  --h1-size: 32px;
+  --h1-subtitle-typeface: Inter SemiBold Italic, sans-serif;
+  --h1-subtitle-size: 20px;
+  --h2-typeface: Inter Bold, sans-serif;
+  --h2-size: 24px;
+  --h3-typeface: Inter Bold, sans-serif;
+  --h3-size: 20px;
+  --h4-typeface: Inter Bold, sans-serif;
+  --h4-size: 16px;
+  --text-typeface: Inter Medium, sans-serif;
+  --text-size: 16px;
+  --button-typeface: Inter Bold, sans-serif;
+  --button-size: 16px;
+  --logo-typeface: Fredoka One Regular, sans-serif;
 }
 
 @font-face {
-    font-family: "Inter Thin";
-    src: url(../fonts/Inter-Thin.ttf);
+  font-family: "Inter Thin";
+  src: url(../fonts/Inter-Thin.ttf);
 }
 
 @font-face {
-    font-family: "Inter ExtraLight";
-    src: url(../fonts/Inter-ExtraLight.ttf);
+  font-family: "Inter ExtraLight";
+  src: url(../fonts/Inter-ExtraLight.ttf);
 }
 
 @font-face {
-    font-family: "Inter Light";
-    src: url(../fonts/Inter-Light.ttf);
+  font-family: "Inter Light";
+  src: url(../fonts/Inter-Light.ttf);
 }
 
 @font-face {
-    font-family: "Inter Regular";
-    src: url(../fonts/Inter-Regular.ttf);
+  font-family: "Inter Regular";
+  src: url(../fonts/Inter-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Inter Medium";
-    src: url(../fonts/Inter-Medium.ttf);
+  font-family: "Inter Medium";
+  src: url(../fonts/Inter-Medium.ttf);
 }
 
 @font-face {
-    font-family: "Inter SemiBold";
-    src: url(../fonts/Inter-SemiBold.ttf);
+  font-family: "Inter SemiBold";
+  src: url(../fonts/Inter-SemiBold.ttf);
 }
 
 @font-face {
-    font-family: "Inter SemiBold Italic";
-    src: url(../fonts/Inter-SemiBoldItalic.otf);
+  font-family: "Inter SemiBold Italic";
+  src: url(../fonts/Inter-SemiBoldItalic.otf);
 }
 
 @font-face {
-    font-family: "Inter Bold";
-    src: url(../fonts/Inter-Bold.ttf);
+  font-family: "Inter Bold";
+  src: url(../fonts/Inter-Bold.ttf);
 }
 
 @font-face {
-    font-family: "Inter ExtraBold";
-    src: url(../fonts/Inter-ExtraBold.ttf);
+  font-family: "Inter ExtraBold";
+  src: url(../fonts/Inter-ExtraBold.ttf);
 }
 
 @font-face {
-    font-family: "Inter Black";
-    src: url(../fonts/Inter-Black.ttf);
+  font-family: "Inter Black";
+  src: url(../fonts/Inter-Black.ttf);
 }
-
+@font-face {
+  font-family: "Fredoka One Regular";
+  src: url(../fonts/FredokaOne-Regular.ttf);
+}
 body {
-    max-width: 600px;
-    width: 100%;
-    margin: 0;
-    font-family: var(--text-typeface);
-    font-size: var(--text-size);
-    color: var(--light-mode-typeface);
-    background: var(--light-mode-background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  max-width: 600px;
+  width: 100%;
+  margin: 0;
+  font-family: var(--text-typeface);
+  font-size: var(--text-size);
+  color: var(--light-mode-typeface);
+  background: var(--light-mode-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 h1 {
-    font-family: var(--h1-typeface);
-    font-size: var(--h1-size);
+  font-family: var(--h1-typeface);
+  font-size: var(--h1-size);
 }
 
 .h1-subtitle {
-    margin: -15px 0 15px;
-    font-family: var(--h1-subtitle-typeface);
-    font-size: var(--h1-subtitle-size);
+  margin: -15px 0 15px;
+  font-family: var(--h1-subtitle-typeface);
+  font-size: var(--h1-subtitle-size);
 }
 
 h2 {
-    font-family: var(--h2-typeface);
-    font-size: var(--h2-size);
+  font-family: var(--h2-typeface);
+  font-size: var(--h2-size);
 }
 
 h3 {
-    font-family: var(--h3-typeface);
-    font-size: var(--h3-size);
+  font-family: var(--h3-typeface);
+  font-size: var(--h3-size);
 }
 
 h4 {
-    font-family: var(--h4-typeface);
-    font-size: var(--h4-size);
+  font-family: var(--h4-typeface);
+  font-size: var(--h4-size);
 }
 
 button {
-    font-family: var(--button-typeface);
-    font-size: var(--button-size);
+  font-family: var(--button-typeface);
+  font-size: var(--button-size);
 }
 
 #root {
-    min-height: 100vh;
-    display: flex;
-    flex-flow: column;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
 }
 
 #content-body {
-    flex: 1;
-    margin: 0 12px 15px 12px;
+  flex: 1;
+  margin: 0 12px 15px 12px;
 }
 
 a {
-    text-decoration: none;
-    color: var(--light-mode-typeface)
+  text-decoration: none;
+  color: var(--light-mode-typeface);
 }
 
 .filler-div {
-    height: 300vh;
-    background: #c7a4a4;
+  height: 300vh;
+  background: #c7a4a4;
 }

@@ -5,7 +5,7 @@ import SportsIcon from "../assets/svgs/sports_icon_black.svg";
 import SettingsIcon from "../assets/svgs/settings_icon_black.svg";
 import { PopupOption } from "./PopupOption";
 
-export function MenuPopup() {
+export function MenuPopup({ userType }) {
   return (
     <div className="options-popup">
       <PopupOption ImageSrc={AccountIcon} LinkUrl="profile">

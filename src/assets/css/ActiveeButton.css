@@ -6,6 +6,13 @@
   font-size: var(--button-size);
   padding: 10px 15px;
   cursor: pointer;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.activee-button-icon {
+  width: 24px;
 }
 .primary {
   color: var(--light-mode-background);
