@@ -10,6 +10,7 @@
   flex-flow: row;
   justify-content: center;
   align-items: center;
+  transition: 200ms;
 }
 .activee-button-icon {
   width: 24px;
@@ -37,4 +38,8 @@
 .outline:active {
   outline: 3px solid #6ac8b7;
   color: #6ac8b7;
+}
+.disabled {
+  cursor: not-allowed;
+  background: var(--light-mode-disabled);
 }

@@ -63,7 +63,10 @@ export function Login() {
           />
         </div>
         <div className="login-buttons">
-          <ActiveeButton buttonType="primary" onClick={() => handleLogin(emailInput, passwordInput)}>
+          <ActiveeButton
+            buttonType="primary"
+            onClick={() => handleLogin(emailInput, passwordInput)}
+            isDisabled={emailInput === "" || passwordInput === ""}>
             Anmelden
           </ActiveeButton>
         </div>

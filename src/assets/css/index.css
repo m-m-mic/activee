@@ -4,6 +4,7 @@
   --light-mode-background-translucent: rgba(255, 252, 249, 0.7);
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
+  --light-mode-disabled: #c6dcd7;
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
   --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
   --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
