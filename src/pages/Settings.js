@@ -1,11 +1,14 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useCookies } from "react-cookie";
 
 export function Settings() {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  useEffect(() => {
+    document.title = "Einstellungen - activee";
+  });
   const handleLogout = () => {
     setCookie("userId", null, {
       path: "/",
