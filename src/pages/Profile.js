@@ -3,7 +3,7 @@ import "../assets/css/Profile.css";
 import AccountIcon from "../assets/svgs/account_icon_black.svg";
 import EditIcon from "../assets/svgs/edit_icon_white.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export function Profile() {
@@ -75,6 +75,6 @@ export function Profile() {
       </>
     );
   } else {
-    return;
+    return <Navigate to="/login" />;
   }
 }
