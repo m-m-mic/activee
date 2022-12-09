@@ -1,11 +1,18 @@
 .activee-button {
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: var(--light-mode-elevation-4);
   font-family: var(--button-typeface);
   font-size: var(--button-size);
   padding: 10px 15px;
   cursor: pointer;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.activee-button-icon {
+  width: 24px;
 }
 .primary {
   color: var(--light-mode-background);
@@ -13,4 +20,21 @@
 }
 .primary:active {
   background: #6ac8b7;
+}
+.warning {
+  color: var(--light-mode-background);
+  background: var(--light-mode-warning);
+}
+.warning:active {
+  background: var(--light-mode-warning-active);
+}
+.outline {
+  background: var(--light-mode-background);
+  outline: 3px solid #4a9d8c;
+  outline-offset: -3px;
+  color: #4a9d8c;
+}
+.outline:active {
+  outline: 3px solid #6ac8b7;
+  color: #6ac8b7;
 }

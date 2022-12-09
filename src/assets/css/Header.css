@@ -1,72 +1,96 @@
 .header {
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    padding: 0 15px;
-    background: var(--light-mode-background);
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 15px;
+  background: var(--light-mode-background-translucent);
+  backdrop-filter: var(--blur-effect);
+  -webkit-backdrop-filter: var(--blur-effect);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
-
 .header.hide {
-    top: -70px;
+  top: -70px;
 }
-
+.header.no-background {
+  background: rgba(255, 252, 249, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+.header.language-only {
+  justify-content: right;
+}
 #header-options {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 20px;
 }
 
 .header-icon {
-    height: 32px;
-    width: 32px;
-    display: block;
+  height: 32px;
+  width: 32px;
+  display: block;
 }
 
 .header-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #options-popup-button {
-    overflow: hidden;
-    border-radius: 20px;
+  overflow: hidden;
+  border-radius: 20px;
 }
 
 .options-popup {
-    position: absolute;
-    top: 60px;
-    right: 12px;
-    background: var(--light-mode-background);
-    box-shadow: var(--light-mode-elevation-4);
-    padding: 14px 19px;
-    border-radius: 8px;
-    transition: 100ms ease-out;
-    z-index: 20;
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  background: var(--light-mode-background);
+  box-shadow: var(--light-mode-elevation-4);
+  padding: 14px 19px;
+  border-radius: 8px;
+  transition: 100ms ease-out;
+  z-index: 20;
 }
 
 #popup-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 19;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 19;
 }
 
 .options-selection {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 5px 0;
-    gap: 19px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 5px 0;
+  gap: 19px;
 }
-.options-icon{
-    width: 24px;
+.options-icon {
+  width: 24px;
+}
+.activee-ci {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 1;
+  transition: 300ms ease-out;
+}
+.activee-ci.hide {
+  opacity: 0;
+}
+.activee-name {
+  font-family: var(--logo-typeface);
+  font-size: 32px;
 }
