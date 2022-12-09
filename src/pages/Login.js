@@ -68,6 +68,11 @@ export function Login() {
           </ActiveeButton>
         </div>
       </div>
+      <div className="login-no-account-wrapper">
+        <NavLink to="/" className="login-no-account-button">
+          Noch kein Konto?
+        </NavLink>
+      </div>
     </>
   );
 }

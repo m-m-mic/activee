@@ -35,3 +35,10 @@
   padding: 6px 8px;
   border-radius: 8px;
 }
+.login-no-account-wrapper {
+  text-align: center;
+  margin: 15px 0;
+}
+.login-no-account-button {
+  text-decoration: underline;
+}

@@ -9,7 +9,7 @@ export function Home() {
   if (cookies.userType === "participant") {
     return (
       <>
-        <h1>Guten Tag, {cookies.userFirstName}</h1>
+        <h1>Guten Tag, {cookies.userFirstName}!</h1>
         <div>
           <NavLink to={`/activity/0`}>
             <ActiveeButton buttonType="primary">Activity</ActiveeButton>
@@ -20,7 +20,7 @@ export function Home() {
   } else if (cookies.userType === "organisation") {
     return (
       <>
-        <h1>Guten Tag, {cookies.userFirstName}</h1>
+        <h1>Guten Tag, {cookies.userFirstName}!</h1>
         <div>
           <NavLink to={`/activity/0`}>
             <ActiveeButton buttonType="primary">Activity</ActiveeButton>
