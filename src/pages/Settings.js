@@ -5,21 +5,18 @@ import { useCookies } from "react-cookie";
 
 export function Settings() {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["userToken", "userId", "userType"]);
   useEffect(() => {
     document.title = "Einstellungen - activee";
   });
   const handleLogout = () => {
-    setCookie("userId", null, {
+    removeCookie("userToken", {
       path: "/",
     });
-    setCookie("userType", null, {
+    removeCookie("userId", {
       path: "/",
     });
-    setCookie("userFirstName", null, {
-      path: "/",
-    });
-    setCookie("userLastName", null, {
+    removeCookie("userType", {
       path: "/",
     });
     navigate("/");

@@ -6,14 +6,14 @@ import { useCookies } from "react-cookie";
 
 export function Login() {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   useEffect(() => {
     document.title = "Anmelden - activee";
   });
   const handleLogin = (email, password) => {
-    const url = "http://localhost:1337/account";
+    const url = "http://localhost:1337/account/login";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -21,20 +21,17 @@ export function Login() {
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.id, data.type, data.first_name, data.last_name))
+      .then((data) => handleCookies(data.token, data.id, data.type))
       .then(() => navigate("/"));
   };
-  const handleCookies = (userId, userType, userFirstName, userLastName) => {
-    setCookie("userId", userId, {
+  const handleCookies = (token, userId, userType) => {
+    setCookie("userToken", token, {
+      path: "/",
+    });
+    setCookie("userType", userId, {
       path: "/",
     });
     setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userFirstName", userFirstName, {
-      path: "/",
-    });
-    setCookie("userLastName", userLastName, {
       path: "/",
     });
   };
