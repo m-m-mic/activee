@@ -10,6 +10,8 @@ import { Activity } from "./pages/Activity";
 import CreateActivity from "./pages/CreateActivity";
 import { Settings } from "./pages/Settings";
 import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
+import { EditProfile } from "./pages/EditProfile";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="activity/:id" element={<Activity />} />
           <Route path="activity/new" element={<CreateActivity />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="profile/edit" element={<EditProfile />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/search" element={<SearchLayout />} />

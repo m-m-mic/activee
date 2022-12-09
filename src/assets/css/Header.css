@@ -22,9 +22,6 @@
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
 }
-.header.language-only {
-  justify-content: right;
-}
 #header-options {
   display: flex;
   flex-flow: row;
