@@ -1,31 +1,31 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
-import { useUser } from "../layouts/Layout";
 import { LandingPage } from "../components/LandingPage";
+import { useCookies } from "react-cookie";
 
 export function Home() {
-  const user = useUser();
-  if (user === "participant") {
+  const [cookies, setCookies] = useCookies(["userId", "userType", "userFirstName"]);
+  if (cookies.userType === "participant") {
     return (
       <>
-        <h1>Guten Tag, Participant</h1>
+        <h1>Guten Tag, {cookies.userFirstName}</h1>
         <div>
-          <NavLink to={`/activity/0?user=${user}`}>
+          <NavLink to={`/activity/0`}>
             <ActiveeButton buttonType="primary">Activity</ActiveeButton>
           </NavLink>
         </div>
       </>
     );
-  } else if (user === "organisation") {
+  } else if (cookies.userType === "organisation") {
     return (
       <>
-        <h1>Guten Tag, Organisation</h1>
+        <h1>Guten Tag, {cookies.userFirstName}</h1>
         <div>
-          <NavLink to={`/activity/0?user=${user}`}>
+          <NavLink to={`/activity/0`}>
             <ActiveeButton buttonType="primary">Activity</ActiveeButton>
           </NavLink>
-          <NavLink to={`/activity/new?user=${user}`}>
+          <NavLink to={`/activity/new`}>
             <ActiveeButton buttonType="primary">New Activity</ActiveeButton>
           </NavLink>
         </div>

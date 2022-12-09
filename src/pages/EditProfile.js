@@ -1,16 +1,16 @@
 import React from "react";
-import { useUser } from "../layouts/Layout";
 import "../assets/css/Profile.css";
 import AccountIcon from "../assets/svgs/account_icon_black.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { EditControls } from "../components/EditControls";
+import { useCookies } from "react-cookie";
 
 export function EditProfile() {
-  const user = useUser();
-  if (user === "participant") {
+  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  if (cookies.userType === "participant") {
     return (
       <>
-        <EditControls user={user} />
+        <EditControls />
         <div className="profile-user-info">
           <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
           <span className="profile-user-credentials">
@@ -45,10 +45,10 @@ export function EditProfile() {
         <div className="filler-div"></div>
       </>
     );
-  } else if (user === "organisation") {
+  } else if (cookies.userType === "organisation") {
     return (
       <>
-        <EditControls user={user} />
+        <EditControls user={cookies.userType} />
         <div className="profile-user-info">
           <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
           <span className="profile-user-credentials">

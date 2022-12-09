@@ -14,19 +14,19 @@ export function MenuPopup({ userType, setOptionsPopupVisible }) {
         onClick={() => {
           setOptionsPopupVisible(false);
         }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile?user=${userType}`}>
+        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile`}>
           Dein Profil
         </PopupOption>
         <PopupOption ImageSrc={AccountSwitchIcon} LinkUrl="#">
           Profil wechseln
         </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities?user=${userType}`}>
+        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities`}>
           Deine Aktivitäten
         </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports?user=${userType}`}>
+        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports`}>
           Sportarten
         </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings?user=${userType}`} isLast>
+        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings`} isLast>
           Einstellungen
         </PopupOption>
       </div>
@@ -38,16 +38,16 @@ export function MenuPopup({ userType, setOptionsPopupVisible }) {
         onClick={() => {
           setOptionsPopupVisible(false);
         }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile?user=${userType}`}>
+        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile`}>
           Dein Profil
         </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities?user=${userType}`}>
+        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities`}>
           Deine Aktivitäten
         </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports?user=${userType}`}>
+        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports`}>
           Sportarten
         </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings?user=${userType}`} isLast>
+        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings`} isLast>
           Einstellungen
         </PopupOption>
       </div>

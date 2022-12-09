@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useOutletContext } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
@@ -18,12 +18,9 @@ export default function Layout() {
     <>
       <Header userType={userParam} />
       <div id="content-body">
-        <Outlet context={userParam} />
+        <Outlet />
       </div>
       <Footer />
     </>
   );
-}
-export function useUser() {
-  return useOutletContext();
 }

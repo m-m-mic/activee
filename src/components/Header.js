@@ -7,8 +7,10 @@ import AccountIconBlack from "../assets/svgs/account_icon_black.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";
+import { useCookies } from "react-cookie";
 
-export function Header({ userType }) {
+export function Header() {
+  const [cookies, setCookie] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
   const [isCiVisible, setIsCiVisible] = useState(false);
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
@@ -33,14 +35,14 @@ export function Header({ userType }) {
       return isVisible;
     });
   };
-  if (userType === "participant" || userType === "organisation") {
+  if (cookies.userType === "participant" || cookies.userType === "organisation") {
     return (
       <div className={`header ${scrollDirection === "down" ? "hide" : "show"}`}>
-        <NavLink id="home-link" to={`/?user=${userType}`}>
+        <NavLink id="home-link" to={`/`}>
           <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
         </NavLink>
         <div id="header-options">
-          <NavLink id="search-link" to={`/search?user=${userType}`}>
+          <NavLink id="search-link" to={`/search`}>
             <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="Search icon" />
           </NavLink>
           <span id="languages-popup-button" className="header-button">
@@ -57,7 +59,7 @@ export function Header({ userType }) {
         </div>
         {isOptionsPopupVisible && (
           <>
-            <MenuPopup userType={userType} setOptionsPopupVisible={setIsOptionsPopupVisible} />
+            <MenuPopup userType={cookies.userType} setOptionsPopupVisible={setIsOptionsPopupVisible} />
             <div
               id="popup-backdrop"
               onClick={() => {

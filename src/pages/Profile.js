@@ -1,23 +1,25 @@
 import React from "react";
-import { useUser } from "../layouts/Layout";
 import "../assets/css/Profile.css";
 import AccountIcon from "../assets/svgs/account_icon_black.svg";
 import EditIcon from "../assets/svgs/edit_icon_white.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { NavLink } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export function Profile() {
-  const user = useUser();
-  if (user === "participant") {
+  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
+  if (cookies.userType === "participant") {
     return (
       <>
         <div className="profile-user-info">
           <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
           <span className="profile-user-credentials">
-            <div className="profile-user-name">User Name</div>
+            <div className="profile-user-name">
+              {cookies.userFirstName} {cookies.userLastName}
+            </div>
             <div className="profile-user-email">user.name@email.com</div>
           </span>
-          <NavLink className="profile-user-edit-link" to={`/profile/edit?user=${user}`}>
+          <NavLink className="profile-user-edit-link" to={`/profile/edit`}>
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
           </NavLink>
         </div>
@@ -47,16 +49,18 @@ export function Profile() {
         <h3>Zeiten</h3>
       </>
     );
-  } else if (user === "organisation") {
+  } else if (cookies.userType === "organisation") {
     return (
       <>
         <div className="profile-user-info">
           <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
           <span className="profile-user-credentials">
-            <div className="profile-user-name">User Name</div>
+            <div className="profile-user-name">
+              {cookies.userFirstName} {cookies.userLastName}
+            </div>
             <div className="profile-user-email">user.name@email.com</div>
           </span>
-          <NavLink className="profile-user-edit-link" to={`/profile/edit?user=${user}`}>
+          <NavLink className="profile-user-edit-link" to={`/profile/edit`}>
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
           </NavLink>
         </div>
