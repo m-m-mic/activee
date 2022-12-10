@@ -48,7 +48,7 @@ export function Profile() {
         <div className="profile-general-info">
           <div className="profile-general-info-container">
             <span className="profile-general-info-name">Geboren am</span>
-            <span className="profile-general-info-data">{new Date(accountInfo.birthday).toISOString()}</span>
+            <span className="profile-general-info-data">{accountInfo.birthday}</span>
           </div>
           {cookies.userType === "organisation" && (
             <div className="profile-general-info-container">

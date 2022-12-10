@@ -31,8 +31,6 @@
 }
 .time-table tr#table-header {
   visibility: visible;
-}
-.time-table tr:first-child {
   background: #509b89;
   display: flex;
 }

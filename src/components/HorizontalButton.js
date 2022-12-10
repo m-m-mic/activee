@@ -1,11 +1,23 @@
 import React from "react";
 import "../assets/css/HorizontalButton.css";
 
-export function HorizontalButton({ iconUrl, children }) {
-  return (
-    <span className="horizontal-button">
-      <img className="horizontal-button-icon" src={iconUrl} alt="button icon" />
-      <div className="horizontal-button-title">{children}</div>
-    </span>
-  );
+export function HorizontalButton({ iconUrl, children, editMode, onClick, value }) {
+  if (editMode) {
+    return (
+      <span className="horizontal-button-edit-mode">
+        <span className="horizontal-button-data">
+          <img className="horizontal-button-icon" src={iconUrl} alt="button icon" />
+          <div className="horizontal-button-title">{children}</div>
+        </span>
+        <img onClick={onClick} className="horizontal-delete-icon" src={iconUrl} alt="button icon" />
+      </span>
+    );
+  } else {
+    return (
+      <span className="horizontal-button">
+        <img className="horizontal-button-icon" src={iconUrl} alt="button icon" />
+        <div className="horizontal-button-title">{children}</div>
+      </span>
+    );
+  }
 }
