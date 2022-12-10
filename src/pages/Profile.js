@@ -22,7 +22,7 @@ export function Profile() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
-  if (cookies.userType) {
+  if (cookies.userToken) {
     return (
       <>
         <div className="profile-user-info">
@@ -37,24 +37,24 @@ export function Profile() {
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
           </NavLink>
         </div>
-        {cookies.userType === "organisation" && <div className="profile-club-name">Club name</div>}
+        {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
         <h2>Deine Angaben</h2>
         <div className="profile-general-info">
           <div className="profile-general-info-container">
             <span className="profile-general-info-name">Geboren am</span>
-            <span className="profile-general-info-data">00.00.0000</span>
+            <span className="profile-general-info-data">{accountInfo.birthday}</span>
           </div>
           {cookies.userType === "organisation" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Telefonnummer</span>
-              <span className="profile-general-info-data">0123 123 123</span>
+              <span className="profile-general-info-data">{accountInfo.phone}</span>
             </div>
           )}
           <div className="profile-general-info-container">
             <span className="profile-general-info-name">Adresse</span>
             <span className="profile-general-info-data">
-              Straße, Nr. <br />
-              00000 Stadt
+              {accountInfo.address.street}, {accountInfo.address.house_number} <br />
+              {accountInfo.address.zip_code} {accountInfo.address.city}
             </span>
           </div>
           <div className="profile-general-info-container language">

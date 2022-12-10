@@ -6,8 +6,8 @@ import { EditControls } from "../components/EditControls";
 import { useCookies } from "react-cookie";
 
 export function EditProfile() {
-  const [cookies, setCookie] = useCookies(["userId", "userType", "userFirstName", "userLastName"]);
-  if (cookies.userType === "participant") {
+  const [cookies, setCookie] = useCookies(["userToken", "userType"]);
+  if (cookies.userToken) {
     return (
       <>
         <EditControls />
