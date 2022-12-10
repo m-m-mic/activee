@@ -4,13 +4,14 @@ import AccountIcon from "../assets/svgs/account_icon_black.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { EditControls } from "../components/EditControls";
 import { useCookies } from "react-cookie";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import EditIcon from "../assets/svgs/edit_icon_white.svg";
 import { VerticalButton } from "../components/VerticalButton";
 import { HorizontalButton } from "../components/HorizontalButton";
 import { TimeTable } from "../components/TimeTable";
 
 export function EditProfile() {
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
   useEffect(() => {
@@ -25,6 +26,18 @@ export function EditProfile() {
     fetch("http://localhost:1337/account/info", requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
+  };
+  const updateAccountInfo = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+      body: JSON.stringify(accountInfo),
+    };
+    console.log(accountInfo);
+    fetch("http://localhost:1337/account/info", requestOptions)
+      .then((response) => response.json())
+      .then((data) => setAccountInfo(data))
+      .then(() => navigate("/profile"));
   };
   const handleSportRemoval = (sport) => {
     let sportArray = accountInfo.sports;
@@ -67,7 +80,7 @@ export function EditProfile() {
   if (cookies.userToken) {
     return (
       <>
-        <EditControls />
+        <EditControls onConfirmClick={() => updateAccountInfo()} />
         <div className="profile-user-info">
           <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
           <span className="profile-user-credentials">

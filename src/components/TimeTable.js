@@ -3,7 +3,9 @@ import "../assets/css/TimeTable.css";
 
 export function TimeTable({ timeValues }) {
   useEffect(() => {
-    fillTable(timeValues);
+    if (timeValues) {
+      fillTable(timeValues);
+    }
   }, [timeValues]);
   const fillTable = (timeValues) => {
     for (const time of timeValues) {

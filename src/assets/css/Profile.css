@@ -72,6 +72,9 @@
 .profile-edit-icon {
   width: 32px;
 }
+.profile-edit-link {
+  cursor: pointer;
+}
 .profile-edit-divider {
   background: var(--light-mode-background);
   width: 2px;

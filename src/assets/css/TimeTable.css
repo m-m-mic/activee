@@ -25,7 +25,7 @@
   border-right: none !important;
 }
 .time-table tr {
-  display: none;
+  display: flex;
   line-height: 28px;
   padding: 0;
 }
