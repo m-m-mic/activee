@@ -1,0 +1,21 @@
+.vertical-button {
+  flex: 1;
+  display: inline-flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  background: #4a9d8c;
+  gap: 8px;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+.vertical-button.unchecked {
+  background: #c6dcd7;
+}
+.vertical-button-icon {
+  width: 32px;
+}
+.vertical-button-title {
+  color: var(--light-mode-background);
+  font-family: var(--button-typeface);
+}

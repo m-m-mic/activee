@@ -1,0 +1,42 @@
+.time-table {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  border-collapse: collapse;
+  background: #b2d5cd;
+  color: var(--light-mode-background);
+  padding: 0;
+  box-shadow: var(--light-mode-elevation-4);
+}
+.time-table th {
+  border: var(--light-mode-background) solid 1px;
+  flex: 1;
+}
+.time-bracket {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+.time-bracket-first {
+  border-right: none !important;
+  border-bottom: none !important;
+}
+.time-day {
+  border-left: none !important;
+  border-right: none !important;
+}
+.time-table tr {
+  display: none;
+  line-height: 28px;
+  padding: 0;
+}
+.time-table tr#table-header {
+  visibility: visible;
+}
+.time-table tr:first-child {
+  background: #509b89;
+  display: flex;
+}
+.time-table tr th:first-child {
+  flex: 30px;
+  background: #509b89;
+}

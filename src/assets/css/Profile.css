@@ -77,3 +77,18 @@
   width: 2px;
   height: 32px;
 }
+.profile-gender-selection,
+.profile-transport-selection {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  gap: 10px;
+}
+.profile-transport-selection {
+  margin-bottom: 15px;
+}
+.profile-sports-selection {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}

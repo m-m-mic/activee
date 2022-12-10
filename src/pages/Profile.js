@@ -5,10 +5,13 @@ import EditIcon from "../assets/svgs/edit_icon_white.svg";
 import GermanIcon from "../assets/svgs/german_icon.svg";
 import { Navigate, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { VerticalButton } from "../components/VerticalButton";
+import { HorizontalButton } from "../components/HorizontalButton";
+import { TimeTable } from "../components/TimeTable";
 
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
-  const [accountInfo, setAccountInfo] = useState([]);
+  const [accountInfo, setAccountInfo] = useState();
   useEffect(() => {
     getAccountInfo();
     document.title = "Dein Profil - activee";
@@ -22,6 +25,9 @@ export function Profile() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
+  if (!accountInfo) {
+    return null;
+  }
   if (cookies.userToken) {
     return (
       <>
@@ -42,7 +48,7 @@ export function Profile() {
         <div className="profile-general-info">
           <div className="profile-general-info-container">
             <span className="profile-general-info-name">Geboren am</span>
-            <span className="profile-general-info-data">{accountInfo.birthday}</span>
+            <span className="profile-general-info-data">{new Date(accountInfo.birthday).toISOString()}</span>
           </div>
           {cookies.userType === "organisation" && (
             <div className="profile-general-info-container">
@@ -60,6 +66,9 @@ export function Profile() {
           <div className="profile-general-info-container language">
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
+              {accountInfo.languages.map((item, key) => (
+                <div key={key}>{item}</div>
+              ))}
               <img className="profile-general-info-language-icon" src={GermanIcon} alt="language icon" />
             </span>
           </div>
@@ -67,9 +76,52 @@ export function Profile() {
         {cookies.userType === "participant" && (
           <>
             <h2>Präferenzen</h2>
+            <div className="profile-gender-selection">
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("female")}>
+                Weiblich
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("male")}>
+                Männlich
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("mix")}>
+                Mix
+              </VerticalButton>
+            </div>
             <h3>Sportarten</h3>
+            <div className="profile-sports-selection">
+              {accountInfo.sports.map((item, key) => (
+                <HorizontalButton iconUrl={EditIcon} key={key}>
+                  {item.name}
+                </HorizontalButton>
+              ))}
+            </div>
             <h3>Anfahrt</h3>
+            <div className="profile-transport-selection">
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("on_foot")}>
+                zu Fuß
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("bicycle")}>
+                Rad
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("car")}>
+                Auto
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("bus")}>
+                Bus
+              </VerticalButton>
+              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("train")}>
+                Bahn
+              </VerticalButton>
+            </div>
+            <div className="profile-general-info">
+              <div className="profile-general-info-container">
+                <span className="profile-general-info-name">Distanz</span>
+                <span className="profile-general-info-data">{accountInfo.distance} km</span>
+              </div>
+            </div>
             <h3>Zeiten</h3>
+            <TimeTable timeValues={accountInfo.times}></TimeTable>
+            {accountInfo.children_accounts && <h2>Unterprofile</h2>}
           </>
         )}
       </>
