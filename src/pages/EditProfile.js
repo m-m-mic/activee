@@ -44,8 +44,6 @@ export function EditProfile() {
       .then((data) => setAccountInfo(data))
       .then(() => navigate("/profile"));
   };
-  console.log(accountInfo);
-
   if (cookies.userToken) {
     if (!accountInfo) {
       return null;
@@ -107,10 +105,12 @@ export function EditProfile() {
               </span>
             </div>
           )}
-          <div className="profile-general-info-container">
-            <span className="profile-general-info-name">Adresse</span>
-            <AddressPicker data={accountInfo} setData={setAccountInfo} />
-          </div>
+          {cookies.userType === "participant" && (
+            <div className="profile-general-info-container">
+              <span className="profile-general-info-name">Adresse</span>
+              <AddressPicker data={accountInfo} setData={setAccountInfo} />
+            </div>
+          )}
           <div className="profile-general-info-container language">
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">

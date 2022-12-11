@@ -94,6 +94,7 @@
 }
 .profile-edit-icon {
   width: 32px;
+  display: block;
 }
 .profile-edit-link {
   cursor: pointer;

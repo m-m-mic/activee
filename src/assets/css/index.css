@@ -170,7 +170,7 @@ input:focus {
 }
 input:disabled {
   border-bottom: none;
-  background: #ececec;
+  background: var(--light-mode-disabled-typeface);
 }
 .filler-div {
   height: 300vh;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useCookies } from "react-cookie";
 
@@ -21,16 +21,20 @@ export function Settings() {
     });
     navigate("/");
   };
-  return (
-    <>
-      <h1>Einstellungen</h1>
-      <ActiveeButton
-        buttonType="warning"
-        onClick={() => {
-          handleLogout();
-        }}>
-        Ausloggen
-      </ActiveeButton>
-    </>
-  );
+  if (cookies.userToken) {
+    return (
+      <>
+        <h1>Einstellungen</h1>
+        <ActiveeButton
+          buttonType="warning"
+          onClick={() => {
+            handleLogout();
+          }}>
+          Ausloggen
+        </ActiveeButton>
+      </>
+    );
+  } else {
+    return <Navigate to="/login" />;
+  }
 }
