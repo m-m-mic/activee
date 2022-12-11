@@ -4,7 +4,6 @@ import "../assets/css/Header.css";
 import ActiveeLogo from "../assets/pngs/40px_activee_logo.png";
 import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
 import AccountIconBlack from "../assets/svgs/account_icon_black.svg";
-import GermanIcon from "../assets/svgs/german_icon.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";
 import { useCookies } from "react-cookie";
@@ -46,7 +45,12 @@ export function Header() {
             <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="Search icon" />
           </NavLink>
           <span id="languages-popup-button" className="header-button">
-            <img id="language-icon" className="header-icon" src={GermanIcon} alt="Language icon" />
+            <img
+              id="language-icon"
+              className="header-icon"
+              src="http://localhost:3033/flags/german_flag.jpg"
+              alt="Language icon"
+            />
           </span>
           <span
             id="options-popup-button"
@@ -54,7 +58,16 @@ export function Header() {
             onClick={() => {
               setIsOptionsPopupVisible(!isOptionsPopupVisible);
             }}>
-            <img id="account-icon" className="header-icon" src={AccountIconBlack} alt="Account icon" />
+            <img
+              id="account-icon"
+              className="header-icon"
+              src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+              }}
+              alt="Account icon"
+            />
           </span>
         </div>
         {isOptionsPopupVisible && (
@@ -77,7 +90,7 @@ export function Header() {
           <span className="activee-name">activee</span>
         </div>
         <span id="languages-popup-button" className="header-button">
-          <img id="language-icon" className="header-icon" src={GermanIcon} alt="Language icon" />
+          <img id="language-icon" className="header-icon" src="http://localhost:3033/flags/german_flag.jpg" alt="Language icon" />
         </span>
       </div>
     );

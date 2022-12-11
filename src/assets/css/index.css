@@ -1,7 +1,11 @@
 :root {
   --light-mode-typeface: #2d2d2d;
+  --light-mode-typeface-inverted: #fffcf9;
   --light-mode-background: #fffcf9;
   --light-mode-background-translucent: rgba(255, 252, 249, 0.7);
+  --light-mode-primary-1: #4a9d8c;
+  --light-mode-primary-2: #65b9a8ff;
+  --light-mode-primary-disabled: #c6dcd7;
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-disabled: #c6dcd7;
@@ -143,7 +147,25 @@ a {
   text-decoration: none;
   color: var(--light-mode-typeface);
 }
-
+input {
+  display: inline-block;
+  font-family: var(--text-typeface);
+  font-size: var(--text-size);
+  border: none;
+  padding: 3px 6px;
+  border-bottom: 3px solid var(--light-mode-typeface);
+  border-radius: 4px;
+  transition: 200ms ease-out;
+}
+input:focus {
+  outline: none;
+  border-bottom: 3px solid var(--light-mode-primary-1);
+  box-shadow: var(--light-mode-elevation-4);
+}
+input:disabled {
+  border-bottom: none;
+  background: #ececec;
+}
 .filler-div {
   height: 300vh;
   background: #c7a4a4;

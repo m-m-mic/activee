@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/HorizontalButton.css";
+import DeleteIconWhite from "../assets/svgs/delete_icon_white.svg";
 
 export function HorizontalButton({ iconUrl, children, editMode, onClick, value }) {
   if (editMode) {
@@ -9,7 +10,7 @@ export function HorizontalButton({ iconUrl, children, editMode, onClick, value }
           <img className="horizontal-button-icon" src={iconUrl} alt="button icon" />
           <div className="horizontal-button-title">{children}</div>
         </span>
-        <img onClick={onClick} className="horizontal-delete-icon" src={iconUrl} alt="button icon" />
+        <img onClick={onClick} className="horizontal-delete-icon" src={DeleteIconWhite} alt="button icon" />
       </span>
     );
   } else {

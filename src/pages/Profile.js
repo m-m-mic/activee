@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/Profile.css";
-import AccountIcon from "../assets/svgs/account_icon_black.svg";
 import EditIcon from "../assets/svgs/edit_icon_white.svg";
-import GermanIcon from "../assets/svgs/german_icon.svg";
 import { Navigate, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { VerticalButton } from "../components/VerticalButton";
-import { HorizontalButton } from "../components/HorizontalButton";
 import { TimeTable } from "../components/TimeTable";
+import { GenderSelection } from "../components/GenderSelection";
+import { SportSelection } from "../components/SportSelection";
+import { TransportSelection } from "../components/TransportSelection";
 
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
@@ -21,7 +20,7 @@ export function Profile() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:1337/account/info", requestOptions)
+    fetch("http://localhost:3033/account/info", requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
@@ -32,7 +31,15 @@ export function Profile() {
     return (
       <>
         <div className="profile-user-info">
-          <img className="profile-user-picture" src={AccountIcon} alt="Profile" />
+          <img
+            className="profile-user-picture"
+            src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+            }}
+            alt="Profile"
+          />
           <span className="profile-user-credentials">
             <div className="profile-user-name">
               {accountInfo.first_name} {accountInfo.last_name}
@@ -67,52 +74,24 @@ export function Profile() {
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
               {accountInfo.languages.map((item, key) => (
-                <div key={key}>{item}</div>
+                <img
+                  className="profile-general-info-language-icon"
+                  src={`http://localhost:3033/flags/${item}_flag.jpg`}
+                  alt="language icon"
+                  key={key}
+                />
               ))}
-              <img className="profile-general-info-language-icon" src={GermanIcon} alt="language icon" />
             </span>
           </div>
         </div>
         {cookies.userType === "participant" && (
           <>
             <h2>Präferenzen</h2>
-            <div className="profile-gender-selection">
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("female")}>
-                Weiblich
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("male")}>
-                Männlich
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.genders.includes("mix")}>
-                Mix
-              </VerticalButton>
-            </div>
+            <GenderSelection data={accountInfo} />
             <h3>Sportarten</h3>
-            <div className="profile-sports-selection">
-              {accountInfo.sports.map((item, key) => (
-                <HorizontalButton iconUrl={EditIcon} key={key}>
-                  {item.name}
-                </HorizontalButton>
-              ))}
-            </div>
+            <SportSelection data={accountInfo.sports} />
             <h3>Anfahrt</h3>
-            <div className="profile-transport-selection">
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("on_foot")}>
-                zu Fuß
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("bicycle")}>
-                Rad
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("car")}>
-                Auto
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("bus")}>
-                Bus
-              </VerticalButton>
-              <VerticalButton iconUrl={EditIcon} isChecked={accountInfo.transport.includes("train")}>
-                Bahn
-              </VerticalButton>
-            </div>
+            <TransportSelection data={accountInfo.transport} />
             <div className="profile-general-info">
               <div className="profile-general-info-container">
                 <span className="profile-general-info-name">Distanz</span>
@@ -120,7 +99,7 @@ export function Profile() {
               </div>
             </div>
             <h3>Zeiten</h3>
-            <TimeTable timeValues={accountInfo.times}></TimeTable>
+            <TimeTable data={accountInfo.times}></TimeTable>
             {accountInfo.children_accounts && <h2>Unterprofile</h2>}
           </>
         )}

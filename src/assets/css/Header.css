@@ -28,7 +28,9 @@
   align-items: center;
   gap: 20px;
 }
-
+#language-icon {
+  border-radius: 50%;
+}
 .header-icon {
   height: 32px;
   width: 32px;

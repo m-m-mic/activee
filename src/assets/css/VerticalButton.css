@@ -14,8 +14,14 @@
 }
 .vertical-button-icon {
   width: 32px;
+  height: 32px;
 }
 .vertical-button-title {
   color: var(--light-mode-background);
   font-family: var(--button-typeface);
+}
+@media only screen and (max-width: 375px) {
+  .vertical-button {
+    font-size: 12px;
+  }
 }

@@ -13,7 +13,7 @@ export function Login() {
     document.title = "Anmelden - activee";
   });
   const handleLogin = (email, password) => {
-    const url = "http://localhost:1337/account/login";
+    const url = "http://localhost:3033/account/login";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ export function Login() {
     setCookie("userToken", token, {
       path: "/",
     });
-    setCookie("userType", userId, {
+    setCookie("userId", userId, {
       path: "/",
     });
     setCookie("userType", userType, {

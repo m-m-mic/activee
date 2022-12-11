@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "../assets/css/TimeTable.css";
 
-export function TimeTable({ timeValues }) {
+export function TimeTable({ timeValues: data }) {
   useEffect(() => {
-    if (timeValues) {
-      fillTable(timeValues);
+    if (data) {
+      fillTable(data);
     }
-  }, [timeValues]);
+  }, [data]);
   const fillTable = (timeValues) => {
     for (const time of timeValues) {
       document.getElementById(`${time.day}-${time.starting_hour}`).style.background = "#65B9A8";

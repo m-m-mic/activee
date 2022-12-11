@@ -11,7 +11,7 @@ export default function SearchLayout() {
     if (searchQuery === "" || isVariableOnlySpaces(searchQuery)) {
       console.log("Invalid search query!");
     } else {
-      fetch("http://localhost:1337/search/" + searchQuery)
+      fetch("http://localhost:3033/search/" + searchQuery)
         .then((response) => response.json())
         .then((data) => setSearchResults(data));
     }
