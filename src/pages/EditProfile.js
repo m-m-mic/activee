@@ -7,7 +7,14 @@ import { TimeTable } from "../components/TimeTable";
 import { GenderSelection } from "../components/GenderSelection";
 import { TransportSelection } from "../components/TransportSelection";
 import { SportSelection } from "../components/SportSelection";
-import { setAddressStreetInput, setBirthday, setFirstNameInput, setLastNameInput } from "../scripts/validateProfileEditInput";
+import {
+  setBirthday,
+  setDistanceInput,
+  setFirstNameInput,
+  setLastNameInput,
+  setPhoneNumber,
+} from "../scripts/validateProfileEditInput";
+import { AddressPicker } from "../components/AddressPicker";
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -38,10 +45,11 @@ export function EditProfile() {
       .then(() => navigate("/profile"));
   };
   console.log(accountInfo);
-  if (!accountInfo) {
-    return null;
-  }
+
   if (cookies.userToken) {
+    if (!accountInfo) {
+      return null;
+    }
     return (
       <>
         <EditControls onConfirmClick={() => updateAccountInfo()} />
@@ -56,7 +64,7 @@ export function EditProfile() {
             alt="Profile"
           />
           <span className="profile-user-credentials">
-            <div className="profile-user-name">
+            <div className="profile-user-name flex">
               <input
                 className={setFirstNameInput ? "profile-input-name" : "profile-input-name warning"}
                 defaultValue={accountInfo.first_name}
@@ -89,43 +97,19 @@ export function EditProfile() {
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Telefonnummer</span>
               <span className="profile-general-info-data">
-                <input type="tel" className="profile-input" value={accountInfo.phone_number} />
+                <input
+                  type="tel"
+                  className="profile-input phone-input"
+                  placeholder="Telefonnummer"
+                  defaultValue={accountInfo.phone_number}
+                  onChange={(e) => setPhoneNumber(e.target.value, accountInfo, setAccountInfo)}
+                />
               </span>
             </div>
           )}
           <div className="profile-general-info-container">
             <span className="profile-general-info-name">Adresse</span>
-            <span className="profile-general-info-data address">
-              <input
-                className="profile-input-street"
-                placeholder="Straße"
-                defaultValue={accountInfo.address.street}
-                onChange={(e) => setAddressStreetInput(e.target.value, accountInfo, setAccountInfo)}
-              />
-              <input
-                className="profile-input-house-number"
-                placeholder="Nr."
-                value={accountInfo.address.house_number}
-                onChange={(e) =>
-                  setAccountInfo({ ...accountInfo, address: { ...accountInfo.address, house_number: e.target.value } })
-                }
-              />
-              <br />
-              <input
-                className="profile-input-zip-code"
-                placeholder="PLZ"
-                value={accountInfo.address.zip_code}
-                onChange={(e) =>
-                  setAccountInfo({ ...accountInfo, address: { ...accountInfo.address, zip_code: e.target.value } })
-                }
-              />
-              <input
-                className="profile-input-city"
-                placeholder="Stadt"
-                value={accountInfo.address.city}
-                onChange={(e) => setAccountInfo({ ...accountInfo, address: { ...accountInfo.address, city: e.target.value } })}
-              />
-            </span>
+            <AddressPicker data={accountInfo} setData={setAccountInfo} />
           </div>
           <div className="profile-general-info-container language">
             <span className="profile-general-info-name">Sprachen</span>
@@ -154,16 +138,16 @@ export function EditProfile() {
                 <span className="profile-general-info-name">Distanz</span>
                 <span className="profile-general-info-data">
                   <input
-                    type="number"
-                    value={accountInfo.distance}
-                    onChange={(e) => setAccountInfo({ ...accountInfo, distance: Number(e.target.value) })}
+                    className="profile-input-distance"
+                    defaultValue={accountInfo.distance}
+                    onChange={(e) => setDistanceInput(e.target.value, accountInfo, setAccountInfo)}
                   />{" "}
                   km
                 </span>
               </div>
             </div>
             <h3>Zeiten</h3>
-            <TimeTable timeValues={accountInfo.times}></TimeTable>
+            <TimeTable data={accountInfo.times}></TimeTable>
             {accountInfo.children_accounts && <h2>Unterprofile</h2>}
           </>
         )}

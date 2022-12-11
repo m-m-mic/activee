@@ -9,6 +9,7 @@
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-disabled: #c6dcd7;
+  --light-mode-disabled-typeface: #838383;
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
   --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
   --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
@@ -44,6 +45,10 @@
 @font-face {
   font-family: "Inter Light";
   src: url(../fonts/Inter-Light.ttf);
+}
+@font-face {
+  font-family: "Inter Light Italic";
+  src: url(../fonts/Inter-LightItalic.otf);
 }
 
 @font-face {
@@ -86,6 +91,7 @@
 }
 body {
   width: 100%;
+  min-width: 320px;
   margin: 0;
   font-family: var(--text-typeface);
   font-size: var(--text-size);

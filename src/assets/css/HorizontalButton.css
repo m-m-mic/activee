@@ -22,6 +22,9 @@
 .horizontal-button-title {
   color: var(--light-mode-background);
   font-family: var(--button-typeface);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .horizontal-button-edit-mode {
   flex: 1;

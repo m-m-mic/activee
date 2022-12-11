@@ -24,10 +24,11 @@ export function Profile() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
-  if (!accountInfo) {
-    return null;
-  }
+
   if (cookies.userToken) {
+    if (!accountInfo) {
+      return null;
+    }
     return (
       <>
         <div className="profile-user-info">
@@ -40,12 +41,12 @@ export function Profile() {
             }}
             alt="Profile"
           />
-          <span className="profile-user-credentials">
+          <div className="profile-user-credentials">
             <div className="profile-user-name">
               {accountInfo.first_name} {accountInfo.last_name}
             </div>
             <div className="profile-user-email">{accountInfo.email}</div>
-          </span>
+          </div>
           <NavLink className="profile-user-edit-link" to={`/profile/edit`}>
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
           </NavLink>
@@ -53,23 +54,33 @@ export function Profile() {
         {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
         <h2>Deine Angaben</h2>
         <div className="profile-general-info">
-          <div className="profile-general-info-container">
-            <span className="profile-general-info-name">Geboren am</span>
-            <span className="profile-general-info-data">{accountInfo.birthday}</span>
-          </div>
+          {accountInfo.birthday && (
+            <div className="profile-general-info-container">
+              <span className="profile-general-info-name">Geboren am</span>
+              <span className="profile-general-info-data">
+                {accountInfo.birthday}
+                {!accountInfo.birthday && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
+              </span>
+            </div>
+          )}
           {cookies.userType === "organisation" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Telefonnummer</span>
-              <span className="profile-general-info-data">{accountInfo.phone}</span>
+              <span className="profile-general-info-data">
+                {accountInfo.phone_number}
+                {!accountInfo.phone_number && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
+              </span>
             </div>
           )}
-          <div className="profile-general-info-container">
-            <span className="profile-general-info-name">Adresse</span>
-            <span className="profile-general-info-data">
-              {accountInfo.address.street}, {accountInfo.address.house_number} <br />
-              {accountInfo.address.zip_code} {accountInfo.address.city}
-            </span>
-          </div>
+          {cookies.userType === "participant" && (
+            <div className="profile-general-info-container">
+              <span className="profile-general-info-name">Adresse</span>
+              <span className="profile-general-info-data">
+                {accountInfo.address.street}, {accountInfo.address.house_number} <br />
+                {accountInfo.address.zip_code} {accountInfo.address.city}
+              </span>
+            </div>
+          )}
           <div className="profile-general-info-container language">
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
@@ -81,6 +92,7 @@ export function Profile() {
                   key={key}
                 />
               ))}
+              {accountInfo.languages.length === 0 && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
             </span>
           </div>
         </div>
@@ -89,13 +101,16 @@ export function Profile() {
             <h2>Präferenzen</h2>
             <GenderSelection data={accountInfo} />
             <h3>Sportarten</h3>
-            <SportSelection data={accountInfo.sports} />
+            <SportSelection data={accountInfo} />
             <h3>Anfahrt</h3>
-            <TransportSelection data={accountInfo.transport} />
+            <TransportSelection data={accountInfo} />
             <div className="profile-general-info">
               <div className="profile-general-info-container">
                 <span className="profile-general-info-name">Distanz</span>
-                <span className="profile-general-info-data">{accountInfo.distance} km</span>
+                <span className="profile-general-info-data">
+                  {accountInfo.distance} km
+                  {!accountInfo.distance && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
+                </span>
               </div>
             </div>
             <h3>Zeiten</h3>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../assets/css/TimeTable.css";
 
-export function TimeTable({ timeValues: data }) {
+export function TimeTable({ data }) {
   useEffect(() => {
     if (data) {
       fillTable(data);
