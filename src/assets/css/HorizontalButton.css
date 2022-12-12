@@ -9,18 +9,20 @@
   gap: 8px;
   padding: 10px;
   border-radius: 8px;
+  min-width: 0;
 }
 .horizontal-button.unchecked {
   background: #c6dcd7;
 }
 .horizontal-button-icon {
-  width: 24px;
+  flex: 0 0 24px;
 }
 .horizontal-delete-icon {
-  width: 24px;
+  flex: 0 0 24px;
   cursor: pointer;
 }
 .horizontal-button-title {
+  flex: 1;
   color: var(--light-mode-background);
   font-family: var(--button-typeface);
   overflow: hidden;
