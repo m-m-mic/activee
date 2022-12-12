@@ -172,6 +172,9 @@ input:disabled {
   border-bottom: none;
   background: var(--light-mode-disabled-typeface);
 }
+input.warning {
+  border-bottom: 6px solid var(--light-mode-warning-active);
+}
 .filler-div {
   height: 300vh;
   background: #c7a4a4;

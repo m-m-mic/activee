@@ -8,6 +8,7 @@ import { GenderSelection } from "../components/GenderSelection";
 import { TransportSelection } from "../components/TransportSelection";
 import { SportSelection } from "../components/SportSelection";
 import {
+  ProfileInputValidator,
   setBirthday,
   setDistanceInput,
   setFirstNameInput,
@@ -20,6 +21,7 @@ export function EditProfile() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
+  const [inputValidation, setInputValidation] = useState(ProfileInputValidator);
   useEffect(() => {
     getAccountInfo();
     document.title = "Dein Profil - activee";
@@ -64,14 +66,20 @@ export function EditProfile() {
           <span className="profile-user-credentials">
             <div className="profile-user-name flex">
               <input
-                className={setFirstNameInput ? "profile-input-name" : "profile-input-name warning"}
+                className={inputValidation.first_name ? "profile-input-name" : "profile-input-name warning"}
                 defaultValue={accountInfo.first_name}
-                onChange={(e) => setFirstNameInput(e.target.value, accountInfo, setAccountInfo)}
+                placeholder="Vorname"
+                onChange={(e) =>
+                  setFirstNameInput(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                }
               />
               <input
-                className="profile-input-name"
+                className={inputValidation.last_name ? "profile-input-name" : "profile-input-name warning"}
                 defaultValue={accountInfo.last_name}
-                onChange={(e) => setLastNameInput(e.target.value, accountInfo, setAccountInfo)}
+                placeholder="Nachname"
+                onChange={(e) =>
+                  setLastNameInput(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                }
               />
             </div>
             <div className="profile-user-email">{accountInfo.email}</div>
@@ -84,10 +92,10 @@ export function EditProfile() {
             <span className="profile-general-info-name">Geboren am</span>
             <span className="profile-general-info-data">
               <input
-                className="profile-input"
+                className={inputValidation.birthday ? "profile-input" : "profile-input warning"}
                 type="date"
                 defaultValue={accountInfo.birthday}
-                onChange={(e) => setBirthday(e.target.value, accountInfo, setAccountInfo)}
+                onChange={(e) => setBirthday(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)}
               />
             </span>
           </div>
@@ -97,10 +105,12 @@ export function EditProfile() {
               <span className="profile-general-info-data">
                 <input
                   type="tel"
-                  className="profile-input phone-input"
+                  className={inputValidation.phone_number ? "profile-input phone-input" : "profile-input phone-input warning"}
                   placeholder="Telefonnummer"
                   defaultValue={accountInfo.phone_number}
-                  onChange={(e) => setPhoneNumber(e.target.value, accountInfo, setAccountInfo)}
+                  onChange={(e) =>
+                    setPhoneNumber(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                  }
                 />
               </span>
             </div>
@@ -108,7 +118,12 @@ export function EditProfile() {
           {cookies.userType === "participant" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Adresse</span>
-              <AddressPicker data={accountInfo} setData={setAccountInfo} />
+              <AddressPicker
+                data={accountInfo}
+                setData={setAccountInfo}
+                validation={inputValidation}
+                setValidation={setInputValidation}
+              />
             </div>
           )}
           <div className="profile-general-info-container language">
@@ -138,9 +153,11 @@ export function EditProfile() {
                 <span className="profile-general-info-name">Distanz</span>
                 <span className="profile-general-info-data">
                   <input
-                    className="profile-input-distance"
+                    className={inputValidation.distance ? "profile-input-distance" : "profile-input-distance warning"}
                     defaultValue={accountInfo.distance}
-                    onChange={(e) => setDistanceInput(e.target.value, accountInfo, setAccountInfo)}
+                    onChange={(e) =>
+                      setDistanceInput(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                    }
                   />{" "}
                   km
                 </span>
