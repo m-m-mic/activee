@@ -1,3 +1,4 @@
+/* Styling für den standardmäßigen Button der Seite */
 .activee-button {
   border: none;
   border-radius: 8px;
@@ -15,6 +16,8 @@
 .activee-button-icon {
   width: 24px;
 }
+
+/* Styling für unterschiedliche Buttontypen */
 .activee-button.primary {
   color: var(--light-mode-background);
   background: #4a9d8c;

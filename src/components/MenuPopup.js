@@ -7,50 +7,29 @@ import SettingsIcon from "../assets/svgs/settings_icon_black.svg";
 import { PopupOption } from "./PopupOption";
 
 export function MenuPopup({ userType, setOptionsPopupVisible }) {
-  if (userType === "participant") {
-    return (
-      <div
-        className="options-popup"
-        onClick={() => {
-          setOptionsPopupVisible(false);
-        }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile`}>
-          Dein Profil
-        </PopupOption>
+  return (
+    <div
+      className="options-popup"
+      onClick={() => {
+        setOptionsPopupVisible(false);
+      }}>
+      <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile`}>
+        Dein Profil
+      </PopupOption>
+      {userType === "participant" && (
         <PopupOption ImageSrc={AccountSwitchIcon} LinkUrl="#">
           Profil wechseln
         </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities`}>
-          Deine Aktivitäten
-        </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports`}>
-          Sportarten
-        </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings`} isLast>
-          Einstellungen
-        </PopupOption>
-      </div>
-    );
-  } else if (userType === "organisation") {
-    return (
-      <div
-        className="options-popup"
-        onClick={() => {
-          setOptionsPopupVisible(false);
-        }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile`}>
-          Dein Profil
-        </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities`}>
-          Deine Aktivitäten
-        </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports`}>
-          Sportarten
-        </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings`} isLast>
-          Einstellungen
-        </PopupOption>
-      </div>
-    );
-  }
+      )}
+      <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/your-activities`}>
+        Deine Aktivitäten
+      </PopupOption>
+      <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports`}>
+        Sportarten
+      </PopupOption>
+      <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings`} isLast>
+        Einstellungen
+      </PopupOption>
+    </div>
+  );
 }

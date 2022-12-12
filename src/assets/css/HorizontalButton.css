@@ -1,3 +1,4 @@
+/* Styling für horizontale tap Buttons mit Löschfunktion im Bearbeitungsmodus */
 .horizontal-button {
   flex: 1;
   display: inline-flex;

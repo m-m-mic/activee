@@ -1,3 +1,4 @@
+/* Styling für vertikale tap Buttons */
 .vertical-button {
   flex: 1;
   display: inline-flex;
@@ -20,6 +21,8 @@
   color: var(--light-mode-background);
   font-family: var(--button-typeface);
 }
+
+/* Verkleinerung der Schriftgröße unter 375px um ungewolltes Clipping zu verhindern */
 @media only screen and (max-width: 375px) {
   .vertical-button {
     font-size: 14px;

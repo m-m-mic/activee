@@ -16,12 +16,14 @@ import {
   setPhoneNumber,
 } from "../scripts/validateProfileEditInput";
 import { AddressPicker } from "../components/AddressPicker";
+import { WarningDisclaimer } from "../components/WarningDisclaimer";
 
 export function EditProfile() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
   const [inputValidation, setInputValidation] = useState(ProfileInputValidator);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   useEffect(() => {
     getAccountInfo();
     document.title = "Dein Profil - activee";
@@ -36,8 +38,14 @@ export function EditProfile() {
       .then((data) => setAccountInfo(data));
   };
   const updateAccountInfo = () => {
+    for (const [key, value] of Object.entries(inputValidation)) {
+      if (value === false) {
+        setIsDisclaimerVisible(true);
+        return;
+      }
+    }
     const requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(accountInfo),
     };
@@ -52,6 +60,7 @@ export function EditProfile() {
     }
     return (
       <>
+        <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
         <EditControls onConfirmClick={() => updateAccountInfo()} />
         <div className="profile-user-info">
           <img

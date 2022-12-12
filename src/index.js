@@ -14,6 +14,8 @@ import { Profile } from "./pages/Profile";
 import { EditProfile } from "./pages/EditProfile";
 import { CookiesProvider } from "react-cookie";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { YourActivities } from "./pages/YourActivities";
+import { Sports } from "./pages/Sports";
 
 export default function App() {
   return (
@@ -26,8 +28,10 @@ export default function App() {
         </Route>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route exact path="your-activities" element={<YourActivities />} />
           <Route exact path="activity/:id" element={<Activity />} />
           <Route exact path="activity/new" element={<CreateActivity />} />
+          <Route exact path="sports" element={<Sports />} />
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="profile/edit" element={<EditProfile />} />
           <Route exact path="settings" element={<Settings />} />

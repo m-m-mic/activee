@@ -1,3 +1,5 @@
+/* Styling für die Profil- und Profilbearbeitungsseite */
+/* Profilübersicht mit Bild, Namen und E-Mailadresse des Nutzers */
 .profile-user-info {
   display: flex;
   flex-flow: row;
@@ -45,6 +47,7 @@
 .profile-user-edit-icon {
   width: 32px;
 }
+/* Weitere Angaben des Nutzers */
 .profile-club-name {
   font-family: var(--h1-subtitle-typeface);
   font-size: var(--h1-subtitle-size);
@@ -79,7 +82,21 @@
   font-family: Inter Light Italic, sans-serif;
   color: var(--light-mode-disabled-typeface);
 }
-/*Edit page*/
+/* Styling für die Bearbeitungsseite */
+/* Zusätzliches Styling für Eingabefelder */
+.profile-input-name {
+  font-family: Inter Bold, sans-serif;
+  font-size: 20px;
+  width: 100%;
+  max-width: 200px;
+}
+.profile-input.phone-input {
+  min-width: 0;
+  max-width: 130px;
+  width: 100%;
+}
+
+/* Sticky Buttons, mit welchen man die Eingaben bestätigen und den Bearbeitungsmodus abbrechen kann */
 .profile-edit-options {
   position: fixed;
   bottom: 15px;
@@ -91,6 +108,7 @@
   gap: 10px;
   padding: 10px;
   border-radius: 8px;
+  box-shadow: var(--light-mode-elevation-4);
 }
 .profile-edit-icon {
   width: 32px;
@@ -104,6 +122,7 @@
   width: 2px;
   height: 32px;
 }
+/* Styling für die Untersektionen Geschlecht, Transport und Sportarten */
 .profile-gender-selection,
 .profile-transport-selection {
   display: flex;
@@ -119,17 +138,14 @@
   gap: 10px;
   grid-template-columns: 1fr 1fr;
 }
-.profile-input-name {
-  font-family: Inter Bold, sans-serif;
-  font-size: 20px;
-  width: 100%;
-  max-width: 200px;
+@media only screen and (max-width: 430px) {
+  .profile-sports-selection {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
 }
-.profile-input.phone-input {
-  min-width: 0;
-  max-width: 130px;
-  width: 100%;
-}
+/* Styling des Eingabefelder für die Addresse */
 .profile-address-picker {
   display: flex;
   flex-flow: column;
@@ -167,11 +183,4 @@
 .profile-input-distance {
   width: 40px;
   text-align: center;
-}
-@media only screen and (max-width: 430px) {
-  .profile-sports-selection {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: 1fr;
-  }
 }

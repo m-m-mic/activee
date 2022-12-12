@@ -1,3 +1,5 @@
+/* Styling für Header und beinhaltete Elemente */
+/* Header bleibt aufgrund von 'position: sticky' und 'top: 0' immer am oberen Bildschirmrand */
 .header {
   position: sticky;
   top: 0;
@@ -14,6 +16,8 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
+
+/* Versteckt Header außerhalb des Viewports */
 .header.hide {
   top: -70px;
 }
@@ -21,6 +25,11 @@
   background: rgba(255, 252, 249, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
+}
+
+/* Header Elemente */
+#activee-logo {
+  display: block;
 }
 #header-options {
   display: flex;
@@ -36,47 +45,11 @@
   width: 32px;
   display: block;
 }
-
 .header-button {
   cursor: pointer;
 }
 
-#options-popup-button {
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.options-popup {
-  position: absolute;
-  top: 60px;
-  right: 12px;
-  background: var(--light-mode-background);
-  box-shadow: var(--light-mode-elevation-4);
-  padding: 14px 19px;
-  border-radius: 8px;
-  transition: 100ms ease-out;
-  z-index: 20;
-}
-
-#popup-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 19;
-}
-
-.options-selection {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  padding: 5px 0;
-  gap: 19px;
-}
-.options-icon {
-  width: 24px;
-}
+/* Styling des activee Brandings auf der Landing Page */
 .activee-ci {
   display: flex;
   flex-flow: row;
@@ -92,4 +65,39 @@
 .activee-name {
   font-family: var(--logo-typeface);
   font-size: 32px;
+}
+
+/* Styling für das Popup Menü und die beinhalteten Buttons */
+#options-popup-button {
+  overflow: hidden;
+  border-radius: 20px;
+}
+.options-popup {
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  background: var(--light-mode-background);
+  box-shadow: var(--light-mode-elevation-4);
+  padding: 14px 19px;
+  border-radius: 8px;
+  transition: 100ms ease-out;
+  z-index: 20;
+}
+#popup-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 19;
+}
+.options-selection {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 5px 0;
+  gap: 19px;
+}
+.options-icon {
+  width: 24px;
 }

@@ -1,35 +1,36 @@
+/* Styling für den Header auf der Suchseite */
 #search-header {
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    height: 70px;
-    padding: 0 15px;
-    background: var(--light-mode-background);
-    gap: 15px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  height: 70px;
+  padding: 0 15px;
+  background: var(--light-mode-background);
+  gap: 15px;
 }
 
 #search-input {
-    border: none;
-    background: var(--light-mode-background);
-    font-family: var(--text-typeface);
-    font-size: var(--text-size);
-    border-radius: 20px;
-    height: 40px;
-    line-height: 40px;
-    width: 100%;
-    padding: 0 15px;
-    box-shadow: var(--light-mode-elevation-3);
-    transition: 0.2s ease-out;
+  border: none;
+  background: var(--light-mode-background);
+  font-family: var(--text-typeface);
+  font-size: var(--text-size);
+  border-radius: 20px;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  padding: 0 15px;
+  box-shadow: var(--light-mode-elevation-3);
+  transition: 0.2s ease-out;
 }
 
 #search-input:focus {
-    outline: none;
-    border: none;
-    box-shadow: var(--light-mode-elevation-4);
+  outline: none;
+  border: none;
+  box-shadow: var(--light-mode-elevation-4);
 }
 
 #search-input::placeholder {
-    font-family: var(--text-typeface);
+  font-family: var(--text-typeface);
 }
