@@ -38,11 +38,11 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type))
+      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
       .then(() => setProfileSelectionVisible(false))
       .then(() => navigate("/"));
   };
-  const handleCookies = (token, userId, userType) => {
+  const handleCookies = (token, userId, userType, userTier) => {
     setCookie("userToken", token, {
       path: "/",
     });
@@ -50,6 +50,9 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       path: "/",
     });
     setCookie("userType", userType, {
+      path: "/",
+    });
+    setCookie("userTier", userTier, {
       path: "/",
     });
   };
@@ -108,7 +111,6 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
           ))}
         </div>
         <div className="profile-selection-options">
-          <ActiveeButton buttonType="outline">Verwalten</ActiveeButton>
           <ActiveeButton buttonType="primary" onClick={() => changeProfile()}>
             Wechseln
           </ActiveeButton>

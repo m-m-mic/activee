@@ -16,6 +16,7 @@ import { CookiesProvider } from "react-cookie";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { YourActivities } from "./pages/YourActivities";
 import { Sports } from "./pages/Sports";
+import { Profiles } from "./pages/Profiles";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="profile/edit" element={<EditProfile />} />
           <Route exact path="settings" element={<Settings />} />
+          <Route exact path="settings/profiles" element={<Profiles />} />
         </Route>
         <Route exact path="search" element={<SearchLayout />} />
       </Routes>

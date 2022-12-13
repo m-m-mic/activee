@@ -21,10 +21,10 @@ export function Login() {
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type))
+      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
-  const handleCookies = (token, userId, userType) => {
+  const handleCookies = (token, userId, userType, userTier) => {
     setCookie("userToken", token, {
       path: "/",
     });
@@ -32,6 +32,9 @@ export function Login() {
       path: "/",
     });
     setCookie("userType", userType, {
+      path: "/",
+    });
+    setCookie("userTier", userTier, {
       path: "/",
     });
   };

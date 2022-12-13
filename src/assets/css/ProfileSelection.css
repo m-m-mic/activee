@@ -85,6 +85,6 @@
 .profile-selection-options {
   display: flex;
   flex-flow: row wrap;
-  justify-content: right;
+  justify-content: center;
   gap: 15px;
 }
