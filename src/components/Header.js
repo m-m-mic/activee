@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../assets/css/Header.css";
 import ActiveeLogo from "../assets/pngs/40px_activee_logo.png";
 import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
@@ -9,17 +9,19 @@ import { useCookies } from "react-cookie";
 import { ProfileSelection } from "./ProfileSelection";
 
 export function Header() {
-  const [cookies, setCookie] = useCookies(["userId", "userType"]);
+  let location = useLocation();
+  const [cookies, setCookies] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
   const [isCiVisible, setIsCiVisible] = useState(false);
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
   const [isProfileSelectionVisible, setIsProfileSelectionVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    setIsProfileSelectionVisible(false);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [location]);
   const handleScroll = () => {
     setIsOptionsPopupVisible(false);
     setIsCiVisible((isVisible) => {
@@ -87,7 +89,10 @@ export function Header() {
         )}
         {isProfileSelectionVisible && (
           <>
-            <ProfileSelection setProfileSelectionVisible={setIsProfileSelectionVisible} />
+            <ProfileSelection
+              ProfileSelectionVisible={isProfileSelectionVisible}
+              setProfileSelectionVisible={setIsProfileSelectionVisible}
+            />
             <div
               className="popup-backdrop darken"
               onClick={() => {

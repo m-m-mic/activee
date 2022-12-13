@@ -5,14 +5,20 @@ import "../assets/css/ProfileSelection.css";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
-export function ProfileSelection({ setProfileSelectionVisible }) {
+export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId"]);
   const [profileList, setProfileList] = useState([]);
   const [activeProfile, setActiveProfile] = useState(cookies.userId);
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
+    if (ProfileSelectionVisible) {
+      document.body.style.overflow = "hidden";
+    }
     getProfileList();
+    return function cleanup() {
+      document.body.style.overflow = "unset";
+    };
   }, []);
   const getProfileList = () => {
     const requestOptions = {
