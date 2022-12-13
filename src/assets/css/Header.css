@@ -83,7 +83,7 @@
   transition: 100ms ease-out;
   z-index: 20;
 }
-#popup-backdrop {
+.popup-backdrop {
   position: absolute;
   top: 0;
   left: 0;
@@ -91,7 +91,11 @@
   height: 100vh;
   z-index: 19;
 }
+.popup-backdrop.darken {
+  background: rgba(0, 0, 0, 0.55);
+}
 .options-selection {
+  cursor: pointer;
   display: flex;
   width: 100%;
   align-items: center;

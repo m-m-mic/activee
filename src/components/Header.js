@@ -3,16 +3,17 @@ import { NavLink } from "react-router-dom";
 import "../assets/css/Header.css";
 import ActiveeLogo from "../assets/pngs/40px_activee_logo.png";
 import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
-import AccountIconBlack from "../assets/svgs/account_icon_black.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";
 import { useCookies } from "react-cookie";
+import { ProfileSelection } from "./ProfileSelection";
 
 export function Header() {
   const [cookies, setCookie] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
   const [isCiVisible, setIsCiVisible] = useState(false);
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
+  const [isProfileSelectionVisible, setIsProfileSelectionVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -72,11 +73,25 @@ export function Header() {
         </div>
         {isOptionsPopupVisible && (
           <>
-            <MenuPopup userType={cookies.userType} setOptionsPopupVisible={setIsOptionsPopupVisible} />
+            <MenuPopup
+              userType={cookies.userType}
+              setOptionsPopupVisible={setIsOptionsPopupVisible}
+              setIsProfileSelectionVisible={setIsProfileSelectionVisible}
+            />
             <div
-              id="popup-backdrop"
+              className="popup-backdrop"
               onClick={() => {
                 setIsOptionsPopupVisible(false);
+              }}></div>
+          </>
+        )}
+        {isProfileSelectionVisible && (
+          <>
+            <ProfileSelection setProfileSelectionVisible={setIsProfileSelectionVisible} />
+            <div
+              className="popup-backdrop darken"
+              onClick={() => {
+                setIsProfileSelectionVisible(false);
               }}></div>
           </>
         )}
