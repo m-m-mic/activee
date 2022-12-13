@@ -91,7 +91,9 @@ export function EditProfile() {
                 }
               />
             </div>
-            <div className="profile-user-email">{accountInfo.email}</div>
+            <div className="profile-user-email">
+              {accountInfo.email} {!accountInfo.email && <>Unterprofil</>}
+            </div>
           </span>
         </div>
         {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
@@ -172,9 +174,12 @@ export function EditProfile() {
                 </span>
               </div>
             </div>
-            <h3>Zeiten</h3>
-            <TimeTable data={accountInfo.times}></TimeTable>
-            {accountInfo.children_accounts && <h2>Unterprofile</h2>}
+            {accountInfo.times > 0 && (
+              <>
+                <h3>Zeiten</h3>
+                <TimeTable data={accountInfo.times}></TimeTable>
+              </>
+            )}
           </>
         )}
       </>

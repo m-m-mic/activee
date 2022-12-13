@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 export function ProfileSelection({ setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId"]);
-  const [accountList, setAccountList] = useState([]);
-  const [activeAccount, setActiveAccount] = useState(cookies.userId);
+  const [profileList, setProfileList] = useState([]);
+  const [activeProfile, setActiveProfile] = useState(cookies.userId);
   const [activeIndex, setActiveIndex] = useState(null);
   useEffect(() => {
-    getAccountList();
+    getProfileList();
   }, []);
-  const getAccountList = () => {
+  const getProfileList = () => {
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
@@ -23,12 +23,12 @@ export function ProfileSelection({ setProfileSelectionVisible }) {
       .then((response) => response.json())
       .then((data) => handleActiveAccountList(data));
   };
-  const changeAccount = () => {
-    const url = "http://localhost:3033/account/change";
+  const changeProfile = () => {
+    const url = "http://localhost:3033/account/change-profile";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-      body: JSON.stringify({ id: activeAccount }),
+      body: JSON.stringify({ id: activeProfile }),
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
@@ -48,7 +48,7 @@ export function ProfileSelection({ setProfileSelectionVisible }) {
     });
   };
   const handleActiveAccountList = (data) => {
-    setAccountList(data);
+    setProfileList(data);
     for (let i = 0; i < data.length; i++) {
       if (data[i].id === cookies.userId) {
         setActiveIndex(i);
@@ -56,7 +56,7 @@ export function ProfileSelection({ setProfileSelectionVisible }) {
     }
   };
   const handleActiveAccountChange = (id, index) => {
-    setActiveAccount(id);
+    setActiveProfile(id);
     setActiveIndex(index);
   };
   return (
@@ -72,7 +72,7 @@ export function ProfileSelection({ setProfileSelectionVisible }) {
           />
         </div>
         <div className="profile-selection-list">
-          {accountList.map((item, key) => (
+          {profileList.map((item, key) => (
             <button
               className="profile-selection-item"
               key={key}
@@ -103,7 +103,7 @@ export function ProfileSelection({ setProfileSelectionVisible }) {
         </div>
         <div className="profile-selection-options">
           <ActiveeButton buttonType="outline">Verwalten</ActiveeButton>
-          <ActiveeButton buttonType="primary" onClick={() => changeAccount()}>
+          <ActiveeButton buttonType="primary" onClick={() => changeProfile()}>
             Wechseln
           </ActiveeButton>
         </div>

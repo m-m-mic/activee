@@ -24,7 +24,6 @@ export function Profile() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
-
   if (cookies.userToken) {
     if (!accountInfo) {
       return null;
@@ -45,7 +44,9 @@ export function Profile() {
             <div className="profile-user-name">
               {accountInfo.first_name} {accountInfo.last_name}
             </div>
-            <div className="profile-user-email">{accountInfo.email}</div>
+            <div className="profile-user-email">
+              {accountInfo.email} {!accountInfo.email && <>Unterprofil</>}
+            </div>
           </div>
           <NavLink className="profile-user-edit-link" to={`/profile/edit`}>
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
@@ -100,22 +101,29 @@ export function Profile() {
           <>
             <h2>Präferenzen</h2>
             <GenderSelection data={accountInfo} />
-            <h3>Sportarten</h3>
-            <SportSelection data={accountInfo} />
+            {accountInfo.sports.length > 0 && (
+              <>
+                <h3>Sportarten</h3>
+                <SportSelection data={accountInfo} />
+              </>
+            )}
             <h3>Anfahrt</h3>
             <TransportSelection data={accountInfo} />
             <div className="profile-general-info">
               <div className="profile-general-info-container">
                 <span className="profile-general-info-name">Distanz</span>
                 <span className="profile-general-info-data">
-                  {accountInfo.distance} km
+                  {accountInfo.distance > 0 && <>{accountInfo.distance} km</>}
                   {!accountInfo.distance && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
                 </span>
               </div>
             </div>
-            <h3>Zeiten</h3>
-            <TimeTable data={accountInfo.times}></TimeTable>
-            {accountInfo.children_accounts && <h2>Unterprofile</h2>}
+            {accountInfo.times > 0 && (
+              <>
+                <h3>Zeiten</h3>
+                <TimeTable data={accountInfo.times}></TimeTable>
+              </>
+            )}
           </>
         )}
       </>
