@@ -6,7 +6,7 @@ export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabl
     return (
       <button onClick={onClick} className={isDisabled ? "activee-button disabled" : `activee-button ${buttonType}`}>
         <img className="activee-button-icon" src={iconSrc} alt="Button icon" />
-        {children}
+        <span>{children}</span>
       </button>
     );
   } else {

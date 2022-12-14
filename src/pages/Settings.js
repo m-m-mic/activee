@@ -28,10 +28,14 @@ export function Settings() {
     return (
       <>
         <h1>Einstellungen</h1>
-        <NavLink to={`/settings/profiles`}>
-          <ActiveeButton buttonType="primary">Profilübersicht</ActiveeButton>
-        </NavLink>
-        <br />
+        {cookies.userTier === "parent" && (
+          <>
+            <NavLink to={`/settings/profiles`}>
+              <ActiveeButton buttonType="primary">Profilübersicht</ActiveeButton>
+            </NavLink>
+            <br />
+          </>
+        )}
         <ActiveeButton
           buttonType="warning"
           onClick={() => {

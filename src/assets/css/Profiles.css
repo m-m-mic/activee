@@ -1,3 +1,8 @@
+.profiles-list {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
 .profiles-parent,
 .profiles-child-summary {
   display: flex;
@@ -26,8 +31,9 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.profiles-child-container {
+.profiles-child-data {
   flex: 1;
+  min-width: 0;
 }
 .profiles-child-name {
   font-family: var(--h3-typeface);
@@ -47,4 +53,10 @@
   justify-content: right;
   margin: 10px 0;
   gap: 10px;
+}
+.profiles-add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
 }

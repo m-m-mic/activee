@@ -3,6 +3,7 @@
   flex-flow: row;
   align-items: center;
   gap: 17px;
+  cursor: pointer;
 }
 .activee-details-expand-icon {
   flex: 0 0 32px;

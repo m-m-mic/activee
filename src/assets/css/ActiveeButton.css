@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   transition: 200ms;
+  gap: 7px;
 }
 .activee-button-icon {
   width: 24px;
@@ -24,6 +25,13 @@
 }
 .activee-button.primary:active {
   background: #6ac8b7;
+}
+.activee-button.blank {
+  background: var(--light-mode-blank);
+  box-shadow: none;
+}
+.activee-button.blank:active {
+  background: var(--light-mode-blank-active);
 }
 .activee-button.warning {
   color: var(--light-mode-background);

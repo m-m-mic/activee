@@ -7,7 +7,7 @@ export function PopupOption({ ImageSrc, onClick, children, isLast }) {
         <img className="options-icon" src={ImageSrc} alt="Options icon" />
         {children}
       </div>
-      {!isLast && <hr />}
+      {!isLast && <hr className="options-divider" />}
     </div>
   );
 }

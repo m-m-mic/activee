@@ -7,6 +7,8 @@
   --light-mode-primary-1: #4a9d8c;
   --light-mode-primary-2: #65b9a8ff;
   --light-mode-primary-disabled: #c6dcd7;
+  --light-mode-blank: #fffcf9;
+  --light-mode-blank-active: #f6efe8;
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-disabled: #c6dcd7;
@@ -142,6 +144,9 @@ b {
 a {
   text-decoration: none;
   color: var(--light-mode-typeface);
+}
+hr {
+  margin: 0;
 }
 input {
   display: inline-block;

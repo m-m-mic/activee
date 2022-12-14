@@ -118,7 +118,7 @@ export function Profile() {
                 </span>
               </div>
             </div>
-            {accountInfo.times > 0 && (
+            {accountInfo.times.length > 0 && (
               <>
                 <h3>Zeiten</h3>
                 <TimeTable data={accountInfo.times}></TimeTable>

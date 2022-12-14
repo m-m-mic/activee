@@ -105,3 +105,6 @@
 .options-icon {
   width: 24px;
 }
+.options-divider {
+  margin: 8px 0;
+}

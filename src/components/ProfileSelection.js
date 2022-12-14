@@ -7,7 +7,7 @@ import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
 export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userToken", "userId"]);
+  const [cookies, setCookie] = useCookies(["userToken", "userId", "userTier"]);
   const [profileList, setProfileList] = useState([]);
   const [activeProfile, setActiveProfile] = useState(cookies.userId);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -111,6 +111,11 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
           ))}
         </div>
         <div className="profile-selection-options">
+          {cookies.userTier === "parent" && (
+            <ActiveeButton buttonType="outline" onClick={() => navigate("/settings/profiles")}>
+              Verwalten
+            </ActiveeButton>
+          )}
           <ActiveeButton buttonType="primary" onClick={() => changeProfile()}>
             Wechseln
           </ActiveeButton>
