@@ -1,0 +1,25 @@
+/* Styling der Warnung für ungültige Nutzerangaben */
+.warning-disclaimer {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  background: var(--light-mode-warning-active);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: 200ms;
+  visibility: visible;
+}
+.warning-disclaimer.hidden {
+  visibility: hidden;
+  height: 0;
+  margin-bottom: 0;
+}
+.warning-icon {
+  width: 32px;
+}
+.warning-text {
+  font-family: Inter SemiBold, sans-serif;
+}

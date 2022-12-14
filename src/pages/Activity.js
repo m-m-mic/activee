@@ -7,7 +7,7 @@ export function Activity() {
   let { id } = useParams();
   useEffect(() => {
     const getActivityInfo = () => {
-      fetch("http://localhost:1337/activity/" + id)
+      fetch("http://localhost:3033/activity/" + id)
         .then((response) => response.json())
         .then((data) => setActivityInfo(data));
     };

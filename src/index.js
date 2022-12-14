@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import LoginLayout from "./layouts/LoginLayout";
 import SearchLayout from "./layouts/SearchLayout";
@@ -12,27 +12,41 @@ import { Settings } from "./pages/Settings";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 import { EditProfile } from "./pages/EditProfile";
+import { CookiesProvider } from "react-cookie";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { YourActivities } from "./pages/YourActivities";
+import { Sports } from "./pages/Sports";
+import { Profiles } from "./pages/Profiles";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginLayout />}>
-          <Route path="login" element={<Login />} />
+          <Route exact path="login" element={<Login />} />
+          <Route exact path="404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate replace to="404" />} />
         </Route>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="activity/:id" element={<Activity />} />
-          <Route path="activity/new" element={<CreateActivity />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="profile/edit" element={<EditProfile />} />
-          <Route path="settings" element={<Settings />} />
+          <Route exact path="your-activities" element={<YourActivities />} />
+          <Route exact path="activity/:id" element={<Activity />} />
+          <Route exact path="activity/new" element={<CreateActivity />} />
+          <Route exact path="sports" element={<Sports />} />
+          <Route exact path="profile" element={<Profile />} />
+          <Route exact path="profile/edit" element={<EditProfile />} />
+          <Route exact path="settings" element={<Settings />} />
+          <Route exact path="settings/profiles" element={<Profiles />} />
         </Route>
-        <Route path="/search" element={<SearchLayout />} />
+        <Route exact path="search" element={<SearchLayout />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <CookiesProvider>
+    <App />
+  </CookiesProvider>
+);

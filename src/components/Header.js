@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../assets/css/Header.css";
 import ActiveeLogo from "../assets/pngs/40px_activee_logo.png";
 import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
-import AccountIconBlack from "../assets/svgs/account_icon_black.svg";
-import GermanIcon from "../assets/svgs/german_icon.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";
+import { useCookies } from "react-cookie";
+import { ProfileSelection } from "./ProfileSelection";
 
-export function Header({ userType }) {
+export function Header() {
+  let location = useLocation();
+  const [cookies, setCookies] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
   const [isCiVisible, setIsCiVisible] = useState(false);
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
+  const [isProfileSelectionVisible, setIsProfileSelectionVisible] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    setIsProfileSelectionVisible(false);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [location]);
   const handleScroll = () => {
     setIsOptionsPopupVisible(false);
     setIsCiVisible((isVisible) => {
@@ -33,18 +37,23 @@ export function Header({ userType }) {
       return isVisible;
     });
   };
-  if (userType === "participant" || userType === "organisation") {
+  if (cookies.userType === "participant" || cookies.userType === "organisation") {
     return (
       <div className={`header ${scrollDirection === "down" ? "hide" : "show"}`}>
-        <NavLink id="home-link" to={`/?user=${userType}`}>
+        <NavLink id="home-link" to={`/`}>
           <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
         </NavLink>
         <div id="header-options">
-          <NavLink id="search-link" to={`/search?user=${userType}`}>
+          <NavLink id="search-link" to={`/search`}>
             <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="Search icon" />
           </NavLink>
           <span id="languages-popup-button" className="header-button">
-            <img id="language-icon" className="header-icon" src={GermanIcon} alt="Language icon" />
+            <img
+              id="language-icon"
+              className="header-icon"
+              src="http://localhost:3033/flags/german_flag.jpg"
+              alt="Language icon"
+            />
           </span>
           <span
             id="options-popup-button"
@@ -52,16 +61,42 @@ export function Header({ userType }) {
             onClick={() => {
               setIsOptionsPopupVisible(!isOptionsPopupVisible);
             }}>
-            <img id="account-icon" className="header-icon" src={AccountIconBlack} alt="Account icon" />
+            <img
+              id="account-icon"
+              className="header-icon"
+              src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+              }}
+              alt="Account icon"
+            />
           </span>
         </div>
         {isOptionsPopupVisible && (
           <>
-            <MenuPopup userType={userType} setOptionsPopupVisible={setIsOptionsPopupVisible} />
+            <MenuPopup
+              userType={cookies.userType}
+              setOptionsPopupVisible={setIsOptionsPopupVisible}
+              setIsProfileSelectionVisible={setIsProfileSelectionVisible}
+            />
             <div
-              id="popup-backdrop"
+              className="popup-backdrop"
               onClick={() => {
                 setIsOptionsPopupVisible(false);
+              }}></div>
+          </>
+        )}
+        {isProfileSelectionVisible && (
+          <>
+            <ProfileSelection
+              ProfileSelectionVisible={isProfileSelectionVisible}
+              setProfileSelectionVisible={setIsProfileSelectionVisible}
+            />
+            <div
+              className="popup-backdrop darken"
+              onClick={() => {
+                setIsProfileSelectionVisible(false);
               }}></div>
           </>
         )}
@@ -75,7 +110,7 @@ export function Header({ userType }) {
           <span className="activee-name">activee</span>
         </div>
         <span id="languages-popup-button" className="header-button">
-          <img id="language-icon" className="header-icon" src={GermanIcon} alt="Language icon" />
+          <img id="language-icon" className="header-icon" src="http://localhost:3033/flags/german_flag.jpg" alt="Language icon" />
         </span>
       </div>
     );

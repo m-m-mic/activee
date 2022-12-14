@@ -1,0 +1,50 @@
+/* Styling für horizontale tap Buttons mit Löschfunktion im Bearbeitungsmodus */
+.horizontal-button {
+  flex: 1;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: center;
+  background: #4a9d8c;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 0;
+}
+.horizontal-button.unchecked {
+  background: #c6dcd7;
+}
+.horizontal-button-icon {
+  flex: 0 0 24px;
+}
+.horizontal-delete-icon {
+  flex: 0 0 24px;
+  cursor: pointer;
+}
+.horizontal-button-title {
+  flex: 1;
+  color: var(--light-mode-background);
+  font-family: var(--button-typeface);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.horizontal-button-edit-mode {
+  flex: 1;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: center;
+  background: #4a9d8c;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.horizontal-button-data {
+  flex: 1;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
+}

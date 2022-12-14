@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/SearchHeader.css";
 import "../assets/css/Header.css";
-import BackButtonBlack from "../assets/svgs/back_button_black.svg";
+import BackButtonBlack from "../assets/svgs/back_icon_black.svg";
 import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
 

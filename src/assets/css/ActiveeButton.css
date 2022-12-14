@@ -1,3 +1,4 @@
+/* Styling für den standardmäßigen Button der Seite */
 .activee-button {
   border: none;
   border-radius: 8px;
@@ -10,31 +11,46 @@
   flex-flow: row;
   justify-content: center;
   align-items: center;
+  transition: 200ms;
+  gap: 7px;
 }
 .activee-button-icon {
   width: 24px;
 }
-.primary {
+
+/* Styling für unterschiedliche Buttontypen */
+.activee-button.primary {
   color: var(--light-mode-background);
   background: #4a9d8c;
 }
-.primary:active {
+.activee-button.primary:active {
   background: #6ac8b7;
 }
-.warning {
+.activee-button.blank {
+  background: var(--light-mode-blank);
+  box-shadow: none;
+}
+.activee-button.blank:active {
+  background: var(--light-mode-blank-active);
+}
+.activee-button.warning {
   color: var(--light-mode-background);
   background: var(--light-mode-warning);
 }
-.warning:active {
+.activee-button.warning:active {
   background: var(--light-mode-warning-active);
 }
-.outline {
+.activee-button.outline {
   background: var(--light-mode-background);
   outline: 3px solid #4a9d8c;
   outline-offset: -3px;
   color: #4a9d8c;
 }
-.outline:active {
+.activee-button.outline:active {
   outline: 3px solid #6ac8b7;
   color: #6ac8b7;
+}
+.activee-button.disabled {
+  cursor: not-allowed;
+  background: var(--light-mode-disabled);
 }

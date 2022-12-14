@@ -1,0 +1,19 @@
+.activee-details-summary {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 17px;
+  cursor: pointer;
+}
+.activee-details-expand-icon {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  transition: 200ms;
+  z-index: -1;
+}
+.activee-details-expand-icon.open {
+  z-index: -1;
+  transform: rotate(180deg);
+}

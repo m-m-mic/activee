@@ -1,0 +1,62 @@
+.profiles-list {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+.profiles-parent,
+.profiles-child-summary {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 17px;
+}
+.profiles-parent-image,
+.profiles-child-image {
+  flex: 0 0 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #e7e7e7;
+}
+.profiles-parent-data {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  min-width: 0;
+  gap: 3px;
+}
+.profiles-parent-name {
+  font-family: var(--h2-typeface);
+  font-size: var(--h2-size);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.profiles-child-data {
+  flex: 1;
+  min-width: 0;
+}
+.profiles-child-name {
+  font-family: var(--h3-typeface);
+  font-size: var(--h3-size);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.profiles-child-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+}
+.profiles-details-content {
+  display: flex;
+  flex-flow: row;
+  justify-content: right;
+  margin: 10px 0;
+  gap: 10px;
+}
+.profiles-add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}

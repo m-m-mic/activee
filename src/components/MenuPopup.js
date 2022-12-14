@@ -5,52 +5,33 @@ import ActivitiesIcon from "../assets/svgs/your_activities_icon_black.svg";
 import SportsIcon from "../assets/svgs/sports_icon_black.svg";
 import SettingsIcon from "../assets/svgs/settings_icon_black.svg";
 import { PopupOption } from "./PopupOption";
+import { useNavigate } from "react-router-dom";
 
-export function MenuPopup({ userType, setOptionsPopupVisible }) {
-  if (userType === "participant") {
-    return (
-      <div
-        className="options-popup"
-        onClick={() => {
-          setOptionsPopupVisible(false);
-        }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile?user=${userType}`}>
-          Dein Profil
-        </PopupOption>
-        <PopupOption ImageSrc={AccountSwitchIcon} LinkUrl="#">
+export function MenuPopup({ userType, setOptionsPopupVisible, setIsProfileSelectionVisible }) {
+  const navigate = useNavigate();
+  return (
+    <div
+      className="options-popup"
+      onClick={() => {
+        setOptionsPopupVisible(false);
+      }}>
+      <PopupOption ImageSrc={AccountIcon} onClick={() => navigate("/profile")}>
+        Dein Profil
+      </PopupOption>
+      {userType === "participant" && (
+        <PopupOption ImageSrc={AccountSwitchIcon} onClick={() => setIsProfileSelectionVisible(true)}>
           Profil wechseln
         </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities?user=${userType}`}>
-          Deine Aktivitäten
-        </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports?user=${userType}`}>
-          Sportarten
-        </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings?user=${userType}`} isLast>
-          Einstellungen
-        </PopupOption>
-      </div>
-    );
-  } else if (userType === "organisation") {
-    return (
-      <div
-        className="options-popup"
-        onClick={() => {
-          setOptionsPopupVisible(false);
-        }}>
-        <PopupOption ImageSrc={AccountIcon} LinkUrl={`/profile?user=${userType}`}>
-          Dein Profil
-        </PopupOption>
-        <PopupOption ImageSrc={ActivitiesIcon} LinkUrl={`/activities?user=${userType}`}>
-          Deine Aktivitäten
-        </PopupOption>
-        <PopupOption ImageSrc={SportsIcon} LinkUrl={`/sports?user=${userType}`}>
-          Sportarten
-        </PopupOption>
-        <PopupOption ImageSrc={SettingsIcon} LinkUrl={`/settings?user=${userType}`} isLast>
-          Einstellungen
-        </PopupOption>
-      </div>
-    );
-  }
+      )}
+      <PopupOption ImageSrc={ActivitiesIcon} onClick={() => navigate("/your-activities")}>
+        Deine Aktivitäten
+      </PopupOption>
+      <PopupOption ImageSrc={SportsIcon} onClick={() => navigate("/sports")}>
+        Sportarten
+      </PopupOption>
+      <PopupOption ImageSrc={SettingsIcon} onClick={() => navigate("/settings")} isLast>
+        Einstellungen
+      </PopupOption>
+    </div>
+  );
 }
