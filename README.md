@@ -4,13 +4,13 @@
 
 ### Teilnehmerprofil
 
-Email: __max.mustermann@test-mail.com__
+Email: __roza.kovaci@gmail.com__
 
 Password: __password__
 
 ### Übungsleiter:innenprofil
 
-Email: __adele-vogt@tsvmuenchen.de__
+Email: __adele.vogt@tsv-muenchen.de__
 
 Password: __password__
 
