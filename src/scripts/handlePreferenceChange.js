@@ -1,5 +1,3 @@
-import React from "react";
-
 export function handleGenderChange(preference, data, setData) {
   let preferenceArray = data.genders;
   if (preferenceArray.includes(preference)) {
@@ -30,7 +28,7 @@ export function handleTransportChange(preference, data, setData) {
 export function handleSportRemoval(preference, data, setData) {
   let preferenceArray = data.sports;
   for (let i = 0; i < preferenceArray.length; i++) {
-    if (preferenceArray[i].value === preference) {
+    if (preferenceArray[i]._id === preference) {
       preferenceArray.splice(i, 1);
     }
   }

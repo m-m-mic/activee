@@ -59,7 +59,7 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
   const handleActiveAccountList = (data) => {
     setProfileList(data);
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id === cookies.userId) {
+      if (data[i]._id === cookies.userId) {
         setActiveIndex(i);
       }
     }
@@ -85,11 +85,11 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
             <button
               className="profile-selection-item"
               key={key}
-              value={item.id}
-              onClick={() => handleActiveAccountChange(item.id, key)}>
+              value={item._id}
+              onClick={() => handleActiveAccountChange(item._id, key)}>
               <img
                 className="profile-selection-item-image"
-                src={`http://localhost:3033/images/profiles/${item.id}.jpg`}
+                src={`http://localhost:3033/images/profiles/${item._id}.jpg`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
                   currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";

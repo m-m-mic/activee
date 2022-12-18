@@ -14,13 +14,13 @@ import {
   setFirstNameInput,
   setLastNameInput,
   setPhoneNumber,
-} from "../scripts/validateProfileEditInput";
+} from "../scripts/validateInputs";
 import { AddressPicker } from "../components/AddressPicker";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
 
 export function EditProfile() {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userToken", "userType"]);
+  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
   const [inputValidation, setInputValidation] = useState(ProfileInputValidator);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
@@ -143,7 +143,7 @@ export function EditProfile() {
               {accountInfo.languages.map((item, key) => (
                 <img
                   className="profile-general-info-language-icon"
-                  src={`http://localhost:3033/flags/${item}_flag.jpg`}
+                  src={`http://localhost:3033/flags/${item._id}_flag.jpg`}
                   alt="language icon"
                   key={key}
                 />

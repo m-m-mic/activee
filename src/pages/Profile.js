@@ -88,7 +88,7 @@ export function Profile() {
               {accountInfo.languages.map((item, key) => (
                 <img
                   className="profile-general-info-language-icon"
-                  src={`http://localhost:3033/flags/${item}_flag.jpg`}
+                  src={`http://localhost:3033/flags/${item._id}_flag.jpg`}
                   alt="language icon"
                   key={key}
                 />

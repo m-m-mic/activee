@@ -5,10 +5,12 @@ import "../assets/css/Profiles.css";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { ActiveeDetails } from "../components/ActiveeDetails";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
+import { CreateNewProfile } from "../components/CreateNewProfile";
 
 export function Profiles() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType", "userTier"]);
+  const [isCreateSubAccountVisible, setCreateSubAccountVisible] = useState(false);
   const [accountInfo, setAccountInfo] = useState();
   useEffect(() => {
     getAccountInfo();
@@ -58,12 +60,29 @@ export function Profiles() {
     }
     return (
       <>
+        {isCreateSubAccountVisible && (
+          <>
+            <CreateNewProfile
+              isCreateSubAccountVisible={isCreateSubAccountVisible}
+              setCreateSubAccountVisible={setCreateSubAccountVisible}
+              firstName={accountInfo.first_name}
+              lastName={accountInfo.last_name}
+              address={accountInfo.address}
+            />
+            <div
+              className="popup-backdrop darken"
+              onClick={() => {
+                setCreateSubAccountVisible(false);
+              }}></div>
+          </>
+        )}
+
         <h1>Profilübersicht</h1>
         <div className="profiles-list">
           <div className="profiles-parent">
             <img
               className="profiles-parent-image"
-              src={`http://localhost:3033/images/profiles/${accountInfo.id}.jpg`}
+              src={`http://localhost:3033/images/profiles/${accountInfo._id}.jpg`}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
@@ -85,7 +104,7 @@ export function Profiles() {
                 <>
                   <img
                     className="profiles-child-image"
-                    src={`http://localhost:3033/images/profiles/${item.id}.jpg`}
+                    src={`http://localhost:3033/images/profiles/${item._id}.jpg`}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
                       currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
@@ -101,7 +120,7 @@ export function Profiles() {
               }
               content={
                 <div className="profiles-details-content">
-                  <ActiveeButton onClick={() => changeProfile(item.id)} buttonType="primary">
+                  <ActiveeButton onClick={() => changeProfile(item._id)} buttonType="primary">
                     Wechseln
                   </ActiveeButton>
                   <ActiveeButton buttonType="warning">Profil löschen</ActiveeButton>
@@ -111,7 +130,12 @@ export function Profiles() {
           ))}
           {accountInfo.related_accounts.length < 3 && (
             <div className="profiles-add-button">
-              <ActiveeButton iconSrc={AddIconBlack} buttonType="blank">
+              <ActiveeButton
+                iconSrc={AddIconBlack}
+                buttonType="blank"
+                onClick={() => {
+                  setCreateSubAccountVisible(true);
+                }}>
                 Neues Profil
               </ActiveeButton>
             </div>

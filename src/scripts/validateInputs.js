@@ -105,3 +105,8 @@ export const ProfileInputValidator = {
   city: true,
   distance: true,
 };
+
+export const NewSubAccountValidator = {
+  first_name: false,
+  last_name: true,
+};
