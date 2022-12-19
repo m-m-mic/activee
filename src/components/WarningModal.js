@@ -17,7 +17,6 @@ export function WarningModal({ isWarningModalVisible, setWarningModalVisible, on
       <div className="warning-modal-container">
         <div className="warning-modal-header">
           <span>{title}</span>
-          <img className="warning-modal-exit" src={CancelIconBlack} onClick={() => setWarningModalVisible(false)} alt="Cancel" />
         </div>
         <div>{children}</div>
         <div className="warning-modal-options">
