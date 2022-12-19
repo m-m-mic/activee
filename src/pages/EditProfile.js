@@ -49,10 +49,13 @@ export function EditProfile() {
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(accountInfo),
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
-      .then((response) => response.json())
-      .then((data) => setAccountInfo(data))
-      .then(() => navigate("/profile"));
+    fetch("http://localhost:3033/account/info", requestOptions).then((response) => {
+      if (response.status === 200) {
+        navigate("/profile");
+      } else {
+        console.log("Error while updating profile.");
+      }
+    });
   };
   if (cookies.userToken) {
     if (!accountInfo) {

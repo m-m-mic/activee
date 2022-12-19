@@ -6,6 +6,7 @@ import { ActiveeButton } from "./ActiveeButton";
 import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import { WarningDisclaimer } from "./WarningDisclaimer";
 import { useNavigate } from "react-router-dom";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 
 export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address }) {
   const navigate = useNavigate();
@@ -46,22 +47,8 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
     };
     fetch("http://localhost:3033/account/create-profile", requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
+      .then((data) => handleCookieChange(data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
-  };
-  const handleCookies = (token, userId, userType, userTier) => {
-    setCookie("userToken", token, {
-      path: "/",
-    });
-    setCookie("userId", userId, {
-      path: "/",
-    });
-    setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userTier", userTier, {
-      path: "/",
-    });
   };
   return (
     <div className="create-sub-account-modal">
