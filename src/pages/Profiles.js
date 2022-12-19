@@ -37,6 +37,21 @@ export function Profiles() {
       .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
+  const deleteProfile = (profileId) => {
+    const url = "http://localhost:3033/account/delete-profile";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+      body: JSON.stringify({ id: profileId }),
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        getAccountInfo();
+        return;
+      }
+      console.log("Something went wrong while deleting profile");
+    });
+  };
   const handleCookies = (token, userId, userType, userTier) => {
     setCookie("userToken", token, {
       path: "/",
@@ -123,12 +138,14 @@ export function Profiles() {
                   <ActiveeButton onClick={() => changeProfile(item._id)} buttonType="primary">
                     Wechseln
                   </ActiveeButton>
-                  <ActiveeButton buttonType="warning">Profil löschen</ActiveeButton>
+                  <ActiveeButton onClick={() => deleteProfile(item._id)} buttonType="warning">
+                    Profil löschen
+                  </ActiveeButton>
                 </div>
               }
             />
           ))}
-          {accountInfo.related_accounts.length < 3 && (
+          {accountInfo.related_accounts.length < 4 && (
             <div className="profiles-add-button">
               <ActiveeButton
                 iconSrc={AddIconBlack}
