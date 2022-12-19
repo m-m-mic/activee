@@ -63,12 +63,11 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
       path: "/",
     });
   };
-  console.log(newProfileInfo);
   return (
     <div className="create-sub-account-modal">
       <div className="create-sub-account-container">
         <div className="create-sub-account-header">
-          <span className="profile-selection-title">Neues Profil erstellen</span>
+          <span>Neues Profil erstellen</span>
           <img
             className="create-sub-account-exit"
             src={CancelIconBlack}

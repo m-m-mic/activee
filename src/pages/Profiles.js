@@ -6,11 +6,15 @@ import { ActiveeButton } from "../components/ActiveeButton";
 import { ActiveeDetails } from "../components/ActiveeDetails";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { CreateNewProfile } from "../components/CreateNewProfile";
+import { WarningModal } from "../components/WarningModal";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 
 export function Profiles() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType", "userTier"]);
   const [isCreateSubAccountVisible, setCreateSubAccountVisible] = useState(false);
+  const [isWarningModalVisible, setWarningModalVisible] = useState(false);
+  const [activeId, setActiveId] = useState();
   const [accountInfo, setAccountInfo] = useState();
   useEffect(() => {
     getAccountInfo();
@@ -34,37 +38,28 @@ export function Profiles() {
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
+      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
-  const deleteProfile = (profileId) => {
+  const deleteProfile = () => {
     const url = "http://localhost:3033/account/delete-profile";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-      body: JSON.stringify({ id: profileId }),
+      body: JSON.stringify({ id: activeId }),
     };
     fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
+        setWarningModalVisible(false);
         getAccountInfo();
         return;
       }
       console.log("Something went wrong while deleting profile");
     });
   };
-  const handleCookies = (token, userId, userType, userTier) => {
-    setCookie("userToken", token, {
-      path: "/",
-    });
-    setCookie("userId", userId, {
-      path: "/",
-    });
-    setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userTier", userTier, {
-      path: "/",
-    });
+  const handleWarningOpen = (itemId) => {
+    setActiveId(itemId);
+    setWarningModalVisible(true);
   };
   if (cookies.userToken) {
     if (!accountInfo) {
@@ -91,7 +86,23 @@ export function Profiles() {
               }}></div>
           </>
         )}
-
+        {isWarningModalVisible && (
+          <>
+            <WarningModal
+              onClick={() => deleteProfile()}
+              isWarningModalVisible={isWarningModalVisible}
+              setWarningModalVisible={setWarningModalVisible}
+              title={"Profil löschen"}
+              action={"löschen"}>
+              <b>Willst du das Profil wirklich löschen?</b> <br /> Diese Handlung kann nicht rückgängig gemacht werden.
+            </WarningModal>
+            <div
+              className="popup-backdrop darken"
+              onClick={() => {
+                setCreateSubAccountVisible(false);
+              }}></div>
+          </>
+        )}
         <h1>Profilübersicht</h1>
         <div className="profiles-list">
           <div className="profiles-parent">
@@ -138,7 +149,7 @@ export function Profiles() {
                   <ActiveeButton onClick={() => changeProfile(item._id)} buttonType="primary">
                     Wechseln
                   </ActiveeButton>
-                  <ActiveeButton onClick={() => deleteProfile(item._id)} buttonType="warning">
+                  <ActiveeButton onClick={() => handleWarningOpen(item._id)} buttonType="warning">
                     Profil löschen
                   </ActiveeButton>
                 </div>

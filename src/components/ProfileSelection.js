@@ -5,6 +5,7 @@ import "../assets/css/ProfileSelection.css";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userTier"]);
@@ -38,23 +39,9 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
+      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => setProfileSelectionVisible(false))
       .then(() => navigate("/"));
-  };
-  const handleCookies = (token, userId, userType, userTier) => {
-    setCookie("userToken", token, {
-      path: "/",
-    });
-    setCookie("userId", userId, {
-      path: "/",
-    });
-    setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userTier", userTier, {
-      path: "/",
-    });
   };
   const handleActiveAccountList = (data) => {
     setProfileList(data);

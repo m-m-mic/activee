@@ -4,6 +4,7 @@ import { ActiveeButton } from "../components/ActiveeButton";
 import "../assets/css/Login.css";
 import { useCookies } from "react-cookie";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 
 export function Login() {
   const navigate = useNavigate();
@@ -34,22 +35,8 @@ export function Login() {
       }
       response
         .json()
-        .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
+        .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
         .then(() => navigate("/"));
-    });
-  };
-  const handleCookies = (token, userId, userType, userTier) => {
-    setCookie("userToken", token, {
-      path: "/",
-    });
-    setCookie("userId", userId, {
-      path: "/",
-    });
-    setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userTier", userTier, {
-      path: "/",
     });
   };
   return (
