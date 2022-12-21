@@ -26,7 +26,7 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/account-list", requestOptions)
+    fetch("http://localhost:3033/account/profile-list", requestOptions)
       .then((response) => response.json())
       .then((data) => handleActiveAccountList(data));
   };

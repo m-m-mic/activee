@@ -45,7 +45,7 @@ export function EditProfile() {
       }
     }
     const requestOptions = {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(accountInfo),
     };

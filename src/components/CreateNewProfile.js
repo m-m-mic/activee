@@ -47,7 +47,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
     };
     fetch("http://localhost:3033/account/create-profile", requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookieChange(data.token, data.id, data.type, data.tier))
+      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
   return (

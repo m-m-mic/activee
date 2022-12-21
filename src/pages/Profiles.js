@@ -44,7 +44,7 @@ export function Profiles() {
   const deleteProfile = () => {
     const url = "http://localhost:3033/account/delete-profile";
     const requestOptions = {
-      method: "POST",
+      method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify({ id: activeId }),
     };
