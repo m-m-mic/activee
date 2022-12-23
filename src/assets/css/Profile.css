@@ -72,7 +72,10 @@
   text-align: right;
 }
 .profile-general-info-language-icon {
-  width: 24px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 30px;
   height: auto;
   border: 3px solid var(--light-mode-primary-1);
   border-radius: 50%;

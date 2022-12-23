@@ -34,6 +34,7 @@
   --button-size: 16px;
   --logo-typeface: Fredoka One Regular, sans-serif;
 }
+
 /* Deklarierung aller notwendigen typefaces */
 @font-face {
   font-family: "Inter Thin";

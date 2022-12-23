@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useCookies } from "react-cookie";
+import { handleLogout } from "../scripts/handleCookieChange";
 
 export function Settings() {
   const navigate = useNavigate();
@@ -9,21 +10,6 @@ export function Settings() {
   useEffect(() => {
     document.title = "Einstellungen - activee";
   });
-  const handleLogout = () => {
-    removeCookie("userToken", {
-      path: "/",
-    });
-    removeCookie("userId", {
-      path: "/",
-    });
-    removeCookie("userType", {
-      path: "/",
-    });
-    removeCookie("userTier", {
-      path: "/",
-    });
-    navigate("/");
-  };
   if (cookies.userToken) {
     return (
       <>
@@ -39,7 +25,7 @@ export function Settings() {
         <ActiveeButton
           buttonType="warning"
           onClick={() => {
-            handleLogout();
+            handleLogout(removeCookie, navigate);
           }}>
           Ausloggen
         </ActiveeButton>

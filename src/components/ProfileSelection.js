@@ -5,6 +5,7 @@ import "../assets/css/ProfileSelection.css";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userTier"]);
@@ -25,7 +26,7 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/account-list", requestOptions)
+    fetch("http://localhost:3033/account/profile-list", requestOptions)
       .then((response) => response.json())
       .then((data) => handleActiveAccountList(data));
   };
@@ -38,28 +39,14 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => handleCookies(data.token, data.id, data.type, data.tier))
+      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => setProfileSelectionVisible(false))
       .then(() => navigate("/"));
-  };
-  const handleCookies = (token, userId, userType, userTier) => {
-    setCookie("userToken", token, {
-      path: "/",
-    });
-    setCookie("userId", userId, {
-      path: "/",
-    });
-    setCookie("userType", userType, {
-      path: "/",
-    });
-    setCookie("userTier", userTier, {
-      path: "/",
-    });
   };
   const handleActiveAccountList = (data) => {
     setProfileList(data);
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id === cookies.userId) {
+      if (data[i]._id === cookies.userId) {
         setActiveIndex(i);
       }
     }
@@ -85,11 +72,11 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
             <button
               className="profile-selection-item"
               key={key}
-              value={item.id}
-              onClick={() => handleActiveAccountChange(item.id, key)}>
+              value={item._id}
+              onClick={() => handleActiveAccountChange(item._id, key)}>
               <img
                 className="profile-selection-item-image"
-                src={`http://localhost:3033/images/profiles/${item.id}.jpg`}
+                src={`http://localhost:3033/images/profiles/${item._id}.jpg`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
                   currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";

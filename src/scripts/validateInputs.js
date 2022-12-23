@@ -1,4 +1,3 @@
-import React from "react";
 const specialCharacterPattern = /^[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]*$/g;
 const datePattern = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 const phoneNumberPattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
@@ -104,4 +103,9 @@ export const ProfileInputValidator = {
   zip_code: true,
   city: true,
   distance: true,
+};
+
+export const NewSubAccountValidator = {
+  first_name: false,
+  last_name: true,
 };
