@@ -1,0 +1,10 @@
+.home-no-activities {
+  text-align: center;
+  vertical-align: center;
+  margin: 60px auto;
+}
+.home-sports {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}

@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { Subtitle } from "../components/Subtitle";
 import { InformationTag } from "../components/InformationTag";
-import NotFoundSmileBlack from "../assets/svgs/404_smiley_black.svg";
 import "../assets/css/Activity.css";
 import { TimeTable } from "../components/TimeTable";
 import { useCookies } from "react-cookie";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import MessageIconWhite from "../assets/svgs/message_icon_white.svg";
+import { getBirthYear, shortenDates, translateWeekday } from "../scripts/handleDates";
 
 export function Activity() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
   const [activityInfo, setActivityInfo] = useState();
-  const [shortendDates, setShortendDates] = useState([]);
+  const [shortenedDates, setShortenedDates] = useState([]);
   let { id } = useParams();
   useEffect(() => {
     getActivityInfo();
@@ -25,40 +25,39 @@ export function Activity() {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
-          shortenDates(data.dates);
+          shortenDates(data.dates, setShortenedDates);
         });
       } else {
         return navigate("/404");
       }
     });
   };
-
-  const shortenDates = (dates) => {
-    let updatedDates = [];
-    for (const date of dates) {
-      let updatedStart = date.starting_time.split(":")[0];
-      let updatedEnd = date.ending_time.split(":")[0];
-      updatedDates.push({ day: date.day, starting_hour: updatedStart });
-      if (Number(date.ending_time.split(":")[1]) !== 0) updatedDates.push({ day: date.day, starting_hour: updatedEnd });
-    }
-    setShortendDates(updatedDates);
-  };
-
   if (cookies.userToken) {
     if (!activityInfo) {
       return null;
     }
     return (
       <>
+        <img
+          className="activity-image"
+          src={`http://localhost:3033/images/activities/${activityInfo._id}.jpg`}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.style.display = "none";
+          }}
+          alt="activity"
+        />
         <h1>{activityInfo.name}</h1>
         <Subtitle>{activityInfo.club}</Subtitle>
         <div className="activity-information-tags">
-          <InformationTag iconUrl={NotFoundSmileBlack}>{activityInfo.sport.name}</InformationTag>
+          <InformationTag iconUrl={`http://localhost:3033/icons/sports/${activityInfo.sport._id}_icon.svg`}>
+            {activityInfo.sport.name}
+          </InformationTag>
           <InformationTag iconUrl={`http://localhost:3033/icons/genders/${activityInfo.gender._id}_icon.svg`}>
             {activityInfo.gender.name}
           </InformationTag>
           <InformationTag>
-            {activityInfo.age.age}
+            {getBirthYear(activityInfo.age.age)}
             {!activityInfo.age.isOlderThan && <> oder jünger</>}
             {activityInfo.age.isOlderThan && <> oder älter</>}
           </InformationTag>
@@ -73,6 +72,17 @@ export function Activity() {
           <>
             <h2>Voraussetzungen</h2>
             <div>{activityInfo.requirements}</div>
+            <div className="activity-required-items">
+              {activityInfo.required_items.map((item, key) => (
+                <span className="activity-required-item" key={key}>
+                  <img
+                    className="activity-required-item-image"
+                    src={`http://localhost:3033/icons/required-items/${item._id}_icon_white.svg`}
+                    alt="Item icon"
+                  />
+                </span>
+              ))}
+            </div>
           </>
         )}
         {activityInfo.additional_info && (
@@ -85,12 +95,14 @@ export function Activity() {
         <div>{activityInfo.membership_fee ? activityInfo.membership_fee : "Keine Angabe"}</div>
         <h2>Termine</h2>
         <div className="activity-dates">
-          {activityInfo.dates.map((value, key) => (
-            <div className="activity-date-item" key={key}>
-              {value.day}: {value.starting_time} - {value.ending_time}
-            </div>
-          ))}
-          <TimeTable data={shortendDates} />
+          <div className="activity-dates-list">
+            {activityInfo.dates.map((value, key) => (
+              <div className="activity-date-item" key={key}>
+                {translateWeekday(value.day)}: {value.starting_time} - {value.ending_time}
+              </div>
+            ))}
+          </div>
+          <TimeTable data={shortenedDates} />
         </div>
         <h2>Adresse</h2>
         {activityInfo.address.street}, {activityInfo.address.house_number} <br />
@@ -110,7 +122,7 @@ export function Activity() {
                 className="activity-coach-picture"
                 src={`http://localhost:3033/images/profiles/${coach._id}.jpg`}
                 onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.onerror = null;
                   currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
                 }}
                 alt="coach picture"
@@ -118,7 +130,7 @@ export function Activity() {
             </div>
             <div className="activity-coach-message-button">
               <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
-                Kontaktieren
+                Per E-Mail kontaktieren
               </ActiveeButton>
             </div>
           </div>
