@@ -26,6 +26,10 @@
 .activee-button.primary:active {
   background: #6ac8b7;
 }
+.activee-button.secondary {
+  color: var(--light-mode-background);
+  background: #6ac8b7;
+}
 .activee-button.blank {
   background: var(--light-mode-blank);
   box-shadow: none;

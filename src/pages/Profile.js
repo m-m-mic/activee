@@ -121,7 +121,7 @@ export function Profile() {
             {accountInfo.times.length > 0 && (
               <>
                 <h3>Zeiten</h3>
-                <TimeTable data={accountInfo.times}></TimeTable>
+                <TimeTable data={accountInfo.times} />
               </>
             )}
           </>

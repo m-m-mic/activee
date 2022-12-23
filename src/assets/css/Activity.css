@@ -1,0 +1,57 @@
+.activity-information-tags {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 7px 5px;
+}
+
+.activity-dates {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+}
+
+.activity-coach {
+  display: flex;
+  flex-flow: row;
+  gap: 30px;
+}
+.activity-coach-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.activity-coach-name {
+  font-family: var(--h4-typeface);
+}
+
+.activity-coach-email {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.activity-coach-phone {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.activity-coach-picture {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+.activity-coach-message-button {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+
+.activity-remember-button {
+  display: flex;
+  flex-direction: row-reverse;
+  bottom: 15px;
+  right: 12px;
+  position: fixed;
+}
