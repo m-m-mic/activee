@@ -109,7 +109,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
         </div>
         <div className="modify-activity-general-info-container">
           <span className="modify-activity-general-info-name">Liga</span>
-          <span className="modify-activity-general-info-data">
+          <span className="modify-activity-general-info-data league">
             <input
               placeholder="Liga..."
               className={validation.league ? "modify-activity-league" : "modify-activity-league warning"}

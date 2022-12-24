@@ -30,6 +30,11 @@
   display: flex;
   gap: 10px;
 }
+.modify-activity-general-info-data.league {
+  align-items: end;
+  justify-content: right;
+  flex-flow: column;
+}
 .modify-activity-select {
   display: inline-block;
   text-align: left;
