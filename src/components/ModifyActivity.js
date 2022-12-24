@@ -21,7 +21,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
   const [sports, setSports] = useState();
   const [ageDirection, setAgeDirection] = useState(agePreselect);
   const [genders, setGenders] = useState(genderPreselect);
-  const [isIntegrationChecked, setIntegrationChecked] = useState(false);
+  const [isIntegrationChecked, setIntegrationChecked] = useState(activityInfo.league === "Integrationskurs");
   useEffect(() => getPreselectOptions(), []);
   const getPreselectOptions = () => {
     const requestOptions = {
