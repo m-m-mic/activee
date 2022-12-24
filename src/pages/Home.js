@@ -13,10 +13,10 @@ export function Home() {
   const [accountInfo, setAccountInfo] = useState();
   const [sports, setSports] = useState([]);
   useEffect(() => {
-    getAccountInfo();
-    getSports();
     if (cookies.userToken) {
       document.title = "Übersicht - activee";
+      getAccountInfo();
+      getSports();
     } else {
       document.title = "activee";
     }

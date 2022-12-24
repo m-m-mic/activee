@@ -167,7 +167,8 @@ input:focus {
 }
 input:disabled {
   border-bottom: none;
-  background: var(--light-mode-disabled-typeface);
+  color: var(--light-mode-disabled-typeface);
+  background: var(--light-mode-disabled);
 }
 input.warning {
   border-bottom: 6px solid var(--light-mode-warning-active);

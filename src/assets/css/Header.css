@@ -81,7 +81,7 @@
   padding: 14px 19px;
   border-radius: 8px;
   transition: 100ms ease-out;
-  z-index: 20;
+  z-index: 999 !important;
 }
 .popup-backdrop {
   position: absolute;
