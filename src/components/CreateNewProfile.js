@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/CreateNewProfile.css";
-import { NewSubAccountValidator, setFirstNameInput, setLastNameInput } from "../scripts/validateInputs";
+import { NewSubAccountValidator, setFirstNameInput, setLastNameInput } from "../scripts/handleInputs";
 import { useCookies } from "react-cookie";
 import { ActiveeButton } from "./ActiveeButton";
 import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";

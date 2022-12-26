@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import MessageIconWhite from "../assets/svgs/message_icon_white.svg";
-import { getBirthYear, shortenDates, translateWeekday } from "../scripts/handleDates";
+import { getBirthYear, shortenDates } from "../scripts/handleDates";
 
 export function Activity() {
   const navigate = useNavigate();
@@ -96,9 +96,9 @@ export function Activity() {
         <h2>Termine</h2>
         <div className="activity-dates">
           <div className="activity-dates-list">
-            {activityInfo.dates.map((value, key) => (
+            {activityInfo.dates.map((date, key) => (
               <div className="activity-date-item" key={key}>
-                {translateWeekday(value.day)}: {value.starting_time} - {value.ending_time}
+                {date.day.label}: {date.starting_time} - {date.ending_time}
               </div>
             ))}
           </div>

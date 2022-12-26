@@ -37,7 +37,7 @@ export function SearchItem({ item }) {
         <span>{item.address.city}</span>
         <span>{item.gender.name}</span>
         <span>
-          {item.dates[0].day}, {item.dates[0].starting_time}
+          {item.dates[0].day.label}, {item.dates[0].starting_time}
         </span>
       </div>
     </div>

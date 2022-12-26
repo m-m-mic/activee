@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { ModifyActivity } from "../components/ModifyActivity";
 import { activityTemplate } from "../scripts/inputTemplates";
-import { newActivityInputValidator } from "../scripts/validateInputs";
+import { newActivityInputValidator } from "../scripts/handleInputs";
 
 export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType"]);
@@ -12,6 +12,7 @@ export default function CreateActivity() {
 
   useEffect(() => {
     getAccountInfo();
+    document.title = "Neue Aktivität erstellen - activee";
   }, []);
   const getAccountInfo = () => {
     const requestOptions = {
@@ -27,15 +28,17 @@ export default function CreateActivity() {
     template = { ...template, club: data.club };
     template = {
       ...template,
-      trainers: {
-        _id: data._id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        show_email: true,
-        phone_number: data.phone_number,
-        show_phone_number: true,
-      },
+      trainers: [
+        {
+          _id: data._id,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          show_email: true,
+          phone_number: data.phone_number,
+          show_phone_number: true,
+        },
+      ],
     };
     setActivityInfo(template);
   };

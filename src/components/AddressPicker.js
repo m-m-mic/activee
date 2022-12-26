@@ -4,7 +4,7 @@ import {
   setAddressHouseNumberInput,
   setAddressStreetInput,
   setAddressZipCodeInput,
-} from "../scripts/validateInputs";
+} from "../scripts/handleInputs";
 
 export function AddressPicker({ data, setData, validation, setValidation }) {
   return (

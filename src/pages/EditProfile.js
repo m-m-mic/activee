@@ -14,7 +14,7 @@ import {
   setFirstNameInput,
   setLastNameInput,
   setPhoneNumber,
-} from "../scripts/validateInputs";
+} from "../scripts/handleInputs";
 import { AddressPicker } from "../components/AddressPicker";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
 
