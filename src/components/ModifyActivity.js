@@ -15,7 +15,7 @@ import {
   setShowEmailInput,
   setShowPhoneNumberInput,
   setSportInput,
-  validateDate,
+  isDateValid,
 } from "../scripts/handleInputs";
 import { useCookies } from "react-cookie";
 import { createSelectArray } from "../scripts/createSelectArray";
@@ -53,15 +53,18 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
   };
 
   const createActivity = () => {
+    let validators = validation;
     for (const date of activityInfo.dates) {
-      if (validateDate(date)) {
+      if (isDateValid(date)) {
+        validators.dates = true;
         setValidation({ ...validation, dates: true });
       } else {
+        validators.dates = false;
         setValidation({ ...validation, dates: false });
         break;
       }
     }
-    for (const [key, value] of Object.entries(validation)) {
+    for (const [key, value] of Object.entries(validators)) {
       if (value === false) {
         console.log("Validation failed");
         return;
@@ -81,6 +84,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
     });
   };
   console.log(activityInfo);
+  console.log(validation);
   if (!languages || !requiredItems || !sports) {
     return null;
   }

@@ -280,10 +280,7 @@ export const setDateEndingTime = (index, input, data, setData) => {
   setData({ ...data, dates: data.dates });
 };
 
-export const validateDate = (date) => {
-  console.log(date.starting_time.match(timePattern));
-  console.log(date.ending_time.match(timePattern));
-
+export const isDateValid = (date) => {
   if (date.day.value && date.day.label) {
     if (date.starting_time.match(timePattern)) {
       if (date.ending_time.match(timePattern)) {
