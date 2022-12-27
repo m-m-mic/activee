@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, NavLink, useParams } from "react-router-dom";
 import { Subtitle } from "../components/Subtitle";
 import { InformationTag } from "../components/InformationTag";
 import "../assets/css/Activity.css";
@@ -9,12 +9,15 @@ import { ActiveeButton } from "../components/ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import MessageIconWhite from "../assets/svgs/message_icon_white.svg";
 import { getBirthYear, shortenDates } from "../scripts/handleDates";
+import EditIconBlack from "../assets/svgs/edit_icon_black.svg";
 
 export function Activity() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
   const [activityInfo, setActivityInfo] = useState();
   const [shortenedDates, setShortenedDates] = useState([]);
+  const [isOwner, setOwner] = useState(false);
+  const [isParticipant, setParticipant] = useState(false);
   let { id } = useParams();
   useEffect(() => {
     getActivityInfo();
@@ -25,6 +28,7 @@ export function Activity() {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
+          setRelations(data);
           shortenDates(data.dates, setShortenedDates);
         });
       } else {
@@ -32,12 +36,34 @@ export function Activity() {
       }
     });
   };
+  const setRelations = (data) => {
+    if (cookies.userType === "organisation") {
+      for (const trainer of data.trainers) {
+        if (trainer._id === cookies.userId) return setOwner(true);
+      }
+    } else {
+      for (const participant of data.participants) {
+        if (participant._id === cookies.userId) return setParticipant(true);
+      }
+    }
+  };
+
   if (cookies.userToken) {
     if (!activityInfo) {
       return null;
     }
     return (
       <>
+        {cookies.userType === "participant" && !isParticipant && (
+          <div className="activity-remember-button">
+            <ActiveeButton buttonType="secondary">Aktivität merken</ActiveeButton>
+          </div>
+        )}
+        {cookies.userType === "participant" && isParticipant && (
+          <div className="activity-remember-button">
+            <ActiveeButton buttonType="secondary">Aktivität entfernen (temp)</ActiveeButton>
+          </div>
+        )}
         <img
           className="activity-image"
           src={`http://localhost:3033/images/activities/${activityInfo._id}.jpg`}
@@ -47,7 +73,14 @@ export function Activity() {
           }}
           alt="activity"
         />
-        <h1>{activityInfo.name}</h1>
+        <div className="activity-header">
+          <h1 className="activity-name">{activityInfo.name}</h1>
+          {isOwner && (
+            <NavLink className="activity-edit-link" to={`/${id}/edit`}>
+              <img className="activity-edit-icon" src={EditIconBlack} alt="Edit icon" />
+            </NavLink>
+          )}
+        </div>
         <Subtitle>{activityInfo.club}</Subtitle>
         <div className="activity-information-tags">
           <InformationTag iconUrl={`http://localhost:3033/icons/sports/${activityInfo.sport._id}_icon.svg`}>
@@ -128,16 +161,15 @@ export function Activity() {
                 alt="coach picture"
               />
             </div>
-            <div className="activity-coach-message-button">
-              <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
-                Per E-Mail kontaktieren
-              </ActiveeButton>
-            </div>
+            {!isOwner && (
+              <div className="activity-coach-message-button">
+                <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
+                  Per E-Mail kontaktieren
+                </ActiveeButton>
+              </div>
+            )}
           </div>
         ))}
-        <div className="activity-remember-button">
-          <ActiveeButton buttonType="secondary">Aktivität merken</ActiveeButton>
-        </div>
       </>
     );
   } else {

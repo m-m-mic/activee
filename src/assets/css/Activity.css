@@ -4,7 +4,24 @@
   object-fit: cover;
   border-radius: 8px;
 }
-
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0;
+}
+.activity-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.activity-edit-link {
+  flex: 0 0 32px;
+}
+.activity-edit-icon {
+  width: 32px;
+}
 .activity-information-tags {
   display: flex;
   flex-flow: row wrap;
