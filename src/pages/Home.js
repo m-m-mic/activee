@@ -47,16 +47,11 @@ export function Home() {
       <>
         <h1>Guten Tag, {accountInfo.first_name}!</h1>
         {cookies.userType === "organisation" && <Subtitle>Club name</Subtitle>}
-        <div>
-          <NavLink to={`/activity/0`}>
-            <ActiveeButton buttonType="primary">Activity</ActiveeButton>
+        {cookies.userType === "organisation" && (
+          <NavLink to={`/activity/new`}>
+            <ActiveeButton buttonType="primary">New Activity</ActiveeButton>
           </NavLink>
-          {cookies.userType === "organisation" && (
-            <NavLink to={`/activity/new`}>
-              <ActiveeButton buttonType="primary">New Activity</ActiveeButton>
-            </NavLink>
-          )}
-        </div>
+        )}
         <h2>Anstehende Termine</h2>
         <UnderConstruction />
         {accountInfo.activities > 0 ? (

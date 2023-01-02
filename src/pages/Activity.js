@@ -34,6 +34,7 @@ export function Activity() {
           setActivityInfo(data);
           setRelations(data);
           shortenDates(data.dates, setShortenedDates);
+          document.title = `${data.name} - activee`;
         });
       } else {
         return navigate("/404");
@@ -80,7 +81,7 @@ export function Activity() {
         <div className="activity-header">
           <h1 className="activity-name">{activityInfo.name}</h1>
           {isOwner && (
-            <NavLink className="activity-edit-link" to={`/${id}/edit`}>
+            <NavLink className="activity-edit-link" to={`/activity/${id}/edit`}>
               <img className="activity-edit-icon" src={EditIconBlack} alt="Edit icon" />
             </NavLink>
           )}

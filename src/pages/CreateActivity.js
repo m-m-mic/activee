@@ -50,7 +50,6 @@ export default function CreateActivity() {
       }
       return (
         <ModifyActivity
-          mode="new"
           activityInfo={activityInfo}
           setActivityInfo={setActivityInfo}
           validation={inputValidation}

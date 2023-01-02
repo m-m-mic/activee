@@ -29,8 +29,6 @@ export function YourActivities() {
       }
     });
   };
-  console.log(shortenedDates);
-  console.log(userActivities);
   if (cookies.userToken) {
     if (!userActivities) {
       return null;

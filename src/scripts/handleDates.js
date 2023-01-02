@@ -14,7 +14,6 @@ export const shortenDates = (dates, setShortenedDate) => {
 export const collectAndShortenDates = (activities, setShortenedDate) => {
   let initialDates = [];
   for (const activity of activities) {
-    console.log(activity.dates);
     initialDates = initialDates.concat(activity.dates);
   }
   shortenDates(initialDates, setShortenedDate);

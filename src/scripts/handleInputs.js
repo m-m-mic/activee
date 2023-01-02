@@ -36,6 +36,25 @@ export const newActivityInputValidator = {
   city: false,
 };
 
+export const ActivityInputValidator = {
+  name: true,
+  sport: true,
+  gender: true,
+  age: true,
+  league: true,
+  languages: true,
+  maximum_participants: true,
+  requirements: true,
+  required_items: true,
+  additional_info: true,
+  membership_fee: true,
+  dates: false,
+  street: true,
+  house_number: true,
+  zip_code: true,
+  city: true,
+};
+
 // PATTERNS für Eingabevalidierung
 const specialCharacterPattern = /^[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]*$/g;
 const datePattern = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;

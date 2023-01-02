@@ -9,3 +9,12 @@ export const createSelectArray = (array) => {
   }
   return selectArray;
 };
+
+export const createSelectObject = (object) => {
+  object["value"] = object["_id"];
+  object["label"] = object["name"];
+  delete object["_id"];
+  delete object["name"];
+  delete object["__v"];
+  return object;
+};

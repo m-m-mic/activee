@@ -18,24 +18,29 @@ import {
   isDateValid,
 } from "../scripts/handleInputs";
 import { useCookies } from "react-cookie";
-import { createSelectArray } from "../scripts/createSelectArray";
+import { createSelectArray, createSelectObject } from "../scripts/createSelectArray";
 import Select from "react-select";
 import { agePreselect, genderPreselect } from "../scripts/inputTemplates";
 import { DatePicker } from "./DatePicker";
 import { AddressPicker } from "./AddressPicker";
 import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
+import { EditControls } from "./EditControls";
 
-export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation, setValidation }) {
+export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
+  const [defaultValues, setDefaultValues] = useState({});
   const [languages, setLanguages] = useState();
   const [requiredItems, setRequiredItems] = useState();
   const [sports, setSports] = useState();
   const [ageDirection, setAgeDirection] = useState(agePreselect);
   const [genders, setGenders] = useState(genderPreselect);
   const [isIntegrationChecked, setIntegrationChecked] = useState(activityInfo.league === "Integrationskurs");
-  useEffect(() => getPreselectOptions(), []);
+  useEffect(() => {
+    getPreselectOptions();
+    transformDefaultValues();
+  }, []);
   const getPreselectOptions = () => {
     const requestOptions = {
       method: "GET",
@@ -52,7 +57,31 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
       .then((data) => setSports(createSelectArray(data)));
   };
 
-  const createActivity = () => {
+  const transformDefaultValues = () => {
+    const defaultInfo = structuredClone(activityInfo);
+    let transformedValues;
+    if (editMode) {
+      transformedValues = {
+        sport: createSelectObject(defaultInfo.sport),
+        gender: createSelectObject(defaultInfo.gender),
+        languages: createSelectArray(defaultInfo.languages),
+      };
+      if (defaultInfo.required_items.length > 0) {
+        transformedValues = { ...transformedValues, required_items: createSelectArray(defaultInfo.required_items) };
+      } else {
+        transformedValues = { ...transformedValues, required_items: null };
+      }
+    } else {
+      transformedValues = {
+        sport: null,
+        gender: null,
+        languages: null,
+        required_items: null,
+      };
+    }
+    setDefaultValues(transformedValues);
+  };
+  const modifyActivity = () => {
     let validators = validation;
     for (const date of activityInfo.dates) {
       if (isDateValid(date)) {
@@ -70,26 +99,52 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
         return;
       }
     }
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-      body: JSON.stringify(activityInfo),
-    };
-    fetch("http://localhost:3033/activity", requestOptions).then((response) => {
-      if (response.status === 201) {
+    let url;
+    let requestOptions;
+    if (editMode) {
+      url = `http://localhost:3033/activity/${activityInfo._id}`;
+      requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+        body: JSON.stringify(activityInfo),
+      };
+    } else {
+      url = "http://localhost:3033/activity";
+      requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+        body: JSON.stringify(activityInfo),
+      };
+    }
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 201 || response.status === 200) {
         response.json().then((data) => navigate(`/activity/${data._id}`));
       } else {
         console.log("Error while creating activity.");
       }
     });
   };
-  console.log(activityInfo);
-  console.log(validation);
-  if (!languages || !requiredItems || !sports) {
+  const deleteActivity = () => {
+    const url = `http://localhost:3033/activity/${activityInfo._id}`;
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        navigate(`/`);
+      } else {
+        console.log("Error while creating activity.");
+      }
+    });
+  };
+  if (!languages || !requiredItems || !sports || defaultValues === {}) {
     return null;
   }
   return (
     <>
+      {editMode && <EditControls onConfirmClick={() => modifyActivity()} />}
+
       <input
         className={validation.name ? "modify-activity-name" : "modify-activity-name warning"}
         placeholder="Neue Aktivität..."
@@ -105,8 +160,10 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
             <Select
               className="modify-activity-select sport"
               placeholder="Sportart..."
+              defaultValue={defaultValues.sport}
               options={sports}
               onChange={(option) => setSportInput(option, activityInfo, setActivityInfo, validation, setValidation)}
+              isDisabled={editMode}
             />
           </span>
         </div>
@@ -116,8 +173,10 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
             <Select
               placeholder="Geschlecht..."
               className="modify-activity-select gender"
+              defaultValue={defaultValues.gender}
               options={genders}
               onChange={(option) => setGenderInput(option, activityInfo, setActivityInfo, validation, setValidation)}
+              isDisabled={editMode}
             />
           </span>
         </div>
@@ -129,11 +188,13 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
               className={validation.age ? "modify-activity-age" : "modify-activity-age warning"}
               defaultValue={activityInfo.age.age}
               onChange={(e) => setAgeInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
+              disabled={editMode}
             />
             <Select
               className="modify-activity-select age-direction"
-              defaultValue={ageDirection[0]}
+              defaultValue={activityInfo.isOlderThan ? ageDirection[1] : ageDirection[0]}
               options={ageDirection}
+              isDisabled={editMode}
               onChange={(option) => setAgeDirectionInput(option, activityInfo, setActivityInfo)}
             />
           </span>
@@ -144,6 +205,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
             <Select
               className="modify-activity-select languages"
               placeholder="Sprachen..."
+              defaultValue={defaultValues.languages}
               isMulti
               options={languages}
               onChange={(option) => setLanguagesInput(option, activityInfo, setActivityInfo, validation, setValidation)}
@@ -157,7 +219,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
             <input
               placeholder="Liga..."
               className={validation.league ? "modify-activity-league" : "modify-activity-league warning"}
-              defaultValue={activityInfo.league}
+              value={activityInfo.league}
               onChange={(e) => setLeagueInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
               disabled={isIntegrationChecked}
             />
@@ -199,6 +261,7 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
         className="modify-activity-select items"
         placeholder="Vorausgesetzte Mitbringsel..."
         isMulti
+        defaultValue={defaultValues.required_items}
         options={requiredItems}
         onChange={(option) => setRequiredItemsInput(option, activityInfo, setActivityInfo, validation, setValidation)}
       />
@@ -240,9 +303,15 @@ export function ModifyActivity({ mode, activityInfo, setActivityInfo, validation
           <label>Telefonnummer anzeigen</label>
         </div>
       ))}
-      <ActiveeButton buttonType="primary" onClick={() => createActivity()}>
-        Aktivität erstellen
-      </ActiveeButton>
+      {editMode ? (
+        <ActiveeButton buttonType="warning" onClick={() => deleteActivity()}>
+          Aktivität löschen
+        </ActiveeButton>
+      ) : (
+        <ActiveeButton buttonType="primary" onClick={() => modifyActivity()}>
+          Aktivität erstellen
+        </ActiveeButton>
+      )}
     </>
   );
 }
