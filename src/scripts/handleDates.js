@@ -11,6 +11,15 @@ export const shortenDates = (dates, setShortenedDate) => {
   setShortenedDate(updatedDates);
 };
 
+export const collectAndShortenDates = (activities, setShortenedDate) => {
+  let initialDates = [];
+  for (const activity of activities) {
+    console.log(activity.dates);
+    initialDates = initialDates.concat(activity.dates);
+  }
+  shortenDates(initialDates, setShortenedDate);
+};
+
 export const getBirthYear = (age) => {
   const currentYear = new Date().getFullYear();
   return Number(currentYear) - Number(age);

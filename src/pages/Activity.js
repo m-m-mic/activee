@@ -24,7 +24,11 @@ export function Activity() {
   }, [id]);
 
   const getActivityInfo = () => {
-    fetch("http://localhost:3033/activity/" + id).then((response) => {
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(`http://localhost:3033/activity/${id}`, requestOptions).then((response) => {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
