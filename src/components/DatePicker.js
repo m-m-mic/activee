@@ -4,14 +4,23 @@ import Select from "react-select";
 import { setDateDayInput, setDateEndingTime, setDateStartingTime } from "../scripts/handleInputs";
 import { dateTemplate, weekdayPreselect } from "../scripts/inputTemplates";
 import { ActiveeButton } from "./ActiveeButton";
+import DeleteIconWhite from "../assets/svgs/delete_icon_white.svg";
+import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 
-export function DatePicker({ data, setData, validation, setValidation }) {
+export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
-  let dateList = data.dates;
+  let dateList = data.dates.map((item) => {
+    return { ...item, id: crypto.randomUUID() };
+  });
+  const removeIds = (array) => {
+    const sanitizedArray = structuredClone(array);
+    sanitizedArray.forEach((e) => delete e["id"]);
+    return sanitizedArray;
+  };
   return (
     <div className="date-picker">
       {data.dates.map((date, key) => (
-        <div key={key} className="date-picker-item">
+        <div key={date.id} className="date-picker-item">
           <Select
             className="date-picker-day"
             placeholder="Tag..."
@@ -35,24 +44,24 @@ export function DatePicker({ data, setData, validation, setValidation }) {
             />
           </div>
 
-          {key > 0 && (
+          {dateList.length > 1 && (
             <ActiveeButton
               buttonType="warning"
+              iconSrc={DeleteIconWhite}
               onClick={() => {
                 dateList.splice(key, 1);
-                setData({ ...data, dates: dateList });
-              }}>
-              Löschen
-            </ActiveeButton>
+                setData({ ...data, dates: removeIds(dateList) });
+              }}></ActiveeButton>
           )}
         </div>
       ))}
-      {dateList.length <= 5 && (
+      {dateList.length <= 4 && (
         <ActiveeButton
-          buttonType="primary"
+          buttonType="blank"
+          iconSrc={AddIconBlack}
           onClick={() => {
-            dateList.push(dateTemplate);
-            setData({ ...data, dates: dateList });
+            dateList.push({ ...dateTemplate, id: crypto.randomUUID() });
+            setData({ ...data, dates: removeIds(dateList) });
           }}>
           Termin hinzufügen
         </ActiveeButton>

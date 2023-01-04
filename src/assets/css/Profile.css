@@ -101,6 +101,7 @@
 
 /* Sticky Buttons, mit welchen man die Eingaben bestätigen und den Bearbeitungsmodus abbrechen kann */
 .profile-edit-options {
+  z-index: 42;
   position: fixed;
   bottom: 15px;
   left: 50%;

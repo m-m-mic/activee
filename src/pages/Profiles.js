@@ -111,7 +111,7 @@ export function Profiles() {
           <div className="profiles-parent">
             <img
               className="profiles-parent-image"
-              src={`${backendUrl}/images/profiles/${accountInfo._id}.jpg`}
+              src={`${backendUrl}/images/profiles/${cookies.userId}.jpg`}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;

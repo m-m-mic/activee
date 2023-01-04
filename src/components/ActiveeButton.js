@@ -4,7 +4,9 @@ import "../assets/css/ActiveeButton.css";
 export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabled }) {
   if (iconSrc != null) {
     return (
-      <button onClick={onClick} className={isDisabled ? "activee-button disabled" : `activee-button ${buttonType}`}>
+      <button
+        onClick={onClick}
+        className={`activee-button ${buttonType} ${isDisabled ? "disabled" : ""} ${children ? "gap" : ""}`}>
         <img className="activee-button-icon" src={iconSrc} alt="Button icon" />
         <span>{children}</span>
       </button>
