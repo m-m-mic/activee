@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UnderConstruction } from "../components/UnderConstruction";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { collectAndShortenDates } from "../scripts/handleDates";
 import { TimeTable } from "../components/TimeTable";
+import { ActiveeButton } from "../components/ActiveeButton";
+import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 
 export function YourActivities() {
+  const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken", "userType"]);
   const [userActivities, setUserActivities] = useState();
   const [shortenedDates, setShortenedDates] = useState([]);
@@ -36,12 +39,29 @@ export function YourActivities() {
     return (
       <>
         <h1>Deine Aktivitäten</h1>
-        <h2>Terminkalender</h2>
-        <TimeTable data={shortenedDates} />
-        <h2>Anstehende Termine</h2>
-        <UnderConstruction />
+        {userActivities.length > 0 && (
+          <>
+            <h2>Terminkalender</h2>
+            <TimeTable data={shortenedDates} />
+          </>
+        )}
         <h2>{cookies.userType === "participant" ? "Gemerkte Aktivitäten" : "Aktivitäten"}</h2>
-        <ActiveeScrollingCards items={userActivities} type="activity" />
+        {userActivities.length > 0 ? (
+          <ActiveeScrollingCards items={userActivities} type="activity" />
+        ) : (
+          <div>
+            {cookies.userType === "participant" ? (
+              "Du hast dir noch keine Aktivität gemerkt."
+            ) : (
+              <div>Du hast noch keine Aktivität erstellt.</div>
+            )}
+          </div>
+        )}
+        {cookies.userType === "organisation" && (
+          <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
+            Neue Aktivität
+          </ActiveeButton>
+        )}
       </>
     );
   } else {

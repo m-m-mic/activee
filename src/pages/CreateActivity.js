@@ -6,7 +6,7 @@ import { activityTemplate } from "../scripts/inputTemplates";
 import { newActivityInputValidator } from "../scripts/handleInputs";
 
 export default function CreateActivity() {
-  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
+  const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
   const [activityInfo, setActivityInfo] = useState();
   const [inputValidation, setInputValidation] = useState(newActivityInputValidator);
 
@@ -30,7 +30,7 @@ export default function CreateActivity() {
       ...template,
       trainers: [
         {
-          _id: data._id,
+          _id: cookies.userId,
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
