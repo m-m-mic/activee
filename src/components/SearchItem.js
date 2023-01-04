@@ -24,9 +24,11 @@ export function SearchItem({ item }) {
             <span className="search-item-name">{item.name}</span>
           </div>
           <div className="search-item-club">{item.club}</div>
-          <div>
-            <InformationTag>{item.league}</InformationTag>
-          </div>
+          {item.league && (
+            <div>
+              <InformationTag>{item.league}</InformationTag>
+            </div>
+          )}
         </span>
       </div>
       <div className="search-item-details">

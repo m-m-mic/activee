@@ -1,14 +1,11 @@
-/* Styling für den Header auf der Suchseite */
-#search-header {
+/* Styling für die Searchbar */
+#search-bar {
   position: sticky;
   top: 0;
   display: flex;
   flex-flow: row;
   align-items: center;
-  height: 70px;
-  padding: 0 15px;
-  background: var(--light-mode-background);
-  gap: 15px;
+  background: var(--light-mode-background-translucent);
 }
 
 #search-input {

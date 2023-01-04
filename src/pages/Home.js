@@ -25,7 +25,7 @@ export function Home() {
     } else {
       document.title = "activee";
     }
-  }, []);
+  }, [cookies.userToken]);
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
