@@ -19,7 +19,7 @@ import { Sports } from "./pages/Sports";
 import { Profiles } from "./pages/Profiles";
 import { EditActivity } from "./pages/EditActivity";
 
-export const backendUrl = "http://localhost:3033";
+export const backendUrl = "https://api-activee.onrender.com";
 
 export default function App() {
   return (
