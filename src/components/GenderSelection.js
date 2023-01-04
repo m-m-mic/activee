@@ -1,6 +1,7 @@
 import React from "react";
 import { VerticalButton } from "./VerticalButton";
 import { handleGenderChange } from "../scripts/handlePreferenceChange";
+import { backendUrl } from "../index";
 
 export function GenderSelection({ data, setData, isEditMode }) {
   if (isEditMode) {
@@ -8,19 +9,19 @@ export function GenderSelection({ data, setData, isEditMode }) {
       <div className="profile-gender-selection">
         <VerticalButton
           onClick={() => handleGenderChange("female", data, setData)}
-          iconUrl="http://localhost:3033/icons/genders/female_icon.svg"
+          iconUrl={`${backendUrl}/icons/genders/female_icon.svg`}
           isChecked={data.genders.includes("female")}>
           Weiblich
         </VerticalButton>
         <VerticalButton
           onClick={() => handleGenderChange("male", data, setData)}
-          iconUrl="http://localhost:3033/icons/genders/male_icon.svg"
+          iconUrl={`${backendUrl}/icons/genders/male_icon.svg`}
           isChecked={data.genders.includes("male")}>
           Männlich
         </VerticalButton>
         <VerticalButton
           onClick={() => handleGenderChange("mix", data, setData)}
-          iconUrl="http://localhost:3033/icons/genders/mix_icon.svg"
+          iconUrl={`${backendUrl}/icons/genders/mix_icon.svg`}
           isChecked={data.genders.includes("mix")}>
           Mix
         </VerticalButton>
@@ -29,13 +30,13 @@ export function GenderSelection({ data, setData, isEditMode }) {
   } else {
     return (
       <div className="profile-gender-selection">
-        <VerticalButton iconUrl="http://localhost:3033/icons/genders/female_icon.svg" isChecked={data.genders.includes("female")}>
+        <VerticalButton iconUrl={`${backendUrl}/icons/genders/female_icon.svg`} isChecked={data.genders.includes("female")}>
           Weiblich
         </VerticalButton>
-        <VerticalButton iconUrl="http://localhost:3033/icons/genders/male_icon.svg" isChecked={data.genders.includes("male")}>
+        <VerticalButton iconUrl={`${backendUrl}/icons/genders/male_icon.svg`} isChecked={data.genders.includes("male")}>
           Männlich
         </VerticalButton>
-        <VerticalButton iconUrl="http://localhost:3033/icons/genders/mix_icon.svg" isChecked={data.genders.includes("mix")}>
+        <VerticalButton iconUrl={`${backendUrl}/icons/genders/mix_icon.svg`} isChecked={data.genders.includes("mix")}>
           Mix
         </VerticalButton>
       </div>

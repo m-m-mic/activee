@@ -6,6 +6,7 @@ import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import { handleCookieChange } from "../scripts/handleCookieChange";
+import { backendUrl } from "../index";
 export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userTier"]);
@@ -22,16 +23,17 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
     };
   }, []);
   const getProfileList = () => {
+    const url = backendUrl + "/account/profile-list";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/profile-list", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => handleActiveAccountList(data));
   };
   const changeProfile = () => {
-    const url = "http://localhost:3033/account/change-profile";
+    const url = backendUrl + "/account/change-profile";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
@@ -76,10 +78,10 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
               onClick={() => handleActiveAccountChange(item._id, key)}>
               <img
                 className="profile-selection-item-image"
-                src={`http://localhost:3033/images/profiles/${item._id}.jpg`}
+                src={`${backendUrl}/images/profiles/${item._id}.jpg`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+                  currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
                 }}
                 alt="Account icon"
               />

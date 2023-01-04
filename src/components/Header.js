@@ -7,6 +7,7 @@ import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";
 import { useCookies } from "react-cookie";
 import { ProfileSelection } from "./ProfileSelection";
+import { backendUrl } from "../index";
 
 export function Header() {
   let location = useLocation();
@@ -48,12 +49,7 @@ export function Header() {
             <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="Search icon" />
           </NavLink>
           <span id="languages-popup-button" className="header-button">
-            <img
-              id="language-icon"
-              className="header-icon"
-              src="http://localhost:3033/flags/german_flag.jpg"
-              alt="Language icon"
-            />
+            <img id="language-icon" className="header-icon" src={`${backendUrl}/flags/german_flag.jpg`} alt="Language icon" />
           </span>
           <span
             id="options-popup-button"
@@ -64,10 +60,10 @@ export function Header() {
             <img
               id="account-icon"
               className="header-icon"
-              src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+              src={`${backendUrl}/images/profiles/${cookies.userId}.jpg`}
               onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+                currentTarget.onerror = null;
+                currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
               }}
               alt="Account icon"
             />
@@ -110,7 +106,7 @@ export function Header() {
           <span className="activee-name">activee</span>
         </div>
         <span id="languages-popup-button" className="header-button">
-          <img id="language-icon" className="header-icon" src="http://localhost:3033/flags/german_flag.jpg" alt="Language icon" />
+          <img id="language-icon" className="header-icon" src={`${backendUrl}/flags/german_flag.jpg`} alt="Language icon" />
         </span>
       </div>
     );

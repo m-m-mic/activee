@@ -18,12 +18,16 @@
   width: 24px;
 }
 
-/* Styling für unterschiedliche Buttontypen */
+/* Styling für unterschiedliche Buttons */
 .activee-button.primary {
   color: var(--light-mode-background);
   background: #4a9d8c;
 }
 .activee-button.primary:active {
+  background: #6ac8b7;
+}
+.activee-button.secondary {
+  color: var(--light-mode-background);
   background: #6ac8b7;
 }
 .activee-button.blank {
@@ -48,6 +52,14 @@
 }
 .activee-button.outline:active {
   outline: 3px solid #6ac8b7;
+  color: #6ac8b7;
+}
+.activee-button.transparent {
+  background: none;
+  color: var(--light-mode-typeface);
+  box-shadow: none;
+}
+.activee-button.outline:active {
   color: #6ac8b7;
 }
 .activee-button.disabled {

@@ -14,9 +14,11 @@ import {
   setFirstNameInput,
   setLastNameInput,
   setPhoneNumber,
-} from "../scripts/validateInputs";
+} from "../scripts/handleInputs";
 import { AddressPicker } from "../components/AddressPicker";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -29,11 +31,12 @@ export function EditProfile() {
     document.title = "Dein Profil - activee";
   }, []);
   const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
@@ -44,12 +47,13 @@ export function EditProfile() {
         return;
       }
     }
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(accountInfo),
     };
-    fetch("http://localhost:3033/account/info", requestOptions).then((response) => {
+    fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         navigate("/profile");
       } else {
@@ -59,7 +63,7 @@ export function EditProfile() {
   };
   if (cookies.userToken) {
     if (!accountInfo) {
-      return null;
+      return <LoadingAnimation />;
     }
     return (
       <>
@@ -68,10 +72,10 @@ export function EditProfile() {
         <div className="profile-user-info">
           <img
             className="profile-user-picture"
-            src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+            src={`${backendUrl}/images/profiles/${cookies.userId}.jpg`}
             onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+              currentTarget.onerror = null;
+              currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
             }}
             alt="Profile"
           />
@@ -146,7 +150,7 @@ export function EditProfile() {
               {accountInfo.languages.map((item, key) => (
                 <img
                   className="profile-general-info-language-icon"
-                  src={`http://localhost:3033/flags/${item._id}_flag.jpg`}
+                  src={`${backendUrl}/flags/${item._id}_flag.jpg`}
                   alt="language icon"
                   key={key}
                 />

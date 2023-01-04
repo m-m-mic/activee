@@ -1,0 +1,11 @@
+.search-results {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 700px) {
+  .search-results {
+    grid-template-columns: 1fr 1fr;
+  }
+}

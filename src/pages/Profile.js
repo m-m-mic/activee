@@ -7,6 +7,8 @@ import { TimeTable } from "../components/TimeTable";
 import { GenderSelection } from "../components/GenderSelection";
 import { SportSelection } from "../components/SportSelection";
 import { TransportSelection } from "../components/TransportSelection";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
@@ -16,27 +18,28 @@ export function Profile() {
     document.title = "Dein Profil - activee";
   }, []);
   const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
   if (cookies.userToken) {
     if (!accountInfo) {
-      return null;
+      return <LoadingAnimation />;
     }
     return (
       <>
         <div className="profile-user-info">
           <img
             className="profile-user-picture"
-            src={`http://localhost:3033/images/profiles/${cookies.userId}.jpg`}
+            src={`${backendUrl}/images/profiles/${cookies.userId}.jpg`}
             onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+              currentTarget.onerror = null;
+              currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
             }}
             alt="Profile"
           />
@@ -88,7 +91,7 @@ export function Profile() {
               {accountInfo.languages.map((item, key) => (
                 <img
                   className="profile-general-info-language-icon"
-                  src={`http://localhost:3033/flags/${item._id}_flag.jpg`}
+                  src={`${backendUrl}/flags/${item._id}_flag.jpg`}
                   alt="language icon"
                   key={key}
                 />
@@ -121,7 +124,7 @@ export function Profile() {
             {accountInfo.times.length > 0 && (
               <>
                 <h3>Zeiten</h3>
-                <TimeTable data={accountInfo.times}></TimeTable>
+                <TimeTable data={accountInfo.times} />
               </>
             )}
           </>

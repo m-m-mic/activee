@@ -1,0 +1,63 @@
+.modify-activity-name {
+  font-family: var(--h1-typeface);
+  font-size: var(--h1-size);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.modify-activity-club {
+  font-family: var(--h1-subtitle-typeface);
+  font-size: var(--h1-subtitle-size);
+  margin: 10px 0 15px;
+}
+.modify-activity-general-info {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+}
+.modify-activity-general-info-container {
+  display: flex;
+  flex-flow: row;
+  gap: 30px;
+  justify-content: space-between;
+}
+.modify-activity-general-info-name {
+  font-family: Inter Bold, sans-serif;
+}
+.modify-activity-general-info-data {
+  flex: 1 1;
+  justify-content: right;
+  display: flex;
+  gap: 10px;
+}
+.modify-activity-general-info-data.league {
+  align-items: end;
+  justify-content: right;
+  flex-flow: column;
+}
+.modify-activity-select {
+  display: inline-block;
+  text-align: left;
+  font-family: var(--text-typeface);
+  font-size: var(--text-size);
+  width: 100%;
+}
+.modify-activity-select.sport,
+.modify-activity-select.gender {
+  max-width: 160px;
+}
+.modify-activity-select.age-direction {
+  max-width: 150px;
+}
+.modify-activity-select.languages {
+  max-width: 320px;
+}
+.modify-activity-age {
+  max-width: 50px;
+}
+.modify-activity-league {
+  max-width: 210px;
+}
+.modify-activity-membership-fee {
+  height: 32px;
+}

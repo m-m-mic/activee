@@ -1,0 +1,21 @@
+.date-picker {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.date-picker-item {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 10px;
+}
+.date-picker-times {
+  flex: 0 0 120px;
+  width: 100%;
+  align-items: center;
+  gap: 5px;
+  display: flex;
+}

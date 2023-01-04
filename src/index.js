@@ -17,6 +17,9 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { YourActivities } from "./pages/YourActivities";
 import { Sports } from "./pages/Sports";
 import { Profiles } from "./pages/Profiles";
+import { EditActivity } from "./pages/EditActivity";
+
+export const backendUrl = "https://api-activee.onrender.com";
 
 export default function App() {
   return (
@@ -31,6 +34,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route exact path="your-activities" element={<YourActivities />} />
           <Route exact path="activity/:id" element={<Activity />} />
+          <Route exact path="activity/:id/edit" element={<EditActivity />} />
           <Route exact path="activity/new" element={<CreateActivity />} />
           <Route exact path="sports" element={<Sports />} />
           <Route exact path="profile" element={<Profile />} />

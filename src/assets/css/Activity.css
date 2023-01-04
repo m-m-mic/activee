@@ -1,0 +1,101 @@
+.activity-image {
+  height: 230px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0;
+}
+.activity-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.activity-edit-link {
+  flex: 0 0 32px;
+}
+.activity-edit-icon {
+  width: 32px;
+}
+.activity-information-tags {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 7px 5px;
+}
+.activity-required-items {
+  margin-top: 15px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.activity-required-item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px 15px;
+  background: var(--light-mode-primary-1);
+}
+.activity-required-item-image {
+  width: 24px;
+  height: 24px;
+}
+.activity-dates {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+}
+.activity-dates-list {
+  line-height: 24px;
+}
+.activity-coach {
+  display: flex;
+  flex-flow: row;
+  gap: 30px;
+}
+.activity-coach-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.activity-coach-name {
+  font-family: var(--h4-typeface);
+}
+
+.activity-coach-email {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.activity-coach-phone {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.activity-coach-picture {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.activity-coach-message-button {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}
+
+.activity-remember-button {
+  display: flex;
+  flex-direction: row-reverse;
+  bottom: 15px;
+  right: 12px;
+  position: fixed;
+}

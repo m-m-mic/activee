@@ -1,14 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import CancelIconWhite from "../assets/svgs/cancel_icon_white.svg";
 import AcceptIconWhite from "../assets/svgs/accept_icon_white.svg";
+import { useNavigate } from "react-router-dom";
 
 export function EditControls({ onConfirmClick }) {
+  const navigate = useNavigate();
   return (
     <div className="profile-edit-options">
-      <NavLink className="profile-edit-link" to={`/profile`}>
+      <div className="profile-edit-link" onClick={() => navigate(-1)}>
         <img className="profile-edit-icon" src={CancelIconWhite} alt="Edit icon" />
-      </NavLink>
+      </div>
       <span className="profile-edit-divider" />
       <div className="profile-edit-link" onClick={onConfirmClick}>
         <img className="profile-edit-icon" src={AcceptIconWhite} alt="Edit icon" />
