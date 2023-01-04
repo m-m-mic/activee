@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import "../assets/css/YourActivities.css";
 import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
-import { UnderConstruction } from "../components/UnderConstruction";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { collectAndShortenDates } from "../scripts/handleDates";
 import { TimeTable } from "../components/TimeTable";
 import { ActiveeButton } from "../components/ActiveeButton";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function YourActivities() {
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
+  const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [userActivities, setUserActivities] = useState();
   const [shortenedDates, setShortenedDates] = useState([]);
   useEffect(() => {
@@ -19,11 +21,12 @@ export function YourActivities() {
     }
   }, []);
   const getUserActivities = () => {
+    const url = backendUrl + "/activity";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(`http://localhost:3033/activity`, requestOptions).then((response) => {
+    fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         response.json().then((data) => {
           setUserActivities(data);
@@ -34,7 +37,7 @@ export function YourActivities() {
   };
   if (cookies.userToken) {
     if (!userActivities) {
-      return null;
+      return <LoadingAnimation />;
     }
     return (
       <>
@@ -58,9 +61,11 @@ export function YourActivities() {
           </div>
         )}
         {cookies.userType === "organisation" && (
-          <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
-            Neue Aktivität
-          </ActiveeButton>
+          <div className="your-activities-add-button">
+            <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
+              Neue Aktivität
+            </ActiveeButton>
+          </div>
         )}
       </>
     );

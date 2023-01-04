@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/ActiveeCard.css";
 import { useNavigate } from "react-router-dom";
+import { backendUrl } from "../index";
 
 export function ActiveeCard({ item, type }) {
   const navigate = useNavigate();
@@ -8,15 +9,15 @@ export function ActiveeCard({ item, type }) {
     <span className="activee-card" onClick={() => navigate(`/activity/${item._id}`)}>
       <img
         className="activee-card-image"
-        src={`http://localhost:3033/images/activities/${item._id}.jpg`}
+        src={`${backendUrl}/images/activities/${item._id}.jpg`}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null;
-          currentTarget.src = "http://localhost:3033/images/activities/default_activity_image.jpg";
+          currentTarget.src = `${backendUrl}/images/activities/default_activity_image.jpg`;
         }}
-        alt="card image"
+        alt="card"
       />
       <div className="activee-card-info">
-        <img className="activee-card-icon" src={`http://localhost:3033/icons/sports/${item.sport._id}_icon.svg`} alt="sport" />
+        <img className="activee-card-icon" src={`${backendUrl}/icons/sports/${item.sport._id}_icon.svg`} alt="sport" />
         <span className="activee-card-name">{item.name}</span>
       </div>
     </span>

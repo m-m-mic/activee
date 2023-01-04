@@ -8,6 +8,8 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { CreateNewProfile } from "../components/CreateNewProfile";
 import { WarningModal } from "../components/WarningModal";
 import { handleCookieChange } from "../scripts/handleCookieChange";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function Profiles() {
   const navigate = useNavigate();
@@ -21,16 +23,17 @@ export function Profiles() {
     document.title = "Profilübersicht - activee";
   }, []);
   const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
   const changeProfile = (profileId) => {
-    const url = "http://localhost:3033/account/change-profile";
+    const url = backendUrl + "/account/change-profile";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
@@ -42,7 +45,7 @@ export function Profiles() {
       .then(() => navigate("/"));
   };
   const deleteProfile = () => {
-    const url = "http://localhost:3033/account/delete-profile";
+    const url = backendUrl + "/account/delete-profile";
     const requestOptions = {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
@@ -63,7 +66,7 @@ export function Profiles() {
   };
   if (cookies.userToken) {
     if (!accountInfo) {
-      return null;
+      return <LoadingAnimation />;
     }
     if (cookies.userTier === "child") {
       return <Navigate to="/404" />;
@@ -108,10 +111,10 @@ export function Profiles() {
           <div className="profiles-parent">
             <img
               className="profiles-parent-image"
-              src={`http://localhost:3033/images/profiles/${accountInfo._id}.jpg`}
+              src={`${backendUrl}/images/profiles/${accountInfo._id}.jpg`}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+                currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
               }}
               alt="Account icon"
             />
@@ -130,10 +133,10 @@ export function Profiles() {
                 <>
                   <img
                     className="profiles-child-image"
-                    src={`http://localhost:3033/images/profiles/${item._id}.jpg`}
+                    src={`${backendUrl}/images/profiles/${item._id}.jpg`}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
-                      currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+                      currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
                     }}
                     alt="Account icon"
                   />

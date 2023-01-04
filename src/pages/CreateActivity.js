@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 import { ModifyActivity } from "../components/ModifyActivity";
 import { activityTemplate } from "../scripts/inputTemplates";
 import { newActivityInputValidator } from "../scripts/handleInputs";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
@@ -15,11 +17,12 @@ export default function CreateActivity() {
     document.title = "Neue Aktivität erstellen - activee";
   }, []);
   const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => fillActivityTemplate(data));
   };
@@ -46,7 +49,7 @@ export default function CreateActivity() {
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {
-        return null;
+        return <LoadingAnimation />;
       }
       return (
         <ModifyActivity

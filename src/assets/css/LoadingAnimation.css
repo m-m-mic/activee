@@ -1,0 +1,11 @@
+.loading-animation-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: auto;
+}
+.loading-animation {
+  width: 130px;
+}

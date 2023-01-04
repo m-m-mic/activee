@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import MessageIconWhite from "../assets/svgs/message_icon_white.svg";
 import { getBirthYear, shortenDates } from "../scripts/handleDates";
 import EditIconBlack from "../assets/svgs/edit_icon_black.svg";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function Activity() {
   const navigate = useNavigate();
@@ -24,11 +26,12 @@ export function Activity() {
   }, [id]);
 
   const getActivityInfo = () => {
+    const url = backendUrl + "/activity/" + id;
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(`http://localhost:3033/activity/${id}`, requestOptions).then((response) => {
+    fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
@@ -55,7 +58,7 @@ export function Activity() {
 
   if (cookies.userToken) {
     if (!activityInfo) {
-      return null;
+      return <LoadingAnimation />;
     }
     return (
       <>
@@ -71,7 +74,7 @@ export function Activity() {
         )}
         <img
           className="activity-image"
-          src={`http://localhost:3033/images/activities/${activityInfo._id}.jpg`}
+          src={`${backendUrl}/images/activities/${activityInfo._id}.jpg`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.style.display = "none";
@@ -88,10 +91,10 @@ export function Activity() {
         </div>
         <Subtitle>{activityInfo.club}</Subtitle>
         <div className="activity-information-tags">
-          <InformationTag iconUrl={`http://localhost:3033/icons/sports/${activityInfo.sport._id}_icon.svg`}>
+          <InformationTag iconUrl={`${backendUrl}/icons/sports/${activityInfo.sport._id}_icon.svg`}>
             {activityInfo.sport.name}
           </InformationTag>
-          <InformationTag iconUrl={`http://localhost:3033/icons/genders/${activityInfo.gender._id}_icon.svg`}>
+          <InformationTag iconUrl={`${backendUrl}/icons/genders/${activityInfo.gender._id}_icon.svg`}>
             {activityInfo.gender.name}
           </InformationTag>
           <InformationTag>
@@ -100,7 +103,7 @@ export function Activity() {
             {activityInfo.age.isOlderThan && <> oder älter</>}
           </InformationTag>
           {activityInfo.languages.map((language, key) => (
-            <InformationTag key={key} iconUrl={`http://localhost:3033/flags/${language._id}_flag.jpg`}>
+            <InformationTag key={key} iconUrl={`${backendUrl}/flags/${language._id}_flag.jpg`}>
               {language.name}
             </InformationTag>
           ))}
@@ -115,7 +118,7 @@ export function Activity() {
                 <span className="activity-required-item" key={key}>
                   <img
                     className="activity-required-item-image"
-                    src={`http://localhost:3033/icons/required-items/${item._id}_icon_white.svg`}
+                    src={`${backendUrl}/icons/required-items/${item._id}_icon_white.svg`}
                     alt="Item icon"
                   />
                 </span>
@@ -158,10 +161,10 @@ export function Activity() {
               </div>
               <img
                 className="activity-coach-picture"
-                src={`http://localhost:3033/images/profiles/${coach._id}.jpg`}
+                src={`${backendUrl}/images/profiles/${coach._id}.jpg`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
-                  currentTarget.src = "http://localhost:3033/images/profiles/default_account_icon.svg";
+                  currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
                 }}
                 alt="coach picture"
               />

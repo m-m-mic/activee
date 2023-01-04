@@ -26,6 +26,7 @@ import { AddressPicker } from "./AddressPicker";
 import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
 import { EditControls } from "./EditControls";
+import { backendUrl } from "../index";
 
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
@@ -46,13 +47,13 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/language", requestOptions)
+    fetch(`${backendUrl}/language`, requestOptions)
       .then((response) => response.json())
       .then((data) => setLanguages(createSelectArray(data)));
-    fetch("http://localhost:3033/required-item", requestOptions)
+    fetch(`${backendUrl}/required-item`, requestOptions)
       .then((response) => response.json())
       .then((data) => setRequiredItems(createSelectArray(data)));
-    fetch("http://localhost:3033/sport", requestOptions)
+    fetch(`${backendUrl}/sport`, requestOptions)
       .then((response) => response.json())
       .then((data) => setSports(createSelectArray(data)));
   };
@@ -102,14 +103,14 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     let url;
     let requestOptions;
     if (editMode) {
-      url = `http://localhost:3033/activity/${activityInfo._id}`;
+      url = backendUrl + "/activity/" + activityInfo._id;
       requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
         body: JSON.stringify(activityInfo),
       };
     } else {
-      url = "http://localhost:3033/activity";
+      url = backendUrl + "/activity/";
       requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
@@ -125,7 +126,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     });
   };
   const deleteActivity = () => {
-    const url = `http://localhost:3033/activity/${activityInfo._id}`;
+    const url = backendUrl + "/activity/" + activityInfo._id;
     const requestOptions = {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
@@ -227,7 +228,9 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               <input
                 type="checkbox"
                 defaultValue={isIntegrationChecked}
+                checked={isIntegrationChecked}
                 onChange={(e) => {
+                  console.log(e.target.value);
                   setIntegrationChecked(!isIntegrationChecked);
                   setLeagueInput("Integrationskurs", activityInfo, setActivityInfo, validation, setValidation);
                 }}

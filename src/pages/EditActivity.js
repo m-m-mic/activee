@@ -3,6 +3,8 @@ import { useCookies } from "react-cookie";
 import { ModifyActivity } from "../components/ModifyActivity";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ActivityInputValidator } from "../scripts/handleInputs";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function EditActivity() {
   const navigate = useNavigate();
@@ -16,11 +18,12 @@ export function EditActivity() {
     document.title = "Aktivität bearbeiten - activee";
   }, [id]);
   const getActivityInfo = () => {
+    const url = backendUrl + "/activity/" + id;
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(`http://localhost:3033/activity/${id}`, requestOptions).then((response) => {
+    fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
@@ -34,7 +37,7 @@ export function EditActivity() {
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {
-        return null;
+        return <LoadingAnimation />;
       }
       return (
         <ModifyActivity

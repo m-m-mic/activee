@@ -5,6 +5,7 @@ import "../assets/css/Login.css";
 import { useCookies } from "react-cookie";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
 import { handleCookieChange } from "../scripts/handleCookieChange";
+import { backendUrl } from "../index";
 
 export function Login() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function Login() {
     document.title = "Anmelden - activee";
   });
   const handleLogin = (email, password) => {
-    const url = "http://localhost:3033/account/login";
+    const url = backendUrl + "/account/login";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

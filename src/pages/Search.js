@@ -3,17 +3,21 @@ import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 import { SearchItem } from "../components/SearchItem";
 import "../assets/css/Search.css";
+import { LoadingAnimation } from "../components/LoadingAnimation";
 
-export function Search({ searchResults }) {
+export function Search({ searchResults, query }) {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken"]);
   if (cookies.userToken) {
-    if (!searchResults) {
+    if (!query) {
       return (
         <>
           <h1>Empfohlene Aktivitäten</h1>
         </>
       );
+    }
+    if (!searchResults) {
+      return <LoadingAnimation />;
     }
     return (
       <>

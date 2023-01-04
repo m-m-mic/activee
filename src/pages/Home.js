@@ -9,6 +9,8 @@ import { UnderConstruction } from "../components/UnderConstruction";
 import { HorizontalButton } from "../components/HorizontalButton";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
+import { LoadingAnimation } from "../components/LoadingAnimation";
+import { backendUrl } from "../index";
 
 export function Home() {
   const navigate = useNavigate();
@@ -25,26 +27,28 @@ export function Home() {
     }
   }, []);
   const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/account/info", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
   const getSports = () => {
+    const url = backendUrl + "/sport";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch("http://localhost:3033/sport", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setSports(data));
   };
   if (cookies.userToken) {
     if (!accountInfo || !sports) {
-      return null;
+      return <LoadingAnimation />;
     }
     return (
       <>
@@ -63,14 +67,16 @@ export function Home() {
           </div>
         )}
         {cookies.userType === "organisation" && (
-          <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
-            Neue Aktivität
-          </ActiveeButton>
+          <div className="home-add-button">
+            <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
+              Neue Aktivität
+            </ActiveeButton>
+          </div>
         )}
         <h2>Sportarten</h2>
         <div className="home-sports">
           {sports.map((sport, key) => (
-            <HorizontalButton key={key} iconUrl={`http://localhost:3033/icons/sports/${sport._id}_icon.svg`} value={sport._id}>
+            <HorizontalButton key={key} iconUrl={`${backendUrl}/icons/sports/${sport._id}_icon.svg`} value={sport._id}>
               {sport.name}
             </HorizontalButton>
           ))}

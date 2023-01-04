@@ -4,15 +4,20 @@ import { Search } from "../pages/Search";
 import { useEffect, useState } from "react";
 import { isVariableOnlySpaces } from "../scripts/isVariableOnlySpaces";
 import { useLocation, useNavigate } from "react-router-dom";
+import { backendUrl } from "../index";
+import { useCookies } from "react-cookie";
 
 export default function SearchLayout() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [cookies, setCookie] = useCookies(["userToken"]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [urlQuery, setUrlQuery] = useState();
   const [searchResults, setSearchResults] = useState();
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const urlQuery = queryParams.get("query");
+    setUrlQuery(urlQuery);
     if (urlQuery) {
       getSearchResults(urlQuery);
     } else {
@@ -32,7 +37,8 @@ export default function SearchLayout() {
     if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
       setSearchResults(null);
     } else {
-      fetch("http://localhost:3033/search/" + enteredQuery)
+      const url = backendUrl + "/search/" + enteredQuery;
+      fetch(url)
         .then((response) => response.json())
         .then((data) => setSearchResults(data));
     }
@@ -41,7 +47,7 @@ export default function SearchLayout() {
     <>
       <SearchHeader inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
       <div id="content-body">
-        <Search searchResults={searchResults} />
+        <Search searchResults={searchResults} query={urlQuery} />
       </div>
       <Footer />
     </>

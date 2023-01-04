@@ -7,6 +7,7 @@ import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import { WarningDisclaimer } from "./WarningDisclaimer";
 import { useNavigate } from "react-router-dom";
 import { handleCookieChange } from "../scripts/handleCookieChange";
+import { backendUrl } from "../index";
 
 export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address }) {
   const navigate = useNavigate();
@@ -40,12 +41,13 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
         return;
       }
     }
+    const url = backendUrl + "/account/create-profile";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(newProfileInfo),
     };
-    fetch("http://localhost:3033/account/create-profile", requestOptions)
+    fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
