@@ -46,7 +46,7 @@ export function Header() {
         </NavLink>
         <div id="header-options">
           <NavLink id="search-link" to={`/search`}>
-            <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="Search icon" />
+            <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="SearchResults icon" />
           </NavLink>
           <span id="languages-popup-button" className="header-button">
             <img id="language-icon" className="header-icon" src={`${backendUrl}/flags/german_flag.jpg`} alt="Language icon" />

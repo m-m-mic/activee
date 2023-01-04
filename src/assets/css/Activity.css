@@ -6,6 +6,7 @@
 }
 .activity-header {
   display: flex;
+  gap: 8px;
   justify-content: space-between;
   align-items: center;
   min-width: 0;
@@ -13,7 +14,6 @@
 .activity-name {
   flex: 1;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
 }
 .activity-edit-link {

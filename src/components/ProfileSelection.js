@@ -43,7 +43,7 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       .then((response) => response.json())
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => setProfileSelectionVisible(false))
-      .then(() => navigate("/"));
+      .then(() => navigate("#"));
   };
   const handleActiveAccountList = (data) => {
     setProfileList(data);
