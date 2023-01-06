@@ -5,22 +5,14 @@ import { SearchItem } from "./SearchItem";
 import "../assets/css/Search.css";
 import { LoadingAnimation } from "./LoadingAnimation";
 
-export function SearchResults({ searchResults, query }) {
+export function SearchResults({ searchResults }) {
   const [cookies, setCookies] = useCookies(["userToken"]);
   if (cookies.userToken) {
-    if (!query) {
-      return (
-        <>
-          <h1>Empfohlene Aktivitäten</h1>
-        </>
-      );
-    }
     if (!searchResults) {
       return <LoadingAnimation />;
     }
     return (
       <>
-        <h1>Suchergebnisse</h1>
         <div className="search-results">
           {searchResults.map((item, key) => (
             <SearchItem item={item} key={key} />

@@ -36,7 +36,17 @@ export function Search() {
     return (
       <>
         <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-        {searchResults ? <SearchResults searchResults={searchResults.filtered} query={urlQuery} /> : <h1>Empfehlungen</h1>}
+        {searchResults ? (
+          <>
+            <h1>Suchergebnisse</h1>
+            <h2>Exact</h2>
+            <SearchResults searchResults={searchResults.filtered} />
+            <h2>Other</h2>
+            <SearchResults searchResults={searchResults.other} />
+          </>
+        ) : (
+          <h1>Empfehlungen</h1>
+        )}
       </>
     );
   } else {

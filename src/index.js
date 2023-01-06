@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate, HashRouter } from "react-router-dom";
+import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import LoginLayout from "./layouts/LoginLayout";
 import "./assets/css/index.css";
@@ -19,7 +19,7 @@ import { Profiles } from "./pages/Profiles";
 import { EditActivity } from "./pages/EditActivity";
 import { Search } from "./pages/Search";
 
-export const backendUrl = "http://localhost:3033";
+export const backendUrl = "https://api-activee.onrender.com";
 
 export default function App() {
   return (
