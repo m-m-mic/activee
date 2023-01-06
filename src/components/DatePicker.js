@@ -9,14 +9,6 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 
 export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
-  let dateList = data.dates.map((item) => {
-    return { ...item, id: crypto.randomUUID() };
-  });
-  const removeIds = (array) => {
-    const sanitizedArray = structuredClone(array);
-    sanitizedArray.forEach((e) => delete e["id"]);
-    return sanitizedArray;
-  };
   return (
     <div className="date-picker">
       {data.dates.map((date, key) => (
@@ -43,25 +35,24 @@ export function DatePicker({ data, setData }) {
               onChange={(e) => setDateEndingTime(key, e.target.value, data, setData)}
             />
           </div>
-
-          {dateList.length > 1 && (
+          {data.dates.length > 1 && (
             <ActiveeButton
               buttonType="warning"
               iconSrc={DeleteIconWhite}
               onClick={() => {
-                dateList.splice(key, 1);
-                setData({ ...data, dates: removeIds(dateList) });
+                const dates = data.dates;
+                dates.splice(key, 1);
+                setData({ ...data, dates: dates });
               }}></ActiveeButton>
           )}
         </div>
       ))}
-      {dateList.length <= 4 && (
+      {data.dates.length <= 4 && (
         <ActiveeButton
           buttonType="blank"
           iconSrc={AddIconBlack}
           onClick={() => {
-            dateList.push({ ...dateTemplate, id: crypto.randomUUID() });
-            setData({ ...data, dates: removeIds(dateList) });
+            setData({ ...data, dates: [...data.dates, { ...dateTemplate, id: crypto.randomUUID() }] });
           }}>
           Termin hinzufügen
         </ActiveeButton>

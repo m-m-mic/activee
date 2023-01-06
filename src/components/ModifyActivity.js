@@ -82,6 +82,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     }
     setDefaultValues(transformedValues);
   };
+  console.log(activityInfo);
   const modifyActivity = () => {
     let validators = validation;
     for (const date of activityInfo.dates) {
@@ -145,7 +146,6 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   return (
     <>
       {editMode && <EditControls onConfirmClick={() => modifyActivity()} />}
-
       <input
         className={validation.name ? "modify-activity-name" : "modify-activity-name warning"}
         placeholder="Neue Aktivität..."

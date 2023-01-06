@@ -58,15 +58,13 @@ export function Profile() {
         {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
         <h2>Deine Angaben</h2>
         <div className="profile-general-info">
-          {accountInfo.birthday && (
-            <div className="profile-general-info-container">
-              <span className="profile-general-info-name">Geboren am</span>
-              <span className="profile-general-info-data">
-                {accountInfo.birthday}
-                {!accountInfo.birthday && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
-              </span>
-            </div>
-          )}
+          <div className="profile-general-info-container">
+            <span className="profile-general-info-name">Geboren am</span>
+            <span className="profile-general-info-data">
+              {accountInfo.birthday}
+              {!accountInfo.birthday && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
+            </span>
+          </div>
           {cookies.userType === "organisation" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Telefonnummer</span>
@@ -80,8 +78,19 @@ export function Profile() {
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Adresse</span>
               <span className="profile-general-info-data">
-                {accountInfo.address.street}, {accountInfo.address.house_number} <br />
-                {accountInfo.address.zip_code} {accountInfo.address.city}
+                {accountInfo.address.street &&
+                  accountInfo.address.house_number &&
+                  accountInfo.address.zip_code &&
+                  accountInfo.address.city && (
+                    <>
+                      {accountInfo.address.street} {accountInfo.address.house_number} <br />
+                      {accountInfo.address.zip_code} {accountInfo.address.city}
+                    </>
+                  )}
+                {(!accountInfo.address.street ||
+                  !accountInfo.address.house_number ||
+                  !accountInfo.address.zip_code ||
+                  !accountInfo.address.city) && <span className="profile-no-info-disclaimer">Keine Angabe</span>}
               </span>
             </div>
           )}

@@ -28,6 +28,36 @@ export function TimeTable({ data }) {
         </tr>
       </thead>
       <tbody>
+        <tr id="row-0">
+          <th className="time-bracket">0:00</th>
+          <th id="mo-0"></th>
+          <th id="tu-0"></th>
+          <th id="we-0"></th>
+          <th id="th-0"></th>
+          <th id="fr-0"></th>
+          <th id="sa-0"></th>
+          <th id="su-0"></th>
+        </tr>
+        <tr id="row-2">
+          <th className="time-bracket">2:00</th>
+          <th id="mo-2"></th>
+          <th id="tu-2"></th>
+          <th id="we-2"></th>
+          <th id="th-2"></th>
+          <th id="fr-2"></th>
+          <th id="sa-2"></th>
+          <th id="su-2"></th>
+        </tr>
+        <tr id="row-4">
+          <th className="time-bracket">4:00</th>
+          <th id="mo-4"></th>
+          <th id="tu-4"></th>
+          <th id="we-4"></th>
+          <th id="th-4"></th>
+          <th id="fr-4"></th>
+          <th id="sa-4"></th>
+          <th id="su-4"></th>
+        </tr>
         <tr id="row-6">
           <th className="time-bracket">6:00</th>
           <th id="mo-6"></th>
@@ -107,6 +137,16 @@ export function TimeTable({ data }) {
           <th id="fr-20"></th>
           <th id="sa-20"></th>
           <th id="su-20"></th>
+        </tr>
+        <tr id="row-22">
+          <th className="time-bracket">22:00</th>
+          <th id="mo-22"></th>
+          <th id="tu-22"></th>
+          <th id="we-22"></th>
+          <th id="th-22"></th>
+          <th id="fr-22"></th>
+          <th id="sa-22"></th>
+          <th id="su-22"></th>
         </tr>
       </tbody>
     </table>
