@@ -114,6 +114,22 @@ export const setPhoneNumber = (input, data, setData, validation, setValidation) 
   }
 };
 
+export const setProfileLanguagesInput = (input, data, setData) => {
+  const convertedArray = [];
+  for (const language of input) {
+    convertedArray.push({ _id: language.value, name: language.label });
+  }
+  setData({ ...data, languages: convertedArray });
+};
+
+export const setProfileSportsInput = (input, data, setData) => {
+  const convertedArray = [];
+  for (const sport of input) {
+    convertedArray.push({ _id: sport.value, name: sport.label });
+  }
+  setData({ ...data, sports: convertedArray });
+};
+
 // Distance darf maximal 300 sein. Leeres Feld erlaubt.
 export const setDistanceInput = (input, data, setData, validation, setValidation) => {
   if (Number(input) <= 300 && input.match(numberPattern)) {

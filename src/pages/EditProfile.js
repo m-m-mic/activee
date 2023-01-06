@@ -13,12 +13,15 @@ import {
   setDistanceInput,
   setFirstNameInput,
   setLastNameInput,
-  setPhoneNumber,
+  setPhoneNumber, setProfileLanguagesInput, setProfileSportsInput,
 } from "../scripts/handleInputs";
 import { AddressPicker } from "../components/AddressPicker";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import Select from "react-select";
+import {getPreselectOptions} from "../scripts/fetchRequests";
+import {createSelectArray} from "../scripts/createSelectArray";
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -26,10 +29,28 @@ export function EditProfile() {
   const [accountInfo, setAccountInfo] = useState();
   const [inputValidation, setInputValidation] = useState(ProfileInputValidator);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [languages, setLanguages] = useState();
+  const [sports, setSports] = useState();
+  const [defaultValues, setDefaultValues] = useState({});
+
   useEffect(() => {
+    getPreselectOptions(cookies.userToken, setLanguages, null, setSports);
     getAccountInfo();
     document.title = "Dein Profil - activee";
   }, []);
+
+  console.log(defaultValues);
+
+
+  const transformDefaultValues = (data) => {
+    const defaultInfo = structuredClone(data);
+    let transformedValues = {
+      sports: createSelectArray(defaultInfo.sports),
+      languages: createSelectArray(defaultInfo.languages),
+    };
+    setDefaultValues(transformedValues);
+  };
+
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
@@ -38,7 +59,10 @@ export function EditProfile() {
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => setAccountInfo(data));
+      .then((data) =>{
+        setAccountInfo(data);
+        transformDefaultValues(data);
+      });
   };
   const updateAccountInfo = () => {
     for (const [key, value] of Object.entries(inputValidation)) {
@@ -147,14 +171,15 @@ export function EditProfile() {
           <div className="profile-general-info-container language">
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
-              {accountInfo.languages.map((item, key) => (
-                <img
-                  className="profile-general-info-language-icon"
-                  src={`${backendUrl}/flags/${item._id}_flag.jpg`}
-                  alt="language icon"
-                  key={key}
-                />
-              ))}
+              <Select
+                  className="profile-select languages"
+                  placeholder="Sprachen..."
+                  defaultValue={defaultValues.languages}
+                  isMulti
+                  options={languages}
+                  onChange={(option) => setProfileLanguagesInput(option, accountInfo, setAccountInfo)}
+                  isOptionDisabled={() => accountInfo.languages.length >= 5}
+              />
             </span>
           </div>
         </div>
@@ -163,7 +188,15 @@ export function EditProfile() {
             <h2>Präferenzen</h2>
             <GenderSelection data={accountInfo} setData={setAccountInfo} isEditMode />
             <h3>Sportarten</h3>
-            <SportSelection data={accountInfo} setData={setAccountInfo} isEditMode />
+            <Select
+                className="profile-select sports"
+                placeholder="Sportarten..."
+                defaultValue={defaultValues.sports}
+                isMulti
+                options={sports}
+                onChange={(option) => setProfileSportsInput(option, accountInfo, setAccountInfo)}
+                isOptionDisabled={() => accountInfo.sports.length >= 6}
+            />
             <h3>Anfahrt</h3>
             <TransportSelection data={accountInfo} setData={setAccountInfo} isEditMode />
             <div className="profile-general-info">
