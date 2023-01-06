@@ -1,14 +1,14 @@
-import { Footer } from "../components/Footer";
 import { SearchBar } from "../components/SearchBar";
 import { SearchResults } from "../components/SearchResults";
-import { useEffect, useState } from "react";
-import { isVariableOnlySpaces } from "../scripts/isVariableOnlySpaces";
-import { useLocation, useNavigate } from "react-router-dom";
-import { backendUrl } from "../index";
+import React, { useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { getSearchResults } from "../scripts/fetchRequests";
 
 export function Search() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [cookies, setCookie] = useCookies(["userToken"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [urlQuery, setUrlQuery] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -17,7 +17,7 @@ export function Search() {
     const urlQuery = queryParams.get("query");
     setUrlQuery(urlQuery);
     if (urlQuery) {
-      getSearchResults(urlQuery);
+      getSearchResults(cookies.userToken, urlQuery, setSearchResults);
     } else {
       setSearchResults(null);
     }
@@ -31,21 +31,15 @@ export function Search() {
   const confirmSearch = (e) => {
     if (e.key === "Enter") navigate(`/search?query=${searchQuery}`);
   };
-  const getSearchResults = (enteredQuery) => {
-    if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
-      setSearchResults(null);
-    } else {
-      const url = backendUrl + "/search/" + enteredQuery;
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => setSearchResults(data));
-    }
-  };
 
-  return (
-    <>
-      <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-      {searchResults ? <SearchResults searchResults={searchResults} query={urlQuery} /> : <h1>Empfehlungen</h1>}
-    </>
-  );
+  if (cookies.userToken) {
+    return (
+      <>
+        <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
+        {searchResults ? <SearchResults searchResults={searchResults.filtered} query={urlQuery} /> : <h1>Empfehlungen</h1>}
+      </>
+    );
+  } else {
+    return <Navigate to="/login" />;
+  }
 }

@@ -1,7 +1,5 @@
 /* Styling für die Searchbar */
-#search-bar {
-  position: sticky;
-  top: 0;
+.search-bar {
   display: flex;
   flex-flow: row;
   align-items: center;

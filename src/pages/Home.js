@@ -11,43 +11,27 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import { getAccountInfo, getRecommendations, getSports } from "../scripts/fetchRequests";
 
 export function Home() {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
   const [sports, setSports] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
   useEffect(() => {
     if (cookies.userToken) {
       document.title = "Übersicht - activee";
-      getAccountInfo();
-      getSports();
+      getAccountInfo(cookies.userToken, setAccountInfo);
+      getSports(cookies.userToken, setSports);
+      if (cookies.userType === "participant") getRecommendations(cookies.userToken, setRecommendations);
     } else {
       document.title = "activee";
     }
   }, [cookies.userToken]);
-  const getAccountInfo = () => {
-    const url = backendUrl + "/account/info";
-    const requestOptions = {
-      method: "GET",
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-    };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setAccountInfo(data));
-  };
-  const getSports = () => {
-    const url = backendUrl + "/sport";
-    const requestOptions = {
-      method: "GET",
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-    };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setSports(data));
-  };
+
   if (cookies.userToken) {
-    if (!accountInfo || !sports) {
+    if (!accountInfo || !sports || !recommendations) {
       return <LoadingAnimation />;
     }
     return (
@@ -84,7 +68,7 @@ export function Home() {
         {cookies.userType === "participant" ? (
           <>
             <h2>Empfehlungen für Dich</h2>
-            <UnderConstruction />
+            <ActiveeScrollingCards items={recommendations} type="activity" />
           </>
         ) : (
           <>
