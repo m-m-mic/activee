@@ -13,15 +13,18 @@ import {
   setDistanceInput,
   setFirstNameInput,
   setLastNameInput,
-  setPhoneNumber, setProfileLanguagesInput, setProfileSportsInput,
+  setPhoneNumber,
+  setProfileLanguagesInput,
+  setProfileSportsInput,
 } from "../scripts/handleInputs";
 import { AddressPicker } from "../components/AddressPicker";
 import { WarningDisclaimer } from "../components/WarningDisclaimer";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import Select from "react-select";
-import {getPreselectOptions} from "../scripts/fetchRequests";
-import {createSelectArray} from "../scripts/createSelectArray";
+import { getPreselectOptions } from "../scripts/fetchRequests";
+import { createSelectArray } from "../scripts/createSelectArray";
+import { MultiValueLanguage, MultiValueSport, MultiValueStyles } from "../scripts/reactSelect";
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -41,7 +44,6 @@ export function EditProfile() {
 
   console.log(defaultValues);
 
-
   const transformDefaultValues = (data) => {
     const defaultInfo = structuredClone(data);
     let transformedValues = {
@@ -59,7 +61,7 @@ export function EditProfile() {
     };
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) =>{
+      .then((data) => {
         setAccountInfo(data);
         transformDefaultValues(data);
       });
@@ -93,7 +95,7 @@ export function EditProfile() {
       <>
         <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
         <EditControls onConfirmClick={() => updateAccountInfo()} />
-        <div className="profile-user-info">
+        <div className="profile-user-info edit">
           <img
             className="profile-user-picture"
             src={`${backendUrl}/images/profiles/${cookies.userId}.jpg`}
@@ -106,7 +108,7 @@ export function EditProfile() {
           <span className="profile-user-credentials">
             <div className="profile-user-name flex">
               <input
-                className={inputValidation.first_name ? "profile-input-name" : "profile-input-name warning"}
+                className={inputValidation.first_name ? "profile-input name" : "profile-input name warning"}
                 defaultValue={accountInfo.first_name}
                 placeholder="Vorname"
                 onChange={(e) =>
@@ -114,7 +116,7 @@ export function EditProfile() {
                 }
               />
               <input
-                className={inputValidation.last_name ? "profile-input-name" : "profile-input-name warning"}
+                className={inputValidation.last_name ? "profile-input name" : "profile-input name warning"}
                 defaultValue={accountInfo.last_name}
                 placeholder="Nachname"
                 onChange={(e) =>
@@ -134,7 +136,7 @@ export function EditProfile() {
             <span className="profile-general-info-name">Geboren am</span>
             <span className="profile-general-info-data">
               <input
-                className={inputValidation.birthday ? "profile-input" : "profile-input warning"}
+                className={inputValidation.birthday ? "profile-input birthday" : "profile-input birthday warning"}
                 type="date"
                 defaultValue={accountInfo.birthday}
                 onChange={(e) => setBirthday(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)}
@@ -147,7 +149,7 @@ export function EditProfile() {
               <span className="profile-general-info-data">
                 <input
                   type="tel"
-                  className={inputValidation.phone_number ? "profile-input phone-input" : "profile-input phone-input warning"}
+                  className={inputValidation.phone_number ? "profile-input phone" : "profile-input phone warning"}
                   placeholder="Telefonnummer"
                   defaultValue={accountInfo.phone_number}
                   onChange={(e) =>
@@ -172,13 +174,15 @@ export function EditProfile() {
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
               <Select
-                  className="profile-select languages"
-                  placeholder="Sprachen..."
-                  defaultValue={defaultValues.languages}
-                  isMulti
-                  options={languages}
-                  onChange={(option) => setProfileLanguagesInput(option, accountInfo, setAccountInfo)}
-                  isOptionDisabled={() => accountInfo.languages.length >= 5}
+                className="profile-select languages"
+                placeholder="Sprachen..."
+                defaultValue={defaultValues.languages}
+                components={{ MultiValue: MultiValueLanguage }}
+                isMulti
+                styles={MultiValueStyles}
+                options={languages}
+                onChange={(option) => setProfileLanguagesInput(option, accountInfo, setAccountInfo)}
+                isOptionDisabled={() => accountInfo.languages.length >= 5}
               />
             </span>
           </div>
@@ -189,13 +193,15 @@ export function EditProfile() {
             <GenderSelection data={accountInfo} setData={setAccountInfo} isEditMode />
             <h3>Sportarten</h3>
             <Select
-                className="profile-select sports"
-                placeholder="Sportarten..."
-                defaultValue={defaultValues.sports}
-                isMulti
-                options={sports}
-                onChange={(option) => setProfileSportsInput(option, accountInfo, setAccountInfo)}
-                isOptionDisabled={() => accountInfo.sports.length >= 6}
+              className="profile-select sports"
+              placeholder="Sportarten..."
+              defaultValue={defaultValues.sports}
+              isMulti
+              components={{ MultiValue: MultiValueSport }}
+              styles={MultiValueStyles}
+              options={sports}
+              onChange={(option) => setProfileSportsInput(option, accountInfo, setAccountInfo)}
+              isOptionDisabled={() => accountInfo.sports.length >= 6}
             />
             <h3>Anfahrt</h3>
             <TransportSelection data={accountInfo} setData={setAccountInfo} isEditMode />

@@ -12,12 +12,13 @@
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-disabled: #c6dcd7;
-  --light-mode-disabled-typeface: #838383;
+  --light-mode-disabled-typeface: #9b9b9b;
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
   --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
   --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
   --light-mode-elevation-4: 1px 2px 9px -5px rgba(0, 0, 0, 0.37);
   --blur-effect: blur(12px);
+  --component-spacing: 20px;
   --h1-typeface: Inter Bold, sans-serif;
   --h1-size: 32px;
   --h1-subtitle-typeface: Inter SemiBold Italic, sans-serif;
@@ -112,10 +113,11 @@ body {
 h1 {
   font-family: var(--h1-typeface);
   font-size: var(--h1-size);
+  margin: 0;
 }
 
 .h1-subtitle {
-  margin: -15px 0 15px;
+  margin: -10px 0 0;
   font-family: var(--h1-subtitle-typeface);
   font-size: var(--h1-subtitle-size);
 }
@@ -123,16 +125,19 @@ h1 {
 h2 {
   font-family: var(--h2-typeface);
   font-size: var(--h2-size);
+  margin: 0;
 }
 
 h3 {
   font-family: var(--h3-typeface);
   font-size: var(--h3-size);
+  margin: 0;
 }
 
 h4 {
   font-family: var(--h4-typeface);
   font-size: var(--h4-size);
+  margin: 0;
 }
 
 button {
@@ -172,10 +177,17 @@ textarea {
   font-family: var(--text-typeface);
   font-size: var(--text-size);
   border: none;
-  padding: 3px 6px;
+  padding: 6px;
   border-bottom: 3px solid var(--light-mode-typeface);
   border-radius: 4px;
   transition: 200ms ease-out;
+}
+
+input:hover,
+textarea:hover {
+  outline: none;
+  border-bottom: 3px solid var(--light-mode-primary-1);
+  box-shadow: var(--light-mode-elevation-4);
 }
 
 input:focus,
@@ -186,9 +198,13 @@ textarea:focus {
 }
 input:disabled,
 textarea:disabled {
-  border-bottom: none;
+  background: none;
+  border-bottom: 3px solid var(--light-mode-disabled-typeface);
   color: var(--light-mode-disabled-typeface);
-  background: var(--light-mode-disabled);
+}
+input:disabled:hover,
+textarea:disabled:hover {
+  box-shadow: none;
 }
 input.warning,
 textarea.warning {
@@ -205,6 +221,7 @@ textarea.warning {
 /* Aufgrund von flex: 1 nimmt der Seiteninhalt im content-body immer sämtlichen freien Platz im Viewport ein */
 #content-body {
   flex: 1;
+  gap: var(--component-spacing);
   margin: 0 12px 15px 12px;
   display: flex;
   flex-flow: column;

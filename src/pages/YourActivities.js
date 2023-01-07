@@ -62,7 +62,7 @@ export function YourActivities() {
         )}
         {cookies.userType === "organisation" && (
           <div className="your-activities-add-button">
-            <ActiveeButton iconSrc={AddIconBlack} buttonType="transparent" onClick={() => navigate("/activity/new")}>
+            <ActiveeButton iconSrc={AddIconBlack} buttonType="blank" onClick={() => navigate("/activity/new")}>
               Neue Aktivität
             </ActiveeButton>
           </div>

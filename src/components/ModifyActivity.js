@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
 import { EditControls } from "./EditControls";
 import { backendUrl } from "../index";
+import { Subtitle } from "./Subtitle";
+import { MultiValueLanguage, MultiValueRequiredItems, MultiValueStyles, SingleValueStyles } from "../scripts/reactSelect";
 
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
@@ -152,7 +154,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         defaultValue={activityInfo.name}
         onChange={(e) => setNameInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
-      <div className="modify-activity-club">{activityInfo.club}</div>
+      <Subtitle>{activityInfo.club}</Subtitle>
       <h2>Hauptangaben</h2>
       <div className="modify-activity-general-info">
         <div className="modify-activity-general-info-container">
@@ -162,6 +164,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               className="modify-activity-select sport"
               placeholder="Sportart..."
               defaultValue={defaultValues.sport}
+              styles={SingleValueStyles}
               options={sports}
               onChange={(option) => setSportInput(option, activityInfo, setActivityInfo, validation, setValidation)}
               isDisabled={editMode}
@@ -176,6 +179,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               className="modify-activity-select gender"
               defaultValue={defaultValues.gender}
               options={genders}
+              styles={SingleValueStyles}
               onChange={(option) => setGenderInput(option, activityInfo, setActivityInfo, validation, setValidation)}
               isDisabled={editMode}
             />
@@ -195,19 +199,22 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               className="modify-activity-select age-direction"
               defaultValue={activityInfo.isOlderThan ? ageDirection[1] : ageDirection[0]}
               options={ageDirection}
+              styles={SingleValueStyles}
               isDisabled={editMode}
               onChange={(option) => setAgeDirectionInput(option, activityInfo, setActivityInfo)}
             />
           </span>
         </div>
-        <div className="modify-activity-general-info-container">
+        <div className="modify-activity-general-info-container language">
           <span className="modify-activity-general-info-name">Sprachen</span>
           <span className="modify-activity-general-info-data">
             <Select
-              className="modify-activity-select languages"
+              className="modify-activity-select"
               placeholder="Sprachen..."
               defaultValue={defaultValues.languages}
+              components={{ MultiValue: MultiValueLanguage }}
               isMulti
+              styles={MultiValueStyles}
               options={languages}
               onChange={(option) => setLanguagesInput(option, activityInfo, setActivityInfo, validation, setValidation)}
               isOptionDisabled={() => activityInfo.languages.length >= 3}
@@ -263,7 +270,9 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
       <Select
         className="modify-activity-select items"
         placeholder="Vorausgesetzte Mitbringsel..."
+        components={{ MultiValue: MultiValueRequiredItems }}
         isMulti
+        styles={MultiValueStyles}
         defaultValue={defaultValues.required_items}
         options={requiredItems}
         onChange={(option) => setRequiredItemsInput(option, activityInfo, setActivityInfo, validation, setValidation)}

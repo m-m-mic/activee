@@ -8,7 +8,7 @@
   height: 48px;
   background: var(--light-mode-warning-active);
   border-radius: 12px;
-  margin-bottom: 10px;
+  margin-bottom: var(--component-spacing);
   transition: 200ms;
   visibility: visible;
 }

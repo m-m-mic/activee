@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getSearchResults } from "../scripts/fetchRequests";
+import { Subtitle } from "../components/Subtitle";
 
 export function Search() {
   const navigate = useNavigate();
@@ -39,10 +40,9 @@ export function Search() {
         {searchResults ? (
           <>
             <h1>Suchergebnisse</h1>
-            <h2>Exact</h2>
-            <SearchResults searchResults={searchResults.filtered} />
-            <h2>Other</h2>
-            <SearchResults searchResults={searchResults.other} />
+            <Subtitle>für "{searchQuery}"</Subtitle>
+            {searchResults.filtered.length > 0 && <SearchResults searchResults={searchResults.filtered} />}
+            {searchResults.other.length > 0 && <SearchResults searchResults={searchResults.other} />}
           </>
         ) : (
           <h1>Empfehlungen</h1>

@@ -9,6 +9,7 @@ import { SportSelection } from "../components/SportSelection";
 import { TransportSelection } from "../components/TransportSelection";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import { Subtitle } from "../components/Subtitle";
 
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
@@ -55,7 +56,7 @@ export function Profile() {
             <img className="profile-user-edit-icon" src={EditIcon} alt="Edit icon" />
           </NavLink>
         </div>
-        {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
+        {cookies.userType === "organisation" && <Subtitle> {accountInfo.club} </Subtitle>}
         <h2>Deine Angaben</h2>
         <div className="profile-general-info">
           <div className="profile-general-info-container">
@@ -77,7 +78,7 @@ export function Profile() {
           {cookies.userType === "participant" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Adresse</span>
-              <span className="profile-general-info-data">
+              <span className="profile-general-info-data address">
                 {accountInfo.address.street &&
                   accountInfo.address.house_number &&
                   accountInfo.address.zip_code &&
@@ -94,7 +95,7 @@ export function Profile() {
               </span>
             </div>
           )}
-          <div className="profile-general-info-container language">
+          <div className="profile-general-info-container">
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
               {accountInfo.languages.map((item, key) => (

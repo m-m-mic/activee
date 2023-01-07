@@ -12,6 +12,9 @@
   box-sizing: content-box;
   gap: 15px;
 }
+.profile-user-info.edit {
+  margin-top: -20px;
+}
 .profile-user-picture {
   flex: 0 0 52px;
   height: 52px;
@@ -64,11 +67,22 @@
   gap: 30px;
   justify-content: space-between;
 }
+.profile-general-info-container.language {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  justify-content: space-between;
+}
 .profile-general-info-name {
   font-family: Inter Bold, sans-serif;
 }
 .profile-general-info-data {
   flex: 1 1;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.profile-general-info-data.address {
   text-align: right;
 }
 .profile-general-info-language-icon {
@@ -87,16 +101,47 @@
 }
 /* Styling für die Bearbeitungsseite */
 /* Zusätzliches Styling für Eingabefelder */
-.profile-input-name {
+.profile-input.name {
   font-family: Inter Bold, sans-serif;
   font-size: 20px;
   width: 100%;
   max-width: 200px;
 }
-.profile-input.phone-input {
+.profile-input.birthday {
   min-width: 0;
-  max-width: 130px;
+  max-width: 140px;
   width: 100%;
+}
+.profile-input.phone {
+  min-width: 0;
+  max-width: 140px;
+  width: 100%;
+}
+.profile-select.languages {
+  width: 100%;
+  min-width: 0;
+}
+.select-box-container {
+  min-width: 0;
+}
+.select-box {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--light-mode-typeface-inverted);
+}
+.select-box-label {
+  flex: 1;
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+}
+.select-flag,
+.select-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 
 /* Sticky Buttons, mit welchen man die Eingaben bestätigen und den Bearbeitungsmodus abbrechen kann */
@@ -134,19 +179,15 @@
   width: 100%;
   gap: 10px;
 }
-.profile-transport-selection {
-  margin-bottom: 15px;
-}
 .profile-sports-selection {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
-@media only screen and (max-width: 400px) {
+
+@media only screen and (min-width: 400px) {
   .profile-sports-selection {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 /* Styling des Eingabefelder für die Addresse */
@@ -170,12 +211,12 @@
   min-width: 0;
 }
 .profile-input-house-number {
-  flex: 0 0 40px;
+  flex: 0 0 60px;
   min-width: 0;
   text-align: center;
 }
 .profile-input-zip-code {
-  flex: 0 0 60px;
+  flex: 0 0 80px;
   min-width: 0;
   text-align: center;
 }
@@ -187,4 +228,5 @@
 .profile-input-distance {
   width: 40px;
   text-align: center;
+  margin-right: 6px;
 }

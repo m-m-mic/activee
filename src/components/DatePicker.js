@@ -6,6 +6,7 @@ import { dateTemplate, weekdayPreselect } from "../scripts/inputTemplates";
 import { ActiveeButton } from "./ActiveeButton";
 import DeleteIconWhite from "../assets/svgs/delete_icon_white.svg";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
+import { SingleValueStyles } from "../scripts/reactSelect";
 
 export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
@@ -16,6 +17,7 @@ export function DatePicker({ data, setData }) {
           <Select
             className="date-picker-day"
             placeholder="Tag..."
+            styles={SingleValueStyles}
             defaultValue={date.day.value ? date.day : null}
             options={weekdays}
             onChange={(option) => setDateDayInput(key, option, data, setData)}

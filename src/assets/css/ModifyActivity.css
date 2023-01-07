@@ -21,6 +21,12 @@
   gap: 30px;
   justify-content: space-between;
 }
+.modify-activity-general-info-container.language {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  justify-content: space-between;
+}
 .modify-activity-general-info-name {
   font-family: Inter Bold, sans-serif;
 }
@@ -30,6 +36,7 @@
   display: flex;
   gap: 10px;
 }
+
 .modify-activity-general-info-data.league {
   align-items: end;
   justify-content: right;
@@ -53,11 +60,12 @@
   max-width: 320px;
 }
 .modify-activity-age {
-  max-width: 50px;
+  text-align: center;
+  max-width: 60px;
 }
 .modify-activity-league {
   max-width: 210px;
 }
 .modify-activity-membership-fee {
-  height: 32px;
+  height: 64px;
 }
