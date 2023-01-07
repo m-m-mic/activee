@@ -3,6 +3,7 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useCookies } from "react-cookie";
 import { handleLogout } from "../scripts/handleCookieChange";
+import "../assets/css/Settings.css";
 
 export function Settings() {
   const navigate = useNavigate();
@@ -19,16 +20,17 @@ export function Settings() {
             <NavLink to={`/settings/profiles`}>
               <ActiveeButton buttonType="primary">Profilübersicht</ActiveeButton>
             </NavLink>
-            <br />
           </>
         )}
-        <ActiveeButton
-          buttonType="warning"
-          onClick={() => {
-            handleLogout(removeCookie, navigate);
-          }}>
-          Ausloggen
-        </ActiveeButton>
+        <div className="settings-logout">
+          <ActiveeButton
+            buttonType="outline"
+            onClick={() => {
+              handleLogout(removeCookie, navigate);
+            }}>
+            Ausloggen
+          </ActiveeButton>
+        </div>
       </>
     );
   } else {

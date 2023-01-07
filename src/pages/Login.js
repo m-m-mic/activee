@@ -12,11 +12,22 @@ export function Login() {
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [emailWarning, setEmailWarning] = useState(false);
+  const [passwordWarning, setPasswordWarning] = useState(false);
   const [wrongEmailDisclaimerVisible, setWrongEmailDisclaimerVisible] = useState(false);
   const [wrongPasswordDisclaimerVisible, setWrongPasswordDisclaimerVisible] = useState(false);
   useEffect(() => {
     document.title = "Anmelden - activee";
   });
+  useEffect(() => {
+    document.addEventListener("keydown", confirmInputs);
+    return () => {
+      document.removeEventListener("keydown", confirmInputs);
+    };
+  });
+  const confirmInputs = (e) => {
+    if (e.key === "Enter") handleLogin(emailInput, passwordInput);
+  };
   const handleLogin = (email, password) => {
     const url = backendUrl + "/account/login";
     const requestOptions = {
@@ -28,10 +39,12 @@ export function Login() {
       if (response.status === 404) {
         setWrongEmailDisclaimerVisible(true);
         setWrongPasswordDisclaimerVisible(false);
+        setEmailWarning(true);
         return;
       } else if (response.status === 403) {
         setWrongEmailDisclaimerVisible(false);
         setWrongPasswordDisclaimerVisible(true);
+        setPasswordWarning(true);
         return;
       }
       response
@@ -45,28 +58,24 @@ export function Login() {
       <>
         <div className="login-hero">Willkommen zurück</div>
         <div className="login-wrapper">
-          <WarningDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
-            E-Mail konnte nicht gefunden werden
-          </WarningDisclaimer>
-          <WarningDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
-            Es wurde ein falsches Password eingegeben
-          </WarningDisclaimer>
           <div className="login-input-wrapper">
             <input
               value={emailInput}
               onChange={(e) => {
+                setEmailWarning(false);
                 setEmailInput(e.target.value);
               }}
-              className="login-input"
+              className={emailWarning ? "login-input warning" : "login-input"}
               type="email"
               placeholder="E-Mail"
             />
             <input
               value={passwordInput}
               onChange={(e) => {
+                setPasswordWarning(false);
                 setPasswordInput(e.target.value);
               }}
-              className="login-input"
+              className={passwordWarning ? "login-input warning" : "login-input"}
               type="password"
               placeholder="Passwort"
             />
@@ -80,6 +89,12 @@ export function Login() {
             </ActiveeButton>
           </div>
         </div>
+        <WarningDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
+          E-Mail konnte nicht gefunden werden
+        </WarningDisclaimer>
+        <WarningDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
+          Es wurde ein falsches Password eingegeben
+        </WarningDisclaimer>
         <div className="login-no-account-wrapper">
           <NavLink to="/" className="login-no-account-button">
             Noch kein Konto?

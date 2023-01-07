@@ -1,7 +1,7 @@
 export const dateTemplate = {
   day: { value: null, label: null },
-  starting_time: "",
-  ending_time: "",
+  starting_time: "12:00",
+  ending_time: "13:00",
 };
 export const activityTemplate = {
   name: "",

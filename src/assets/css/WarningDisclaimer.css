@@ -1,21 +1,20 @@
 /* Styling der Warnung für ungültige Nutzerangaben */
 .warning-disclaimer {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 12px;
   display: flex;
   flex-flow: row;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  height: 48px;
+  border-radius: 8px;
   background: var(--light-mode-warning-active);
-  border-radius: 12px;
-  margin-bottom: var(--component-spacing);
   transition: 200ms;
   visibility: visible;
 }
 .warning-disclaimer.hidden {
-  visibility: hidden;
-  height: 0;
-  margin-bottom: 0;
+  display: none;
 }
 .warning-icon {
   width: 32px;

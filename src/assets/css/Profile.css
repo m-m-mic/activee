@@ -12,9 +12,6 @@
   box-sizing: content-box;
   gap: 15px;
 }
-.profile-user-info.edit {
-  margin-top: -20px;
-}
 .profile-user-picture {
   flex: 0 0 52px;
   height: 52px;
@@ -103,6 +100,7 @@
 /* Zusätzliches Styling für Eingabefelder */
 .profile-input.name {
   font-family: Inter Bold, sans-serif;
+  background: var(--light-mode-background);
   font-size: 20px;
   width: 100%;
   max-width: 200px;

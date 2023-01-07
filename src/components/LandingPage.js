@@ -23,7 +23,6 @@ export function LandingPage() {
           <ActiveeButton buttonType="outline">Anmelden</ActiveeButton>
         </NavLink>
       </div>
-      <div className="filler-div"></div>
     </>
   );
 }

@@ -1,9 +1,13 @@
 /* Styling für den standardmäßigen Button der Seite */
 .activee-button {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   border: none;
   border-radius: 8px;
   box-shadow: var(--light-mode-elevation-4);
   font-family: var(--button-typeface);
+  color: var(--light-mode-typeface);
   font-size: var(--button-size);
   padding: 10px 15px;
   cursor: pointer;
@@ -12,6 +16,7 @@
   justify-content: center;
   align-items: center;
   transition: 200ms;
+  height: 42px;
 }
 .activee-button.gap {
   gap: 7px;
@@ -22,14 +27,14 @@
 
 /* Styling für unterschiedliche Buttons */
 .activee-button.primary {
-  color: var(--light-mode-background);
+  color: var(--light-mode-typeface-inverted);
   background: #4a9d8c;
 }
 .activee-button.primary:active {
   background: #6ac8b7;
 }
 .activee-button.secondary {
-  color: var(--light-mode-background);
+  color: var(--light-mode-typeface-inverted);
   background: #6ac8b7;
 }
 .activee-button.blank {
@@ -40,7 +45,7 @@
   background: var(--light-mode-blank-active);
 }
 .activee-button.warning {
-  color: var(--light-mode-background);
+  color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-warning);
 }
 .activee-button.warning:active {
@@ -48,12 +53,11 @@
 }
 .activee-button.outline {
   background: var(--light-mode-background);
-  outline: 3px solid #4a9d8c;
-  outline-offset: -3px;
+  border: 3px solid #4a9d8c;
   color: #4a9d8c;
 }
 .activee-button.outline:active {
-  outline: 3px solid #6ac8b7;
+  border: 3px solid #6ac8b7;
   color: #6ac8b7;
 }
 .activee-button.outline:active {
@@ -61,5 +65,6 @@
 }
 .activee-button.disabled {
   cursor: not-allowed;
+  color: var(--light-mode-disabled-typeface);
   background: var(--light-mode-disabled);
 }
