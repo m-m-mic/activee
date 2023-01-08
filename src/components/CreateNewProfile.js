@@ -53,46 +53,49 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
       .then(() => navigate("/"));
   };
   return (
-    <div className="create-sub-account-modal">
-      <div className="create-sub-account-container">
-        <div className="create-sub-account-header">
-          <span>Neues Profil erstellen</span>
-          <img
-            className="create-sub-account-exit"
-            src={CancelIconBlack}
-            onClick={() => setCreateSubAccountVisible(false)}
-            alt="Cancel"
-          />
-        </div>
-        <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
-        <div className="create-sub-account-names">
-          <input
-            className={inputValidation.first_name ? "create-sub-account-input" : "create-sub-account-input warning"}
-            defaultValue={newProfileInfo.first_name}
-            placeholder="Vorname"
-            onChange={(e) =>
-              setFirstNameInput(e.target.value, newProfileInfo, setNewProfileInfo, inputValidation, setInputValidation)
-            }
-          />
-          <input
-            className={inputValidation.last_name ? "create-sub-account-input" : "create-sub-account-input warning"}
-            defaultValue={newProfileInfo.last_name}
-            placeholder="Nachname"
-            onChange={(e) =>
-              setLastNameInput(e.target.value, newProfileInfo, setNewProfileInfo, inputValidation, setInputValidation)
-            }
-          />
-        </div>
-        <div className="create-sub-account-options">
-          <ActiveeButton
-            buttonType="primary"
-            onClick={() => {
-              createNewProfile();
-            }}>
-            Erstellen
-          </ActiveeButton>
+    <>
+      <div className="create-sub-account-modal">
+        <div className="create-sub-account-container">
+          <div className="create-sub-account-header">
+            <span>Neues Profil erstellen</span>
+            <img
+              className="create-sub-account-exit"
+              src={CancelIconBlack}
+              onClick={() => setCreateSubAccountVisible(false)}
+              alt="Cancel"
+            />
+          </div>
+          <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
+          <div className="create-sub-account-names">
+            <input
+              className={inputValidation.first_name ? "create-sub-account-input" : "create-sub-account-input warning"}
+              defaultValue={newProfileInfo.first_name}
+              placeholder="Vorname"
+              onChange={(e) =>
+                setFirstNameInput(e.target.value, newProfileInfo, setNewProfileInfo, inputValidation, setInputValidation)
+              }
+            />
+            <input
+              className={inputValidation.last_name ? "create-sub-account-input" : "create-sub-account-input warning"}
+              defaultValue={newProfileInfo.last_name}
+              placeholder="Nachname"
+              onChange={(e) =>
+                setLastNameInput(e.target.value, newProfileInfo, setNewProfileInfo, inputValidation, setInputValidation)
+              }
+            />
+          </div>
+          <div className="create-sub-account-options">
+            <ActiveeButton
+              buttonType="primary"
+              onClick={() => {
+                createNewProfile();
+              }}>
+              Erstellen
+            </ActiveeButton>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="modal-background" onClick={() => setCreateSubAccountVisible(false)}></div>
+    </>
   );
 }

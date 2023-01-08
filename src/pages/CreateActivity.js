@@ -27,7 +27,7 @@ export default function CreateActivity() {
       .then((data) => fillActivityTemplate(data));
   };
   const fillActivityTemplate = (data) => {
-    let template = activityTemplate;
+    let template = structuredClone(activityTemplate);
     template = { ...template, club: data.club };
     template = {
       ...template,

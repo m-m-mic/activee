@@ -29,10 +29,13 @@ import { EditControls } from "./EditControls";
 import { backendUrl } from "../index";
 import { Subtitle } from "./Subtitle";
 import { MultiValueLanguage, MultiValueRequiredItems, MultiValueStyles, SingleValueStyles } from "../scripts/reactSelect";
+import { ActiveeCheckbox } from "./ActiveeCheckbox";
+import { WarningModal } from "./WarningModal";
 
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
+  const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [defaultValues, setDefaultValues] = useState({});
   const [languages, setLanguages] = useState();
   const [requiredItems, setRequiredItems] = useState();
@@ -147,6 +150,18 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   }
   return (
     <>
+      {isWarningModalVisible && (
+        <>
+          <WarningModal
+            onClick={() => deleteActivity()}
+            isWarningModalVisible={isWarningModalVisible}
+            setWarningModalVisible={setWarningModalVisible}
+            title={"Aktivität löschen"}
+            action={"löschen"}>
+            <b>Willst du diese Aktivität wirklich löschen?</b> <br /> Diese Handlung kann nicht rückgängig gemacht werden.
+          </WarningModal>
+        </>
+      )}
       {editMode && <EditControls onConfirmClick={() => modifyActivity()} />}
       <input
         className={validation.name ? "modify-activity-name" : "modify-activity-name warning"}
@@ -232,17 +247,14 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               disabled={isIntegrationChecked}
             />
             <div>
-              <input
-                type="checkbox"
+              <ActiveeCheckbox
                 defaultValue={isIntegrationChecked}
-                checked={isIntegrationChecked}
-                onChange={(e) => {
-                  console.log(e.target.value);
+                onChange={() => {
                   setIntegrationChecked(!isIntegrationChecked);
                   setLeagueInput("Integrationskurs", activityInfo, setActivityInfo, validation, setValidation);
-                }}
-              />
-              Integrationskurs
+                }}>
+                Integrationskurs
+              </ActiveeCheckbox>
             </div>
           </span>
         </div>
@@ -301,29 +313,31 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           <h4>
             {trainer.first_name} {trainer.last_name}
           </h4>
-          <input
-            type="checkbox"
-            checked={trainer.show_email}
-            onChange={() => setShowEmailInput(trainer.show_email, key, activityInfo, setActivityInfo)}
-          />
-          <label>E-Mail anzeigen</label>
-          <input
-            type="checkbox"
-            checked={trainer.show_phone_number}
-            onChange={() => setShowPhoneNumberInput(trainer.show_phone_number, key, activityInfo, setActivityInfo)}
-          />
-          <label>Telefonnummer anzeigen</label>
+          <div className="modify-activity-trainer-checkboxes">
+            <ActiveeCheckbox
+              defaultValue={trainer.show_email}
+              onChange={() => setShowEmailInput(trainer.show_email, key, activityInfo, setActivityInfo)}>
+              E-Mail anzeigen
+            </ActiveeCheckbox>
+            <ActiveeCheckbox
+              defaultValue={trainer.show_phone_number}
+              onChange={() => setShowEmailInput(trainer.show_phone_number, key, activityInfo, setActivityInfo)}>
+              Telefonnummer anzeigen
+            </ActiveeCheckbox>
+          </div>
         </div>
       ))}
-      {editMode ? (
-        <ActiveeButton buttonType="warning" onClick={() => deleteActivity()}>
-          Aktivität löschen
-        </ActiveeButton>
-      ) : (
-        <ActiveeButton buttonType="primary" onClick={() => modifyActivity()}>
-          Aktivität erstellen
-        </ActiveeButton>
-      )}
+      <div className="modify-activity-button">
+        {editMode ? (
+          <ActiveeButton buttonType="warning" onClick={() => setWarningModalVisible(true)}>
+            Aktivität löschen
+          </ActiveeButton>
+        ) : (
+          <ActiveeButton buttonType="primary" onClick={() => modifyActivity()}>
+            Aktivität erstellen
+          </ActiveeButton>
+        )}
+      </div>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 import "../assets/css/WarningModal.css";
 
@@ -13,21 +12,24 @@ export function WarningModal({ isWarningModalVisible, setWarningModalVisible, on
     };
   }, []);
   return (
-    <div className="warning-modal">
-      <div className="warning-modal-container">
-        <div className="warning-modal-header">
-          <span>{title}</span>
-        </div>
-        <div>{children}</div>
-        <div className="warning-modal-options">
-          <ActiveeButton buttonType="outline" onClick={() => setWarningModalVisible(false)}>
-            Abbrechen
-          </ActiveeButton>
-          <ActiveeButton buttonType="warning" onClick={onClick}>
-            Ja, {action}
-          </ActiveeButton>
+    <>
+      <div className="warning-modal">
+        <div className="warning-modal-container">
+          <div className="warning-modal-header">
+            <span>{title}</span>
+          </div>
+          <div>{children}</div>
+          <div className="warning-modal-options">
+            <ActiveeButton buttonType="outline" onClick={() => setWarningModalVisible(false)}>
+              Abbrechen
+            </ActiveeButton>
+            <ActiveeButton buttonType="warning" onClick={onClick}>
+              Ja, {action}
+            </ActiveeButton>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="modal-background" onClick={() => setWarningModalVisible(false)}></div>
+    </>
   );
 }

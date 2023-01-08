@@ -236,6 +236,18 @@ textarea.warning {
   flex-flow: column;
 }
 
+/* Modal Background */
+.modal-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  /* Sehr hässliche Lösung damit der Hintergrund auch wirklich alles füllt */
+  height: 5000000px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+}
+
 /* Temporäre Klassen für Entwicklung */
 .filler-div {
   height: 300vh;

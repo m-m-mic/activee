@@ -40,7 +40,7 @@ export function Search() {
         {searchResults ? (
           <>
             <h1>Suchergebnisse</h1>
-            <Subtitle>für "{searchQuery}"</Subtitle>
+            <Subtitle>für "{urlQuery}"</Subtitle>
             {searchResults.filtered.length > 0 && <SearchResults searchResults={searchResults.filtered} />}
             {searchResults.other.length > 0 && <SearchResults searchResults={searchResults.other} />}
           </>

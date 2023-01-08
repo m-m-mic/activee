@@ -74,37 +74,23 @@ export function Profiles() {
     return (
       <>
         {isCreateSubAccountVisible && (
-          <>
-            <CreateNewProfile
-              isCreateSubAccountVisible={isCreateSubAccountVisible}
-              setCreateSubAccountVisible={setCreateSubAccountVisible}
-              firstName={accountInfo.first_name}
-              lastName={accountInfo.last_name}
-              address={accountInfo.address}
-            />
-            <div
-              className="popup-backdrop darken"
-              onClick={() => {
-                setCreateSubAccountVisible(false);
-              }}></div>
-          </>
+          <CreateNewProfile
+            isCreateSubAccountVisible={isCreateSubAccountVisible}
+            setCreateSubAccountVisible={setCreateSubAccountVisible}
+            firstName={accountInfo.first_name}
+            lastName={accountInfo.last_name}
+            address={accountInfo.address}
+          />
         )}
         {isWarningModalVisible && (
-          <>
-            <WarningModal
-              onClick={() => deleteProfile()}
-              isWarningModalVisible={isWarningModalVisible}
-              setWarningModalVisible={setWarningModalVisible}
-              title={"Profil löschen"}
-              action={"löschen"}>
-              <b>Willst du das Profil wirklich löschen?</b> <br /> Diese Handlung kann nicht rückgängig gemacht werden.
-            </WarningModal>
-            <div
-              className="popup-backdrop darken"
-              onClick={() => {
-                setCreateSubAccountVisible(false);
-              }}></div>
-          </>
+          <WarningModal
+            onClick={() => deleteProfile()}
+            isWarningModalVisible={isWarningModalVisible}
+            setWarningModalVisible={setWarningModalVisible}
+            title={"Profil löschen"}
+            action={"löschen"}>
+            <b>Willst du das Profil wirklich löschen?</b> <br /> Diese Handlung kann nicht rückgängig gemacht werden.
+          </WarningModal>
         )}
         <h1>Profilübersicht</h1>
         <div className="profiles-list">

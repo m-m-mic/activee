@@ -146,7 +146,7 @@ export function Activity() {
           <TimeTable data={shortenedDates} />
         </div>
         <h2>Adresse</h2>
-        {activityInfo.address.street}, {activityInfo.address.house_number} <br />
+        {activityInfo.address.street} {activityInfo.address.house_number} <br />
         {activityInfo.address.zip_code} {activityInfo.address.city}
         <h2>Übungsleiter:innen</h2>
         {activityInfo.trainers.map((coach, key) => (

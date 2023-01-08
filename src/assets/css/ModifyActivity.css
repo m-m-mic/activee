@@ -69,3 +69,13 @@
 .modify-activity-membership-fee {
   height: 64px;
 }
+.modify-activity-trainer-checkboxes {
+  display: flex;
+  flex-flow: column;
+  margin: 10px 0;
+  gap: 5px;
+}
+.modify-activity-button {
+  display: flex;
+  justify-content: right;
+}
