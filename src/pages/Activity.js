@@ -112,18 +112,20 @@ export function Activity() {
         {(activityInfo.requirements || activityInfo.required_items) && (
           <>
             <h2>Voraussetzungen</h2>
-            <div>{activityInfo.requirements}</div>
-            <div className="activity-required-items">
-              {activityInfo.required_items.map((item, key) => (
-                <span className="activity-required-item" key={key}>
-                  <img
-                    className="activity-required-item-image"
-                    src={`${backendUrl}/icons/required-items/${item._id}_icon_white.svg`}
-                    alt="Item icon"
-                  />
-                </span>
-              ))}
-            </div>
+            {activityInfo.requirements && <div>{activityInfo.requirements}</div>}
+            {activityInfo.required_items.length > 0 && (
+              <div className="activity-required-items">
+                {activityInfo.required_items.map((item, key) => (
+                  <span className="activity-required-item" key={key}>
+                    <img
+                      className="activity-required-item-image"
+                      src={`${backendUrl}/icons/required-items/${item._id}_icon_white.svg`}
+                      alt="Item icon"
+                    />
+                  </span>
+                ))}
+              </div>
+            )}
           </>
         )}
         {activityInfo.additional_info && (

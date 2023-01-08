@@ -321,7 +321,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
             </ActiveeCheckbox>
             <ActiveeCheckbox
               defaultValue={trainer.show_phone_number}
-              onChange={() => setShowEmailInput(trainer.show_phone_number, key, activityInfo, setActivityInfo)}>
+              onChange={() => setShowPhoneNumberInput(trainer.show_phone_number, key, activityInfo, setActivityInfo)}>
               Telefonnummer anzeigen
             </ActiveeCheckbox>
           </div>
