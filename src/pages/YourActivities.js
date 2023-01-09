@@ -15,11 +15,14 @@ export function YourActivities() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [userActivities, setUserActivities] = useState();
   const [shortenedDates, setShortenedDates] = useState([]);
+
   useEffect(() => {
     if (cookies.userToken) {
       getUserActivities();
     }
   }, []);
+
+  // Fetched alle Aktivitäten eines Nutzers, mitsamt Terminen
   const getUserActivities = () => {
     const url = backendUrl + "/activity";
     const requestOptions = {
@@ -35,6 +38,7 @@ export function YourActivities() {
       }
     });
   };
+
   if (cookies.userToken) {
     if (!userActivities) {
       return <LoadingAnimation />;

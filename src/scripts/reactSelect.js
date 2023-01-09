@@ -1,6 +1,9 @@
 import { backendUrl } from "../index";
 import { components } from "react-select";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
+
+// Custom-Components und Styling für react-select Select Komponente
+
+// Custom MultiValue Selection Components
 
 export const MultiValueLanguage = (props) => {
   return (
@@ -39,6 +42,7 @@ export const MultiValueRequiredItems = (props) => {
   );
 };
 
+// Custom Styling für MultiValue Dropdowns
 export const MultiValueStyles = {
   multiValue: (base) => ({
     ...base,
@@ -79,6 +83,7 @@ export const MultiValueStyles = {
   }),
 };
 
+// Custom Styling für SingleValue Dropdown
 export const SingleValueStyles = {
   control: (base, state) => ({
     minWidth: `0`,

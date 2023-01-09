@@ -42,15 +42,7 @@ export function EditProfile() {
     document.title = "Dein Profil - activee";
   }, []);
 
-  const transformDefaultValues = (data) => {
-    const defaultInfo = structuredClone(data);
-    let transformedValues = {
-      sports: createSelectArray(defaultInfo.sports),
-      languages: createSelectArray(defaultInfo.languages),
-    };
-    setDefaultValues(transformedValues);
-  };
-
+  // Fetched AccountInfo
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
@@ -64,6 +56,8 @@ export function EditProfile() {
         transformDefaultValues(data);
       });
   };
+
+  // Aktualisiert die AccountInfo des Nutzers
   const updateAccountInfo = () => {
     for (const [key, value] of Object.entries(inputValidation)) {
       if (value === false) {
@@ -85,6 +79,18 @@ export function EditProfile() {
       }
     });
   };
+
+  // Wandelt Sport und Language Auswahl des Nutzers in SelectArrays um, damit diese als Standardwerte angezeigt werden
+  // können
+  const transformDefaultValues = (data) => {
+    const defaultInfo = structuredClone(data);
+    let transformedValues = {
+      sports: createSelectArray(defaultInfo.sports),
+      languages: createSelectArray(defaultInfo.languages),
+    };
+    setDefaultValues(transformedValues);
+  };
+
   if (cookies.userToken) {
     if (!accountInfo) {
       return <LoadingAnimation />;

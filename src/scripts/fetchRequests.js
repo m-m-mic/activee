@@ -89,6 +89,7 @@ export const getSearchResults = (token, enteredQuery, setSearchResults) => {
   }
 };
 
+// Fetched alle Preselect Collections (Language, RequiredItems, Sports) und verwandelt sie in Select Arrays
 export const getPreselectOptions = (token, setLanguages, setRequiredItems, setSports) => {
   const requestOptions = {
     method: "GET",

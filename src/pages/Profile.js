@@ -18,6 +18,8 @@ export function Profile() {
     getAccountInfo();
     document.title = "Dein Profil - activee";
   }, []);
+
+  // Fetched AccountInfo
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
@@ -28,6 +30,7 @@ export function Profile() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
+
   if (cookies.userToken) {
     if (!accountInfo) {
       return <LoadingAnimation />;

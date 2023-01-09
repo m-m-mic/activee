@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function EditControls({ onConfirmClick }) {
   const navigate = useNavigate();
+
   return (
     <div className="profile-edit-options">
       <div className="profile-edit-link" onClick={() => navigate(-1)}>

@@ -13,6 +13,8 @@ export function Search() {
   const [searchQuery, setSearchQuery] = useState("");
   const [urlQuery, setUrlQuery] = useState();
   const [searchResults, setSearchResults] = useState();
+
+  // Zwei unterschiedliche useEffects, da sie verschiedene dependencies haben
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const urlQuery = queryParams.get("query");
@@ -23,12 +25,14 @@ export function Search() {
       setSearchResults(null);
     }
   }, [location.search]);
+
   useEffect(() => {
     document.addEventListener("keydown", confirmSearch);
     return () => {
       document.removeEventListener("keydown", confirmSearch);
     };
   }, [searchQuery]);
+
   const confirmSearch = (e) => {
     if (e.key === "Enter") navigate(`/search?query=${searchQuery}`);
   };

@@ -1,3 +1,4 @@
+// Entfernt oder fügt Gender in accountInfo.genders hinzu
 export function handleGenderChange(preference, data, setData) {
   let preferenceArray = data.genders;
   if (preferenceArray.includes(preference)) {
@@ -12,6 +13,7 @@ export function handleGenderChange(preference, data, setData) {
   setData({ ...data, genders: preferenceArray });
 }
 
+// Entfernt oder fügt Transport in accountInfo.transport hinzu
 export function handleTransportChange(preference, data, setData) {
   let preferenceArray = data.transport;
   if (preferenceArray.includes(preference)) {
@@ -25,6 +27,8 @@ export function handleTransportChange(preference, data, setData) {
   }
   setData({ ...data, transport: preferenceArray });
 }
+
+// Löscht Sportarten aus accountInfo.sports
 export function handleSportRemoval(preference, data, setData) {
   let preferenceArray = data.sports;
   for (let i = 0; i < preferenceArray.length; i++) {

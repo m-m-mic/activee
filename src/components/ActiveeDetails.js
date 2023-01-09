@@ -4,6 +4,7 @@ import "../assets/css/ActiveeDetails.css";
 
 export function ActiveeDetails({ summary, content }) {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <details className="activee-details">
       <summary className="activee-details-summary" onClick={() => setIsOpen(!isOpen)}>

@@ -26,14 +26,19 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
     distance: null,
   });
   const [inputValidation, setInputValidation] = useState(NewSubAccountValidator);
+
+  // Verhindert Scrolling des ganzen Viewports, solange Modal offen ist
   useEffect(() => {
     if (isCreateSubAccountVisible) {
       document.body.style.overflow = "hidden";
     }
-    return function cleanup() {
+    return function revertOverflow() {
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  // Erstellt nach Validierung der Eingaben ein neues Profil mit Verbindung zum Account, welches es erstellt hat.
+  // Nach Erstellung wird zu diesem Profil gewechselt
   const createNewProfile = () => {
     for (const [key, value] of Object.entries(inputValidation)) {
       if (value === false) {
@@ -52,6 +57,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
+
   return (
     <>
       <div className="create-sub-account-modal">

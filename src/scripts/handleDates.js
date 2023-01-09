@@ -1,3 +1,4 @@
+// Kürzt 00:00 Uhrzeitformat auf die Stundenanzahl, damit TimeTable damit umgehen kann
 export const shortenDates = (dates, setShortenedDate) => {
   let updatedDates = [];
   for (const date of dates) {
@@ -11,6 +12,7 @@ export const shortenDates = (dates, setShortenedDate) => {
   setShortenedDate(updatedDates);
 };
 
+// Wandelt eine Liste an Uhrzeiten um
 export const collectAndShortenDates = (activities, setShortenedDate) => {
   let initialDates = [];
   for (const activity of activities) {
@@ -19,6 +21,7 @@ export const collectAndShortenDates = (activities, setShortenedDate) => {
   shortenDates(initialDates, setShortenedDate);
 };
 
+// Gibt Geburtsdatum des angegebenen Alters zurück
 export const getBirthYear = (age) => {
   const currentYear = new Date().getFullYear();
   return Number(currentYear) - Number(age);

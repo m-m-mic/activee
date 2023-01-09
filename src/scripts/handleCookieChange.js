@@ -1,3 +1,4 @@
+// Ändert cookies, wenn Nutzer Profil wechselt
 export const handleCookieChange = (setCookie, token, userId, userType, userTier) => {
   setCookie("userToken", token, {
     path: "/",
@@ -12,6 +13,8 @@ export const handleCookieChange = (setCookie, token, userId, userType, userTier)
     path: "/",
   });
 };
+
+// Löscht cookies, wenn Nutzer sich abmeldet
 export const handleLogout = (removeCookie, navigate) => {
   removeCookie("userToken", {
     path: "/",

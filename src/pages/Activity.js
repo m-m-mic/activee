@@ -25,6 +25,7 @@ export function Activity() {
     getActivityInfo();
   }, [id]);
 
+  // Fetched ActivityInfo und ändert den Titel zum Namen der Aktivität
   const getActivityInfo = () => {
     const url = backendUrl + "/activity/" + id;
     const requestOptions = {
@@ -44,6 +45,9 @@ export function Activity() {
       }
     });
   };
+
+  // Entscheidet anhand von activityInfo, welches Verhältnis der Nutzer zur aufgerufenen Aktivität hat
+  // z.B. ist er als Teilnehmer angemeldet, oder ein Trainer der Aktivität etc.
   const setRelations = (data) => {
     if (cookies.userType === "organisation") {
       for (const trainer of data.trainers) {

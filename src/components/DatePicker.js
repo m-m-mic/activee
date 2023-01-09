@@ -10,6 +10,7 @@ import { SingleValueStyles } from "../scripts/reactSelect";
 
 export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
+
   return (
     <div className="date-picker">
       {data.dates.map((date, key) => (

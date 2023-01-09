@@ -19,6 +19,7 @@ export function Home() {
   const [accountInfo, setAccountInfo] = useState();
   const [sports, setSports] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+
   useEffect(() => {
     if (cookies.userToken) {
       document.title = "Übersicht - activee";

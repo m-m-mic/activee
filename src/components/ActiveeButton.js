@@ -2,6 +2,7 @@ import React from "react";
 import "../assets/css/ActiveeButton.css";
 
 export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabled }) {
+  // Struktur, wenn ein Icon mitgegeben wird
   if (iconSrc != null) {
     return (
       <button
@@ -12,6 +13,7 @@ export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabl
       </button>
     );
   } else {
+    // Struktur ohne Icon
     return (
       <button
         onClick={onClick}

@@ -16,18 +16,23 @@ export function Login() {
   const [passwordWarning, setPasswordWarning] = useState(false);
   const [wrongEmailDisclaimerVisible, setWrongEmailDisclaimerVisible] = useState(false);
   const [wrongPasswordDisclaimerVisible, setWrongPasswordDisclaimerVisible] = useState(false);
+
+  // Fügt Keydown EventListener bei ComponentMount hinzu und entfernt ihn wieder bei Unmount
   useEffect(() => {
     document.title = "Anmelden - activee";
-  });
-  useEffect(() => {
     document.addEventListener("keydown", confirmInputs);
     return () => {
       document.removeEventListener("keydown", confirmInputs);
     };
   });
+
+  // Login wird durchgeführt, wenn Nutzer 'Enter' drückt
   const confirmInputs = (e) => {
     if (e.key === "Enter") handleLogin(emailInput, passwordInput);
   };
+
+  // Versucht Nutzer einzuloggen. Bei Erfolg gibt das Backend einen Token, Nutzer-ID, Nutzer-Typ und Nutzer-Tier zurück,
+  // welche in die Cookies geschrieben werden
   const handleLogin = (email, password) => {
     const url = backendUrl + "/account/login";
     const requestOptions = {
@@ -53,6 +58,7 @@ export function Login() {
         .then(() => navigate("/"));
     });
   };
+
   if (!cookies.userToken) {
     return (
       <>

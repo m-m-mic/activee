@@ -1,3 +1,4 @@
+// Konvertiert Array aus {_id, name} in {value, label}
 export const createSelectArray = (array) => {
   let selectArray = array;
   for (const object of selectArray) {
@@ -10,6 +11,7 @@ export const createSelectArray = (array) => {
   return selectArray;
 };
 
+// Konvertiert Objekt mit {_id, name} in {value, label}
 export const createSelectObject = (object) => {
   object["value"] = object["_id"];
   object["label"] = object["name"];

@@ -17,6 +17,8 @@ export function EditActivity() {
     getActivityInfo();
     document.title = "Aktivität bearbeiten - activee";
   }, [id]);
+
+  // Fetched ActivityInfo
   const getActivityInfo = () => {
     const url = backendUrl + "/activity/" + id;
     const requestOptions = {

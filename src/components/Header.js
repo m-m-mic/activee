@@ -16,6 +16,7 @@ export function Header() {
   const [isCiVisible, setIsCiVisible] = useState(false);
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
   const [isProfileSelectionVisible, setIsProfileSelectionVisible] = useState(false);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     setIsProfileSelectionVisible(false);
@@ -23,21 +24,22 @@ export function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [location]);
+
+  // Funktion für den Header auf der LandingPage, welcher sich beim Herunterscrollen verändert
   const handleScroll = () => {
     setIsOptionsPopupVisible(false);
     setIsCiVisible((isVisible) => {
-      const minimumHeight = 200;
-      if (!isVisible && (document.body.scrollTop > minimumHeight || document.documentElement.scrollTop > minimumHeight)) {
+      const minHeight = 200; // Höhe, ab wann das activee Logo im Header auftaucht bzw. verschwindet
+      if (!isVisible && (document.body.scrollTop > minHeight || document.documentElement.scrollTop > minHeight)) {
         return true;
       }
-
-      if (isVisible && document.body.scrollTop < minimumHeight && document.documentElement.scrollTop < minimumHeight) {
+      if (isVisible && document.body.scrollTop < minHeight && document.documentElement.scrollTop < minHeight) {
         return false;
       }
-
       return isVisible;
     });
   };
+
   if (cookies.userType === "participant" || cookies.userType === "organisation") {
     return (
       <div className={`header ${scrollDirection === "down" ? "hide" : "show"}`}>

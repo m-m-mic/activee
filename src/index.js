@@ -23,6 +23,7 @@ import { Register } from "./pages/Register";
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
 export const backendUrl = "https://api-activee.onrender.com";
 
+// React-Router Struktur unseres Projekts, nicht existierende Pfade werden zu 404 weitergeleitet
 export default function App() {
   return (
     <HashRouter>
@@ -51,6 +52,7 @@ export default function App() {
   );
 }
 
+// App muss in CookiesProvider sein, damit Cookies auf allen Unterseiten verwendbar sind
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CookiesProvider>

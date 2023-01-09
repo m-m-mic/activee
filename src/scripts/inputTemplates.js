@@ -1,3 +1,5 @@
+// Templates für neue Account oder Activity Objekte, welche beim Erstellen initialisiert werden
+
 export const accountTemplate = {
   email: "",
   password: "",
@@ -44,6 +46,8 @@ export const activityTemplate = {
   trainers: [],
   participants: [],
 };
+
+// React-select preselects für ModifyActivity.js, welche nicht im Backend gespeichert werden
 
 export const agePreselect = [
   { value: "youngerThan", label: "oder jünger" },

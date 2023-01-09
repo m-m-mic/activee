@@ -18,10 +18,13 @@ export function Profiles() {
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [activeId, setActiveId] = useState();
   const [accountInfo, setAccountInfo] = useState();
+
   useEffect(() => {
     getAccountInfo();
     document.title = "Profilübersicht - activee";
   }, []);
+
+  // Fetched AccountInfo
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
@@ -32,6 +35,8 @@ export function Profiles() {
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
   };
+
+  // Wechselt zu einem anderen Unterprofil anhand der ID des Profils
   const changeProfile = (profileId) => {
     const url = backendUrl + "/account/change-profile";
     const requestOptions = {
@@ -44,6 +49,8 @@ export function Profiles() {
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
   };
+
+  // Löscht ein Profil anhand der ID des Profils
   const deleteProfile = () => {
     const url = backendUrl + "/account/delete-profile";
     const requestOptions = {
@@ -60,10 +67,13 @@ export function Profiles() {
       console.log("Something went wrong while deleting profile");
     });
   };
+
+  // Öffnet das Warning modal und wechselt die Active ID zu dem Nutzer, welcher gelöscht werden soll
   const handleWarningOpen = (itemId) => {
     setActiveId(itemId);
     setWarningModalVisible(true);
   };
+
   if (cookies.userToken) {
     if (!accountInfo) {
       return <LoadingAnimation />;

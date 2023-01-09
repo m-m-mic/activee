@@ -16,6 +16,8 @@ export default function CreateActivity() {
     getAccountInfo();
     document.title = "Neue Aktivität erstellen - activee";
   }, []);
+
+  // Fetched AccountInfo und erstellt Template für ModifyActivity.js
   const getAccountInfo = () => {
     const url = backendUrl + "/account/info";
     const requestOptions = {
@@ -26,6 +28,8 @@ export default function CreateActivity() {
       .then((response) => response.json())
       .then((data) => fillActivityTemplate(data));
   };
+
+  // Erstellt ein leeres Activity Objekt, welches die Daten des Nutzers in trainers beinhaltet
   const fillActivityTemplate = (data) => {
     let template = structuredClone(activityTemplate);
     template = { ...template, club: data.club };
@@ -46,7 +50,7 @@ export default function CreateActivity() {
     };
     setActivityInfo(template);
   };
-  console.log(activityInfo);
+
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {

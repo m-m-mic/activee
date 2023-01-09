@@ -5,6 +5,8 @@ import CheckmarkIconWhite from "../assets/svgs/checkmark_icon_white.svg";
 export function ActiveeCheckbox({ onChange, defaultValue, disabled, children }) {
   const [value, setValue] = useState(defaultValue);
   const [checked, setChecked] = useState(defaultValue);
+
+  // Dreht Value und Check der Box um, wenn Nutzer auf das oberste div der Komponente klicken
   const handleCheck = () => {
     if (!disabled) {
       setValue(!value);
@@ -12,6 +14,7 @@ export function ActiveeCheckbox({ onChange, defaultValue, disabled, children }) 
       onChange();
     }
   };
+
   return (
     <div className="activee-checkbox-container" onClick={handleCheck}>
       <input type="checkbox" onChange={onChange} />
