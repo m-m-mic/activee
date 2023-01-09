@@ -21,7 +21,7 @@ import { Search } from "./pages/Search";
 import { Register } from "./pages/Register";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
-export const backendUrl = "http://localhost:3033";
+export const backendUrl = "https://api-activee.onrender.com";
 
 export default function App() {
   return (
