@@ -90,7 +90,7 @@ export function Login() {
           </div>
         </div>
         <WarningDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
-          E-Mail konnte nicht gefunden werden
+          Email konnte nicht gefunden werden
         </WarningDisclaimer>
         <WarningDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
           Es wurde ein falsches Password eingegeben

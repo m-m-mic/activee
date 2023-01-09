@@ -65,6 +65,6 @@
 }
 .activee-button.disabled {
   cursor: not-allowed;
-  color: var(--light-mode-disabled-typeface);
+  color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-disabled);
 }

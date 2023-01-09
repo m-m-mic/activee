@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { ModifyActivity } from "../components/ModifyActivity";
-import { activityTemplate } from "../scripts/inputTemplates";
+import { activityTemplate, dateTemplate } from "../scripts/inputTemplates";
 import { newActivityInputValidator } from "../scripts/handleInputs";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
@@ -31,6 +31,7 @@ export default function CreateActivity() {
     template = { ...template, club: data.club };
     template = {
       ...template,
+      dates: [{ ...dateTemplate, id: crypto.randomUUID() }],
       trainers: [
         {
           _id: cookies.userId,
@@ -45,7 +46,7 @@ export default function CreateActivity() {
     };
     setActivityInfo(template);
   };
-
+  console.log(activityInfo);
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {

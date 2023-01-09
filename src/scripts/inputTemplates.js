@@ -1,8 +1,29 @@
+export const accountTemplate = {
+  email: "",
+  password: "",
+  type: "participant",
+  tier: "parent",
+  first_name: "",
+  last_name: "",
+  club: null,
+  phone_number: null,
+  birthday: null,
+  address: { street: "", house_number: "", zip_code: "", city: "" },
+  languages: [],
+  genders: [],
+  sports: [],
+  transport: [],
+  distance: 0,
+  times: [],
+  children_accounts: [],
+};
+
 export const dateTemplate = {
   day: { value: null, label: null },
   starting_time: "12:00",
   ending_time: "13:00",
 };
+
 export const activityTemplate = {
   name: "",
   club: null,
@@ -19,11 +40,11 @@ export const activityTemplate = {
   required_items: [],
   additional_info: "",
   membership_fee: "",
-  dates: [dateTemplate],
   address: { street: "", house_number: "", zip_code: "", city: "" },
   trainers: [],
   participants: [],
 };
+
 export const agePreselect = [
   { value: "youngerThan", label: "oder jünger" },
   { value: "olderThan", label: "oder älter" },

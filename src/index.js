@@ -18,14 +18,17 @@ import { Sports } from "./pages/Sports";
 import { Profiles } from "./pages/Profiles";
 import { EditActivity } from "./pages/EditActivity";
 import { Search } from "./pages/Search";
+import { Register } from "./pages/Register";
 
-export const backendUrl = "https://api-activee.onrender.com";
+// Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
+export const backendUrl = "http://localhost:3033";
 
 export default function App() {
   return (
     <HashRouter>
       <Routes>
         <Route path="/" element={<LoginLayout />}>
+          <Route exact path="register" element={<Register />} />
           <Route exact path="login" element={<Login />} />
           <Route exact path="404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="404" />} />

@@ -1,8 +1,41 @@
 import { backendUrl } from "../index";
 import { isVariableOnlySpaces } from "./isVariableOnlySpaces";
-import {createSelectArray} from "./createSelectArray";
+import { createSelectArray } from "./createSelectArray";
+import { handleCookieChange } from "./handleCookieChange";
 
 // Fetch Requests an activee-Backend
+
+// Registriert neuen Nutzer und loggt ihn ein
+// Zuerst wird die Validität der Nutzereingaben überprüft. Sind diese valide, wird ein neuer Account erstellt und
+// ein Token, sowie andere wichtige Informationen zurückgegeben
+export const registerAccount = (accountInfo, validation, setCookie, navigate, setWarningVisibility, setWarning) => {
+  for (const [key, value] of Object.entries(validation)) {
+    if (value === false) {
+      setWarning("Bitte überprüfe deine Angaben.");
+      setWarningVisibility(true);
+      return;
+    }
+  }
+  console.log(accountInfo);
+  const url = backendUrl + "/account/register";
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(accountInfo),
+  };
+  fetch(url, requestOptions).then((response) => {
+    if (response.status === 201) {
+      setWarningVisibility(false);
+      response
+        .json()
+        .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
+        .then(() => navigate("/"));
+    } else {
+      setWarning("Es ist ein Fehler beim Erstellen des Accounts aufgetreten.");
+      return setWarningVisibility(true);
+    }
+  });
+};
 
 // Liefert alle Informationen des Nutzeraccounts zurück
 export const getAccountInfo = (token, setAccountInfo) => {
@@ -56,7 +89,6 @@ export const getSearchResults = (token, enteredQuery, setSearchResults) => {
   }
 };
 
-
 export const getPreselectOptions = (token, setLanguages, setRequiredItems, setSports) => {
   const requestOptions = {
     method: "GET",
@@ -64,17 +96,17 @@ export const getPreselectOptions = (token, setLanguages, setRequiredItems, setSp
   };
   if (setLanguages) {
     fetch(`${backendUrl}/language`, requestOptions)
-        .then((response) => response.json())
-        .then((data) => setLanguages(createSelectArray(data)));
+      .then((response) => response.json())
+      .then((data) => setLanguages(createSelectArray(data)));
   }
   if (setRequiredItems) {
     fetch(`${backendUrl}/required-item`, requestOptions)
-        .then((response) => response.json())
-        .then((data) => setRequiredItems(createSelectArray(data)));
+      .then((response) => response.json())
+      .then((data) => setRequiredItems(createSelectArray(data)));
   }
   if (setSports) {
     fetch(`${backendUrl}/sport`, requestOptions)
-        .then((response) => response.json())
-        .then((data) => setSports(createSelectArray(data)));
+      .then((response) => response.json())
+      .then((data) => setSports(createSelectArray(data)));
   }
 };

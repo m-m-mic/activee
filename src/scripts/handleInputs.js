@@ -1,5 +1,15 @@
 // Validator Objekte, welche verwendet werden, um die Validität von Nutzereingaben auf Create und Edit Pages zu prüfen.
 // Sämtliche Keys in den Objekten müssen auf true stehen, damit der POST oder PATCH Request ausgeführt werden kann.
+export const NewAccountInputValidator = {
+  first_name: false,
+  last_name: false,
+  email: false,
+  password: false,
+  password_repeat: true,
+  birthday: true,
+  club: true,
+};
+
 export const ProfileInputValidator = {
   first_name: true,
   last_name: true,
@@ -58,16 +68,18 @@ export const ActivityInputValidator = {
 // PATTERNS für Eingabevalidierung
 const specialCharacterPattern = /^[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]*$/g;
 const datePattern = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+const emailPattern =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneNumberPattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
 const numberPattern = /^[0-9]*$/;
 const timePattern = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+const houseNumberPattern = /^[1-9]\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\d*))?$/;
 
 // Input Handling- und Validator-Funktionen
 
-// Für EditProfile.js
+// Für Register & EditProfile.js
 
-// FirstName & LastName müssen mindestens ein Zeichen und maximal 20 Zeichen enthalten und dürfen keine Sonderzeichen
-// enthalten.
+// Names müssen mindestens ein Zeichen enthalten und dürfen keine Sonderzeichen enthalten.
 export const setFirstNameInput = (input, data, setData, validation, setValidation) => {
   if (input.length >= 1 && input.length <= 20 && !input.match(specialCharacterPattern)) {
     setData({ ...data, first_name: input });
@@ -86,8 +98,17 @@ export const setLastNameInput = (input, data, setData, validation, setValidation
   }
 };
 
-// Birthday muss HTML Datumformat von dd-mm-yyyy entsprechen. Leeres Feld erlaubt.
-export const setBirthday = (input, data, setData, validation, setValidation) => {
+export const setClubNameInput = (input, data, setData, validation, setValidation) => {
+  if (input.length >= 1 && input.length <= 30 && !input.match(specialCharacterPattern)) {
+    setData({ ...data, club: input });
+    return setValidation({ ...validation, club: true });
+  } else {
+    return setValidation({ ...validation, club: false });
+  }
+};
+
+// Birthday muss HTML Datumsformat von dd-mm-yyyy entsprechen. Leeres Feld erlaubt.
+export const setBirthdayInput = (input, data, setData, validation, setValidation) => {
   if (input === "") {
     setData({ ...data, birthday: input });
     return setValidation({ ...validation, birthday: true });
@@ -100,8 +121,8 @@ export const setBirthday = (input, data, setData, validation, setValidation) => 
   }
 };
 
-// Phone Number muss Telefonnummerformat entsprechen. Leeres Feld erlaubt.
-export const setPhoneNumber = (input, data, setData, validation, setValidation) => {
+// PhoneNumber muss Telefonnummerformat entsprechen. Leeres Feld erlaubt.
+export const setPhoneNumberInput = (input, data, setData, validation, setValidation) => {
   if (input === "") {
     setData({ ...data, phone_number: input });
     return setValidation({ ...validation, phone_number: true });
@@ -113,6 +134,37 @@ export const setPhoneNumber = (input, data, setData, validation, setValidation) 
     return setValidation({ ...validation, phone_number: false });
   }
 };
+
+// E-Mail muss E-Mail Regex entsprechen und darf maximal 30 Zeichen lang sein
+export const setEmailInput = (input, data, setData, validation, setValidation) => {
+  if (input.match(emailPattern)) {
+    setData({ ...data, email: input });
+    return setValidation({ ...validation, email: true });
+  } else {
+    return setValidation({ ...validation, email: false });
+  }
+};
+
+// Password muss mindestens 8 Zeichen und darf maximal 20 Zeichen lang sein
+export const setPasswordInput = (input, data, setData, validation, setValidation) => {
+  if (input.length >= 8 && input.length <= 20) {
+    setData({ ...data, password: input });
+    return setValidation({ ...validation, password: true, password_repeat: false });
+  } else {
+    return setValidation({ ...validation, password: false });
+  }
+};
+
+// PasswordRepeat Validator wird auf true gesetzt, wenn Password und PasswordRepeat gleich sind
+export const setPasswordRepeatInput = (input, data, validation, setValidation) => {
+  if (input === data.password) {
+    return setValidation({ ...validation, password_repeat: true });
+  } else {
+    return setValidation({ ...validation, password_repeat: false });
+  }
+};
+
+// Einfügen der Language und Sports Objekte das Account-Objekt
 
 export const setProfileLanguagesInput = (input, data, setData) => {
   const convertedArray = [];
@@ -329,8 +381,10 @@ export const isDateValid = (date) => {
 
 // AddressPicker.js
 
-export const setAddressStreetInput = (input, data, setData, validation, setValidation) => {
-  if (input === "") {
+// Adressen sind für Aktivitäten ein Pflichtfeld, weshalb keine leeren Felder akzeptiert werden, falls isActivity = true ist
+
+export const setAddressStreetInput = (input, data, setData, validation, setValidation, isActivity) => {
+  if (!isActivity && input === "") {
     setData({ ...data, address: { ...data.address, street: input } });
     return setValidation({ ...validation, street: true });
   }
@@ -341,8 +395,8 @@ export const setAddressStreetInput = (input, data, setData, validation, setValid
     return setValidation({ ...validation, street: false });
   }
 };
-export const setAddressHouseNumberInput = (input, data, setData, validation, setValidation) => {
-  if (input.length <= 4 && input.match(numberPattern)) {
+export const setAddressHouseNumberInput = (input, data, setData, validation, setValidation, isActivity) => {
+  if ((!isActivity || input.length >= 1) && input.length <= 4 && input.match(houseNumberPattern)) {
     setData({ ...data, address: { ...data.address, house_number: input } });
     return setValidation({ ...validation, house_number: true });
   } else {
@@ -350,8 +404,8 @@ export const setAddressHouseNumberInput = (input, data, setData, validation, set
   }
 };
 
-export const setAddressZipCodeInput = (input, data, setData, validation, setValidation) => {
-  if (input.length <= 5 && input.match(numberPattern)) {
+export const setAddressZipCodeInput = (input, data, setData, validation, setValidation, isActivity) => {
+  if ((!isActivity || input.length >= 1) && input.length <= 5 && input.match(numberPattern)) {
     setData({ ...data, address: { ...data.address, zip_code: input } });
     return setValidation({ ...validation, zip_code: true });
   } else {
@@ -359,8 +413,8 @@ export const setAddressZipCodeInput = (input, data, setData, validation, setVali
   }
 };
 
-export const setAddressCityInput = (input, data, setData, validation, setValidation) => {
-  if (input === "") {
+export const setAddressCityInput = (input, data, setData, validation, setValidation, isActivity) => {
+  if (!isActivity && input === "") {
     setData({ ...data, address: { ...data.address, city: input } });
     return setValidation({ ...validation, city: true });
   }

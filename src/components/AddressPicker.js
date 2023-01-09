@@ -6,7 +6,7 @@ import {
   setAddressZipCodeInput,
 } from "../scripts/handleInputs";
 
-export function AddressPicker({ data, setData, validation, setValidation }) {
+export function AddressPicker({ data, setData, validation, setValidation, isActivity = false }) {
   return (
     <div className="profile-address-picker">
       <div>
@@ -14,13 +14,13 @@ export function AddressPicker({ data, setData, validation, setValidation }) {
           className={validation.street ? "profile-input-street" : "profile-input-street warning"}
           placeholder="Straße"
           defaultValue={data.address.street}
-          onChange={(e) => setAddressStreetInput(e.target.value, data, setData, validation, setValidation)}
+          onChange={(e) => setAddressStreetInput(e.target.value, data, setData, validation, setValidation, isActivity)}
         />
         <input
           className={validation.house_number ? "profile-input-house-number" : "profile-input-house-number warning"}
           placeholder="Nr."
           defaultValue={data.address.house_number}
-          onChange={(e) => setAddressHouseNumberInput(e.target.value, data, setData, validation, setValidation)}
+          onChange={(e) => setAddressHouseNumberInput(e.target.value, data, setData, validation, setValidation, isActivity)}
         />
       </div>
       <div>
@@ -28,13 +28,13 @@ export function AddressPicker({ data, setData, validation, setValidation }) {
           className={validation.zip_code ? "profile-input-zip-code" : "profile-input-zip-code warning"}
           placeholder="PLZ"
           defaultValue={data.address.zip_code}
-          onChange={(e) => setAddressZipCodeInput(e.target.value, data, setData, validation, setValidation)}
+          onChange={(e) => setAddressZipCodeInput(e.target.value, data, setData, validation, setValidation, isActivity)}
         />
         <input
           className={validation.city ? "profile-input-city" : "profile-input-city warning"}
           placeholder="Stadt"
           defaultValue={data.address.city}
-          onChange={(e) => setAddressCityInput(e.target.value, data, setData, validation, setValidation)}
+          onChange={(e) => setAddressCityInput(e.target.value, data, setData, validation, setValidation, isActivity)}
         />
       </div>
     </div>

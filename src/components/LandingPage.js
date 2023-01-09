@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
 import ActiveeLogo50 from "../assets/pngs/50px_activee_logo.png";
 import "../assets/css/LandingPage.css";
 
 export function LandingPage() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="activee-banner">
@@ -18,10 +19,12 @@ export function LandingPage() {
       </div>
       <h1>Sei dabei!</h1>
       <div className="action-buttons">
-        <ActiveeButton buttonType="primary">Registrieren</ActiveeButton>
-        <NavLink to="/login">
-          <ActiveeButton buttonType="outline">Anmelden</ActiveeButton>
-        </NavLink>
+        <ActiveeButton buttonType="primary" onClick={() => navigate("/register")}>
+          Registrieren
+        </ActiveeButton>
+        <ActiveeButton buttonType="outline" onClick={() => navigate("/login")}>
+          Anmelden
+        </ActiveeButton>
       </div>
     </>
   );

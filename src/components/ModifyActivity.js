@@ -87,7 +87,6 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     }
     setDefaultValues(transformedValues);
   };
-  console.log(activityInfo);
   const modifyActivity = () => {
     let validators = validation;
     for (const date of activityInfo.dates) {
@@ -176,7 +175,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           <span className="modify-activity-general-info-name">Sportart</span>
           <span className="modify-activity-general-info-data">
             <Select
-              className="modify-activity-select sport"
+              className="react-select modify-activity-select sport"
               placeholder="Sportart..."
               defaultValue={defaultValues.sport}
               styles={SingleValueStyles}
@@ -191,7 +190,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           <span className="modify-activity-general-info-data">
             <Select
               placeholder="Geschlecht..."
-              className="modify-activity-select gender"
+              className="react-select modify-activity-select gender"
               defaultValue={defaultValues.gender}
               options={genders}
               styles={SingleValueStyles}
@@ -211,7 +210,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
               disabled={editMode}
             />
             <Select
-              className="modify-activity-select age-direction"
+              className="react-select modify-activity-select age-direction"
               defaultValue={activityInfo.isOlderThan ? ageDirection[1] : ageDirection[0]}
               options={ageDirection}
               styles={SingleValueStyles}
@@ -224,7 +223,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           <span className="modify-activity-general-info-name">Sprachen</span>
           <span className="modify-activity-general-info-data">
             <Select
-              className="modify-activity-select"
+              className="react-select modify-activity-select"
               placeholder="Sprachen..."
               defaultValue={defaultValues.languages}
               components={{ MultiValue: MultiValueLanguage }}
@@ -280,7 +279,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         onChange={(e) => setRequirementsInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
       <Select
-        className="modify-activity-select items"
+        className="react-select modify-activity-select items"
         placeholder="Vorausgesetzte Mitbringsel..."
         components={{ MultiValue: MultiValueRequiredItems }}
         isMulti
@@ -306,7 +305,13 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
       <h2>Termine</h2>
       <DatePicker data={activityInfo} setData={setActivityInfo} validation={validation} setValidation={setValidation} />
       <h2>Adresse</h2>
-      <AddressPicker data={activityInfo} setData={setActivityInfo} validation={validation} setValidation={setValidation} />
+      <AddressPicker
+        data={activityInfo}
+        setData={setActivityInfo}
+        validation={validation}
+        setValidation={setValidation}
+        isActivity={true}
+      />
       <h2>Übungsleiter:innen</h2>
       {activityInfo.trainers.map((trainer, key) => (
         <div key={key}>

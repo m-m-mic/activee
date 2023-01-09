@@ -9,11 +9,11 @@ import { TransportSelection } from "../components/TransportSelection";
 import { SportSelection } from "../components/SportSelection";
 import {
   ProfileInputValidator,
-  setBirthday,
+  setBirthdayInput,
   setDistanceInput,
   setFirstNameInput,
   setLastNameInput,
-  setPhoneNumber,
+  setPhoneNumberInput,
   setProfileLanguagesInput,
   setProfileSportsInput,
 } from "../scripts/handleInputs";
@@ -41,8 +41,6 @@ export function EditProfile() {
     getAccountInfo();
     document.title = "Dein Profil - activee";
   }, []);
-
-  console.log(defaultValues);
 
   const transformDefaultValues = (data) => {
     const defaultInfo = structuredClone(data);
@@ -139,7 +137,9 @@ export function EditProfile() {
                 className={inputValidation.birthday ? "profile-input birthday" : "profile-input birthday warning"}
                 type="date"
                 defaultValue={accountInfo.birthday}
-                onChange={(e) => setBirthday(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)}
+                onChange={(e) =>
+                  setBirthdayInput(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                }
               />
             </span>
           </div>
@@ -153,7 +153,7 @@ export function EditProfile() {
                   placeholder="Telefonnummer"
                   defaultValue={accountInfo.phone_number}
                   onChange={(e) =>
-                    setPhoneNumber(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
+                    setPhoneNumberInput(e.target.value, accountInfo, setAccountInfo, inputValidation, setInputValidation)
                   }
                 />
               </span>
@@ -174,7 +174,7 @@ export function EditProfile() {
             <span className="profile-general-info-name">Sprachen</span>
             <span className="profile-general-info-data">
               <Select
-                className="profile-select languages"
+                className="react-select profile-select languages"
                 placeholder="Sprachen..."
                 defaultValue={defaultValues.languages}
                 components={{ MultiValue: MultiValueLanguage }}
@@ -193,7 +193,7 @@ export function EditProfile() {
             <GenderSelection data={accountInfo} setData={setAccountInfo} isEditMode />
             <h3>Sportarten</h3>
             <Select
-              className="profile-select sports"
+              className="react-select profile-select sports"
               placeholder="Sportarten..."
               defaultValue={defaultValues.sports}
               isMulti

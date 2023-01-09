@@ -15,7 +15,7 @@ export function DatePicker({ data, setData }) {
       {data.dates.map((date, key) => (
         <div key={date.id} className="date-picker-item">
           <Select
-            className="date-picker-day"
+            className="react-select date-picker-day"
             placeholder="Tag..."
             styles={SingleValueStyles}
             defaultValue={date.day.value ? date.day : null}
