@@ -8,9 +8,10 @@ import { backendUrl } from "../index";
 
 export function EditActivity() {
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
+  const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
   const [activityInfo, setActivityInfo] = useState();
   const [inputValidation, setInputValidation] = useState(ActivityInputValidator);
+  const [authorisation, setAuthorisation] = useState(null);
   let { id } = useParams();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export function EditActivity() {
       if (response.status === 200) {
         response.json().then((data) => {
           setActivityInfo(data);
+          checkForAuthorisation(data.trainers);
         });
       } else {
         return navigate("/404");
@@ -36,20 +38,34 @@ export function EditActivity() {
     });
   };
 
+  // Stellt fest, ob Nutzer in der Trainerliste der Aktivität steht. Wenn ja, wird die Seite gerendert.
+  const checkForAuthorisation = (trainers) => {
+    for (const trainer of trainers) {
+      if (trainer._id === cookies.userId) {
+        return setAuthorisation(true);
+      }
+    }
+    return setAuthorisation(false);
+  };
+
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {
         return <LoadingAnimation />;
       }
-      return (
-        <ModifyActivity
-          editMode={true}
-          activityInfo={activityInfo}
-          setActivityInfo={setActivityInfo}
-          validation={inputValidation}
-          setValidation={setInputValidation}
-        />
-      );
+      if (authorisation === false) {
+        return <Navigate to="/404" />;
+      } else {
+        return (
+          <ModifyActivity
+            editMode={true}
+            activityInfo={activityInfo}
+            setActivityInfo={setActivityInfo}
+            validation={inputValidation}
+            setValidation={setInputValidation}
+          />
+        );
+      }
     } else {
       return <Navigate to="/404" />;
     }
