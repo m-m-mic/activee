@@ -18,7 +18,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
     last_name: lastName,
     type: cookies.userType,
     tier: "child",
-    related_accounts: [{ _id: cookies.userId, first_name: firstName, last_name: lastName }],
+    related_accounts: [cookies.userId],
     club: null,
     phone_number: null,
     birthday: null,

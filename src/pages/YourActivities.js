@@ -24,7 +24,7 @@ export function YourActivities() {
 
   // Fetched alle Aktivitäten eines Nutzers, mitsamt Terminen
   const getUserActivities = () => {
-    const url = backendUrl + "/activity";
+    const url = backendUrl + "/account/info";
     const requestOptions = {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
@@ -32,8 +32,8 @@ export function YourActivities() {
     fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         response.json().then((data) => {
-          setUserActivities(data);
-          collectAndShortenDates(data, setShortenedDates);
+          setUserActivities(data.activities);
+          collectAndShortenDates(data.activities, setShortenedDates);
         });
       }
     });
