@@ -15,8 +15,10 @@ export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
   useEffect(() => {
-    getAccountInfo();
-    document.title = "Dein Profil - activee";
+    if (cookies.userToken) {
+      getAccountInfo();
+      document.title = "Dein Profil - activee";
+    }
   }, []);
 
   // Fetched AccountInfo

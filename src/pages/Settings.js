@@ -9,7 +9,9 @@ export function Settings() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["userToken", "userId", "userType", "userTier"]);
   useEffect(() => {
-    document.title = "Einstellungen - activee";
+    if (cookies.userToken) {
+      document.title = "Einstellungen - activee";
+    }
   });
   if (cookies.userToken) {
     return (

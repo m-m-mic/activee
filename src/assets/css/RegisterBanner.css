@@ -1,0 +1,26 @@
+.register-banner {
+  bottom: 0;
+  display: flex;
+  flex-flow: column;
+  position: sticky;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-top: 3px solid var(--light-mode-primary-1);
+  background: var(--light-mode-background);
+  padding: 15px 12px 20px;
+  margin: 0 -12px;
+}
+.register-text {
+  text-align: center;
+}
+.register-cta {
+  margin-bottom: 8px;
+}
+.register-text span {
+  font-family: var(--logo-typeface);
+}
+.register-buttons {
+  display: flex;
+  gap: 15px;
+}

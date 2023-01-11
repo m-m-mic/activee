@@ -1,11 +1,19 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ActiveeButton } from "./ActiveeButton";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { ActiveeButton } from "../components/ActiveeButton";
 import ActiveeLogo50 from "../assets/pngs/50px_activee_logo.png";
 import "../assets/css/LandingPage.css";
+import { useCookies } from "react-cookie";
 
 export function LandingPage() {
+  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "Sport ist wie Klebstoff - activee";
+  }, []);
+  if (cookies.userToken) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <div className="activee-banner">

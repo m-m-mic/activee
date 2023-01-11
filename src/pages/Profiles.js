@@ -20,8 +20,10 @@ export function Profiles() {
   const [accountInfo, setAccountInfo] = useState();
 
   useEffect(() => {
-    getAccountInfo();
-    document.title = "Profilübersicht - activee";
+    if (cookies.userToken && cookies.userTier === "parent") {
+      getAccountInfo();
+      document.title = "Profilübersicht - activee";
+    }
   }, []);
 
   // Fetched AccountInfo

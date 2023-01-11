@@ -52,6 +52,7 @@
 
 /* Styling des activee Brandings auf der Landing Page */
 .activee-ci {
+  text-decoration: none;
   display: flex;
   flex-flow: row;
   align-items: center;

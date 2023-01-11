@@ -38,9 +38,11 @@ export function EditProfile() {
   const [defaultValues, setDefaultValues] = useState({});
 
   useEffect(() => {
-    getPreselectOptions(cookies.userToken, setLanguages, null, setSports);
-    getAccountInfo();
-    document.title = "Dein Profil - activee";
+    if (cookies.userToken) {
+      getPreselectOptions(cookies.userToken, setLanguages, null, setSports);
+      getAccountInfo();
+      document.title = "Dein Profil - activee";
+    }
   }, []);
 
   // Fetched AccountInfo

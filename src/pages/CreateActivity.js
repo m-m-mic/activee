@@ -14,8 +14,10 @@ export default function CreateActivity() {
   const [inputValidation, setInputValidation] = useState(newActivityInputValidator);
 
   useEffect(() => {
-    getAccountInfo();
-    document.title = "Neue Aktivität erstellen - activee";
+    if (cookies.userToken) {
+      getAccountInfo();
+      document.title = "Neue Aktivität erstellen - activee";
+    }
   }, []);
 
   // Fetched AccountInfo und erstellt Template für ModifyActivity.js

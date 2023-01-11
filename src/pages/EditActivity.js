@@ -15,8 +15,10 @@ export function EditActivity() {
   let { id } = useParams();
 
   useEffect(() => {
-    getActivityInfo();
-    document.title = "Aktivität bearbeiten - activee";
+    if (cookies.userToken) {
+      getActivityInfo();
+      document.title = "Aktivität bearbeiten - activee";
+    }
   }, [id]);
 
   // Fetched ActivityInfo

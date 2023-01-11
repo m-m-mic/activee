@@ -19,6 +19,8 @@ import { Profiles } from "./pages/Profiles";
 import { EditActivity } from "./pages/EditActivity";
 import { Search } from "./pages/Search";
 import { Register } from "./pages/Register";
+import { LandingPage } from "./pages/LandingPage";
+import WelcomeLayout from "./layouts/WelcomeLayout";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
 export const backendUrl = "https://api-activee.onrender.com";
@@ -28,14 +30,15 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<LoginLayout />}>
+        <Route path="/" element={<WelcomeLayout />}>
+          <Route exact path="welcome" element={<LandingPage />} />
+        </Route>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
           <Route exact path="register" element={<Register />} />
           <Route exact path="login" element={<Login />} />
           <Route exact path="404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate replace to="404" />} />
-        </Route>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
           <Route exact path="your-activities" element={<YourActivities />} />
           <Route exact path="activity/:id" element={<Activity />} />
           <Route exact path="activity/:id/edit" element={<EditActivity />} />

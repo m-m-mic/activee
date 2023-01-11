@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import { ProfileSelection } from "./ProfileSelection";
 import { backendUrl } from "../index";
 
-export function Header() {
+export function Header({ welcome = false }) {
   let location = useLocation();
   const [cookies, setCookies] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
@@ -39,7 +39,24 @@ export function Header() {
       return isVisible;
     });
   };
-
+  if (welcome) {
+    return (
+      <div className={isCiVisible ? "header" : "header no-background"}>
+        <div className={isCiVisible ? "activee-ci" : "activee-ci hide"}>
+          <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
+          <span className="activee-name">activee</span>
+        </div>
+        <div id="header-options">
+          <NavLink id="search-link" to={`/search`}>
+            <img id="search-icon" className="header-icon" src={SearchIconBlack} alt="SearchResults icon" />
+          </NavLink>
+          <span id="languages-popup-button" className="header-button">
+            <img id="language-icon" className="header-icon" src={`${backendUrl}/flags/german_flag.jpg`} alt="Language icon" />
+          </span>
+        </div>
+      </div>
+    );
+  }
   if (cookies.userType === "participant" || cookies.userType === "organisation") {
     return (
       <div className={`header ${scrollDirection === "down" ? "hide" : "show"}`}>
@@ -102,11 +119,11 @@ export function Header() {
     );
   } else {
     return (
-      <div className={isCiVisible ? "header" : "header no-background"}>
-        <div className={isCiVisible ? "activee-ci" : "activee-ci hide"}>
+      <div className="header">
+        <NavLink className="activee-ci" to="/">
           <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
           <span className="activee-name">activee</span>
-        </div>
+        </NavLink>
         <span id="languages-popup-button" className="header-button">
           <img id="language-icon" className="header-icon" src={`${backendUrl}/flags/german_flag.jpg`} alt="Language icon" />
         </span>

@@ -79,10 +79,15 @@ export const getSearchResults = (token, enteredQuery, setSearchResults) => {
     setSearchResults(null);
   } else {
     const url = backendUrl + "/search/" + enteredQuery;
-    const requestOptions = {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    let requestOptions;
+    if (token) {
+      requestOptions = {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      };
+    } else {
+      requestOptions = { method: "GET" };
+    }
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setSearchResults(data));

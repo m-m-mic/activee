@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/Home.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
-import { LandingPage } from "../components/LandingPage";
+import { LandingPage } from "./LandingPage";
 import { useCookies } from "react-cookie";
 import { Subtitle } from "../components/Subtitle";
 import { UnderConstruction } from "../components/UnderConstruction";
@@ -26,8 +26,6 @@ export function Home() {
       getAccountInfo(cookies.userToken, setAccountInfo);
       getSports(cookies.userToken, setSports);
       if (cookies.userType === "participant") getRecommendations(cookies.userToken, setRecommendations);
-    } else {
-      document.title = "activee";
     }
   }, [cookies.userToken]);
 
@@ -71,6 +69,6 @@ export function Home() {
       </>
     );
   } else {
-    return <LandingPage />;
+    return <Navigate to="/welcome" />;
   }
 }

@@ -5,11 +5,12 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getSearchResults } from "../scripts/fetchRequests";
 import { Subtitle } from "../components/Subtitle";
+import { LoadingAnimation } from "../components/LoadingAnimation";
 
 export function Search() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [cookies, setCookie] = useCookies(["userToken"]);
+  const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [urlQuery, setUrlQuery] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -22,6 +23,9 @@ export function Search() {
     if (urlQuery) {
       getSearchResults(cookies.userToken, urlQuery, setSearchResults);
     } else {
+      if (cookies.userType !== "organisation") {
+      } else {
+      }
       setSearchResults(null);
     }
   }, [location.search]);
@@ -36,24 +40,18 @@ export function Search() {
   const confirmSearch = (e) => {
     if (e.key === "Enter") navigate(`/search?query=${searchQuery}`);
   };
-
-  if (cookies.userToken) {
-    return (
-      <>
-        <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-        {searchResults ? (
-          <>
-            <h1>Suchergebnisse</h1>
-            <Subtitle>für "{urlQuery}"</Subtitle>
-            {searchResults.filtered.length > 0 && <SearchResults searchResults={searchResults.filtered} />}
-            {searchResults.other.length > 0 && <SearchResults searchResults={searchResults.other} />}
-          </>
-        ) : (
-          <h1>Empfehlungen</h1>
-        )}
-      </>
-    );
-  } else {
-    return <Navigate to="/login" />;
-  }
+  return (
+    <>
+      <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
+      <h1>
+        {urlQuery ? "Suchergebnisse" : cookies.userToken !== "organisation" ? "Empfehlungen" : "Aktivität von deinem Verein"}
+      </h1>
+      {urlQuery && <Subtitle>für "{urlQuery}"</Subtitle>}
+      {searchResults ? (
+        <>{searchResults.length > 0 ? <SearchResults searchResults={searchResults} /> : <div>Keine Ergebnisse gefunden</div>}</>
+      ) : (
+        <LoadingAnimation />
+      )}
+    </>
+  );
 }
