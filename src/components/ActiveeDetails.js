@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
 import "../assets/css/ActiveeDetails.css";
 
-export function ActiveeDetails({ summary, content }) {
-  const [isOpen, setIsOpen] = useState(false);
+export function ActiveeDetails({ summary, content, onClick, open = false }) {
+  const [isOpen, setIsOpen] = useState(open);
 
   return (
-    <details className="activee-details">
+    <details onClick={onClick} className="activee-details">
       <summary className="activee-details-summary" onClick={() => setIsOpen(!isOpen)}>
         {summary}
         <img

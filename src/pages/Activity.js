@@ -12,6 +12,7 @@ import { getBirthYear, shortenDates } from "../scripts/handleDates";
 import EditIconBlack from "../assets/svgs/edit_icon_black.svg";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import { RequiredItems } from "../components/RequiredItems";
 
 export function Activity() {
   const navigate = useNavigate();
@@ -113,25 +114,13 @@ export function Activity() {
           ))}
           {activityInfo.league && <InformationTag>{activityInfo.league}</InformationTag>}
         </div>
-        {(activityInfo.requirements || activityInfo.required_items) && (
+        {activityInfo.requirements && (
           <>
             <h2>Voraussetzungen</h2>
-            {activityInfo.requirements && <div>{activityInfo.requirements}</div>}
-            {activityInfo.required_items.length > 0 && (
-              <div className="activity-required-items">
-                {activityInfo.required_items.map((item, key) => (
-                  <span className="activity-required-item" key={key}>
-                    <img
-                      className="activity-required-item-image"
-                      src={`${backendUrl}/icons/required-items/${item._id}_icon_white.svg`}
-                      alt="Item icon"
-                    />
-                  </span>
-                ))}
-              </div>
-            )}
+            <div>{activityInfo.requirements}</div>
           </>
         )}
+        {activityInfo.required_items.length > 0 && <RequiredItems items={activityInfo.required_items} />}
         {activityInfo.additional_info && (
           <>
             <h2>Infos vom Verein</h2>

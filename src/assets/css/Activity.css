@@ -27,23 +27,7 @@
   flex-flow: row wrap;
   gap: 7px 5px;
 }
-.activity-required-items {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-.activity-required-item {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  padding: 10px 15px;
-  background: var(--light-mode-primary-1);
-}
-.activity-required-item-image {
-  width: 24px;
-  height: 24px;
-}
+
 .activity-dates {
   display: flex;
   flex-flow: row wrap;

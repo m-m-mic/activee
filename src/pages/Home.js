@@ -66,12 +66,13 @@ export function Home() {
             </HorizontalButton>
           ))}
         </div>
-        {cookies.userType === "participant" ? (
+        {(cookies.userType === "participant" && recommendations.length) > 0 && (
           <>
             <h2>Empfehlungen für Dich</h2>
             <ActiveeScrollingCards items={recommendations} type="activity" />
           </>
-        ) : (
+        )}
+        {cookies.userType === "organisation" && (
           <>
             <h2>Andere Aktivitäten von deinem Verein</h2>
             <UnderConstruction />

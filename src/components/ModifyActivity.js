@@ -278,6 +278,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         defaultValue={activityInfo.requirements}
         onChange={(e) => setRequirementsInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
+      <h2>Mitbringsel</h2>
       <Select
         className="react-select modify-activity-select items"
         placeholder="Vorausgesetzte Mitbringsel..."
