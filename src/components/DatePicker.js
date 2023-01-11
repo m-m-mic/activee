@@ -7,6 +7,7 @@ import { ActiveeButton } from "./ActiveeButton";
 import DeleteIconWhite from "../assets/svgs/delete_icon_white.svg";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { SingleValueStyles } from "../scripts/reactSelect";
+import { v4 } from "uuid";
 
 export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
@@ -15,38 +16,43 @@ export function DatePicker({ data, setData }) {
     <div className="date-picker">
       {data.dates.map((date, key) => (
         <div key={date.id} className="date-picker-item">
-          <Select
-            className="react-select date-picker-day"
-            placeholder="Tag..."
-            styles={SingleValueStyles}
-            defaultValue={date.day.value ? date.day : null}
-            options={weekdays}
-            onChange={(option) => setDateDayInput(key, option, data, setData)}
-          />
-          <div className="date-picker-times">
-            <input
-              className="date-picker-starting-time"
-              type="time"
-              defaultValue={date.starting_time}
-              onChange={(e) => setDateStartingTime(key, e.target.value, data, setData)}
+          <h3 className="date-picker-number">{key + 1}.</h3>
+          <div className="date-picker-inputs">
+            <Select
+              className="react-select date-picker-day"
+              placeholder="Tag..."
+              styles={SingleValueStyles}
+              defaultValue={date.day.value ? date.day : null}
+              options={weekdays}
+              onChange={(option) => setDateDayInput(key, option, data, setData)}
             />
-            -
-            <input
-              className="date-picker-ending-time"
-              type="time"
-              defaultValue={date.ending_time}
-              onChange={(e) => setDateEndingTime(key, e.target.value, data, setData)}
-            />
+            <div className="date-picker-times">
+              <input
+                className="date-picker-time"
+                type="time"
+                defaultValue={date.starting_time}
+                onChange={(e) => setDateStartingTime(key, e.target.value, data, setData)}
+              />
+              -
+              <input
+                className="date-picker-time"
+                type="time"
+                defaultValue={date.ending_time}
+                onChange={(e) => setDateEndingTime(key, e.target.value, data, setData)}
+              />
+            </div>
           </div>
           {data.dates.length > 1 && (
-            <ActiveeButton
-              buttonType="warning"
-              iconSrc={DeleteIconWhite}
-              onClick={() => {
-                const dates = data.dates;
-                dates.splice(key, 1);
-                setData({ ...data, dates: dates });
-              }}></ActiveeButton>
+            <div className="date-picker-delete">
+              <ActiveeButton
+                buttonType="warning"
+                iconSrc={DeleteIconWhite}
+                onClick={() => {
+                  const dates = data.dates;
+                  dates.splice(key, 1);
+                  setData({ ...data, dates: dates });
+                }}></ActiveeButton>
+            </div>
           )}
         </div>
       ))}
@@ -55,7 +61,7 @@ export function DatePicker({ data, setData }) {
           buttonType="blank"
           iconSrc={AddIconBlack}
           onClick={() => {
-            setData({ ...data, dates: [...data.dates, { ...dateTemplate, id: crypto.randomUUID() }] });
+            setData({ ...data, dates: [...data.dates, { ...dateTemplate, id: v4() }] });
           }}>
           Termin hinzufügen
         </ActiveeButton>

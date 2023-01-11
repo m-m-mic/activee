@@ -1,0 +1,44 @@
+/* Styling der Warnmeldung für ungültige Nutzerangaben */
+.warning-disclaimer {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 12px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--light-mode-warning-active);
+  transition: 200ms;
+  visibility: visible;
+}
+.warning-disclaimer.hidden {
+  display: none;
+}
+.warning-icon {
+  width: 32px;
+}
+.warning-text {
+  font-family: Inter SemiBold, sans-serif;
+}
+
+/* Styling für die Achtung-Meldung */
+.caution-disclaimer {
+  font-family: var(--annotation-typeface);
+  font-size: var(--annotation-size);
+  border: 2px solid var(--light-mode-caution);
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.caution-disclaimer img {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+.caution-disclaimer span {
+  flex: 1;
+}

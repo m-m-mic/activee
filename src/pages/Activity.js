@@ -67,16 +67,6 @@ export function Activity() {
     }
     return (
       <>
-        {cookies.userType === "participant" && !isParticipant && (
-          <div className="activity-remember-button">
-            <ActiveeButton buttonType="secondary">Aktivität merken</ActiveeButton>
-          </div>
-        )}
-        {cookies.userType === "participant" && isParticipant && (
-          <div className="activity-remember-button">
-            <ActiveeButton buttonType="secondary">Aktivität entfernen (temp)</ActiveeButton>
-          </div>
-        )}
         <img
           className="activity-image"
           src={`${backendUrl}/images/activities/${activityInfo._id}.jpg`}
@@ -127,8 +117,6 @@ export function Activity() {
             <div>{activityInfo.additional_info}</div>
           </>
         )}
-        <h2>Mitgliedsbeitrag</h2>
-        <div>{activityInfo.membership_fee ? activityInfo.membership_fee : "Keine Angabe"}</div>
         <h2>Termine</h2>
         <div className="activity-dates">
           <div className="activity-dates-list">
@@ -143,36 +131,49 @@ export function Activity() {
         <h2>Adresse</h2>
         {activityInfo.address.street} {activityInfo.address.house_number} <br />
         {activityInfo.address.zip_code} {activityInfo.address.city}
+        {activityInfo.membership_fee && (
+          <>
+            <h2>Mitgliedsbeitrag</h2>
+            <div>{activityInfo.membership_fee ? activityInfo.membership_fee : "Keine Angabe"}</div>
+          </>
+        )}
         <h2>Übungsleiter:innen</h2>
         {activityInfo.trainers.map((coach, key) => (
           <div key={key}>
-            <div className="activity-coach">
-              <div className="activity-coach-info">
-                <div className="activity-coach-name">
-                  {coach.first_name} {coach.last_name}
+            <div>
+              <div className="activity-coach">
+                <img
+                  className="activity-coach-picture"
+                  src={`${backendUrl}/images/profiles/${coach._id}.jpg`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                  }}
+                  alt="coach picture"
+                />
+                <div className="activity-coach-info">
+                  <div className="activity-coach-name">
+                    {coach.first_name} {coach.last_name}
+                  </div>
+                  <div className="activity-coach-email">{coach.show_email && coach.email}</div>
+                  <div className="activity-coach-phone">{coach.show_phone_number && coach.phone_number}</div>
                 </div>
-                <div className="activity-coach-email">{coach.show_email && coach.email}</div>
-                <div className="activity-coach-phone">{coach.show_phone_number && coach.phone_number}</div>
               </div>
-              <img
-                className="activity-coach-picture"
-                src={`${backendUrl}/images/profiles/${coach._id}.jpg`}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                }}
-                alt="coach picture"
-              />
+              {!isOwner && coach.show_email && (
+                <div className="activity-coach-message-button">
+                  <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
+                    Per E-Mail kontaktieren
+                  </ActiveeButton>
+                </div>
+              )}
             </div>
-            {!isOwner && (
-              <div className="activity-coach-message-button">
-                <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
-                  Per E-Mail kontaktieren
-                </ActiveeButton>
-              </div>
-            )}
           </div>
         ))}
+        {cookies.userType === "participant" && !isParticipant && (
+          <div className="activity-remember-button">
+            <ActiveeButton buttonType="secondary">Aktivität merken</ActiveeButton>
+          </div>
+        )}
       </>
     );
   } else {

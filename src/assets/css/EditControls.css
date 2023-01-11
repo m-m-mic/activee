@@ -1,0 +1,29 @@
+/* Sticky Buttons, mit welchen man die Eingaben bestätigen und den Bearbeitungsmodus abbrechen kann */
+.edit-controls-container {
+  position: sticky;
+  bottom: 15px;
+  z-index: 42;
+  display: flex;
+  justify-content: center;
+}
+.edit-controls {
+  background: var(--light-mode-primary-1);
+  display: inline-flex;
+  flex-flow: row;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: var(--light-mode-elevation-4);
+}
+.edit-controls-icon {
+  width: 32px;
+  display: block;
+}
+.edit-controls-link {
+  cursor: pointer;
+}
+.edit-controls-divider {
+  background: var(--light-mode-typeface-inverted);
+  width: 2px;
+  height: 32px;
+}

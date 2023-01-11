@@ -119,6 +119,11 @@
   width: 100%;
   min-width: 0;
 }
+.profile-general-address {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
 .select-box-container {
   min-width: 0;
 }
@@ -142,33 +147,6 @@
   border-radius: 50%;
 }
 
-/* Sticky Buttons, mit welchen man die Eingaben bestätigen und den Bearbeitungsmodus abbrechen kann */
-.profile-edit-options {
-  z-index: 42;
-  position: fixed;
-  bottom: 15px;
-  left: 50%;
-  transform: translate(-50%, -0%);
-  background: var(--light-mode-primary-1);
-  display: inline-flex;
-  flex-flow: row;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: var(--light-mode-elevation-4);
-}
-.profile-edit-icon {
-  width: 32px;
-  display: block;
-}
-.profile-edit-link {
-  cursor: pointer;
-}
-.profile-edit-divider {
-  background: var(--light-mode-typeface-inverted);
-  width: 2px;
-  height: 32px;
-}
 /* Styling für die Untersektionen Geschlecht, Transport und Sportarten */
 .profile-gender-selection,
 .profile-transport-selection {
@@ -188,41 +166,7 @@
     grid-template-columns: 1fr 1fr;
   }
 }
-/* Styling des Eingabefelder für die Addresse */
-.profile-address-picker {
-  display: flex;
-  flex-flow: column;
-  max-width: 270px;
-  min-width: 0;
-  width: 100%;
-  gap: 8px;
-  margin: 0;
-}
-.profile-address-picker > div {
-  display: flex;
-  flex-flow: row;
-  gap: 8px;
-}
-.profile-input-street {
-  flex: 1;
-  width: 100%;
-  min-width: 0;
-}
-.profile-input-house-number {
-  flex: 0 0 60px;
-  min-width: 0;
-  text-align: center;
-}
-.profile-input-zip-code {
-  flex: 0 0 80px;
-  min-width: 0;
-  text-align: center;
-}
-.profile-input-city {
-  flex: 1;
-  width: 100%;
-  min-width: 0;
-}
+/* Styling für Distance Eingabefeld */
 .profile-input-distance {
   width: 40px;
   text-align: center;

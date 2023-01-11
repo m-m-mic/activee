@@ -20,7 +20,7 @@ import {
 import { useCookies } from "react-cookie";
 import { createSelectArray, createSelectObject } from "../scripts/createSelectArray";
 import Select from "react-select";
-import { agePreselect, genderPreselect } from "../scripts/inputTemplates";
+import { accountTemplate, agePreselect, genderPreselect } from "../scripts/inputTemplates";
 import { DatePicker } from "./DatePicker";
 import { AddressPicker } from "./AddressPicker";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ import { Subtitle } from "./Subtitle";
 import { MultiValueLanguage, MultiValueRequiredItems, MultiValueStyles, SingleValueStyles } from "../scripts/reactSelect";
 import { ActiveeCheckbox } from "./ActiveeCheckbox";
 import { WarningModal } from "./WarningModal";
+import { CautionDisclaimer } from "./CautionDisclaimer";
 
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
@@ -161,7 +162,6 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </WarningModal>
         </>
       )}
-      {editMode && <EditControls onConfirmClick={() => modifyActivity()} />}
       <input
         className={validation.name ? "modify-activity-name" : "modify-activity-name warning"}
         placeholder="Neue Aktivität..."
@@ -170,9 +170,14 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
       />
       <Subtitle>{activityInfo.club}</Subtitle>
       <h2>Hauptangaben</h2>
+      {!editMode && (
+        <CautionDisclaimer>
+          <b>Sportart</b>, <b>Geschlecht</b> und <b>Alter</b> können nach Erstellung nicht mehr geändert werden!
+        </CautionDisclaimer>
+      )}
       <div className="modify-activity-general-info">
         <div className="modify-activity-general-info-container">
-          <span className="modify-activity-general-info-name">Sportart</span>
+          <span className="modify-activity-general-info-name">Sportart{!editMode && " *"}</span>
           <span className="modify-activity-general-info-data">
             <Select
               className="react-select modify-activity-select sport"
@@ -186,7 +191,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </span>
         </div>
         <div className="modify-activity-general-info-container">
-          <span className="modify-activity-general-info-name">Geschlecht</span>
+          <span className="modify-activity-general-info-name">Geschlecht{!editMode && " *"}</span>
           <span className="modify-activity-general-info-data">
             <Select
               placeholder="Geschlecht..."
@@ -200,7 +205,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </span>
         </div>
         <div className="modify-activity-general-info-container">
-          <span className="modify-activity-general-info-name">Alter</span>
+          <span className="modify-activity-general-info-name">Alter{!editMode && " *"}</span>
           <span className="modify-activity-general-info-data">
             <input
               placeholder="Alter..."
@@ -220,7 +225,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </span>
         </div>
         <div className="modify-activity-general-info-container language">
-          <span className="modify-activity-general-info-name">Sprachen</span>
+          <span className="modify-activity-general-info-name">Sprachen *</span>
           <span className="modify-activity-general-info-data">
             <Select
               className="react-select modify-activity-select"
@@ -303,9 +308,9 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         defaultValue={activityInfo.membership_fee}
         onChange={(e) => setMembershipFeeInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
-      <h2>Termine</h2>
+      <h2>Termine *</h2>
       <DatePicker data={activityInfo} setData={setActivityInfo} validation={validation} setValidation={setValidation} />
-      <h2>Adresse</h2>
+      <h2>Adresse *</h2>
       <AddressPicker
         data={activityInfo}
         setData={setActivityInfo}
@@ -333,6 +338,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </div>
         </div>
       ))}
+      <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
       <div className="modify-activity-button">
         {editMode ? (
           <ActiveeButton buttonType="warning" onClick={() => setWarningModalVisible(true)}>
@@ -344,6 +350,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </ActiveeButton>
         )}
       </div>
+      {editMode && <EditControls onConfirmClick={() => modifyActivity()} />}
     </>
   );
 }

@@ -6,6 +6,7 @@ import { activityTemplate, dateTemplate } from "../scripts/inputTemplates";
 import { newActivityInputValidator } from "../scripts/handleInputs";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import { v4 } from "uuid";
 
 export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
@@ -35,7 +36,7 @@ export default function CreateActivity() {
     template = { ...template, club: data.club };
     template = {
       ...template,
-      dates: [{ ...dateTemplate, id: crypto.randomUUID() }],
+      dates: [{ ...dateTemplate, id: v4() }],
       trainers: [
         {
           _id: cookies.userId,

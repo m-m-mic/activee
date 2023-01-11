@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/WarningDisclaimer.css";
+import "../assets/css/Disclaimers.css";
 import WarningIconBlack from "../assets/svgs/warning_icon_black.svg";
 
 export function WarningDisclaimer({ children, isDisclaimerVisible }) {

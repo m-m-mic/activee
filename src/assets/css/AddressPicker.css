@@ -1,0 +1,37 @@
+/* Styling des Eingabefelder für die Addresse */
+.address-picker {
+  display: flex;
+  flex-flow: column;
+  min-width: 0;
+  width: 100%;
+  gap: 8px;
+  margin: 0;
+}
+.address-picker > div {
+  display: flex;
+  flex-flow: row;
+  gap: 8px;
+}
+.input-street {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+.input-house-number {
+  flex: 0 0 60px;
+  min-width: 0;
+}
+.input-zip-code {
+  flex: 0 0 80px;
+  min-width: 0;
+}
+.input-city {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+.input-distance {
+  width: 40px;
+  text-align: center;
+  margin-right: 6px;
+}

@@ -11,6 +11,7 @@
   --light-mode-blank-active: #f6efe8;
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
+  --light-mode-caution: #ecc300;
   --light-mode-disabled: #c6dcd7;
   --light-mode-disabled-typeface: #9b9b9b;
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
@@ -34,6 +35,8 @@
   --text-line-height: 24px;
   --button-typeface: Inter Bold, sans-serif;
   --button-size: 16px;
+  --annotation-typeface: Inter Medium, sans-serif;
+  --annotation-size: 12px;
   --logo-typeface: Fredoka One Regular, sans-serif;
 }
 
@@ -164,7 +167,8 @@ input {
   min-width: 0;
   width: 100%;
   min-height: 39px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--text-typeface);
   font-size: var(--text-size);
   color: var(--light-mode-typeface);
@@ -222,6 +226,10 @@ textarea:disabled:hover {
 input.warning,
 textarea.warning {
   border-bottom: 6px solid var(--light-mode-warning-active);
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--light-mode-typeface);
 }
 /* Grundlagen für Seitenstruktur */
 /* #root wird in eine flex-box mit Mindesthöhe 100vh gesetzt, damit der Footer immer ganz unten am Bildschirmrand bleibt */

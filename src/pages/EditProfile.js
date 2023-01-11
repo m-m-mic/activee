@@ -25,6 +25,7 @@ import Select from "react-select";
 import { getPreselectOptions } from "../scripts/fetchRequests";
 import { createSelectArray } from "../scripts/createSelectArray";
 import { MultiValueLanguage, MultiValueSport, MultiValueStyles } from "../scripts/reactSelect";
+import { CautionDisclaimer } from "../components/CautionDisclaimer";
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -98,7 +99,6 @@ export function EditProfile() {
     return (
       <>
         <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
-        <EditControls onConfirmClick={() => updateAccountInfo()} />
         <div className="profile-user-info edit">
           <img
             className="profile-user-picture"
@@ -168,12 +168,20 @@ export function EditProfile() {
           {cookies.userType === "participant" && (
             <div className="profile-general-info-container">
               <span className="profile-general-info-name">Adresse</span>
-              <AddressPicker
-                data={accountInfo}
-                setData={setAccountInfo}
-                validation={inputValidation}
-                setValidation={setInputValidation}
-              />
+              <div className="profile-general-address">
+                <AddressPicker
+                  data={accountInfo}
+                  setData={setAccountInfo}
+                  validation={inputValidation}
+                  setValidation={setInputValidation}
+                />
+                {(accountInfo.address.street === "" ||
+                  accountInfo.address.house_number === "" ||
+                  accountInfo.address.zip_code === "" ||
+                  accountInfo.address.city === "") && (
+                  <CautionDisclaimer>Keine Distanzrechnung mit diesen Angaben möglich.</CautionDisclaimer>
+                )}
+              </div>
             </div>
           )}
           <div className="profile-general-info-container language">
@@ -234,6 +242,7 @@ export function EditProfile() {
             )}
           </>
         )}
+        <EditControls onConfirmClick={() => updateAccountInfo()} />
       </>
     );
   } else {

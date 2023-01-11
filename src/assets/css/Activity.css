@@ -40,7 +40,7 @@
   display: flex;
   flex-flow: row;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 }
 .activity-coach-info {
   min-width: 0;
@@ -64,6 +64,7 @@
 }
 
 .activity-coach-picture {
+  flex: 0 0 50px;
   width: 50px;
   height: 50px;
   margin: auto;
@@ -71,9 +72,7 @@
 }
 
 .activity-coach-message-button {
-  display: flex;
-  flex-direction: row-reverse;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .activity-remember-button {
@@ -81,5 +80,5 @@
   flex-direction: row-reverse;
   bottom: 15px;
   right: 12px;
-  position: fixed;
+  position: sticky;
 }
