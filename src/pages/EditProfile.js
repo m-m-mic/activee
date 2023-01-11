@@ -98,7 +98,9 @@ export function EditProfile() {
     }
     return (
       <>
-        <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
+        <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
+          Bitte überprüfe deine Angaben
+        </WarningDisclaimer>
         <div className="profile-user-info edit">
           <img
             className="profile-user-picture"

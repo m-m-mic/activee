@@ -1,7 +1,21 @@
 /* Styling der Warnmeldung für ungültige Nutzerangaben */
+.warning-disclaimer-container {
+  visibility: unset;
+  position: fixed;
+  left: 50%;
+  top: 30px;
+  transform: translate(-50%, 0%);
+  transition: 100ms ease-out;
+  z-index: 41;
+  min-width: 290px;
+  width: 100%;
+}
+.warning-disclaimer-container.hidden {
+  visibility: hidden;
+  top: -65px;
+}
 .warning-disclaimer {
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   padding: 12px;
   display: flex;
   flex-flow: row;
@@ -13,13 +27,23 @@
   transition: 200ms;
   visibility: visible;
 }
+.warning-disclaimer.closable {
+  box-shadow: var(--light-mode-elevation-4);
+  margin: 0 12px;
+}
 .warning-disclaimer.hidden {
   display: none;
 }
 .warning-icon {
+  flex: 0 0 32px;
   width: 32px;
 }
+.warning-icon.pointer {
+  cursor: pointer;
+}
 .warning-text {
+  flex: 1;
+  text-align: center;
   font-family: Inter SemiBold, sans-serif;
 }
 

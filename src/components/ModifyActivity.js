@@ -32,10 +32,12 @@ import { MultiValueLanguage, MultiValueRequiredItems, MultiValueStyles, SingleVa
 import { ActiveeCheckbox } from "./ActiveeCheckbox";
 import { WarningModal } from "./WarningModal";
 import { CautionDisclaimer } from "./CautionDisclaimer";
+import { WarningDisclaimer } from "./WarningDisclaimer";
 
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [defaultValues, setDefaultValues] = useState({});
   const [languages, setLanguages] = useState();
@@ -102,8 +104,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     }
     for (const [key, value] of Object.entries(validators)) {
       if (value === false) {
-        console.log("Validation failed");
-        return;
+        return setIsDisclaimerVisible(true);
       }
     }
     let url;
@@ -150,6 +151,9 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   }
   return (
     <>
+      <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
+        Bitte überprüfe deine Angaben
+      </WarningDisclaimer>
       {isWarningModalVisible && (
         <>
           <WarningModal
