@@ -227,6 +227,11 @@ input.warning,
 textarea.warning {
   border-bottom: 6px solid var(--light-mode-warning-active);
 }
+
+a {
+  text-decoration: underline;
+}
+
 hr {
   border: 0;
   border-top: 1px solid var(--light-mode-typeface);

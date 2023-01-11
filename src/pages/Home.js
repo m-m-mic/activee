@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/Home.css";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { LandingPage } from "../components/LandingPage";
 import { useCookies } from "react-cookie";
@@ -40,17 +40,7 @@ export function Home() {
         <h1>Guten Tag, {accountInfo.first_name}!</h1>
         {cookies.userType === "organisation" && <Subtitle>{accountInfo.club}</Subtitle>}
         <h2>Deine Aktivitäten</h2>
-        {accountInfo.activities.length > 0 ? (
-          <ActiveeScrollingCards items={accountInfo.activities} type="activity" />
-        ) : (
-          <div>
-            {cookies.userType === "participant" ? (
-              "Du hast dir noch keine Aktivität gemerkt."
-            ) : (
-              <div>Du hast noch keine Aktivität erstellt.</div>
-            )}
-          </div>
-        )}
+        <ActiveeScrollingCards items={accountInfo.activities} type={cookies.userType} />
         {cookies.userType === "organisation" && (
           <div className="home-add-button">
             <ActiveeButton iconSrc={AddIconBlack} buttonType="blank" onClick={() => navigate("/activity/new")}>

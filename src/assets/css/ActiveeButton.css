@@ -1,6 +1,7 @@
 /* Styling für den standardmäßigen Button der Seite */
 .activee-button {
   -webkit-appearance: none;
+  text-decoration: none;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   border: none;

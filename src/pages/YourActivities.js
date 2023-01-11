@@ -53,17 +53,7 @@ export function YourActivities() {
           </>
         )}
         <h2>{cookies.userType === "participant" ? "Gemerkte Aktivitäten" : "Aktivitäten"}</h2>
-        {userActivities.length > 0 ? (
-          <ActiveeScrollingCards items={userActivities} type="activity" />
-        ) : (
-          <div>
-            {cookies.userType === "participant" ? (
-              "Du hast dir noch keine Aktivität gemerkt."
-            ) : (
-              <div>Du hast noch keine Aktivität erstellt.</div>
-            )}
-          </div>
-        )}
+        <ActiveeScrollingCards items={userActivities} type={cookies.userType} />
         {cookies.userType === "organisation" && (
           <div className="your-activities-add-button">
             <ActiveeButton iconSrc={AddIconBlack} buttonType="blank" onClick={() => navigate("/activity/new")}>
