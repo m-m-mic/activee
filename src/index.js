@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Routes, Route, Navigate, HashRouter } from "react-router-dom";
 import Layout from "./layouts/Layout";
-import LoginLayout from "./layouts/LoginLayout";
 import "./assets/css/index.css";
 import { Login } from "./pages/Login";
 import { Activity } from "./pages/Activity";

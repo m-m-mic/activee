@@ -45,6 +45,7 @@ export const activityTemplate = {
   address: { street: "", house_number: "", zip_code: "", city: "" },
   trainers: [],
   participants: [],
+  only_logged_in: false,
 };
 
 // React-select preselects für ModifyActivity.js, welche nicht im Backend gespeichert werden

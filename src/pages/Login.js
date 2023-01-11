@@ -55,7 +55,7 @@ export function Login() {
       response
         .json()
         .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-        .then(() => navigate("/"));
+        .then(() => navigate(-1));
     });
   };
 

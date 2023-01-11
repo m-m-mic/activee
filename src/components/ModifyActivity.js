@@ -342,6 +342,12 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
           </div>
         </div>
       ))}
+      <h2>Sichtbarkeit</h2>
+      <ActiveeCheckbox
+        defaultValue={activityInfo.only_logged_in}
+        onChange={() => setActivityInfo({ ...activityInfo, only_logged_in: !activityInfo.only_logged_in })}>
+        Aktivität nur für angemeldete Nutzer sichtbar machen
+      </ActiveeCheckbox>
       <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
       <div className="modify-activity-button">
         {editMode ? (
