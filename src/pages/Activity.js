@@ -57,21 +57,6 @@ export function Activity() {
     });
   };
 
-  // Save Fetch Request
-  const changeAccountActivityRelations = () => {
-    const url = backendUrl + "/activity/" + id + "/save";
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-      body: JSON.stringify({ accounts: [cookies.userId] }),
-    };
-    fetch(url, requestOptions).then((response) => {
-      if (response.status === 200) {
-        getActivityInfo();
-      }
-    });
-  };
-
   // Entscheidet anhand von activityInfo, welches Verhältnis der Nutzer zur aufgerufenen Aktivität hat
   // z.B. ist er als Teilnehmer angemeldet, oder ein Trainer der Aktivität etc.
   const setRelations = (data) => {
@@ -196,7 +181,7 @@ export function Activity() {
                 </div>
                 {!isOwner && coach.show_email && (
                   <div className="activity-coach-message-button">
-                    <ActiveeButton iconSrc={MessageIconWhite} buttonType="primary">
+                    <ActiveeButton iconSrc={MessageIconWhite} buttonType="secondary">
                       Per E-Mail kontaktieren
                     </ActiveeButton>
                   </div>
@@ -208,7 +193,7 @@ export function Activity() {
       )}
       {cookies.userToken && cookies.userType === "participant" && !isParticipant && (
         <div className="activity-remember-button">
-          <ActiveeButton onClick={() => setManageProfileSelectionVisible(true)} buttonType="secondary">
+          <ActiveeButton onClick={() => setManageProfileSelectionVisible(true)} buttonType="primary">
             {activityInfo.participants.includes(cookies.userId) ? "Aktivitäten verwalten" : "Aktivität merken"}
           </ActiveeButton>
         </div>
@@ -216,6 +201,8 @@ export function Activity() {
       {isManageProfileSelectionVisible && (
         <ManageActivityPopUp
           userToken={cookies.userToken}
+          id={id}
+          getActivityInfo={getActivityInfo}
           participants={activityInfo.participants}
           ProfileSelectionVisible={isManageProfileSelectionVisible}
           setProfileSelectionVisible={setManageProfileSelectionVisible}

@@ -12,7 +12,7 @@
   margin: 60px auto;
 }
 .login-wrapper {
-  background: #6ac8b7;
+  background: var(--light-mode-cs-secondary);
   padding: 20px;
   display: flex;
   flex-flow: column;

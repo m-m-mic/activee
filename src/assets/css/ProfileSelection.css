@@ -50,7 +50,7 @@
   flex: 0 0 52px;
   height: 52px;
   border-radius: 50%;
-  background: #e7e7e7;
+  background: var(--light-mode-cs-disabled);
 }
 .profile-selection-item-container {
   flex: 1;

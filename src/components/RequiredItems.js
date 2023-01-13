@@ -8,7 +8,6 @@ export function RequiredItems({ items }) {
   return (
     <div>
       <ActiveeDetails
-        onClick={() => setOpen(!open)}
         summary={<h2 className="required-items-title">Mitbringsel</h2>}
         content={
           <div className="required-item-details">

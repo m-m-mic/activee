@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "../assets/css/Header.css";
-import ActiveeLogo from "../assets/pngs/40px_activee_logo.png";
+import ActiveeLogo from "../assets/pngs/150px_activee_logo.png";
 import SearchIconBlack from "../assets/svgs/search_icon_black.svg";
 import { useScrollDirection } from "../scripts/useScrollDirection";
 import { MenuPopup } from "./MenuPopup";

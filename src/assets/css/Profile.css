@@ -94,7 +94,7 @@
 }
 .profile-no-info-disclaimer {
   font-family: Inter Light Italic, sans-serif;
-  color: var(--light-mode-disabled-typeface);
+  color: var(--light-mode-typeface-disabled);
 }
 /* Styling für die Bearbeitungsseite */
 /* Zusätzliches Styling für Eingabefelder */

@@ -5,10 +5,18 @@ import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
 
-export function ManageActivityPopUp({ userToken, participants, ProfileSelectionVisible, setProfileSelectionVisible }) {
+export function ManageActivityPopUp({
+  userToken,
+  id,
+  getActivityInfo,
+  participants,
+  ProfileSelectionVisible,
+  setProfileSelectionVisible,
+}) {
   const [profileList, setProfileList] = useState([]);
   const [checkedAccounts, setCheckedAccounts] = useState([]);
   const [toBeChangedAccounts, setToBeChangedAccounts] = useState([]);
+  const [mutate, setMutate] = useState(false);
 
   useEffect(() => {
     if (ProfileSelectionVisible) {
@@ -43,6 +51,24 @@ export function ManageActivityPopUp({ userToken, participants, ProfileSelectionV
     setCheckedAccounts(checkedProfiles);
   };
 
+  // Save Fetch Request
+  const saveChanges = () => {
+    const url = backendUrl + "/activity/" + id + "/save";
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${userToken}` },
+      body: JSON.stringify({ accounts: toBeChangedAccounts }),
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        setToBeChangedAccounts([]);
+        setCheckedAccounts([]);
+        getActivityInfo();
+        setProfileSelectionVisible(false);
+      }
+    });
+  };
+
   const setCheckedAndChangedAccountLists = (id) => {
     const checkedAccountsList = checkedAccounts;
     const changedAccountsList = toBeChangedAccounts;
@@ -58,11 +84,10 @@ export function ManageActivityPopUp({ userToken, participants, ProfileSelectionV
     } else {
       changedAccountsList.push(id);
     }
+    setMutate(!mutate);
     setCheckedAccounts(checkedAccountsList);
     setToBeChangedAccounts(changedAccountsList);
   };
-
-  console.log(checkedAccounts, toBeChangedAccounts);
   return (
     <>
       <div className="manage-activity-pop-up">

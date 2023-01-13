@@ -78,7 +78,7 @@
 .activity-remember-button {
   position: sticky;
   bottom: 15px;
-  z-index: 42;
+  z-index: 39;
   display: flex;
   justify-content: right;
 }

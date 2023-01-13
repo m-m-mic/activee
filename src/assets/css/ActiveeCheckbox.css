@@ -36,16 +36,16 @@
 /* Unselected, Disabled */
 .activee-checkbox-container .activee-checkbox.unselected.disabled {
   background: none;
-  border: 3px solid grey;
+  border: 3px solid var(--light-mode-typeface-disabled);
 }
 /* Unselected, Hovered */
 .activee-checkbox-container:hover .activee-checkbox.unselected.enabled {
-  background: var(--light-mode-primary-disabled);
+  background: var(--light-mode-cs-unselected);
   border: 2px solid var(--light-mode-typeface);
 }
 /* Unselected, Focused */
 input:focus + .activee-checkbox.unselected.enabled {
-  background: var(--light-mode-primary-disabled);
+  background: var(--light-mode-cs-unselected);
   border: 2px solid var(--light-mode-typeface);
 }
 /* Unselected, Pressed */
@@ -60,8 +60,8 @@ input:focus + .activee-checkbox.unselected.enabled {
 }
 /* Selected, Disabled */
 .activee-checkbox-container .activee-checkbox.selected.disabled {
-  background: grey;
-  border: 2px solid grey;
+  background: var(--light-mode-typeface-disabled);
+  border: 2px solid var(--light-mode-typeface-disabled);
 }
 /* Selected, Hovered */
 .activee-checkbox-container:hover .activee-checkbox.selected.enabled {

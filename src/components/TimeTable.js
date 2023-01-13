@@ -9,7 +9,7 @@ export function TimeTable({ data }) {
   }, [data]);
   const fillTable = (timeValues) => {
     for (const time of timeValues) {
-      document.getElementById(`${time.day}-${time.starting_hour}`).style.background = "#65B9A8";
+      document.getElementById(`${time.day}-${time.starting_hour}`).style.background = "var(--light-mode-cs-dark)";
       document.getElementById(`row-${time.starting_hour}`).style.display = "flex";
     }
   };

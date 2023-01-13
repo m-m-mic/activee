@@ -5,13 +5,13 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  background: #4a9d8c;
+  background: var(--light-mode-cs-primary);
   gap: 8px;
   padding: 10px 0;
   border-radius: 8px;
 }
 .vertical-button.unchecked {
-  background: #c6dcd7;
+  background: var(--light-mode-cs-unselected);
 }
 .vertical-button-icon {
   width: 32px;

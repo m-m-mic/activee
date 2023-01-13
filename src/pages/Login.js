@@ -102,7 +102,7 @@ export function Login() {
           Es wurde ein falsches Password eingegeben
         </WarningDisclaimer>
         <div className="login-no-account-wrapper">
-          <NavLink to="/" className="login-no-account-button">
+          <NavLink to="/register" className="login-no-account-button">
             Noch kein Konto?
           </NavLink>
         </div>

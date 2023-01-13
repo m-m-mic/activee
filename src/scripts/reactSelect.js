@@ -47,7 +47,7 @@ export const MultiValueStyles = {
   multiValue: (base) => ({
     ...base,
     borderRadius: `12px`,
-    background: `var(--light-mode-primary-1)`,
+    background: `var(--light-mode-cs-primary)`,
     color: `var(--light-mode-typeface-inverted)`,
   }),
   multiValueRemove: (base) => ({
@@ -59,7 +59,7 @@ export const MultiValueStyles = {
     minWidth: `0`,
     display: `flex`,
     transition: `200ms ease-out`,
-    color: state.isDisabled ? `var(--light-mode-disabled-typeface)` : `var(--light-mode-typeface-inverted)`,
+    color: state.isDisabled ? `var(--light-mode-typeface-disabled)` : `var(--light-mode-typeface-inverted)`,
     border: state.isFocused || state.isSelected ? `none` : `none`,
     boxShadow: state.isFocused || state.isSelected ? `var(--light-mode-elevation-4)` : ``,
     borderRadius: `4px`,
@@ -67,7 +67,7 @@ export const MultiValueStyles = {
       ? state.isFocused
         ? "3px solid var(--light-mode-cs-primary)"
         : `3px solid var(--light-mode-typeface)`
-      : `3px solid var(--light-mode-disabled-typeface)`,
+      : `3px solid var(--light-mode-typeface-disabled)`,
     "&:hover": {
       boxShadow: `var(--light-mode-elevation-4)`,
       borderBottom: "3px solid var(--light-mode-cs-primary)",
@@ -75,11 +75,11 @@ export const MultiValueStyles = {
   }),
   option: (base, state) => ({
     ...base,
-    background: (state.isSelected || state.isFocused) && !state.isDisabled ? `var(--light-mode-primary-1)` : `none`,
+    background: (state.isSelected || state.isFocused) && !state.isDisabled ? `var(--light-mode-cs-primary)` : `none`,
     color:
       (state.isSelected || state.isFocused) && !state.isDisabled
         ? `var(--light-mode-typeface-inverted)`
-        : `` || (state.isDisabled && `var(--light-mode-disabled-typeface)`),
+        : `` || (state.isDisabled && `var(--light-mode-typeface-disabled)`),
   }),
 };
 
@@ -89,7 +89,7 @@ export const SingleValueStyles = {
     minWidth: `0`,
     display: `flex`,
     transition: `200ms ease-out`,
-    color: state.isDisabled ? `var(--light-mode-disabled-typeface)` : `var(--light-mode-typeface-inverted)`,
+    color: state.isDisabled ? `var(--light-mode-typeface-disabled)` : `var(--light-mode-typeface-inverted)`,
     border: state.isFocused || state.isSelected ? `none` : `none`,
     boxShadow: state.isFocused || state.isSelected ? `var(--light-mode-elevation-4)` : ``,
     borderRadius: `4px`,
@@ -97,7 +97,7 @@ export const SingleValueStyles = {
       ? state.isFocused
         ? "3px solid var(--light-mode-cs-primary)"
         : `3px solid var(--light-mode-typeface)`
-      : `3px solid var(--light-mode-disabled-typeface)`,
+      : `3px solid var(--light-mode-typeface-disabled)`,
     "&:hover": {
       boxShadow: `var(--light-mode-elevation-4)`,
       borderBottom: "3px solid var(--light-mode-cs-primary)",
@@ -105,10 +105,10 @@ export const SingleValueStyles = {
   }),
   option: (base, state) => ({
     ...base,
-    background: (state.isSelected || state.isFocused) && !state.isDisabled ? `var(--light-mode-primary-1)` : `none`,
+    background: (state.isSelected || state.isFocused) && !state.isDisabled ? `var(--light-mode-cs-primary)` : `none`,
     color:
       (state.isSelected || state.isFocused) && !state.isDisabled
         ? `var(--light-mode-typeface-inverted)`
-        : `` || (state.isDisabled && `var(--light-mode-disabled-typeface)`),
+        : `` || (state.isDisabled && `var(--light-mode-typeface-disabled)`),
   }),
 };

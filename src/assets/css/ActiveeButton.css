@@ -29,14 +29,24 @@
 /* Styling für unterschiedliche Buttons */
 .activee-button.primary {
   color: var(--light-mode-typeface-inverted);
-  background: #4a9d8c;
+  background: var(--light-mode-cs-primary);
 }
 .activee-button.primary:active {
-  background: #6ac8b7;
+  background: var(--light-mode-cs-secondary);
 }
 .activee-button.secondary {
   color: var(--light-mode-typeface-inverted);
-  background: #6ac8b7;
+  background: var(--light-mode-cs-secondary);
+}
+.activee-button.secondary:active {
+  background: var(--light-mode-cs-unselected);
+}
+.activee-button.unselected {
+  color: var(--light-mode-typeface-inverted);
+  background: var(--light-mode-cs-unselected);
+}
+.activee-button.unselected:active {
+  background: var(--light-mode-cs-disabled);
 }
 .activee-button.blank {
   background: var(--light-mode-blank);
@@ -54,20 +64,17 @@
 }
 .activee-button.outline {
   background: var(--light-mode-background);
-  border: 3px solid #4a9d8c;
-  color: #4a9d8c;
+  border: 3px solid var(--light-mode-cs-primary);
+  color: var(--light-mode-cs-primary);
 }
 .activee-button.outline:active {
-  border: 3px solid #6ac8b7;
-  color: #6ac8b7;
+  border: 3px solid var(--light-mode-cs-secondary);
+  color: var(--light-mode-cs-secondary);
 }
-.activee-button.outline:active {
-  color: #6ac8b7;
-}
-.activee-button.disabled {
+.activee-button:disabled {
   cursor: not-allowed;
-  color: var(--light-mode-typeface-inverted);
-  background: var(--light-mode-disabled);
+  color: var(--light-mode-typeface-disabled);
+  background: var(--light-mode-cs-disabled);
 }
 /* Spezifisch für RegisterBanner */
 .activee-button.register {

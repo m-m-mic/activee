@@ -35,7 +35,7 @@ export function Register() {
           <div className="register-type">
             <span>
               <ActiveeButton
-                buttonType={accountInfo.type === "participant" ? "primary" : "disabled"}
+                buttonType={accountInfo.type === "participant" ? "primary" : "unselected"}
                 onClick={() => {
                   setAccountInfo({ ...accountInfo, type: "participant", tier: "parent", club: null });
                   setValidation({ ...validation, club: true });
@@ -45,7 +45,7 @@ export function Register() {
             </span>
             <span>
               <ActiveeButton
-                buttonType={accountInfo.type === "organisation" ? "primary" : "disabled"}
+                buttonType={accountInfo.type === "organisation" ? "primary" : "unselected"}
                 onClick={() => {
                   setAccountInfo({ ...accountInfo, type: "organisation", tier: "child" });
                   setValidation({ ...validation, club: false });
