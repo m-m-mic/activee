@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
-import ActiveeLogo50 from "../assets/pngs/50px_activee_logo.png";
+import ActiveeLogo from "../assets/pngs/150px_activee_logo.png";
 import "../assets/css/LandingPage.css";
 import { useCookies } from "react-cookie";
 
@@ -17,7 +17,7 @@ export function LandingPage() {
   return (
     <>
       <div className="activee-banner">
-        <img src={ActiveeLogo50} alt="activee Logo" />
+        <img className="landing-page-activee-logo" src={ActiveeLogo} alt="activee Logo" />
         <span className="activee-name-large">activee</span>
       </div>
       <div>
