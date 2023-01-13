@@ -9,10 +9,10 @@ import "../assets/css/SearchBar.css";
  * @constructor
  */
 export function SearchBar({ inputValue, onChange }) {
+  // TODO: confirm button
   return (
     <div className="search-bar">
       <input value={inputValue} onChange={(event) => onChange(event)} id="search-input" placeholder="Suchbegriff eingeben..." />
-      // TODO: confirm button
     </div>
   );
 }
