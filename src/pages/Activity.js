@@ -14,6 +14,7 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { RequiredItems } from "../components/RequiredItems";
 import { RegisterBanner } from "../components/RegisterBanner";
+import { ManageActivityPopUp } from "../components/ManageActivityPopUp";
 
 export function Activity() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export function Activity() {
   const [shortenedDates, setShortenedDates] = useState([]);
   const [isOwner, setOwner] = useState(false);
   const [isParticipant, setParticipant] = useState(false);
+  const [isManageProfileSelectionVisible, setManageProfileSelectionVisible] = useState(false);
   let { id } = useParams();
   useEffect(() => {
     getActivityInfo();
@@ -51,6 +53,21 @@ export function Activity() {
         });
       } else {
         return navigate("/404");
+      }
+    });
+  };
+
+  // Save Fetch Request
+  const changeAccountActivityRelations = () => {
+    const url = backendUrl + "/activity/" + id + "/save";
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+      body: JSON.stringify({ accounts: [cookies.userId] }),
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        getActivityInfo();
       }
     });
   };
@@ -191,8 +208,18 @@ export function Activity() {
       )}
       {cookies.userToken && cookies.userType === "participant" && !isParticipant && (
         <div className="activity-remember-button">
-          <ActiveeButton buttonType="secondary">Aktivität merken</ActiveeButton>
+          <ActiveeButton onClick={() => setManageProfileSelectionVisible(true)} buttonType="secondary">
+            {activityInfo.participants.includes(cookies.userId) ? "Aktivitäten verwalten" : "Aktivität merken"}
+          </ActiveeButton>
         </div>
+      )}
+      {isManageProfileSelectionVisible && (
+        <ManageActivityPopUp
+          userToken={cookies.userToken}
+          participants={activityInfo.participants}
+          ProfileSelectionVisible={isManageProfileSelectionVisible}
+          setProfileSelectionVisible={setManageProfileSelectionVisible}
+        />
       )}
       {!cookies.userToken && <RegisterBanner />}
     </>

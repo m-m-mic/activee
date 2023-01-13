@@ -6,7 +6,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { TimeTable } from "../components/TimeTable";
 import { GenderSelection } from "../components/GenderSelection";
 import { TransportSelection } from "../components/TransportSelection";
-import { SportSelection } from "../components/SportSelection";
 import {
   ProfileInputValidator,
   setBirthdayInput,

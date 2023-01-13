@@ -13,6 +13,7 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
   const [profileList, setProfileList] = useState([]);
   const [activeProfile, setActiveProfile] = useState(cookies.userId);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [manageActivityPopupVisible, setManageActivityPopupVisible] = useState(false);
   useEffect(() => {
     if (ProfileSelectionVisible) {
       document.body.style.overflow = "hidden";
