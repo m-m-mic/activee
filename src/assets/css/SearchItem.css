@@ -1,6 +1,6 @@
 .search-item {
   color: var(--light-mode-typeface-inverted);
-  background: var(--light-mode-primary-1);
+  background: var(--light-mode-cs-primary);
   padding: 12px 10px;
   border-radius: 8px;
   cursor: pointer;

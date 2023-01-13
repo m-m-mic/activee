@@ -13,7 +13,7 @@
   align-items: center;
   border-radius: 8px;
   padding: 10px 15px;
-  background: var(--light-mode-primary-1);
+  background: var(--light-mode-cs-primary);
 }
 .required-item-image-container {
   display: flex;
@@ -37,7 +37,7 @@
   align-items: center;
   display: flex;
   padding: 10px 15px;
-  background: var(--light-mode-primary-1);
+  background: var(--light-mode-cs-primary);
   border-radius: 8px;
   gap: 15px;
   min-width: 0;

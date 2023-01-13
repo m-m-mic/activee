@@ -64,53 +64,61 @@ export function ManageActivityPopUp({ userToken, participants, ProfileSelectionV
 
   console.log(checkedAccounts, toBeChangedAccounts);
   return (
-    <div className="manage-activity-pop-up">
-      <div className="profile-selection-container">
-        <div className="profile-selection-header">
-          <span className="profile-selection-title">Aktivität verwalten</span>
-          <img
-            className="profile-selection-exit"
-            src={CancelIconBlack}
-            onClick={() => setProfileSelectionVisible(false)}
-            alt="Cancel"
-          />
-        </div>
-        <div className="profile-selection-list">
-          {profileList.map((item, key) => (
-            <button
-              className="profile-selection-item"
-              key={key}
-              value={item._id}
-              onClick={() => setCheckedAndChangedAccountLists(item._id)}>
-              <img
-                className="profile-selection-item-image"
-                src={`${backendUrl}/images/profiles/${item._id}.jpg`}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                }}
-                alt="Account icon"
-              />
-              <span className="profile-selection-item-container">
-                <div className="profile-selection-item-name">
-                  {item.first_name} {item.last_name}
-                </div>
-                <div className="profile-selection-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
-              </span>
-              <img
-                className={
-                  checkedAccounts.includes(item._id) ? "profile-selection-item-icon" : "profile-selection-item-icon hidden"
-                }
-                src={AcceptIconBlack}
-                alt="Active Icon"
-              />
-            </button>
-          ))}
-        </div>
-        <div className="profile-selection-options">
-          <ActiveeButton buttonType="primary">Wechseln</ActiveeButton>
+    <>
+      <div className="manage-activity-pop-up">
+        <div className="manage-activity-pop-up-container">
+          <div className="manage-activity-pop-up-header">
+            <span className="manage-activity-pop-up-title">Aktivität merken</span>
+            <img
+              className="manage-activity-pop-up-exit"
+              src={CancelIconBlack}
+              onClick={() => setProfileSelectionVisible(false)}
+              alt="Cancel"
+            />
+          </div>
+          <div className="manage-activity-pop-up-list">
+            {profileList.map((item, key) => (
+              <button
+                className="manage-activity-pop-up-item"
+                key={item._id}
+                onClick={() => {
+                  setCheckedAndChangedAccountLists(item._id);
+                }}>
+                <img
+                  className="manage-activity-pop-up-item-image"
+                  src={`${backendUrl}/images/profiles/${item._id}.jpg`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                  }}
+                  alt="Account icon"
+                />
+                <span className="manage-activity-pop-up-item-container">
+                  <div className="manage-activity-pop-up-item-name">
+                    {item.first_name} {item.last_name}
+                  </div>
+                  <div className="manage-activity-pop-up-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
+                </span>
+                <img
+                  className={
+                    checkedAccounts.includes(item._id)
+                      ? "manage-activity-pop-up-item-icon"
+                      : "manage-activity-pop-up-item-icon hidden"
+                  }
+                  src={AcceptIconBlack}
+                  alt="Active Icon"
+                />
+              </button>
+            ))}
+          </div>
+          <div className="manage-activity-pop-up-options">
+            <ActiveeButton buttonType="primary" onClick={() => saveChanges()}>
+              Speichern
+            </ActiveeButton>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="modal-background" onClick={() => setProfileSelectionVisible(false)}></div>
+    </>
   );
 }

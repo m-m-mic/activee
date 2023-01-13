@@ -5,14 +5,14 @@
   flex-flow: row;
   justify-content: left;
   align-items: center;
-  background: #4a9d8c;
+  background: var(--light-mode-cs-primary);
   gap: 8px;
   padding: 10px;
   border-radius: 8px;
   min-width: 0;
 }
 .horizontal-button.unchecked {
-  background: #c6dcd7;
+  background: var(--light-mode-cs-unselected);
 }
 .horizontal-button-icon {
   flex: 0 0 24px;
@@ -36,7 +36,7 @@
   flex-flow: row;
   justify-content: left;
   align-items: center;
-  background: #4a9d8c;
+  background: var(--light-mode-cs-primary);
   gap: 8px;
   padding: 10px;
   border-radius: 8px;

@@ -5,7 +5,7 @@
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
-  background: var(--light-mode-primary-1);
+  background: var(--light-mode-cs-primary);
   color: var(--light-mode-typeface-inverted);
   padding: 16px;
   border-radius: 12px;
@@ -88,7 +88,7 @@
   -webkit-box-sizing: border-box;
   width: 30px;
   height: auto;
-  border: 3px solid var(--light-mode-primary-1);
+  border: 3px solid var(--light-mode-cs-primary);
   border-radius: 50%;
   margin-left: 6px;
 }

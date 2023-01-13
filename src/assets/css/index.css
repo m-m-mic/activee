@@ -1,13 +1,18 @@
 /* Deklarierung aller css-Variablen, welche von activee verwendet werden */
 :root {
-  --light-mode-typeface: #2d2d2d;
-  --light-mode-typeface-inverted: #fffcf9;
-  --light-mode-background: #fffcf9;
-  --light-mode-background-translucent: rgba(255, 252, 249, 0.7);
-  --light-mode-primary-1: #4a9d8c;
-  --light-mode-primary-2: #65b9a8ff;
-  --light-mode-primary-disabled: #c6dcd7;
-  --light-mode-blank: #fffcf9;
+  --light-mode-typeface: #1d1d1d;
+  --light-mode-typeface-inverted: var(--light-mode-background);
+  --light-mode-typeface-disabled: #839695;
+  --light-mode-background: #fafafa;
+  --light-mode-background-translucent: rgba(250, 250, 250, 0.7);
+  --light-mode-background-translucent-invisible: rgba(250, 250, 250, 0);
+  --light-mode-backdrop-translucent-dark: rgba(0, 0, 0, 0.55);
+  --light-mode-cs-dark: #00838a;
+  --light-mode-cs-primary: #00a5ae;
+  --light-mode-cs-secondary: #26bec3;
+  --light-mode-cs-unselected: #9ad9dc;
+  --light-mode-cs-disabled: #d9f9f8;
+  --light-mode-blank: var(--light-mode-background);
   --light-mode-blank-active: #f6efe8;
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
@@ -203,21 +208,21 @@ textarea {
 input:hover,
 textarea:hover {
   outline: none;
-  border-bottom: 3px solid var(--light-mode-primary-1);
+  border-bottom: 3px solid var(--light-mode-cs-primary);
   box-shadow: var(--light-mode-elevation-4);
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-bottom: 3px solid var(--light-mode-primary-1);
+  border-bottom: 3px solid var(--light-mode-cs-primary);
   box-shadow: var(--light-mode-elevation-4);
 }
 input:disabled,
 textarea:disabled {
   background: none;
-  border-bottom: 3px solid var(--light-mode-disabled-typeface);
-  color: var(--light-mode-disabled-typeface);
+  border-bottom: 3px solid var(--light-mode-typeface-disabled);
+  color: var(--light-mode-typeface-disabled);
 }
 input:disabled:hover,
 textarea:disabled:hover {

@@ -65,12 +65,12 @@ export const MultiValueStyles = {
     borderRadius: `4px`,
     borderBottom: !state.isDisabled
       ? state.isFocused
-        ? "3px solid var(--light-mode-primary-1)"
+        ? "3px solid var(--light-mode-cs-primary)"
         : `3px solid var(--light-mode-typeface)`
       : `3px solid var(--light-mode-disabled-typeface)`,
     "&:hover": {
       boxShadow: `var(--light-mode-elevation-4)`,
-      borderBottom: "3px solid var(--light-mode-primary-1)",
+      borderBottom: "3px solid var(--light-mode-cs-primary)",
     },
   }),
   option: (base, state) => ({
@@ -95,12 +95,12 @@ export const SingleValueStyles = {
     borderRadius: `4px`,
     borderBottom: !state.isDisabled
       ? state.isFocused
-        ? "3px solid var(--light-mode-primary-1)"
+        ? "3px solid var(--light-mode-cs-primary)"
         : `3px solid var(--light-mode-typeface)`
       : `3px solid var(--light-mode-disabled-typeface)`,
     "&:hover": {
       boxShadow: `var(--light-mode-elevation-4)`,
-      borderBottom: "3px solid var(--light-mode-primary-1)",
+      borderBottom: "3px solid var(--light-mode-cs-primary)",
     },
   }),
   option: (base, state) => ({

@@ -23,7 +23,7 @@
   top: -70px;
 }
 .header.no-background {
-  background: rgba(255, 252, 249, 0);
+  background: var(--light-mode-background-translucent-invisible);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
 }
@@ -94,7 +94,7 @@
   z-index: 45;
 }
 .popup-backdrop.darken {
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--light-mode-backdrop-translucent-dark);
 }
 .options-selection {
   cursor: pointer;

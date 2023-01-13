@@ -51,12 +51,12 @@ input:focus + .activee-checkbox.unselected.enabled {
 /* Unselected, Pressed */
 .activee-checkbox-container:active .activee-checkbox.unselected.enabled {
   background: none;
-  border: 2px solid var(--light-mode-primary-1);
+  border: 2px solid var(--light-mode-cs-primary);
 }
 /* Selected, Enabled */
 .activee-checkbox-container .activee-checkbox.selected.enabled {
-  background: var(--light-mode-primary-1);
-  border: 2px solid var(--light-mode-primary-1);
+  background: var(--light-mode-cs-primary);
+  border: 2px solid var(--light-mode-cs-primary);
 }
 /* Selected, Disabled */
 .activee-checkbox-container .activee-checkbox.selected.disabled {
@@ -65,17 +65,17 @@ input:focus + .activee-checkbox.unselected.enabled {
 }
 /* Selected, Hovered */
 .activee-checkbox-container:hover .activee-checkbox.selected.enabled {
-  background: var(--light-mode-primary-2);
-  border: 2px solid var(--light-mode-primary-2);
+  background: var(--light-mode-cs-secondary);
+  border: 2px solid var(--light-mode-cs-secondary);
 }
 /* Selected, Focused */
 input:focus + .activee-checkbox.selected.enabled {
-  background: var(--light-mode-primary-2);
-  border: 2px solid var(--light-mode-primary-2);
+  background: var(--light-mode-cs-secondary);
+  border: 2px solid var(--light-mode-cs-secondary);
 }
 /* Selected, Pressed */
 .activee-checkbox-container:active .activee-checkbox.selected.enabled {
-  background: var(--light-mode-primary-2);
+  background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-typeface);
 }
 /* activee-checkmark */
