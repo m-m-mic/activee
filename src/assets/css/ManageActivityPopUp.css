@@ -1,3 +1,4 @@
+/* Styling für Aktivitäten verwalten Popup auf der Aktivitäten-Seite */
 .manage-activity-pop-up {
   position: fixed;
   left: 0;
@@ -6,7 +7,15 @@
   z-index: 46;
   min-width: 290px;
   width: 100%;
+  visibility: unset;
 }
+
+/* Versteckt Popup */
+.manage-activity-pop-up.hidden {
+  visibility: hidden;
+  bottom: -200px;
+}
+
 .manage-activity-pop-up-container {
   padding: 20px;
   display: flex;
@@ -16,6 +25,8 @@
   background: var(--light-mode-background);
   box-shadow: var(--light-mode-elevation-4);
 }
+
+/* Komponenten-Header */
 .manage-activity-pop-up-header {
   display: flex;
   justify-content: space-between;
@@ -23,14 +34,18 @@
   font-family: var(--h2-typeface);
   font-size: var(--h2-size);
 }
+
 .manage-activity-pop-up-exit {
   cursor: pointer;
 }
+
 .manage-activity-pop-up-list {
   display: flex;
   flex-flow: column;
   gap: 20px;
 }
+
+/* Komponenten-Items */
 .manage-activity-pop-up-item {
   -webkit-appearance: none;
   display: flex;
@@ -43,12 +58,14 @@
   border: none;
   cursor: pointer;
 }
+
 .manage-activity-pop-up-item-image {
   flex: 0 0 52px;
   height: 52px;
   border-radius: 50%;
   background: var(--light-mode-cs-disabled);
 }
+
 .manage-activity-pop-up-item-container {
   flex: 1;
   text-align: left;
@@ -57,6 +74,7 @@
   gap: 3px;
   min-width: 0;
 }
+
 .manage-activity-pop-up-item-name {
   font-family: var(--h3-typeface);
   font-size: var(--h3-size);
@@ -64,6 +82,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .manage-activity-pop-up-item-type {
   font-family: var(--text-typeface);
   font-size: var(--text-size);
@@ -71,15 +90,19 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .manage-activity-pop-up-item-icon {
   flex: 0 0 32px;
   height: 32px;
 }
+
 .manage-activity-pop-up-item-icon.hidden {
   flex: 0 0 32px;
   height: 32px;
   display: none;
 }
+
+/* Speichern-Button */
 .manage-activity-pop-up-options {
   display: flex;
   flex-flow: row wrap;

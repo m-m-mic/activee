@@ -3,7 +3,13 @@ import "../assets/css/ActiveeCard.css";
 import { useNavigate } from "react-router-dom";
 import { backendUrl } from "../index";
 
-export function ActiveeCard({ item, type }) {
+/**
+ * Card-Komponente von Activee
+ * @param item
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export function ActiveeCard({ item }) {
   const navigate = useNavigate();
   return (
     <span className="activee-card" onClick={() => navigate(`/activity/${item._id}`)}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { Subtitle } from "../components/Subtitle";
-import { InformationTag } from "../components/InformationTag";
+import { ActiveeChip } from "../components/ActiveeChip";
 import "../assets/css/Activity.css";
 import { TimeTable } from "../components/TimeTable";
 import { useCookies } from "react-cookie";
@@ -15,6 +15,7 @@ import { backendUrl } from "../index";
 import { RequiredItems } from "../components/RequiredItems";
 import { RegisterBanner } from "../components/RegisterBanner";
 import { ManageActivityPopUp } from "../components/ManageActivityPopUp";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
 export function Activity() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export function Activity() {
   const [isOwner, setOwner] = useState(false);
   const [isParticipant, setParticipant] = useState(false);
   const [isManageProfileSelectionVisible, setManageProfileSelectionVisible] = useState(false);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   let { id } = useParams();
   useEffect(() => {
     getActivityInfo();
@@ -66,9 +68,11 @@ export function Activity() {
       }
     } else {
       for (const participant of data.participants) {
-        if (participant._id === cookies.userId) return setParticipant(true);
+        if (participant === cookies.userId) return setParticipant(true);
       }
     }
+    setOwner(false);
+    setParticipant(false);
   };
 
   if (!activityInfo) {
@@ -76,6 +80,14 @@ export function Activity() {
   }
   return (
     <>
+      <ActiveeDisclaimer
+        isDisclaimerVisible={isDisclaimerVisible}
+        setIsDisclaimerVisible={setIsDisclaimerVisible}
+        variant="confirmed"
+        type="closable"
+        timed>
+        Änderungen übernommen
+      </ActiveeDisclaimer>
       <img
         className="activity-image"
         src={`${backendUrl}/images/activities/${activityInfo._id}.jpg`}
@@ -93,25 +105,28 @@ export function Activity() {
           </NavLink>
         )}
       </div>
-      <Subtitle>{activityInfo.club}</Subtitle>
+      <Subtitle>
+        {activityInfo.club} {isOwner && <ActiveeChip primary>Deine Aktivität</ActiveeChip>}{" "}
+        {isParticipant && <ActiveeChip primary>Gemerkt</ActiveeChip>}
+      </Subtitle>
       <div className="activity-information-tags">
-        <InformationTag iconUrl={`${backendUrl}/icons/sports/${activityInfo.sport._id}_icon.svg`}>
+        <ActiveeChip iconUrl={`${backendUrl}/icons/sports/${activityInfo.sport._id}_icon.svg`}>
           {activityInfo.sport.name}
-        </InformationTag>
-        <InformationTag iconUrl={`${backendUrl}/icons/genders/${activityInfo.gender._id}_icon.svg`}>
+        </ActiveeChip>
+        <ActiveeChip iconUrl={`${backendUrl}/icons/genders/${activityInfo.gender._id}_icon.svg`}>
           {activityInfo.gender.name}
-        </InformationTag>
-        <InformationTag>
+        </ActiveeChip>
+        <ActiveeChip>
           {getBirthYear(activityInfo.age.age)}
           {!activityInfo.age.isOlderThan && <> oder jünger</>}
           {activityInfo.age.isOlderThan && <> oder älter</>}
-        </InformationTag>
+        </ActiveeChip>
         {activityInfo.languages.map((language, key) => (
-          <InformationTag key={key} iconUrl={`${backendUrl}/flags/${language._id}_flag.jpg`}>
+          <ActiveeChip key={key} iconUrl={`${backendUrl}/flags/${language._id}_flag.jpg`}>
             {language.name}
-          </InformationTag>
+          </ActiveeChip>
         ))}
-        {activityInfo.league && <InformationTag>{activityInfo.league}</InformationTag>}
+        {activityInfo.league && <ActiveeChip>{activityInfo.league}</ActiveeChip>}
       </div>
       {activityInfo.requirements && (
         <>
@@ -191,23 +206,22 @@ export function Activity() {
           ))}
         </>
       )}
-      {cookies.userToken && cookies.userType === "participant" && !isParticipant && (
+      {cookies.userToken && cookies.userType === "participant" && (
         <div className="activity-remember-button">
           <ActiveeButton onClick={() => setManageProfileSelectionVisible(true)} buttonType="primary">
             {activityInfo.participants.includes(cookies.userId) ? "Aktivitäten verwalten" : "Aktivität merken"}
           </ActiveeButton>
         </div>
       )}
-      {isManageProfileSelectionVisible && (
-        <ManageActivityPopUp
-          userToken={cookies.userToken}
-          id={id}
-          getActivityInfo={getActivityInfo}
-          participants={activityInfo.participants}
-          ProfileSelectionVisible={isManageProfileSelectionVisible}
-          setProfileSelectionVisible={setManageProfileSelectionVisible}
-        />
-      )}
+      <ManageActivityPopUp
+        userToken={cookies.userToken}
+        id={id}
+        getActivityInfo={getActivityInfo}
+        participants={activityInfo.participants}
+        ProfileSelectionVisible={isManageProfileSelectionVisible}
+        setProfileSelectionVisible={setManageProfileSelectionVisible}
+        setIsDisclaimerVisible={setIsDisclaimerVisible}
+      />
       {!cookies.userToken && <RegisterBanner />}
     </>
   );

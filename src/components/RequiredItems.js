@@ -3,6 +3,12 @@ import { backendUrl } from "../index";
 import { ActiveeDetails } from "./ActiveeDetails";
 import "../assets/css/RequiredItems.css";
 
+/**
+ * Liste an Mitbringsel einer Aktivität (in Form einer Details-Komponente)
+ * @param items
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function RequiredItems({ items }) {
   const [open, setOpen] = useState(false);
   return (

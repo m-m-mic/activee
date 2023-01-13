@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import "../assets/css/ActiveeCheckbox.css";
 import CheckmarkIconWhite from "../assets/svgs/checkmark_icon_white.svg";
 
+/**
+ * Checkbox-Komponente von Activee
+ * @param onChange
+ * @param defaultValue
+ * @param disabled
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function ActiveeCheckbox({ onChange, defaultValue, disabled, children }) {
   const [value, setValue] = useState(defaultValue);
   const [checked, setChecked] = useState(defaultValue);

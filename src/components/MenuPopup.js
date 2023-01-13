@@ -7,6 +7,14 @@ import SettingsIcon from "../assets/svgs/settings_icon_black.svg";
 import { PopupOption } from "./PopupOption";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Menu-Pop-up, welches im Header dem Nutzer die Möglichkeit gibt, die wichtigsten Seiten zu erreichen
+ * @param userType
+ * @param setOptionsPopupVisible
+ * @param setIsProfileSelectionVisible
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function MenuPopup({ userType, setOptionsPopupVisible, setIsProfileSelectionVisible }) {
   const navigate = useNavigate();
   return (

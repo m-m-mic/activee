@@ -27,14 +27,3 @@ export function handleTransportChange(preference, data, setData) {
   }
   setData({ ...data, transport: preferenceArray });
 }
-
-// Löscht Sportarten aus accountInfo.sports
-export function handleSportRemoval(preference, data, setData) {
-  let preferenceArray = data.sports;
-  for (let i = 0; i < preferenceArray.length; i++) {
-    if (preferenceArray[i]._id === preference) {
-      preferenceArray.splice(i, 1);
-    }
-  }
-  setData({ ...data, sports: preferenceArray });
-}

@@ -1,5 +1,14 @@
 import React from "react";
 
+/**
+ * Pop-Up Element, welches in MenuPopup.js verwendet wird
+ * @param ImageSrc
+ * @param onClick
+ * @param children
+ * @param isLast
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function PopupOption({ ImageSrc, onClick, children, isLast }) {
   return (
     <div>

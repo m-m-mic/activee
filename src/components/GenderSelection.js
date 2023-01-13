@@ -3,6 +3,14 @@ import { VerticalButton } from "./VerticalButton";
 import { handleGenderChange } from "../scripts/handlePreferenceChange";
 import { backendUrl } from "../index";
 
+/**
+ * Auswahl von Geschlechtern im Profil
+ * @param data
+ * @param setData
+ * @param isEditMode
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function GenderSelection({ data, setData, isEditMode }) {
   if (isEditMode) {
     return (

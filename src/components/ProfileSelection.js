@@ -7,13 +7,22 @@ import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
+
+/**
+ * Pop-up, mit welchen der Nutzer zwischen Profilen wechseln kann.
+ * @param ProfileSelectionVisible
+ * @param setProfileSelectionVisible
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionVisible }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userTier"]);
   const [profileList, setProfileList] = useState([]);
   const [activeProfile, setActiveProfile] = useState(cookies.userId);
   const [activeIndex, setActiveIndex] = useState(null);
-  const [manageActivityPopupVisible, setManageActivityPopupVisible] = useState(false);
+
+  // Verhindert Scrolling des Bodys, solange Pop-up geöffnet ist
   useEffect(() => {
     if (ProfileSelectionVisible) {
       document.body.style.overflow = "hidden";
@@ -23,6 +32,8 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  // Fetched Liste an verbundenen Profilen des Accounts
   const getProfileList = () => {
     const url = backendUrl + "/account/profile-list";
     const requestOptions = {
@@ -32,7 +43,10 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => handleActiveAccountList(data));
+    // TODO: error-handling
   };
+
+  // Wechselt zu dem vom Nutzer ausgewählten Profil
   const changeProfile = () => {
     const url = backendUrl + "/account/change-profile";
     const requestOptions = {
@@ -45,7 +59,11 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => setProfileSelectionVisible(false))
       .then(() => navigate("/"));
+    // TODO: error-handling
   };
+
+  // Iteriert durch Liste an Profilen und sucht nach dem Profil, welches momentan angemeldet ist. Der Index dieses Profils
+  // wird in den activeIndex-State geschrieben, damit neben diesen ein Haken gesetzt werden kann
   const handleActiveAccountList = (data) => {
     setProfileList(data);
     for (let i = 0; i < data.length; i++) {
@@ -54,10 +72,13 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
       }
     }
   };
+
+  // Ändert den activeIndex zu den, auf welchen der Nutzer geklickt hat
   const handleActiveAccountChange = (id, index) => {
     setActiveProfile(id);
     setActiveIndex(index);
   };
+
   return (
     <div className="profile-selection">
       <div className="profile-selection-container">

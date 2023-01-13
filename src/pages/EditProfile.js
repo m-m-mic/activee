@@ -17,7 +17,7 @@ import {
   setProfileSportsInput,
 } from "../scripts/handleInputs";
 import { AddressPicker } from "../components/AddressPicker";
-import { WarningDisclaimer } from "../components/WarningDisclaimer";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import Select from "react-select";
@@ -99,9 +99,12 @@ export function EditProfile() {
     }
     return (
       <>
-        <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
+        <ActiveeDisclaimer
+          isDisclaimerVisible={isDisclaimerVisible}
+          setIsDisclaimerVisible={setIsDisclaimerVisible}
+          type="closable">
           Bitte überprüfe deine Angaben
-        </WarningDisclaimer>
+        </ActiveeDisclaimer>
         <div className="profile-user-info edit">
           <img
             className="profile-user-picture"

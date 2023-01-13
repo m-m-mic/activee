@@ -1,6 +1,16 @@
 import React from "react";
 import "../assets/css/ActiveeButton.css";
 
+/**
+ * Button-Komponente von Activee
+ * @param onClick
+ * @param buttonType
+ * @param iconSrc
+ * @param children
+ * @param isDisabled
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabled }) {
   // Struktur, wenn ein Icon mitgegeben wird
   if (iconSrc != null) {

@@ -4,6 +4,13 @@ import "../assets/css/ActiveeCard.css";
 import { backendUrl } from "../index";
 import { NavLink } from "react-router-dom";
 
+/**
+ * Scrolling-Cards-Komponente von Activee. Akzeptiert eine Liste an items mit _id und name.
+ * @param items
+ * @param type
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function ActiveeScrollingCards({ items, type }) {
   if (type === "participant" && items.length === 0) {
     return (

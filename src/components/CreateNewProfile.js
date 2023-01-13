@@ -4,11 +4,21 @@ import { NewSubAccountValidator, setFirstNameInput, setLastNameInput } from "../
 import { useCookies } from "react-cookie";
 import { ActiveeButton } from "./ActiveeButton";
 import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
-import { WarningDisclaimer } from "./WarningDisclaimer";
+import { ActiveeDisclaimer } from "./ActiveeDisclaimer";
 import { useNavigate } from "react-router-dom";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
 
+/**
+ * Popup-Komponente, in welcher "participant"-Nutzer ein neues Unterprofil erstellen könne.
+ * @param isCreateSubAccountVisible
+ * @param setCreateSubAccountVisible
+ * @param firstName
+ * @param lastName
+ * @param address
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
@@ -71,7 +81,9 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
               alt="Cancel"
             />
           </div>
-          <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible}>Bitte überprüfe deine Angaben</WarningDisclaimer>
+          <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible} type="fixed">
+            Überprüfe deine Angaben
+          </ActiveeDisclaimer>
           <div className="create-sub-account-names">
             <input
               className={inputValidation.first_name ? "create-sub-account-input" : "create-sub-account-input warning"}

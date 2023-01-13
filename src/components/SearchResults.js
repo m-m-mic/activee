@@ -2,6 +2,12 @@ import React from "react";
 import { SearchItem } from "./SearchItem";
 import "../assets/css/Search.css";
 
+/**
+ * Liste an Suchergebnissen
+ * @param searchResults
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function SearchResults({ searchResults }) {
   return (
     <>

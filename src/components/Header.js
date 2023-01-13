@@ -13,10 +13,15 @@ export function Header({ welcome = false }) {
   let location = useLocation();
   const [cookies, setCookies] = useCookies(["userId", "userType"]);
   const scrollDirection = useScrollDirection();
+  // Für Landing-Page, entscheidet ob Logo oben links sichtbar ist
   const [isCiVisible, setIsCiVisible] = useState(false);
+  // Entscheidet, ob Pop-up-Menü mit Unterseiten sichtbar ist
   const [isOptionsPopupVisible, setIsOptionsPopupVisible] = useState(false);
+  // Entscheidet, ob das Profilauswahl-Pop-up sichtbar ist
   const [isProfileSelectionVisible, setIsProfileSelectionVisible] = useState(false);
 
+  // Sobald die Seite gerendert wird, wird ein Scroll-eventListener hinzugefügt, welcher beim Scrollen den Header
+  // versteckt
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     setIsProfileSelectionVisible(false);
@@ -39,6 +44,8 @@ export function Header({ welcome = false }) {
       return isVisible;
     });
   };
+
+  // Header für Landing-Page
   if (welcome) {
     return (
       <div className={isCiVisible ? "header" : "header no-background"}>
@@ -57,6 +64,8 @@ export function Header({ welcome = false }) {
       </div>
     );
   }
+
+  // Header für angemeldete Nutzer
   if (cookies.userType === "participant" || cookies.userType === "organisation") {
     return (
       <div className={`header ${scrollDirection === "down" ? "hide" : "show"}`}>
@@ -118,6 +127,7 @@ export function Header({ welcome = false }) {
       </div>
     );
   } else {
+    // Header für nicht angemeldete Nutzer
     return (
       <div className="header">
         <NavLink className="activee-ci" to="/">

@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { ActiveeButton } from "./ActiveeButton";
 import "../assets/css/RegisterBanner.css";
 
+/**
+ * Banner auf Activity.js, wenn Nutzer nicht angemeldet ist
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function RegisterBanner() {
   const navigate = useNavigate();
   return (

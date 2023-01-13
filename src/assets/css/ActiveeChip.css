@@ -1,24 +1,32 @@
-.information-tag {
+/* Styling für activeeChip.js */
+.activee-tag {
+  font-family: var(--text-typeface);
   display: inline-flex;
   flex-flow: row;
   align-items: center;
+  min-height: 18px;
   background: var(--light-mode-cs-dark);
   gap: 5px;
   padding: 3px 7px 3px 5px;
   border-radius: 50px;
 }
 
-.information-tag.without-icon {
+/* Anderes Padding für Tags ohne Icon */
+.activee-tag.without-icon {
   padding: 3px 7px;
 }
 
-.information-tag-icon {
+.activee-tag.primary {
+  background: var(--light-mode-cs-primary);
+}
+
+.activee-tag-icon {
   width: 18px;
   height: 18px;
   border-radius: 50%;
 }
 
-.information-tag-text {
+.activee-tag-text {
   color: var(--light-mode-typeface-inverted);
   font-size: 12px;
 }

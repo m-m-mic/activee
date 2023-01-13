@@ -3,7 +3,7 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import "../assets/css/Login.css";
 import { useCookies } from "react-cookie";
-import { WarningDisclaimer } from "../components/WarningDisclaimer";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
 
@@ -95,12 +95,12 @@ export function Login() {
             </ActiveeButton>
           </div>
         </div>
-        <WarningDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
+        <ActiveeDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
           Email konnte nicht gefunden werden
-        </WarningDisclaimer>
-        <WarningDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
+        </ActiveeDisclaimer>
+        <ActiveeDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
           Es wurde ein falsches Password eingegeben
-        </WarningDisclaimer>
+        </ActiveeDisclaimer>
         <div className="login-no-account-wrapper">
           <NavLink to="/register" className="login-no-account-button">
             Noch kein Konto?

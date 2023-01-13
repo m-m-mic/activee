@@ -1,28 +1,34 @@
 /* Deklarierung aller css-Variablen, welche von activee verwendet werden */
 :root {
+  /* Farben */
+  /* Light mode */
+  /* Typefaces */
   --light-mode-typeface: #1d1d1d;
   --light-mode-typeface-inverted: var(--light-mode-background);
   --light-mode-typeface-disabled: #839695;
+  /* Background & Backdrop */
   --light-mode-background: #fafafa;
   --light-mode-background-translucent: rgba(250, 250, 250, 0.7);
   --light-mode-background-translucent-invisible: rgba(250, 250, 250, 0);
   --light-mode-backdrop-translucent-dark: rgba(0, 0, 0, 0.55);
+  /* Main colors */
   --light-mode-cs-dark: #00838a;
   --light-mode-cs-primary: #00a5ae;
   --light-mode-cs-secondary: #26bec3;
   --light-mode-cs-unselected: #9ad9dc;
   --light-mode-cs-disabled: #d9f9f8;
+  /* Additional colors */
   --light-mode-blank: var(--light-mode-background);
   --light-mode-blank-active: #f6efe8;
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-caution: #ecc300;
+  /* Elevations */
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
   --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
   --light-mode-elevation-3: 1px 2px 9px -5px rgba(0, 0, 0, 0.24);
   --light-mode-elevation-4: 1px 2px 9px -5px rgba(0, 0, 0, 0.37);
-  --blur-effect: blur(12px);
-  --component-spacing: 20px;
+  /* Typefaces */
   --h1-typeface: Inter Bold, sans-serif;
   --h1-size: 32px;
   --h1-subtitle-typeface: Inter SemiBold Italic, sans-serif;
@@ -41,6 +47,9 @@
   --annotation-typeface: Inter Medium, sans-serif;
   --annotation-size: 12px;
   --logo-typeface: Fredoka One Regular, sans-serif;
+  /* Misc */
+  --blur-effect: blur(12px);
+  --component-spacing: 20px;
 }
 
 /* Deklarierung aller notwendigen typefaces */
@@ -58,6 +67,7 @@
   font-family: "Inter Light";
   src: url(../fonts/Inter-Light.ttf);
 }
+
 @font-face {
   font-family: "Inter Light Italic";
   src: url(../fonts/Inter-LightItalic.otf);
@@ -97,6 +107,7 @@
   font-family: "Inter Black";
   src: url(../fonts/Inter-Black.ttf);
 }
+
 @font-face {
   font-family: "Fredoka One Regular";
   src: url(../fonts/FredokaOne-Regular.ttf);
@@ -107,6 +118,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body {
   width: 100%;
   min-width: 320px;
@@ -128,6 +140,9 @@ h1 {
   margin: -10px 0 0;
   font-family: var(--h1-subtitle-typeface);
   font-size: var(--h1-subtitle-size);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 h2 {
@@ -152,6 +167,7 @@ button {
   font-family: var(--button-typeface);
   font-size: var(--button-size);
 }
+
 b {
   font-family: var(--button-typeface);
 }
@@ -160,9 +176,11 @@ a {
   text-decoration: none;
   color: var(--light-mode-typeface);
 }
+
 hr {
   margin: 0;
 }
+
 input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -182,9 +200,11 @@ input {
   border-radius: 4px;
   transition: 200ms ease-out;
 }
+
 .react-select input {
   min-height: 22px !important;
 }
+
 textarea {
   -webkit-appearance: none;
   min-width: 0;
@@ -216,16 +236,19 @@ textarea:focus {
   border-bottom: 3px solid var(--light-mode-cs-primary);
   box-shadow: var(--light-mode-elevation-4);
 }
+
 input:disabled,
 textarea:disabled {
   background: none;
   border-bottom: 3px solid var(--light-mode-typeface-disabled);
   color: var(--light-mode-typeface-disabled);
 }
+
 input:disabled:hover,
 textarea:disabled:hover {
   box-shadow: none;
 }
+
 input.warning,
 textarea.warning {
   border-bottom: 6px solid var(--light-mode-warning-active);
@@ -273,6 +296,7 @@ hr {
   height: 300vh;
   background: #c7a4a4;
 }
+
 .under-construction {
   font-family: Inter SemiBold Italic, sans-serif;
   font-size: 20px;
@@ -284,6 +308,7 @@ hr {
   border-radius: 8px;
   gap: 8px;
 }
+
 .under-construction-icon {
   width: 32px;
 }

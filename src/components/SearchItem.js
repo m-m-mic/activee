@@ -1,9 +1,15 @@
 import React from "react";
-import { InformationTag } from "./InformationTag";
+import { ActiveeChip } from "./ActiveeChip";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/SearchItem.css";
 import { backendUrl } from "../index";
 
+/**
+ * Ergebniselement der Suche (Aktivität)
+ * @param item
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function SearchItem({ item }) {
   const navigate = useNavigate();
   return (
@@ -26,7 +32,7 @@ export function SearchItem({ item }) {
           <div className="search-item-club">{item.club}</div>
           {item.league && (
             <div>
-              <InformationTag>{item.league}</InformationTag>
+              <ActiveeChip>{item.league}</ActiveeChip>
             </div>
           )}
         </span>

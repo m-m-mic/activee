@@ -32,8 +32,18 @@ import { MultiValueLanguage, MultiValueRequiredItems, MultiValueStyles, SingleVa
 import { ActiveeCheckbox } from "./ActiveeCheckbox";
 import { WarningModal } from "./WarningModal";
 import { CautionDisclaimer } from "./CautionDisclaimer";
-import { WarningDisclaimer } from "./WarningDisclaimer";
+import { ActiveeDisclaimer } from "./ActiveeDisclaimer";
 
+/**
+ * Das Grundgerüst für das Modifizieren von Aktivitäten, welches in CreateActivity.js und EditActivity.js verwendet wird
+ * @param editMode
+ * @param activityInfo
+ * @param setActivityInfo
+ * @param validation
+ * @param setValidation
+ * @returns {JSX.Element|null}
+ * @constructor
+ */
 export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo, validation, setValidation }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
@@ -46,10 +56,83 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   const [ageDirection, setAgeDirection] = useState(agePreselect);
   const [genders, setGenders] = useState(genderPreselect);
   const [isIntegrationChecked, setIntegrationChecked] = useState(activityInfo.league === "Integrationskurs");
+
+  /* Preselect-Options und Default-Values werden beim Rendern generiert */
   useEffect(() => {
     getPreselectOptions();
     transformDefaultValues();
   }, []);
+
+  // Fetch Request für das Erstellen/Bearbeiten einer Aktivität
+  const modifyActivity = () => {
+    let validators = validation;
+    // Validieren der Terminangaben, da dies nicht während der Eingabe geregelt werden kann
+    for (const date of activityInfo.dates) {
+      if (isDateValid(date)) {
+        validators.dates = true;
+        setValidation({ ...validation, dates: true });
+      } else {
+        validators.dates = false;
+        setValidation({ ...validation, dates: false });
+        break;
+      }
+    }
+
+    // Validiert alle Einträge des validators-States
+    for (const [key, value] of Object.entries(validators)) {
+      if (value === false) {
+        return setIsDisclaimerVisible(true);
+      }
+    }
+
+    // Bei erfolgreicher Validierung wird der fetch-Request durchgeführt
+    let url;
+    let requestOptions;
+    if (editMode) {
+      // Für Bearbeiten (PATCH)
+      url = backendUrl + "/activity/" + activityInfo._id;
+      requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+        body: JSON.stringify(activityInfo),
+      };
+    } else {
+      // Für Erstellen (POST)
+      url = backendUrl + "/activity/";
+      requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+        body: JSON.stringify(activityInfo),
+      };
+    }
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 201 || response.status === 200) {
+        response.json().then((data) => navigate(`/activity/${data._id}`));
+      } else {
+        // TODO: error-handling
+        console.log("Error while modifying activity.");
+      }
+    });
+  };
+
+  // Löscht Aktivität aus Datenbank
+  const deleteActivity = () => {
+    const url = backendUrl + "/activity/" + activityInfo._id;
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        navigate(`/`);
+      } else {
+        console.log("Error while creating activity.");
+        // TODO: error-handling
+      }
+    });
+  };
+
+  // Fetched Vorauswahl für Sprachen, Mitbringsel und Sportarten aus dem Backend
   const getPreselectOptions = () => {
     const requestOptions = {
       method: "GET",
@@ -64,9 +147,13 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     fetch(`${backendUrl}/sport`, requestOptions)
       .then((response) => response.json())
       .then((data) => setSports(createSelectArray(data)));
+    // TODO: error-handling
   };
 
+  // Wandelt die bereits getätigten Angaben des Nutzers für Sport, Geschlecht und Sprachen in Objekte um, welche von
+  // der react-select-Library als defaultValues verwendet werden können
   const transformDefaultValues = () => {
+    // Erstellen einer tiefen Kopie, um Mutation von activityInfo zu verhindern
     const defaultInfo = structuredClone(activityInfo);
     let transformedValues;
     if (editMode) {
@@ -81,6 +168,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         transformedValues = { ...transformedValues, required_items: null };
       }
     } else {
+      // Keine defaultValues für CreateActivity.js notwendig
       transformedValues = {
         sport: null,
         gender: null,
@@ -90,70 +178,15 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     }
     setDefaultValues(transformedValues);
   };
-  const modifyActivity = () => {
-    let validators = validation;
-    for (const date of activityInfo.dates) {
-      if (isDateValid(date)) {
-        validators.dates = true;
-        setValidation({ ...validation, dates: true });
-      } else {
-        validators.dates = false;
-        setValidation({ ...validation, dates: false });
-        break;
-      }
-    }
-    for (const [key, value] of Object.entries(validators)) {
-      if (value === false) {
-        return setIsDisclaimerVisible(true);
-      }
-    }
-    let url;
-    let requestOptions;
-    if (editMode) {
-      url = backendUrl + "/activity/" + activityInfo._id;
-      requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-        body: JSON.stringify(activityInfo),
-      };
-    } else {
-      url = backendUrl + "/activity/";
-      requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-        body: JSON.stringify(activityInfo),
-      };
-    }
-    fetch(url, requestOptions).then((response) => {
-      if (response.status === 201 || response.status === 200) {
-        response.json().then((data) => navigate(`/activity/${data._id}`));
-      } else {
-        console.log("Error while creating activity.");
-      }
-    });
-  };
-  const deleteActivity = () => {
-    const url = backendUrl + "/activity/" + activityInfo._id;
-    const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
-    };
-    fetch(url, requestOptions).then((response) => {
-      if (response.status === 200) {
-        navigate(`/`);
-      } else {
-        console.log("Error while creating activity.");
-      }
-    });
-  };
+
   if (!languages || !requiredItems || !sports || defaultValues === {}) {
     return null;
   }
   return (
     <>
-      <WarningDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
+      <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
         Bitte überprüfe deine Angaben
-      </WarningDisclaimer>
+      </ActiveeDisclaimer>
       {isWarningModalVisible && (
         <>
           <WarningModal

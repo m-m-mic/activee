@@ -4,6 +4,12 @@ import CancelIconWhite from "../assets/svgs/cancel_icon_white.svg";
 import AcceptIconWhite from "../assets/svgs/accept_icon_white.svg";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Control-Buttons für Bearbeitungsseiten (Bestätigung/Abbrechen)
+ * @param onConfirmClick
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function EditControls({ onConfirmClick }) {
   const navigate = useNavigate();
 

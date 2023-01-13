@@ -12,7 +12,7 @@ import {
   setPasswordInput,
   setPasswordRepeatInput,
 } from "../scripts/handleInputs";
-import { WarningDisclaimer } from "../components/WarningDisclaimer";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 import { registerAccount } from "../scripts/fetchRequests";
@@ -29,7 +29,6 @@ export function Register() {
     return (
       <>
         <div className="login-hero">Account erstellen</div>
-        <WarningDisclaimer isDisclaimerVisible={warningVisibility}>{warning}</WarningDisclaimer>
         <div className="register-inputs">
           <h4>Art des Accounts *</h4>
           <div className="register-type">
@@ -105,6 +104,7 @@ export function Register() {
             onChange={(e) => setPasswordRepeatInput(e.target.value, accountInfo, validation, setValidation)}
           />
           <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
+          <ActiveeDisclaimer isDisclaimerVisible={warningVisibility}>{warning}</ActiveeDisclaimer>
         </div>
         <div className="register-button">
           <ActiveeButton

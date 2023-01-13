@@ -7,6 +7,16 @@ import {
   setAddressZipCodeInput,
 } from "../scripts/handleInputs";
 
+/**
+ * Address-Picker, wird auf ModifyActivity.js und EditProfile.js eingesetzt.
+ * @param data
+ * @param setData
+ * @param validation
+ * @param setValidation
+ * @param isActivity
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function AddressPicker({ data, setData, validation, setValidation, isActivity = false }) {
   return (
     <div className="address-picker">

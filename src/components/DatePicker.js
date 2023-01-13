@@ -9,6 +9,13 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { SingleValueStyles } from "../scripts/reactSelect";
 import { v4 } from "uuid";
 
+/**
+ * Komponente, mit welcher Termine zu Aktivitäten bearbeitet, hinzugefügt oder entfernt werden können
+ * @param data
+ * @param setData
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function DatePicker({ data, setData }) {
   const [weekdays, setWeekdays] = useState(weekdayPreselect);
 
