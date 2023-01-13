@@ -3,6 +3,14 @@ import { VerticalButton } from "./VerticalButton";
 import { handleTransportChange } from "../scripts/handlePreferenceChange";
 import { backendUrl } from "../index";
 
+/**
+ * Auswahl von Transportoptionen im Profil
+ * @param data
+ * @param setData
+ * @param isEditMode
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function TransportSelection({ data, setData, isEditMode }) {
   if (isEditMode) {
     return (

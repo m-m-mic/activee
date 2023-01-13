@@ -17,6 +17,11 @@ import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 import { registerAccount } from "../scripts/fetchRequests";
 
+/**
+ * Seite, auf welcher man sich bei activee registrieren kann
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Register() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);

@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import "../assets/css/TimeTable.css";
 
+/**
+ * TimeTable zeigt alle Termine einer Aktivität/eines Nutzers an
+ * @param data
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function TimeTable({ data }) {
   useEffect(() => {
     if (data) {

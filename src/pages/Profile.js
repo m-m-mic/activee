@@ -11,9 +11,15 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { Subtitle } from "../components/Subtitle";
 
+/**
+ * Seite, auf welcher die Informationen des Nutzerprofils angezeigt werden
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
+
   useEffect(() => {
     if (cookies.userToken) {
       getAccountInfo();

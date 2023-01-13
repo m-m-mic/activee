@@ -3,6 +3,11 @@ import "../assets/css/NotFoundPage.css";
 import { NavLink } from "react-router-dom";
 import NotFoundSmileyBlack from "../assets/svgs/404_smiley_black.svg";
 
+/**
+ * Seite für 404-Redirects
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function NotFoundPage() {
   return (
     <div className="not-found-container">

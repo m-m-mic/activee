@@ -26,6 +26,11 @@ import { createSelectArray } from "../scripts/createSelectArray";
 import { MultiValueLanguage, MultiValueSport, MultiValueStyles } from "../scripts/reactSelect";
 import { CautionDisclaimer } from "../components/CautionDisclaimer";
 
+/**
+ * Seite, auf welchen Nutzer ihre Profileingaben bearbeiten können
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function EditProfile() {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken", "userType"]);

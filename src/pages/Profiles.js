@@ -11,6 +11,11 @@ import { handleCookieChange } from "../scripts/handleCookieChange";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 
+/**
+ * Seite, auf welchen alle Profile eines Nutzers angezeigt werden. Nur für userTier = "parent" zugänglich
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Profiles() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType", "userTier"]);

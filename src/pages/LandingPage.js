@@ -5,12 +5,19 @@ import ActiveeLogo from "../assets/pngs/150px_activee_logo.png";
 import "../assets/css/LandingPage.css";
 import { useCookies } from "react-cookie";
 
+/**
+ * Landing-Page für nicht angemeldete Nutzer
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function LandingPage() {
-  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
   const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(["userToken", "userType"]);
+
   useEffect(() => {
     document.title = "Sport ist wie Klebstoff - activee";
   }, []);
+
   if (cookies.userToken) {
     return <Navigate to="/" />;
   }

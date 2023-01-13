@@ -2,6 +2,17 @@ import React, { useEffect } from "react";
 import { ActiveeButton } from "./ActiveeButton";
 import "../assets/css/WarningModal.css";
 
+/**
+ * Modal, welches den Nutzer vor einer irreversiblen Aktion warnt
+ * @param isWarningModalVisible
+ * @param setWarningModalVisible
+ * @param onClick
+ * @param title
+ * @param action
+ * @param children
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function WarningModal({ isWarningModalVisible, setWarningModalVisible, onClick, title, action, children }) {
   useEffect(() => {
     if (isWarningModalVisible) {

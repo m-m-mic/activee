@@ -17,6 +17,11 @@ import { RegisterBanner } from "../components/RegisterBanner";
 import { ManageActivityPopUp } from "../components/ManageActivityPopUp";
 import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
+/**
+ * Die Activity-Seite zeigt alle Informationen über eine Aktivität an
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Activity() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
@@ -26,12 +31,16 @@ export function Activity() {
   const [isParticipant, setParticipant] = useState(false);
   const [isManageProfileSelectionVisible, setManageProfileSelectionVisible] = useState(false);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  // ID-Parameter aus der URL
   let { id } = useParams();
+
+  // Fetched ActivityInfo, sobald Seite gerendert wird
   useEffect(() => {
     getActivityInfo();
   }, [id]);
 
   // Fetched ActivityInfo und ändert den Titel zum Namen der Aktivität
+  // Redirect auf 404, falls Aktivität nicht gefunden werden kann
   const getActivityInfo = () => {
     const url = backendUrl + "/activity/" + id;
     let requestOptions;
@@ -213,15 +222,17 @@ export function Activity() {
           </ActiveeButton>
         </div>
       )}
-      <ManageActivityPopUp
-        userToken={cookies.userToken}
-        id={id}
-        getActivityInfo={getActivityInfo}
-        participants={activityInfo.participants}
-        ProfileSelectionVisible={isManageProfileSelectionVisible}
-        setProfileSelectionVisible={setManageProfileSelectionVisible}
-        setIsDisclaimerVisible={setIsDisclaimerVisible}
-      />
+      {cookies.userType === "participant" && (
+        <ManageActivityPopUp
+          userToken={cookies.userToken}
+          id={id}
+          getActivityInfo={getActivityInfo}
+          participants={activityInfo.participants}
+          ProfileSelectionVisible={isManageProfileSelectionVisible}
+          setProfileSelectionVisible={setManageProfileSelectionVisible}
+          setIsDisclaimerVisible={setIsDisclaimerVisible}
+        />
+      )}
       {!cookies.userToken && <RegisterBanner />}
     </>
   );

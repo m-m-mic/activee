@@ -6,6 +6,11 @@ import { ActivityInputValidator } from "../scripts/handleInputs";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 
+/**
+ * Seite, mit welchen Nutzer bereits erstellte Aktivitäten bearbeiten können
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function EditActivity() {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
@@ -14,8 +19,9 @@ export function EditActivity() {
   const [authorisation, setAuthorisation] = useState(null);
   let { id } = useParams();
 
+  // Fetch-Request wird nur ausgeführt, falls Nutzer type = "organisation" ist
   useEffect(() => {
-    if (cookies.userToken) {
+    if (cookies.userType === "organisation") {
       getActivityInfo();
       document.title = "Aktivität bearbeiten - activee";
     }

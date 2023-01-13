@@ -7,6 +7,11 @@ import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
 
+/**
+ * Login Seite
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Login() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
@@ -42,11 +47,13 @@ export function Login() {
     };
     fetch(url, requestOptions).then((response) => {
       if (response.status === 404) {
+        // Error-Handling für falsche E-Mail
         setWrongEmailDisclaimerVisible(true);
         setWrongPasswordDisclaimerVisible(false);
         setEmailWarning(true);
         return;
       } else if (response.status === 403) {
+        // Error-Handling für falsche Password
         setWrongEmailDisclaimerVisible(false);
         setWrongPasswordDisclaimerVisible(true);
         setPasswordWarning(true);

@@ -1,12 +1,17 @@
 import { SearchBar } from "../components/SearchBar";
 import { SearchResults } from "../components/SearchResults";
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { getSearchResults } from "../scripts/fetchRequests";
 import { Subtitle } from "../components/Subtitle";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 
+/**
+ * Seite, auf welcher Nutzer nach Aktivität suchen können
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Search() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,6 +42,7 @@ export function Search() {
     };
   }, [searchQuery]);
 
+  // Löst Such-Request aus, wenn Enter gedrückt wurde
   const confirmSearch = (e) => {
     if (e.key === "Enter") navigate(`/search?query=${searchQuery}`);
   };

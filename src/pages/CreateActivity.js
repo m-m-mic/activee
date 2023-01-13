@@ -8,13 +8,19 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { v4 } from "uuid";
 
+/**
+ * Formular, um eine neue Aktivität zu erstellen
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
   const [activityInfo, setActivityInfo] = useState();
   const [inputValidation, setInputValidation] = useState(newActivityInputValidator);
 
+  // Fetch-Request wird nur ausgeführt, falls Nutzer type = "organisation" ist
   useEffect(() => {
-    if (cookies.userToken) {
+    if (cookies.userType === "organisation") {
       getAccountInfo();
       document.title = "Neue Aktivität erstellen - activee";
     }

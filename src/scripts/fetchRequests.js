@@ -31,6 +31,7 @@ export const registerAccount = (accountInfo, validation, setCookie, navigate, se
         .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
         .then(() => navigate("/"));
     } else {
+      // TODO: spezifisches Handling, wenn E-Mail schon existiert
       setWarning("Es ist ein Fehler beim Erstellen des Accounts aufgetreten.");
       return setWarningVisibility(true);
     }
@@ -47,6 +48,7 @@ export const getAccountInfo = (token, setAccountInfo) => {
   fetch(url, requestOptions)
     .then((response) => response.json())
     .then((data) => setAccountInfo(data));
+  // TODO: error-handling
 };
 
 // Liefert empfohlene Aktivitäten anhand von Nutzerpräferenzen zurück
@@ -59,6 +61,7 @@ export const getRecommendations = (token, setRecommendations) => {
   fetch(url, requestOptions)
     .then((response) => response.json())
     .then((data) => setRecommendations(data));
+  // TODO: error-handling
 };
 
 // Liefert alle vorhandenen Sportarten zurück
@@ -71,6 +74,7 @@ export const getSports = (token, setSports) => {
   fetch(url, requestOptions)
     .then((response) => response.json())
     .then((data) => setSports(data));
+  // TODO: error-handling
 };
 
 // Liefert Suchergebnisse anhand von Suchbegriff zurück
@@ -92,6 +96,7 @@ export const getSearchResults = (token, enteredQuery, setSearchResults) => {
       .then((response) => response.json())
       .then((data) => setSearchResults(data));
   }
+  // TODO: error-handling
 };
 
 // Fetched alle Preselect Collections (Language, RequiredItems, Sports) und verwandelt sie in Select Arrays
@@ -115,4 +120,5 @@ export const getPreselectOptions = (token, setLanguages, setRequiredItems, setSp
       .then((response) => response.json())
       .then((data) => setSports(createSelectArray(data)));
   }
+  // TODO: error-handling
 };

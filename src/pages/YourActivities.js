@@ -10,6 +10,11 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 
+/**
+ * Seite mit allen Aktivitäten, mit welchen der Nutzer in Verbindung steht (gemerkt/erstellt)
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function YourActivities() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);

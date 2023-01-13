@@ -13,6 +13,11 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { getAccountInfo, getRecommendations, getSports } from "../scripts/fetchRequests";
 
+/**
+ * Startseite für angemeldete Nutzer
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Home() {
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["userToken", "userType"]);

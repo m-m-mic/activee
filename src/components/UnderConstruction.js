@@ -1,5 +1,7 @@
 import React from "react";
 import WarningIconBlack from "../assets/svgs/warning_icon_black.svg";
+
+// TODO: delete
 export const UnderConstruction = () => {
   return (
     <div className="under-construction">
