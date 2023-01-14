@@ -64,27 +64,35 @@ export const getShortenedRecommendations = (token, setRecommendations) => {
   // TODO: error-handling
 };
 
-export const getRecommendations = (token, setRecommendations) => {
-  const url = backendUrl + "/activity/recommendations";
+export const getRecommendations = (token, page, setPage, results, setResults, setMorePages) => {
+  const url = backendUrl + "/activity/recommendations?page=" + page;
   const requestOptions = {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   };
   fetch(url, requestOptions)
     .then((response) => response.json())
-    .then((data) => setRecommendations(data));
+    .then((data) => {
+      setResults(results.concat(data.activities));
+      setPage(page + 1);
+      if (data.last_page) setMorePages(false);
+    });
   // TODO: error-handling
 };
 
-export const getClubActivities = (token, setRecommendations) => {
-  const url = backendUrl + "/activity/club";
+export const getClubActivities = (token, page, setPage, results, setResults, setMorePages) => {
+  const url = backendUrl + "/activity/club?page=" + page;
   const requestOptions = {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   };
   fetch(url, requestOptions)
     .then((response) => response.json())
-    .then((data) => setRecommendations(data));
+    .then((data) => {
+      setResults(results.concat(data.activities));
+      setPage(page + 1);
+      if (data.last_page) setMorePages(false);
+    });
   // TODO: error-handling
 };
 
@@ -127,11 +135,11 @@ export const getCuratedSports = (token, setSports) => {
 };
 
 // Liefert Suchergebnisse anhand von Suchbegriff zurück
-export const getSearchResults = (token, enteredQuery, setSearchResults) => {
+export const getSearchResults = (token, enteredQuery, page, setPage, results, setResults, setMorePages) => {
   if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
-    setSearchResults(null);
+    setResults(null);
   } else {
-    const url = backendUrl + "/search/" + enteredQuery;
+    const url = backendUrl + "/search/" + enteredQuery + "?page=" + page;
     let requestOptions;
     if (token) {
       requestOptions = {
@@ -143,7 +151,11 @@ export const getSearchResults = (token, enteredQuery, setSearchResults) => {
     }
     fetch(url, requestOptions)
       .then((response) => response.json())
-      .then((data) => setSearchResults(data));
+      .then((data) => {
+        setResults(data.activities);
+        setPage(page + 1);
+        if (data.last_page) setMorePages(false);
+      });
   }
   // TODO: error-handling
 };
