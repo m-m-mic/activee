@@ -29,7 +29,7 @@ export const registerAccount = (accountInfo, validation, setCookie, navigate, se
       response
         .json()
         .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-        .then(() => navigate("/"));
+        .then(() => navigate("/profile"));
     } else {
       // TODO: spezifisches Handling, wenn E-Mail schon existiert
       setWarning("Es ist ein Fehler beim Erstellen des Accounts aufgetreten.");

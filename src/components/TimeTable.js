@@ -4,19 +4,30 @@ import "../assets/css/TimeTable.css";
 /**
  * TimeTable zeigt alle Termine einer Aktivität/eines Nutzers an
  * @param data
+ * @param activity
  * @returns {JSX.Element}
  * @constructor
  */
-export function TimeTable({ data }) {
+export function TimeTable({ data, activity = false }) {
   useEffect(() => {
     if (data) {
-      fillTable(data);
+      if (activity) {
+        fillActivityTable(data);
+      } else {
+        fillTable(data);
+      }
     }
   }, [data]);
   const fillTable = (timeValues) => {
     for (const time of timeValues) {
       document.getElementById(`${time.day}-${time.starting_hour}`).style.background = "var(--light-mode-cs-dark)";
       document.getElementById(`row-${time.starting_hour}`).style.display = "flex";
+    }
+  };
+  const fillActivityTable = (timeValues) => {
+    for (const time of timeValues) {
+      document.getElementById(`${time.day}-${time.hour.toString()}`).style.background = "var(--light-mode-cs-dark)";
+      document.getElementById(`row-${time.hour.toString()}`).style.display = "flex";
     }
   };
   return (

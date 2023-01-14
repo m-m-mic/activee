@@ -54,7 +54,7 @@ export function YourActivities() {
         {userActivities.length > 0 && (
           <>
             <h2>Terminkalender</h2>
-            <TimeTable data={shortenedDates} />
+            <TimeTable data={shortenedDates} activity />
           </>
         )}
         <h2>{cookies.userType === "participant" ? "Gemerkte Aktivitäten" : "Aktivitäten"}</h2>

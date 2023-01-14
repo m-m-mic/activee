@@ -78,7 +78,7 @@ export function Home() {
             </HorizontalButton>
           ))}
         </div>
-        {recommendations && (
+        {recommendations.length > 0 && (
           <>
             {cookies.userType === "participant" ? (
               <div className="heading-button" onClick={() => navigate("/search")}>

@@ -163,7 +163,7 @@ export function Activity() {
                 </div>
               ))}
             </div>
-            <TimeTable data={shortenedDates} />
+            <TimeTable data={shortenedDates} activity />
           </div>
         </>
       )}
