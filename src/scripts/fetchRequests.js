@@ -76,6 +76,30 @@ export const getRecommendations = (token, setRecommendations) => {
   // TODO: error-handling
 };
 
+export const getClubActivities = (token, setRecommendations) => {
+  const url = backendUrl + "/activity/club";
+  const requestOptions = {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => setRecommendations(data));
+  // TODO: error-handling
+};
+
+export const getShortenedClubActivities = (token, setRecommendations) => {
+  const url = backendUrl + "/activity/club/shortened";
+  const requestOptions = {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => setRecommendations(data));
+  // TODO: error-handling
+};
+
 // Liefert alle vorhandenen Sportarten zurück
 export const getSports = (token, setSports) => {
   const url = backendUrl + "/curated/sport";
