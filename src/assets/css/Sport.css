@@ -1,0 +1,19 @@
+.sport-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-list {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.sport-header-icon {
+    flex: 0 0 32px;
+    height: 32px;
+    width: 32px;
+}

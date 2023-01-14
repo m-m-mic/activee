@@ -20,9 +20,10 @@ import { Search } from "./pages/Search";
 import { Register } from "./pages/Register";
 import { LandingPage } from "./pages/LandingPage";
 import WelcomeLayout from "./layouts/WelcomeLayout";
+import { Sport } from "./pages/Sport";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
-export const backendUrl = "https://api-activee.onrender.com";
+export const backendUrl = "http://localhost:3033";
 
 // React-Router Struktur unseres Projekts, nicht existierende Pfade werden zu 404 weitergeleitet
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
           <Route exact path="activity/:id/edit" element={<EditActivity />} />
           <Route exact path="activity/new" element={<CreateActivity />} />
           <Route exact path="sports" element={<Sports />} />
+          <Route exact path="sport/:id" element={<Sport />} />
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="profile/edit" element={<EditProfile />} />
           <Route exact path="settings" element={<Settings />} />

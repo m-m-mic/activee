@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/Home.css";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
-import { LandingPage } from "./LandingPage";
 import { useCookies } from "react-cookie";
 import { Subtitle } from "../components/Subtitle";
 import { UnderConstruction } from "../components/UnderConstruction";
@@ -54,7 +53,11 @@ export function Home() {
         <h2>Sportarten</h2>
         <div className="home-sports">
           {sports.map((sport, key) => (
-            <HorizontalButton key={key} iconUrl={`${backendUrl}/icons/sports/${sport._id}_icon.svg`} value={sport._id}>
+            <HorizontalButton
+              key={key}
+              onClick={() => navigate(`sport/${sport._id}`)}
+              iconUrl={`${backendUrl}/icons/sports/${sport._id}_icon.svg`}
+              value={sport._id}>
               {sport.name}
             </HorizontalButton>
           ))}

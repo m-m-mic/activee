@@ -9,9 +9,9 @@ import "../assets/css/ActiveeChip.css";
  * @returns {JSX.Element}
  * @constructor
  */
-export function ActiveeChip({ iconUrl, children, primary }) {
+export function ActiveeChip({ iconUrl, children, primary, onClick }) {
   return (
-    <span className={`activee-tag ${!iconUrl && "without-icon"} ${primary && "primary"}`}>
+    <span onClick={onClick} className={`activee-tag ${!iconUrl && "without-icon"} ${primary && "primary"}`}>
       {iconUrl && <img className="activee-tag-icon" src={iconUrl} alt="tag icon" />}
       <div className="activee-tag-text">{children}</div>
     </span>

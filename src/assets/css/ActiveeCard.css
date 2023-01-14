@@ -12,10 +12,19 @@
   cursor: pointer;
 }
 
+.activee-card.compact {
+  min-width: auto;
+  max-width: none;
+}
+
 .activee-card-image {
   height: 120px;
   width: 100%;
   object-fit: cover;
+}
+
+.activee-card-image.compact{
+  height: 100px;
 }
 
 .activee-card-info {
