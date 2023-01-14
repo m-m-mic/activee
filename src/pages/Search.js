@@ -26,6 +26,8 @@ export function Search() {
     const queryParams = new URLSearchParams(location.search);
     const urlQuery = queryParams.get("query");
     setUrlQuery(urlQuery);
+    setRecommendations(null);
+    setSearchResults(null);
     if (urlQuery) {
       getSearchResults(cookies.userToken, urlQuery, setSearchResults);
     } else {
@@ -51,15 +53,13 @@ export function Search() {
   return (
     <>
       <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-      <h1>
-        {urlQuery ? "Suchergebnisse" : cookies.userToken !== "organisation" ? "Empfehlungen" : "Aktivität von deinem Verein"}
-      </h1>
+      <h1>{urlQuery ? "Suchergebnisse" : cookies.userType === "participant" ? "Empfehlungen" : "Aktivität von Deinem Verein"}</h1>
       {urlQuery && <Subtitle>für "{urlQuery}"</Subtitle>}
-      {searchResults ? (
+      {recommendations && !searchResults && <SearchResults searchResults={recommendations} />}
+      {searchResults && (
         <>{searchResults.length > 0 ? <SearchResults searchResults={searchResults} /> : <div>Keine Ergebnisse gefunden</div>}</>
-      ) : (
-        <LoadingAnimation />
       )}
+      {!recommendations && !searchResults && <LoadingAnimation />}
     </>
   );
 }
