@@ -3,7 +3,7 @@ import { SearchResults } from "../components/SearchResults";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { getRecommendations, getSearchResults } from "../scripts/fetchRequests";
+import { getClubActivities, getRecommendations, getSearchResults } from "../scripts/fetchRequests";
 import { Subtitle } from "../components/Subtitle";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 
@@ -31,9 +31,10 @@ export function Search() {
     if (urlQuery) {
       getSearchResults(cookies.userToken, urlQuery, setSearchResults);
     } else {
-      if (cookies.userType !== "organisation") {
+      if (cookies.userType === "participant") {
         getRecommendations(cookies.userToken, setRecommendations);
       } else {
+        getClubActivities(cookies.userToken, setRecommendations);
       }
       setSearchResults(null);
     }

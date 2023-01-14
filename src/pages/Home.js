@@ -73,22 +73,20 @@ export function Home() {
             </HorizontalButton>
           ))}
         </div>
-        {(cookies.userType === "participant" && recommendations.length) > 0 && (
+        {recommendations && (
           <>
-            <div className="heading-button" onClick={() => navigate("/search")}>
-              <h2>Empfehlungen für Dich</h2>
-              <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
-            </div>
+            {cookies.userType === "participant" ? (
+              <div className="heading-button" onClick={() => navigate("/search")}>
+                <h2>Empfehlungen für Dich</h2>
+                <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+              </div>
+            ) : (
+              <div className="heading-button" onClick={() => navigate("/search")}>
+                <h2>Andere Aktivitäten von Deinem Verein</h2>
+                <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+              </div>
+            )}
             <ActiveeScrollingCards items={recommendations} type="activity" />
-          </>
-        )}
-        {cookies.userType === "organisation" && (
-          <>
-            <div className="heading-button" onClick={() => navigate("/search")}>
-              <h2>Andere Aktivitäten von Deinem Verein</h2>
-              <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
-            </div>
-            <UnderConstruction />
           </>
         )}
       </>
