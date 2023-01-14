@@ -10,7 +10,12 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
-import { getAccountInfo, getShortenedClubActivities, getShortenedRecommendations, getSports } from "../scripts/fetchRequests";
+import {
+  getAccountInfo,
+  getShortenedClubActivities,
+  getShortenedRecommendations,
+  getCuratedSports,
+} from "../scripts/fetchRequests";
 import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
 
 /**
@@ -29,7 +34,7 @@ export function Home() {
     if (cookies.userToken) {
       document.title = "Übersicht - activee";
       getAccountInfo(cookies.userToken, setAccountInfo);
-      getSports(cookies.userToken, setSports);
+      getCuratedSports(cookies.userToken, setSports);
       if (cookies.userType === "participant") {
         getShortenedRecommendations(cookies.userToken, setRecommendations);
       } else {

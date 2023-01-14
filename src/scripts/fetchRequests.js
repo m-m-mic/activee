@@ -102,6 +102,19 @@ export const getShortenedClubActivities = (token, setRecommendations) => {
 
 // Liefert alle vorhandenen Sportarten zurück
 export const getSports = (token, setSports) => {
+  const url = backendUrl + "/sport";
+  const requestOptions = {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => setSports(data));
+  // TODO: error-handling
+};
+
+// Liefert vier Sportarten (die eigenen + potenziell Empfehlungen) zurück
+export const getCuratedSports = (token, setSports) => {
   const url = backendUrl + "/curated/sport";
   const requestOptions = {
     method: "GET",
