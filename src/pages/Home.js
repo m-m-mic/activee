@@ -10,7 +10,8 @@ import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
-import { getAccountInfo, getRecommendations, getSports } from "../scripts/fetchRequests";
+import { getAccountInfo, getShortenedRecommendations, getSports } from "../scripts/fetchRequests";
+import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
 
 /**
  * Startseite für angemeldete Nutzer
@@ -29,7 +30,7 @@ export function Home() {
       document.title = "Übersicht - activee";
       getAccountInfo(cookies.userToken, setAccountInfo);
       getSports(cookies.userToken, setSports);
-      if (cookies.userType === "participant") getRecommendations(cookies.userToken, setRecommendations);
+      if (cookies.userType === "participant") getShortenedRecommendations(cookies.userToken, setRecommendations);
     }
   }, [cookies.userToken]);
 
@@ -41,7 +42,10 @@ export function Home() {
       <>
         <h1>Guten Tag, {accountInfo.first_name}!</h1>
         {cookies.userType === "organisation" && <Subtitle>{accountInfo.club}</Subtitle>}
-        <h2>Deine Aktivitäten</h2>
+        <div className="heading-button" onClick={() => navigate("/your-activities")}>
+          <h2>Deine Aktivitäten</h2>
+          <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+        </div>
         <ActiveeScrollingCards items={accountInfo.activities} type={cookies.userType} />
         {cookies.userType === "organisation" && (
           <div className="home-add-button">
@@ -50,7 +54,10 @@ export function Home() {
             </ActiveeButton>
           </div>
         )}
-        <h2>Sportarten</h2>
+        <div className="heading-button" onClick={() => navigate("/sports")}>
+          <h2>Sportarten</h2>
+          <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+        </div>
         <div className="home-sports">
           {sports.map((sport, key) => (
             <HorizontalButton
@@ -64,13 +71,19 @@ export function Home() {
         </div>
         {(cookies.userType === "participant" && recommendations.length) > 0 && (
           <>
-            <h2>Empfehlungen für Dich</h2>
+            <div className="heading-button" onClick={() => navigate("/search")}>
+              <h2>Empfehlungen für Dich</h2>
+              <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+            </div>
             <ActiveeScrollingCards items={recommendations} type="activity" />
           </>
         )}
         {cookies.userType === "organisation" && (
           <>
-            <h2>Andere Aktivitäten von deinem Verein</h2>
+            <div className="heading-button" onClick={() => navigate("/search")}>
+              <h2>Andere Aktivitäten von Deinem Verein</h2>
+              <img src={ExpandIconBlack} className="heading-icon" alt="arrow" />
+            </div>
             <UnderConstruction />
           </>
         )}

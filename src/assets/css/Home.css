@@ -8,3 +8,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.heading-button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.heading-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  transform: rotate(-90deg);
+}
+
+.heading-button h2 {
+  flex: 1;
+}

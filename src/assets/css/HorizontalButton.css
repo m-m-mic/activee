@@ -10,6 +10,7 @@
   padding: 10px;
   border-radius: 8px;
   min-width: 0;
+  cursor: pointer;
 }
 .horizontal-button.unchecked {
   background: var(--light-mode-cs-unselected);

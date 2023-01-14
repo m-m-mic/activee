@@ -52,8 +52,20 @@ export const getAccountInfo = (token, setAccountInfo) => {
 };
 
 // Liefert empfohlene Aktivitäten anhand von Nutzerpräferenzen zurück
+export const getShortenedRecommendations = (token, setRecommendations) => {
+  const url = backendUrl + "/activity/recommendations/shortened";
+  const requestOptions = {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => setRecommendations(data));
+  // TODO: error-handling
+};
+
 export const getRecommendations = (token, setRecommendations) => {
-  const url = backendUrl + "/activity/filtered";
+  const url = backendUrl + "/activity/recommendations";
   const requestOptions = {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
@@ -66,7 +78,7 @@ export const getRecommendations = (token, setRecommendations) => {
 
 // Liefert alle vorhandenen Sportarten zurück
 export const getSports = (token, setSports) => {
-  const url = backendUrl + "/sport";
+  const url = backendUrl + "/curated/sport";
   const requestOptions = {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
