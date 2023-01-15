@@ -23,7 +23,7 @@ import WelcomeLayout from "./layouts/WelcomeLayout";
 import { Sport } from "./pages/Sport";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
-export const backendUrl = "http://localhost:3033";
+export const backendUrl = "https://api-activee.onrender.com";
 
 // React-Router Struktur unseres Projekts, nicht existierende Pfade werden zu 404 weitergeleitet
 export default function App() {
