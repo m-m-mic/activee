@@ -59,7 +59,11 @@ export function EditActivity() {
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {
-        return <LoadingAnimation />;
+        return (
+          <>
+            <LoadingAnimation />
+          </>
+        );
       }
       if (authorisation === false) {
         return <Navigate to="/404" />;

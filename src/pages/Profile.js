@@ -10,6 +10,7 @@ import { TransportSelection } from "../components/TransportSelection";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { Subtitle } from "../components/Subtitle";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
 /**
  * Seite, auf welcher die Informationen des Nutzerprofils angezeigt werden
@@ -19,6 +20,8 @@ import { Subtitle } from "../components/Subtitle";
 export function Profile() {
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
   const [accountInfo, setAccountInfo] = useState();
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("");
 
   useEffect(() => {
     if (cookies.userToken) {
@@ -34,15 +37,29 @@ export function Profile() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setAccountInfo(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setAccountInfo(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Account konnte nicht geladen werden");
+      }
+    });
   };
 
   if (cookies.userToken) {
     if (!accountInfo) {
-      return <LoadingAnimation />;
+      return (
+        <>
+          <ActiveeDisclaimer
+            isDisclaimerVisible={isDisclaimerVisible}
+            setIsDisclaimerVisible={setIsDisclaimerVisible}
+            type="closable">
+            {disclaimer}
+          </ActiveeDisclaimer>
+          <LoadingAnimation />
+        </>
+      );
     }
     return (
       <>

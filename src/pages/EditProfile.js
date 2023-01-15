@@ -36,6 +36,7 @@ export function EditProfile() {
   const [accountInfo, setAccountInfo] = useState();
   const [inputValidation, setInputValidation] = useState(ProfileInputValidator);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("");
   const [languages, setLanguages] = useState();
   const [sports, setSports] = useState();
   const [defaultValues, setDefaultValues] = useState({});
@@ -55,12 +56,17 @@ export function EditProfile() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        setAccountInfo(data);
-        transformDefaultValues(data);
-      });
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => {
+          setAccountInfo(data);
+          transformDefaultValues(data);
+        });
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Account konnte nicht geladen werden");
+      }
+    });
   };
 
   // Fetched alle Preselect Collections (Language, RequiredItems, Sports) und verwandelt sie in Select Arrays
@@ -90,6 +96,7 @@ export function EditProfile() {
     for (const [key, value] of Object.entries(inputValidation)) {
       if (value === false) {
         setIsDisclaimerVisible(true);
+        setDisclaimer("Überprüfe deine Angaben");
         return;
       }
     }
@@ -103,7 +110,8 @@ export function EditProfile() {
       if (response.status === 200) {
         navigate("/profile");
       } else {
-        console.log("Error while updating profile.");
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Profil konnte nicht aktualisiert werden");
       }
     });
   };
@@ -121,7 +129,17 @@ export function EditProfile() {
 
   if (cookies.userToken) {
     if (!accountInfo) {
-      return <LoadingAnimation />;
+      return (
+        <>
+          <ActiveeDisclaimer
+            isDisclaimerVisible={isDisclaimerVisible}
+            setIsDisclaimerVisible={setIsDisclaimerVisible}
+            type="closable">
+            {disclaimer}
+          </ActiveeDisclaimer>
+          <LoadingAnimation />
+        </>
+      );
     }
     return (
       <>
@@ -129,7 +147,7 @@ export function EditProfile() {
           isDisclaimerVisible={isDisclaimerVisible}
           setIsDisclaimerVisible={setIsDisclaimerVisible}
           type="closable">
-          Bitte überprüfe deine Angaben
+          {disclaimer}
         </ActiveeDisclaimer>
         <div className="profile-user-info edit">
           <img

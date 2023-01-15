@@ -59,10 +59,14 @@ export function Home() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setSports(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setSports(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Sportarten konnten nicht geladen werden");
+      }
+    });
   };
 
   // Liefert empfohlene Aktivitäten anhand von Nutzerpräferenzen zurück

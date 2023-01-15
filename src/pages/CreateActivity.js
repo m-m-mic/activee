@@ -7,6 +7,7 @@ import { newActivityInputValidator } from "../scripts/handleInputs";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import { v4 } from "uuid";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
 /**
  * Formular, um eine neue Aktivität zu erstellen
@@ -70,7 +71,17 @@ export default function CreateActivity() {
   if (cookies.userToken) {
     if (cookies.userType === "organisation") {
       if (!activityInfo) {
-        return <LoadingAnimation />;
+        return (
+          <>
+            <ActiveeDisclaimer
+              isDisclaimerVisible={isDisclaimerVisible}
+              setIsDisclaimerVisible={setIsDisclaimerVisible}
+              type="closable">
+              {disclaimer}
+            </ActiveeDisclaimer>
+            <LoadingAnimation />
+          </>
+        );
       }
       return (
         <ModifyActivity

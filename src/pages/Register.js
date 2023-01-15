@@ -28,8 +28,8 @@ export function Register() {
   const [cookies, setCookie] = useCookies(["userToken"]);
   const [accountInfo, setAccountInfo] = useState(accountTemplate);
   const [validation, setValidation] = useState(NewAccountInputValidator);
-  const [warningVisibility, setWarningVisibility] = useState(false);
-  const [warning, setWarning] = useState("Error");
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [setDisclaimer, setSetDisclaimer] = useState("Error");
 
   // Registriert neuen Nutzer und loggt ihn ein
   // Zuerst wird die Validität der Nutzereingaben überprüft. Sind diese valide, wird ein neuer Account erstellt und
@@ -37,8 +37,8 @@ export function Register() {
   const registerAccount = () => {
     for (const [key, value] of Object.entries(validation)) {
       if (value === false) {
-        setWarning("Bitte überprüfe deine Angaben.");
-        setWarningVisibility(true);
+        setSetDisclaimer("Bitte überprüfe deine Angaben.");
+        setIsDisclaimerVisible(true);
         return;
       }
     }
@@ -50,16 +50,16 @@ export function Register() {
       body: JSON.stringify(accountInfo),
     };
     fetch(url, requestOptions).then((response) => {
+      console.log(response.json());
       if (response.status === 201) {
-        setWarningVisibility(false);
+        setIsDisclaimerVisible(false);
         response
           .json()
           .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
           .then(() => navigate("/profile"));
       } else {
-        // TODO: spezifisches Handling, wenn E-Mail schon existiert
-        setWarning("Es ist ein Fehler beim Erstellen des Accounts aufgetreten.");
-        return setWarningVisibility(true);
+        setSetDisclaimer("Es ist ein Fehler beim Erstellen des Accounts aufgetreten");
+        return setIsDisclaimerVisible(true);
       }
     });
   };
@@ -143,12 +143,14 @@ export function Register() {
             onChange={(e) => setPasswordRepeatInput(e.target.value, accountInfo, validation, setValidation)}
           />
           <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
-          <ActiveeDisclaimer isDisclaimerVisible={warningVisibility}>{warning}</ActiveeDisclaimer>
+          <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible}>{setDisclaimer}</ActiveeDisclaimer>
         </div>
         <div className="register-button">
           <ActiveeButton
             buttonType="primary"
-            onClick={() => registerAccount(accountInfo, validation, setCookie, navigate, setWarningVisibility, setWarning)}>
+            onClick={() =>
+              registerAccount(accountInfo, validation, setCookie, navigate, setIsDisclaimerVisible, setSetDisclaimer)
+            }>
             Registrieren
           </ActiveeButton>
         </div>

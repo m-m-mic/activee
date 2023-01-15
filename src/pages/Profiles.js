@@ -86,8 +86,8 @@ export function Profiles() {
         getAccountInfo();
         return;
       }
-      // TODO: error-handling
-      console.log("Something went wrong while deleting profile");
+      setIsDisclaimerVisible(true);
+      setDisclaimer("Profil konnte nicht gelöscht werden");
     });
   };
 
