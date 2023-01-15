@@ -1,46 +1,68 @@
 .search-item {
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-primary);
-  padding: 12px 10px;
   border-radius: 8px;
   cursor: pointer;
-}
-.search-item-primary {
-  display: flex;
-  gap: 10px;
-}
-.search-item-primary-info {
-  flex: 0 0 60%;
-  min-width: 160px;
-  display: flex;
-  flex-flow: column;
-  gap: 8px;
-}
-.search-item-title {
-  min-width: 0;
-  display: flex;
-  gap: 5px;
+  overflow: hidden;
 }
 .search-item-image {
   min-width: 0;
-  max-width: 400px;
   width: 100%;
-  border-radius: 4px;
   height: 120px;
   object-fit: cover;
 }
-.search-item-name {
+
+.search-item-info {
+  padding: 10px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+.search-item-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
-  font-family: var(--h2-typeface);
-  font-size: var(--h2-size);
+}
+.search-item-secondary {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.search-item-club,
+.search-item-league,
+.search-item-name {
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
-.search-item-sport-icon {
-  width: 24px;
+.search-item-club {
+  font-family: var(--h1-subtitle-typeface)
 }
-.search-item-details {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr;
+.search-item-name {
+  font-family: var(--h2-typeface);
+  font-size: var(--h2-size);
+}
+.search-item-sport-icon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+.search-item-detail {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.search-item-detail span {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.search-item-detail-image {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
 }

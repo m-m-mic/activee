@@ -1,6 +1,7 @@
 import { SearchBar } from "../components/SearchBar";
 import { SearchResults } from "../components/SearchResults";
 import React, { useEffect, useState } from "react";
+import "../assets/css/Search.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Subtitle } from "../components/Subtitle";
@@ -8,6 +9,7 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { isVariableOnlySpaces } from "../scripts/isVariableOnlySpaces";
 import { backendUrl } from "../index";
+import NotFoundSmiley from "../assets/svgs/404_smiley_black.svg";
 
 /**
  * Seite, auf welcher Nutzer nach Aktivität suchen können
@@ -66,16 +68,19 @@ export function Search() {
   const getSearchResults = (enteredQuery, page, results) => {
     setLoading(true);
     if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
+      // Leere Eingaben sind nicht valide für die Suche
       setResults(null);
     } else {
       const url = backendUrl + "/search/" + enteredQuery + "?page=" + page;
       let requestOptions;
       if (cookies.userToken) {
+        // Request für angemeldete Nutzer
         requestOptions = {
           method: "GET",
           headers: { Authorization: `Bearer ${cookies.userToken}` },
         };
       } else {
+        // Request für nicht angemeldete Nutzer
         requestOptions = { method: "GET" };
       }
       fetch(url, requestOptions)
@@ -94,15 +99,21 @@ export function Search() {
   const getRecommendations = (page, results) => {
     setLoading(true);
     let url;
-    if (cookies.userType === "participant") {
-      url = backendUrl + "/activity/recommendations?page=" + page;
-    } else {
+    if (cookies.userType === "organisation") {
+      // Andere URL für Übungsleiter
       url = backendUrl + "/activity/club?page=" + page;
+    } else {
+      url = backendUrl + "/activity/recommendations?page=" + page;
     }
-    const requestOptions = {
-      method: "GET",
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-    };
+    let requestOptions;
+    if (cookies.userToken) {
+      requestOptions = {
+        method: "GET",
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      };
+    } else {
+      requestOptions = { method: "GET" };
+    }
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -127,7 +138,7 @@ export function Search() {
         <>
           <h1>Suchergebnisse</h1>
           <Subtitle>für "{urlQuery}"</Subtitle>
-          <SearchResults searchResults={results} />
+          <SearchResults searchResults={results} signedIn={!!cookies.userToken} />
           {results.length > 0 && !isLastPage && (
             <ActiveeButton buttonType="primary" onClick={() => getSearchResults(urlQuery, page, results)}>
               Mehr Laden
@@ -136,8 +147,8 @@ export function Search() {
         </>
       ) : (
         <>
-          <h1>{cookies.userType === "participant" ? "Empfehlungen" : "Aktivitäten von Deinem Verein"}</h1>
-          <SearchResults searchResults={results} />
+          <h1>{cookies.userType === "organisation" ? "Aktivitäten von Deinem Verein" : "Empfehlungen"}</h1>
+          <SearchResults searchResults={results} signedIn={!!cookies.userToken} />
           {results.length > 0 && !isLastPage && (
             <ActiveeButton buttonType="primary" onClick={() => getRecommendations(page, results)}>
               Mehr Laden
@@ -145,7 +156,12 @@ export function Search() {
           )}
         </>
       )}
-
+      {!loading && results.length === 0 && (
+        <div className="search-no-results">
+          <img className="search-no-results-image" src={NotFoundSmiley} alt="not found smiley" />
+          Es konnten keine Ergebnisse gefunden werden.
+        </div>
+      )}
       {loading && <LoadingAnimation />}
     </>
   );
