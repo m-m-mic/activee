@@ -36,6 +36,7 @@ export default function CreateActivity() {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => fillActivityTemplate(data));
+    // TODO: error-handling
   };
 
   // Erstellt ein leeres Activity Objekt, welches die Daten des Nutzers in trainers beinhaltet

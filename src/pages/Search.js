@@ -3,9 +3,11 @@ import { SearchResults } from "../components/SearchResults";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { getClubActivities, getRecommendations, getSearchResults } from "../scripts/fetchRequests";
 import { Subtitle } from "../components/Subtitle";
 import { LoadingAnimation } from "../components/LoadingAnimation";
+import { ActiveeButton } from "../components/ActiveeButton";
+import { isVariableOnlySpaces } from "../scripts/isVariableOnlySpaces";
+import { backendUrl } from "../index";
 
 /**
  * Seite, auf welcher Nutzer nach Aktivität suchen können
@@ -16,27 +18,30 @@ export function Search() {
   const navigate = useNavigate();
   const location = useLocation();
   const [cookies, setCookie] = useCookies(["userToken", "userType"]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [urlQuery, setUrlQuery] = useState();
-  const [searchResults, setSearchResults] = useState();
-  const [recommendations, setRecommendations] = useState();
+  // Nutzereingabe im Suchfeld
+  const [searchInput, setSearchInput] = useState("");
+  // Query Parameter in der URL
+  const [urlQuery, setUrlQuery] = useState(null);
+  // Ergebnisse des Fetch-Requests (Search, Recommendations oder Club Activities)
+  const [results, setResults] = useState([]);
+  // Aktuelle Seitenanzahl für längere Ergebnisse
+  const [page, setPage] = useState(0);
+  // Ob noch mehr Seiten geladen werden können
+  const [isLastPage, setIsLastPage] = useState(true);
+  // Status, ob Seite momentan geladen wird
+  const [loading, setLoading] = useState(true);
 
   // Zwei unterschiedliche useEffects, da sie verschiedene dependencies haben
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const urlQuery = queryParams.get("query");
-    setUrlQuery(urlQuery);
-    setRecommendations(null);
-    setSearchResults(null);
-    if (urlQuery) {
-      getSearchResults(cookies.userToken, urlQuery, setSearchResults);
+    const query = queryParams.get("query");
+    setUrlQuery(query);
+    setResults([]);
+    setPage(0);
+    if (query) {
+      getSearchResults(query, 0, []);
     } else {
-      if (cookies.userType === "participant") {
-        getRecommendations(cookies.userToken, setRecommendations);
-      } else {
-        getClubActivities(cookies.userToken, setRecommendations);
-      }
-      setSearchResults(null);
+      getRecommendations(0, []);
     }
   }, [location.search]);
 
@@ -45,22 +50,103 @@ export function Search() {
     return () => {
       document.removeEventListener("keydown", confirmSearch);
     };
-  }, [searchQuery]);
+  }, [searchInput]);
 
   // Löst Such-Request aus, wenn Enter gedrückt wurde
   const confirmSearch = (e) => {
-    if (e.key === "Enter") navigate(`/search?query=${searchQuery}`);
+    if (e.key === "Enter") executeSearch();
   };
+
+  const executeSearch = () => {
+    document.querySelectorAll("[type=search]").forEach((element) => element.blur());
+    return navigate(`/search?query=${searchInput}`);
+  };
+
+  // Liefert Suchergebnisse anhand von Suchbegriff zurück
+  const getSearchResults = (enteredQuery, page, results) => {
+    setLoading(true);
+    if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
+      setResults(null);
+    } else {
+      const url = backendUrl + "/search/" + enteredQuery + "?page=" + page;
+      let requestOptions;
+      if (cookies.userToken) {
+        requestOptions = {
+          method: "GET",
+          headers: { Authorization: `Bearer ${cookies.userToken}` },
+        };
+      } else {
+        requestOptions = { method: "GET" };
+      }
+      fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          setResults(results.concat(data.activities));
+          setPage(page + 1);
+          setIsLastPage(data.last_page);
+          setLoading(false);
+        });
+    }
+    // TODO: error-handling
+  };
+
+  // Liefert Empfehlungen bzw. die anderen Aktivitäten des Vereins zurück
+  const getRecommendations = (page, results) => {
+    setLoading(true);
+    let url;
+    if (cookies.userType === "participant") {
+      url = backendUrl + "/activity/recommendations?page=" + page;
+    } else {
+      url = backendUrl + "/activity/club?page=" + page;
+    }
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setResults(results.concat(data.activities));
+        setPage(page + 1);
+        setIsLastPage(data.last_page);
+        setLoading(false);
+      });
+    // TODO: error-handling
+  };
+
   return (
     <>
-      <SearchBar inputValue={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} />
-      <h1>{urlQuery ? "Suchergebnisse" : cookies.userType === "participant" ? "Empfehlungen" : "Aktivität von Deinem Verein"}</h1>
-      {urlQuery && <Subtitle>für "{urlQuery}"</Subtitle>}
-      {recommendations && !searchResults && <SearchResults searchResults={recommendations} />}
-      {searchResults && (
-        <>{searchResults.length > 0 ? <SearchResults searchResults={searchResults} /> : <div>Keine Ergebnisse gefunden</div>}</>
+      <SearchBar
+        inputValue={searchInput}
+        onChange={(event) => {
+          setSearchInput(event.target.value);
+        }}
+        onClick={() => executeSearch()}
+      />
+      {urlQuery ? (
+        <>
+          <h1>Suchergebnisse</h1>
+          <Subtitle>für "{urlQuery}"</Subtitle>
+          <SearchResults searchResults={results} />
+          {results.length > 0 && !isLastPage && (
+            <ActiveeButton buttonType="primary" onClick={() => getSearchResults(urlQuery, page, results)}>
+              Mehr Laden
+            </ActiveeButton>
+          )}
+        </>
+      ) : (
+        <>
+          <h1>{cookies.userType === "participant" ? "Empfehlungen" : "Aktivitäten von Deinem Verein"}</h1>
+          <SearchResults searchResults={results} />
+          {results.length > 0 && !isLastPage && (
+            <ActiveeButton buttonType="primary" onClick={() => getRecommendations(page, results)}>
+              Mehr Laden
+            </ActiveeButton>
+          )}
+        </>
       )}
-      {!recommendations && !searchResults && <LoadingAnimation />}
+
+      {loading && <LoadingAnimation />}
     </>
   );
 }

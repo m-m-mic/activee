@@ -17,6 +17,7 @@ export function Sport() {
     getSportInfo();
   }, [id]);
 
+  // Fetched den spezifischen Sport anhand von ID-Parameter in URL
   const getSportInfo = () => {
     const url = backendUrl + "/sport/" + id;
     const requestOptions = { method: "GET", headers: { Authorization: `Bearer ${cookies.userToken}` } };
@@ -31,6 +32,7 @@ export function Sport() {
       }
     });
   };
+
   if (cookies.userToken) {
     if (!sportInfo) {
       return <LoadingAnimation />;

@@ -80,8 +80,8 @@ input:focus + .activee-checkbox.selected.enabled {
 }
 /* activee-checkmark */
 .activee-checkmark {
-  width: 14px;
-  height: 11px;
+  width: 16px;
+  height: 16px;
   display: none;
 }
 /* Selected */

@@ -41,6 +41,7 @@ export function Profiles() {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
+    // TODO: error-handling
   };
 
   // Wechselt zu einem anderen Unterprofil anhand der ID des Profils
@@ -55,6 +56,7 @@ export function Profiles() {
       .then((response) => response.json())
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/"));
+    // TODO: error-handling
   };
 
   // Löscht ein Profil anhand der ID des Profils
@@ -71,6 +73,7 @@ export function Profiles() {
         getAccountInfo();
         return;
       }
+      // TODO: error-handling
       console.log("Something went wrong while deleting profile");
     });
   };

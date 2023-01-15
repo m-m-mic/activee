@@ -21,7 +21,6 @@ import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import Select from "react-select";
-import { getPreselectOptions } from "../scripts/fetchRequests";
 import { createSelectArray } from "../scripts/createSelectArray";
 import { MultiValueLanguage, MultiValueSport, MultiValueStyles } from "../scripts/reactSelect";
 import { CautionDisclaimer } from "../components/CautionDisclaimer";
@@ -62,6 +61,22 @@ export function EditProfile() {
         setAccountInfo(data);
         transformDefaultValues(data);
       });
+  };
+
+  // Fetched alle Preselect Collections (Language, RequiredItems, Sports) und verwandelt sie in Select Arrays
+  const getPreselectOptions = () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(`${backendUrl}/language`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setLanguages(createSelectArray(data)));
+    fetch(`${backendUrl}/sport`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setSports(createSelectArray(data)));
+
+    // TODO: error-handling
   };
 
   // Aktualisiert die AccountInfo des Nutzers

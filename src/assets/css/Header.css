@@ -84,7 +84,7 @@
   box-shadow: var(--light-mode-elevation-4);
   padding: 14px 19px;
   border-radius: 8px;
-  transition: 100ms ease-out;
+  transition: 200ms ease-out;
   z-index: 50 !important;
 }
 .popup-backdrop {

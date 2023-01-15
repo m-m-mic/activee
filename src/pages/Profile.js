@@ -37,6 +37,7 @@ export function Profile() {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => setAccountInfo(data));
+    // TODO: error-handling
   };
 
   if (cookies.userToken) {

@@ -66,6 +66,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
       .then((response) => response.json())
       .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
       .then(() => navigate("/profile"));
+    // TODO: error-handling
   };
 
   return (

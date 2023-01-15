@@ -68,6 +68,7 @@ export function ManageActivityPopUp({
         setProfileList(data);
         getCheckedAccounts(data);
       });
+    // TODO: error-handling
   };
 
   // Speichert die gemerkten Nutzer in die Aktivität

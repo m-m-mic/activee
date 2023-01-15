@@ -9,13 +9,17 @@ import "../assets/css/Search.css";
  * @constructor
  */
 export function SearchResults({ searchResults }) {
-  return (
-    <>
-      <div className="search-results">
-        {searchResults.map((item, key) => (
-          <SearchItem item={item} key={key} />
-        ))}
-      </div>
-    </>
-  );
+  if (searchResults.length > 0) {
+    return (
+      <>
+        <div className="search-results">
+          {searchResults.map((item, key) => (
+            <SearchItem item={item} key={key} />
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    return <div>Keine Ergebnisse gefunden.</div>;
+  }
 }

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import "../assets/css/Sports.css";
 import { Navigate } from "react-router-dom";
-import { getSports } from "../scripts/fetchRequests";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { ActiveeCard } from "../components/ActiveeCard";
+import { backendUrl } from "../index";
 
 /**
  * Seite mit allen Sportarten von Activee
@@ -17,9 +17,22 @@ export function Sports() {
   useEffect(() => {
     if (cookies.userToken) {
       document.title = "Sportarten - activee";
-      getSports(cookies.userToken, setSports);
+      getSports();
     }
   }, []);
+
+  // Liefert alle vorhandenen Sportarten von activee zurück
+  const getSports = () => {
+    const url = backendUrl + "/sport";
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setSports(data));
+    // TODO: error-handling
+  };
 
   if (cookies.userToken) {
     if (!sports) {

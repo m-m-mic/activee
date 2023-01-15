@@ -10,7 +10,7 @@
   flex: 0 0 32px;
   width: 32px;
   height: 32px;
-  transition: 200ms;
+  transition: 200ms ease-out;
   z-index: -1;
 }
 .activee-details-expand-icon.open {

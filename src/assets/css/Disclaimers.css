@@ -1,7 +1,7 @@
 /* Styling der Warnmeldung für ungültige Nutzerangaben */
 .disclaimer-container {
   visibility: unset;
-  transition: 100ms ease-out;
+  transition: 200ms ease-out;
   width: 100%;
 }
 .disclaimer-container.closable {
@@ -30,7 +30,7 @@
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  transition: 200ms;
+  transition: 200ms ease-out;
 }
 .disclaimer.warning {
   background: var(--light-mode-warning-active);

@@ -4,18 +4,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { useCookies } from "react-cookie";
 import { Subtitle } from "../components/Subtitle";
-import { UnderConstruction } from "../components/UnderConstruction";
 import { HorizontalButton } from "../components/HorizontalButton";
 import AddIconBlack from "../assets/svgs/add_icon_black.svg";
 import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
-import {
-  getAccountInfo,
-  getShortenedClubActivities,
-  getShortenedRecommendations,
-  getCuratedSports,
-} from "../scripts/fetchRequests";
 import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
 
 /**
@@ -33,15 +26,55 @@ export function Home() {
   useEffect(() => {
     if (cookies.userToken) {
       document.title = "Übersicht - activee";
-      getAccountInfo(cookies.userToken, setAccountInfo);
-      getCuratedSports(cookies.userToken, setSports);
-      if (cookies.userType === "participant") {
-        getShortenedRecommendations(cookies.userToken, setRecommendations);
-      } else {
-        getShortenedClubActivities(cookies.userToken, setRecommendations);
-      }
+      getAccountInfo();
+      getCuratedSports();
+      getShortenedRecommendations();
     }
   }, [cookies.userToken]);
+
+  // Liefert alle Informationen des Nutzeraccounts zurück
+  const getAccountInfo = () => {
+    const url = backendUrl + "/account/info";
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setAccountInfo(data));
+    // TODO: error-handling
+  };
+
+  // Liefert vier Sportarten (die eigenen Präferenzen + potenziell Empfehlungen) zurück
+  const getCuratedSports = () => {
+    const url = backendUrl + "/curated/sport";
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setSports(data));
+    // TODO: error-handling
+  };
+
+  // Liefert empfohlene Aktivitäten anhand von Nutzerpräferenzen zurück
+  const getShortenedRecommendations = () => {
+    let url;
+    if (cookies.userType === "participant") {
+      url = backendUrl + "/activity/recommendations/shortened";
+    } else {
+      url = backendUrl + "/activity/club/shortened";
+    }
+    const requestOptions = {
+      method: "GET",
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => setRecommendations(data));
+    // TODO: error-handling
+  };
 
   if (cookies.userToken) {
     if (!accountInfo || !sports || !recommendations) {

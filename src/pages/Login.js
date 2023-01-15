@@ -19,8 +19,8 @@ export function Login() {
   const [passwordInput, setPasswordInput] = useState("");
   const [emailWarning, setEmailWarning] = useState(false);
   const [passwordWarning, setPasswordWarning] = useState(false);
-  const [wrongEmailDisclaimerVisible, setWrongEmailDisclaimerVisible] = useState(false);
-  const [wrongPasswordDisclaimerVisible, setWrongPasswordDisclaimerVisible] = useState(false);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimerMessage, setDisclaimerMessage] = useState("");
 
   // Fügt Keydown EventListener bei ComponentMount hinzu und entfernt ihn wieder bei Unmount
   useEffect(() => {
@@ -48,14 +48,14 @@ export function Login() {
     fetch(url, requestOptions).then((response) => {
       if (response.status === 404) {
         // Error-Handling für falsche E-Mail
-        setWrongEmailDisclaimerVisible(true);
-        setWrongPasswordDisclaimerVisible(false);
+        setIsDisclaimerVisible(true);
+        setDisclaimerMessage("E-Mail konnte nicht gefunden werden");
         setEmailWarning(true);
         return;
       } else if (response.status === 403) {
         // Error-Handling für falsche Password
-        setWrongEmailDisclaimerVisible(false);
-        setWrongPasswordDisclaimerVisible(true);
+        setIsDisclaimerVisible(true);
+        setDisclaimerMessage("Es wurde ein falsches Password eingegeben");
         setPasswordWarning(true);
         return;
       }
@@ -102,12 +102,7 @@ export function Login() {
             </ActiveeButton>
           </div>
         </div>
-        <ActiveeDisclaimer isDisclaimerVisible={wrongEmailDisclaimerVisible}>
-          Email konnte nicht gefunden werden
-        </ActiveeDisclaimer>
-        <ActiveeDisclaimer isDisclaimerVisible={wrongPasswordDisclaimerVisible}>
-          Es wurde ein falsches Password eingegeben
-        </ActiveeDisclaimer>
+        <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible}>{disclaimerMessage}</ActiveeDisclaimer>
         <div className="login-no-account-wrapper">
           <NavLink to="/register" className="login-no-account-button">
             Noch kein Konto?
