@@ -10,6 +10,7 @@ import { ActiveeScrollingCards } from "../components/ActiveeScrollingCards";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
 import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
 /**
  * Startseite für angemeldete Nutzer
@@ -22,6 +23,8 @@ export function Home() {
   const [accountInfo, setAccountInfo] = useState();
   const [sports, setSports] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("");
 
   useEffect(() => {
     if (cookies.userToken) {
@@ -39,10 +42,14 @@ export function Home() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setAccountInfo(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setAccountInfo(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Account konnte nicht geladen werden");
+      }
+    });
   };
 
   // Liefert vier Sportarten (die eigenen Präferenzen + potenziell Empfehlungen) zurück
@@ -70,15 +77,29 @@ export function Home() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setRecommendations(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setRecommendations(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Empfohlene Aktivitäten konnten nicht geladen werden");
+      }
+    });
   };
 
   if (cookies.userToken) {
     if (!accountInfo || !sports || !recommendations) {
-      return <LoadingAnimation />;
+      return (
+        <>
+          <ActiveeDisclaimer
+            isDisclaimerVisible={isDisclaimerVisible}
+            setIsDisclaimerVisible={setIsDisclaimerVisible}
+            type="closable">
+            {disclaimer}
+          </ActiveeDisclaimer>
+          <LoadingAnimation />
+        </>
+      );
     }
     return (
       <>

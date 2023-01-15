@@ -17,6 +17,8 @@ export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
   const [activityInfo, setActivityInfo] = useState();
   const [inputValidation, setInputValidation] = useState(newActivityInputValidator);
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("");
 
   // Fetch-Request wird nur ausgeführt, falls Nutzer type = "organisation" ist
   useEffect(() => {
@@ -33,10 +35,14 @@ export default function CreateActivity() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => fillActivityTemplate(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => fillActivityTemplate(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Account konnte nicht geladen werden");
+      }
+    });
   };
 
   // Erstellt ein leeres Activity Objekt, welches die Daten des Nutzers in trainers beinhaltet

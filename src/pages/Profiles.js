@@ -10,6 +10,7 @@ import { WarningModal } from "../components/WarningModal";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import { backendUrl } from "../index";
+import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 
 /**
  * Seite, auf welchen alle Profile eines Nutzers angezeigt werden. Nur für userTier = "parent" zugänglich
@@ -23,6 +24,8 @@ export function Profiles() {
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [activeId, setActiveId] = useState();
   const [accountInfo, setAccountInfo] = useState();
+  const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("");
 
   useEffect(() => {
     if (cookies.userToken && cookies.userTier === "parent") {
@@ -38,10 +41,14 @@ export function Profiles() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setAccountInfo(data));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setAccountInfo(data));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Account konnte nicht geladen werden");
+      }
+    });
   };
 
   // Wechselt zu einem anderen Unterprofil anhand der ID des Profils
@@ -52,11 +59,17 @@ export function Profiles() {
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify({ id: profileId }),
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-      .then(() => navigate("/"));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response
+          .json()
+          .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
+          .then(() => navigate("/"));
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Profil konnte nicht gewechselt werden");
+      }
+    });
   };
 
   // Löscht ein Profil anhand der ID des Profils
@@ -86,7 +99,17 @@ export function Profiles() {
 
   if (cookies.userToken) {
     if (!accountInfo) {
-      return <LoadingAnimation />;
+      return (
+        <>
+          <ActiveeDisclaimer
+            isDisclaimerVisible={isDisclaimerVisible}
+            setIsDisclaimerVisible={setIsDisclaimerVisible}
+            type="closable">
+            {disclaimer}
+          </ActiveeDisclaimer>
+          <LoadingAnimation />
+        </>
+      );
     }
     if (cookies.userTier === "child") {
       return <Navigate to="/404" />;

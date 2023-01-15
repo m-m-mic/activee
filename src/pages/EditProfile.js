@@ -69,14 +69,20 @@ export function EditProfile() {
       method: "GET",
       headers: { Authorization: `Bearer ${cookies.userToken}` },
     };
-    fetch(`${backendUrl}/language`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setLanguages(createSelectArray(data)));
-    fetch(`${backendUrl}/sport`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setSports(createSelectArray(data)));
-
-    // TODO: error-handling
+    fetch(`${backendUrl}/language`, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setLanguages(createSelectArray(data)));
+      } else {
+        navigate("/404");
+      }
+    });
+    fetch(`${backendUrl}/sport`, requestOptions).then((response) => {
+      if (response.status === 200) {
+        response.json().then((data) => setSports(createSelectArray(data)));
+      } else {
+        navigate("/404");
+      }
+    });
   };
 
   // Aktualisiert die AccountInfo des Nutzers
