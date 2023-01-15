@@ -53,6 +53,7 @@
   background: var(--light-mode-cs-disabled);
 }
 .profile-selection-item-container {
+  color: var(--light-mode-typeface);
   flex: 1;
   text-align: left;
   display: flex;

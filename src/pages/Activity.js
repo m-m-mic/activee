@@ -16,6 +16,8 @@ import { RequiredItems } from "../components/RequiredItems";
 import { RegisterBanner } from "../components/RegisterBanner";
 import { ManageActivityPopUp } from "../components/ManageActivityPopUp";
 import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
+import StarUnfilledIconWhite from "../assets/svgs/star_unfilled_icon_white.svg";
+import StarFilledIconWhite from "../assets/svgs/star_filled_icon_white.svg";
 
 /**
  * Die Activity-Seite zeigt alle Informationen über eine Aktivität an
@@ -219,8 +221,11 @@ export function Activity() {
       )}
       {cookies.userToken && cookies.userType === "participant" && (
         <div className="activity-remember-button">
-          <ActiveeButton onClick={() => setManageProfileSelectionVisible(true)} buttonType="primary">
-            {activityInfo.participants.includes(cookies.userId) ? "Aktivitäten verwalten" : "Aktivität merken"}
+          <ActiveeButton
+            onClick={() => setManageProfileSelectionVisible(true)}
+            iconSrc={activityInfo.participants.includes(cookies.userId) ? StarFilledIconWhite : StarUnfilledIconWhite}
+            buttonType="primary">
+            {activityInfo.participants.includes(cookies.userId) ? "Aktivität verwalten" : "Aktivität merken"}
           </ActiveeButton>
         </div>
       )}

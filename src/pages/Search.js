@@ -138,7 +138,7 @@ export function Search() {
         <>
           <h1>Suchergebnisse</h1>
           <Subtitle>für "{urlQuery}"</Subtitle>
-          <SearchResults searchResults={results} signedIn={!!cookies.userToken} />
+          <SearchResults searchResults={results} />
           {results.length > 0 && !isLastPage && (
             <ActiveeButton buttonType="primary" onClick={() => getSearchResults(urlQuery, page, results)}>
               Mehr Laden
@@ -148,7 +148,7 @@ export function Search() {
       ) : (
         <>
           <h1>{cookies.userType === "organisation" ? "Aktivitäten von Deinem Verein" : "Empfehlungen"}</h1>
-          <SearchResults searchResults={results} signedIn={!!cookies.userToken} />
+          <SearchResults searchResults={results} />
           {results.length > 0 && !isLastPage && (
             <ActiveeButton buttonType="primary" onClick={() => getRecommendations(page, results)}>
               Mehr Laden

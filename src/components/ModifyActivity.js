@@ -306,7 +306,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         <span className="modify-activity-general-info-data league">
           <input
             placeholder=""
-            className={validation.maximum_participants ? "" : "warning"}
+            className={validation.maximum_participants ? "modify-activity-count" : "modify-activity-count warning"}
             defaultValue={activityInfo.maximum_participants}
             onChange={(e) =>
               setMaximumParticipantsInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)
@@ -338,13 +338,6 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         defaultValue={activityInfo.additional_info}
         onChange={(e) => setAdditionalInfoInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
-      <h2>Mitgliedsbeitrag</h2>
-      <textarea
-        className={validation.membership_fee ? "modify-activity-membership-fee" : "modify-activity-membership-fee warning"}
-        placeholder="Mitgliedsbeitrag..."
-        defaultValue={activityInfo.membership_fee}
-        onChange={(e) => setMembershipFeeInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
-      />
       <h2>Termine *</h2>
       <DatePicker data={activityInfo} setData={setActivityInfo} validation={validation} setValidation={setValidation} />
       <h2>Adresse *</h2>
@@ -354,6 +347,13 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         validation={validation}
         setValidation={setValidation}
         isActivity={true}
+      />
+      <h2>Mitgliedsbeitrag</h2>
+      <textarea
+        className={validation.membership_fee ? "modify-activity-membership-fee" : "modify-activity-membership-fee warning"}
+        placeholder="Mitgliedsbeitrag..."
+        defaultValue={activityInfo.membership_fee}
+        onChange={(e) => setMembershipFeeInput(e.target.value, activityInfo, setActivityInfo, validation, setValidation)}
       />
       <h2>Übungsleiter:innen</h2>
       {activityInfo.trainers.map((trainer, key) => (
@@ -381,7 +381,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         onChange={() => setActivityInfo({ ...activityInfo, only_logged_in: !activityInfo.only_logged_in })}>
         Aktivität nur für angemeldete Nutzer sichtbar machen
       </ActiveeCheckbox>
-      <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
+      <div className="register-mandatory-disclaimer">* Pflichtfelder</div>
       <div className="modify-activity-button">
         {editMode ? (
           <ActiveeButton buttonType="warning" onClick={() => setWarningModalVisible(true)}>

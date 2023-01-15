@@ -23,7 +23,6 @@ export function DatePicker({ data, setData }) {
     <div className="date-picker">
       {data.dates.map((date, key) => (
         <div key={date.id} className="date-picker-item">
-          <h3 className="date-picker-number">{key + 1}.</h3>
           <div className="date-picker-inputs">
             <Select
               className="react-select date-picker-day"

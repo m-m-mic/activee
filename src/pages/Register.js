@@ -142,7 +142,7 @@ export function Register() {
             placeholder="Passwort wiederholen..."
             onChange={(e) => setPasswordRepeatInput(e.target.value, accountInfo, validation, setValidation)}
           />
-          <div className="register-mandatory-disclaimer">* Pflichtfeld</div>
+          <div className="register-mandatory-disclaimer">* Pflichtfelder</div>
           <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible}>{setDisclaimer}</ActiveeDisclaimer>
         </div>
         <div className="register-button">

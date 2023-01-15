@@ -13,8 +13,24 @@
   justify-content: center;
   gap: 15px;
 }
+@media only screen and (min-width: 450px) {
+  .date-picker-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: left;
+  }
+  .date-picker-day {
+    width: 100%;
+    max-width: 250px;
+  }
+  .date-picker-times {
+    flex: 0 0 200px;
+    width: 100%;
+    min-width: 200px;
+  }
+}
 .date-picker-inputs {
-  max-width: 300px;
+  max-width: 600px;
   flex: 1;
 }
 .date-picker-times {
