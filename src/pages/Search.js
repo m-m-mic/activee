@@ -54,7 +54,12 @@ export function Search() {
 
   // Löst Such-Request aus, wenn Enter gedrückt wurde
   const confirmSearch = (e) => {
-    if (e.key === "Enter") navigate(`/search?query=${searchInput}`);
+    if (e.key === "Enter") executeSearch();
+  };
+
+  const executeSearch = () => {
+    document.querySelectorAll("[type=search]").forEach((element) => element.blur());
+    return navigate(`/search?query=${searchInput}`);
   };
 
   // Liefert Suchergebnisse anhand von Suchbegriff zurück
@@ -109,7 +114,6 @@ export function Search() {
     // TODO: error-handling
   };
 
-  console.log(isLastPage);
   return (
     <>
       <SearchBar
@@ -117,6 +121,7 @@ export function Search() {
         onChange={(event) => {
           setSearchInput(event.target.value);
         }}
+        onClick={() => executeSearch()}
       />
       {urlQuery ? (
         <>

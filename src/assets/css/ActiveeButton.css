@@ -16,7 +16,7 @@
   flex-flow: row;
   justify-content: center;
   align-items: center;
-  transition: 200ms;
+  transition: 200ms ease-out;
   height: 42px;
 }
 .activee-button.gap {

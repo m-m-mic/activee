@@ -15,7 +15,8 @@ import {
 import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
-import { registerAccount } from "../scripts/fetchRequests";
+import { backendUrl } from "../index";
+import { handleCookieChange } from "../scripts/handleCookieChange";
 
 /**
  * Seite, auf welcher man sich bei activee registrieren kann
@@ -29,6 +30,39 @@ export function Register() {
   const [validation, setValidation] = useState(NewAccountInputValidator);
   const [warningVisibility, setWarningVisibility] = useState(false);
   const [warning, setWarning] = useState("Error");
+
+  // Registriert neuen Nutzer und loggt ihn ein
+  // Zuerst wird die Validität der Nutzereingaben überprüft. Sind diese valide, wird ein neuer Account erstellt und
+  // ein Token, sowie andere wichtige Informationen zurückgegeben
+  const registerAccount = () => {
+    for (const [key, value] of Object.entries(validation)) {
+      if (value === false) {
+        setWarning("Bitte überprüfe deine Angaben.");
+        setWarningVisibility(true);
+        return;
+      }
+    }
+    console.log(accountInfo);
+    const url = backendUrl + "/account/register";
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(accountInfo),
+    };
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 201) {
+        setWarningVisibility(false);
+        response
+          .json()
+          .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
+          .then(() => navigate("/profile"));
+      } else {
+        // TODO: spezifisches Handling, wenn E-Mail schon existiert
+        setWarning("Es ist ein Fehler beim Erstellen des Accounts aufgetreten.");
+        return setWarningVisibility(true);
+      }
+    });
+  };
 
   if (!cookies.userToken) {
     return (

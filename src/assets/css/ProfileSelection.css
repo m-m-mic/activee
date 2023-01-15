@@ -3,7 +3,7 @@
   left: 50%;
   top: 120px;
   transform: translate(-50%, 0%);
-  transition: 100ms ease-out;
+  transition: 200ms ease-out;
   z-index: 46;
   min-width: 290px;
   max-width: 420px;

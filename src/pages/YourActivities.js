@@ -41,6 +41,7 @@ export function YourActivities() {
           collectAndShortenDates(data.activities, setShortenedDates);
         });
       }
+      // TODO: error-handling
     });
   };
 

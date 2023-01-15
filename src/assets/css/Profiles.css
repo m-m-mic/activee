@@ -15,7 +15,7 @@
   flex: 0 0 52px;
   height: 52px;
   border-radius: 50%;
-  background: #e7e7e7;
+  background: var(--light-mode-cs-disabled);
 }
 .profiles-parent-data {
   flex: 1;
