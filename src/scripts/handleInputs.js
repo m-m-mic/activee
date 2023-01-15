@@ -169,7 +169,7 @@ export const setPasswordRepeatInput = (input, data, validation, setValidation) =
 export const setProfileLanguagesInput = (input, data, setData) => {
   const convertedArray = [];
   for (const language of input) {
-    convertedArray.push({ _id: language.value, name: language.label });
+    convertedArray.push(language.value);
   }
   setData({ ...data, languages: convertedArray });
 };
@@ -177,7 +177,7 @@ export const setProfileLanguagesInput = (input, data, setData) => {
 export const setProfileSportsInput = (input, data, setData) => {
   const convertedArray = [];
   for (const sport of input) {
-    convertedArray.push({ _id: sport.value, name: sport.label });
+    convertedArray.push(sport.value);
   }
   setData({ ...data, sports: convertedArray });
 };
@@ -225,7 +225,7 @@ export const setAgeDirectionInput = (input, data, setData) => {
 
 // Keine Validierung für Sport notwendig. Funktion fügt ausgewählte Sportart in ActivityInfo ein.
 export const setSportInput = (input, data, setData, validation, setValidation) => {
-  setData({ ...data, sport: { _id: input.value, name: input.label } });
+  setData({ ...data, sport: input.value });
   return setValidation({ ...validation, sport: true });
 };
 
@@ -240,7 +240,7 @@ export const setGenderInput = (input, data, setData, validation, setValidation) 
 export const setLanguagesInput = (input, data, setData, validation, setValidation) => {
   const convertedArray = [];
   for (const language of input) {
-    convertedArray.push({ _id: language.value, name: language.label });
+    convertedArray.push(language.value);
   }
   setData({ ...data, languages: convertedArray });
   if (convertedArray.length > 0) {
@@ -325,7 +325,7 @@ export const setMembershipFeeInput = (input, data, setData, validation, setValid
 export const setRequiredItemsInput = (input, data, setData, validation, setValidation) => {
   const convertedArray = [];
   for (const item of input) {
-    convertedArray.push({ _id: item.value, name: item.label });
+    convertedArray.push(item.value);
   }
   setData({ ...data, required_items: convertedArray });
   return setValidation({ ...validation, required_items: true });
