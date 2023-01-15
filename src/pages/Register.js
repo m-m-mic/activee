@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/Register.css";
 import { ActiveeButton } from "../components/ActiveeButton";
 import { accountTemplate } from "../scripts/inputTemplates";
@@ -31,6 +31,20 @@ export function Register() {
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [setDisclaimer, setSetDisclaimer] = useState("Error");
 
+  // Fügt Keydown EventListener bei ComponentMount hinzu und entfernt ihn wieder bei Unmount
+  useEffect(() => {
+    document.title = "Registrieren - activee";
+    document.addEventListener("keydown", confirmInputs);
+    return () => {
+      document.removeEventListener("keydown", confirmInputs);
+    };
+  });
+
+  // Registrieren wird durchgeführt, wenn Nutzer 'Enter' drückt
+  const confirmInputs = (e) => {
+    if (e.key === "Enter") registerAccount();
+  };
+
   // Registriert neuen Nutzer und loggt ihn ein
   // Zuerst wird die Validität der Nutzereingaben überprüft. Sind diese valide, wird ein neuer Account erstellt und
   // ein Token, sowie andere wichtige Informationen zurückgegeben
@@ -42,7 +56,6 @@ export function Register() {
         return;
       }
     }
-    console.log(accountInfo);
     const url = backendUrl + "/account/register";
     const requestOptions = {
       method: "POST",
@@ -146,11 +159,7 @@ export function Register() {
           <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible}>{setDisclaimer}</ActiveeDisclaimer>
         </div>
         <div className="register-button">
-          <ActiveeButton
-            buttonType="primary"
-            onClick={() =>
-              registerAccount(accountInfo, validation, setCookie, navigate, setIsDisclaimerVisible, setSetDisclaimer)
-            }>
+          <ActiveeButton buttonType="primary" onClick={() => registerAccount()}>
             Registrieren
           </ActiveeButton>
         </div>

@@ -48,7 +48,7 @@ export function Header({ welcome = false }) {
   // Header für Landing-Page
   if (welcome) {
     return (
-      <div className={isCiVisible ? "header" : "header no-background"}>
+      <div className="header">
         <div className={isCiVisible ? "activee-ci" : "activee-ci hide"}>
           <img id="activee-logo" src={ActiveeLogo} alt="activee Logo" />
           <span className="activee-name">activee</span>

@@ -22,11 +22,6 @@
 .header.hide {
   top: -70px;
 }
-.header.no-background {
-  background: var(--light-mode-background-translucent-invisible);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-}
 
 /* Header Elemente */
 #activee-logo {

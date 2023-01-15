@@ -1,6 +1,6 @@
 /* Styling der Landing Page für nicht angemeldete Nutzer */
 .activee-banner {
-  margin: 25px 0 95px;
+  margin: 25px 0 75px;
   height: 75px;
   display: flex;
   flex-flow: row;
@@ -16,10 +16,40 @@
   font-family: var(--logo-typeface);
   font-size: 60px;
 }
+.landing-page {
+  display: flex;
+  flex-flow: column;
+  gap: var(--component-spacing);
+  padding: 0 15px;
+}
+.activee-introduction {
+  display: flex;
+  justify-content: space-between;
+}
+.activee-image-1 {
+  width: 110px;
+}
+.activee-desc {
+  max-width: 270px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-right: 80px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+  line-height: 27px;
+}
+.activee-pictures {
+  position: absolute;
+  top: 145px;
+  right: 0;
+}
+.activee-cta {
+}
+
 .action-buttons {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
-  justify-content: center;
   margin-bottom: 15px;
 }
