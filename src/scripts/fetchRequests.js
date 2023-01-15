@@ -64,38 +64,6 @@ export const getShortenedRecommendations = (token, setRecommendations) => {
   // TODO: error-handling
 };
 
-export const getRecommendations = (token, page, setPage, results, setResults, setMorePages) => {
-  const url = backendUrl + "/activity/recommendations?page=" + page;
-  const requestOptions = {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  fetch(url, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      setResults(results.concat(data.activities));
-      setPage(page + 1);
-      if (data.last_page) setMorePages(false);
-    });
-  // TODO: error-handling
-};
-
-export const getClubActivities = (token, page, setPage, results, setResults, setMorePages) => {
-  const url = backendUrl + "/activity/club?page=" + page;
-  const requestOptions = {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  fetch(url, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      setResults(results.concat(data.activities));
-      setPage(page + 1);
-      if (data.last_page) setMorePages(false);
-    });
-  // TODO: error-handling
-};
-
 export const getShortenedClubActivities = (token, setRecommendations) => {
   const url = backendUrl + "/activity/club/shortened";
   const requestOptions = {
@@ -131,32 +99,6 @@ export const getCuratedSports = (token, setSports) => {
   fetch(url, requestOptions)
     .then((response) => response.json())
     .then((data) => setSports(data));
-  // TODO: error-handling
-};
-
-// Liefert Suchergebnisse anhand von Suchbegriff zurück
-export const getSearchResults = (token, enteredQuery, page, setPage, results, setResults, setMorePages) => {
-  if (enteredQuery === "" || isVariableOnlySpaces(enteredQuery)) {
-    setResults(null);
-  } else {
-    const url = backendUrl + "/search/" + enteredQuery + "?page=" + page;
-    let requestOptions;
-    if (token) {
-      requestOptions = {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      };
-    } else {
-      requestOptions = { method: "GET" };
-    }
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        setResults(data.activities);
-        setPage(page + 1);
-        if (data.last_page) setMorePages(false);
-      });
-  }
   // TODO: error-handling
 };
 
