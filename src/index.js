@@ -21,6 +21,7 @@ import { Register } from "./pages/Register";
 import { LandingPage } from "./pages/LandingPage";
 import WelcomeLayout from "./layouts/WelcomeLayout";
 import { Sport } from "./pages/Sport";
+import { Participants } from "./pages/Participants";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
 export const backendUrl = "https://api-activee.onrender.com";
@@ -42,6 +43,7 @@ export default function App() {
           <Route exact path="your-activities" element={<YourActivities />} />
           <Route exact path="activity/:id" element={<Activity />} />
           <Route exact path="activity/:id/edit" element={<EditActivity />} />
+          <Route exact path="activity/:id/participants" element={<Participants />} />
           <Route exact path="activity/new" element={<CreateActivity />} />
           <Route exact path="sports" element={<Sports />} />
           <Route exact path="sport/:id" element={<Sport />} />

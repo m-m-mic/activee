@@ -219,6 +219,13 @@ export function Activity() {
           ))}
         </>
       )}
+      {isOwner && (
+        <div>
+          <ActiveeButton buttonType="primary" onClick={() => navigate(`/activity/${id}/participants`)}>
+            Interessentenliste
+          </ActiveeButton>
+        </div>
+      )}
       {cookies.userToken && cookies.userType === "participant" && (
         <div className="activity-remember-button">
           <ActiveeButton

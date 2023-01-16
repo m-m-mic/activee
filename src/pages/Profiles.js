@@ -123,6 +123,7 @@ export function Profiles() {
             firstName={accountInfo.first_name}
             lastName={accountInfo.last_name}
             address={accountInfo.address}
+            email={accountInfo.email}
           />
         )}
         {isWarningModalVisible && (

@@ -16,10 +16,11 @@ import { backendUrl } from "../index";
  * @param firstName
  * @param lastName
  * @param address
+ * @param email
  * @returns {JSX.Element}
  * @constructor
  */
-export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address }) {
+export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address, email }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
@@ -28,6 +29,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
     last_name: lastName,
     type: cookies.userType,
     tier: "child",
+    parent_email: email,
     related_accounts: [cookies.userId],
     club: null,
     phone_number: null,
