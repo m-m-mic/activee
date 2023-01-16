@@ -1,7 +1,6 @@
 .profiles-list {
   display: flex;
   flex-flow: column;
-  gap: 10px;
 }
 .profiles-parent,
 .profiles-child-summary {

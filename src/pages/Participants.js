@@ -66,46 +66,58 @@ export function Participants() {
           <>
             <h1>{activityParticipants.name}</h1>
             <Subtitle>{activityParticipants.club}</Subtitle>
-            <h2>Interessentenliste</h2>
-            {activityParticipants.participants.map((item, key) => (
-              <ActiveeDetails
-                key={item.id}
-                summary={
-                  <>
-                    <img
-                      className="participants-image"
-                      src={`${backendUrl}/images/profiles/${item._id}.jpg`}
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                      }}
-                      alt="Account icon"
-                    />
-                    <span className="participants-data">
-                      <div className="participants-name">
-                        {item.first_name} {item.last_name}
-                      </div>
-                    </span>
-                  </>
-                }
-                content={
-                  <div className="participants-content">
-                    <div className="participants-content-data">
-                      <div className="participants-content-data-box">
-                        <div className="participants-content-data-name">E-Mail</div>
-                        <div>{item.email ? item.email : item.parent_email}</div>
-                      </div>
-                      {item.birthday && (
-                        <div className="participants-content-data-box">
-                          <div className="participants-content-data-name">Geboren am</div>
-                          <div>{item.birthday}</div>
+            <div className="participants-title">
+              <h2>Interessentenliste</h2>
+              <span>{activityParticipants.participants.length}</span>
+            </div>
+            <div className="participant-list">
+              {activityParticipants.participants.map((item, key) => (
+                <div key={item.id}>
+                  <ActiveeDetails
+                    summary={
+                      <>
+                        <img
+                          className="participants-image"
+                          src={`${backendUrl}/images/profiles/${item._id}.jpg`}
+                          onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                          }}
+                          alt="Account icon"
+                        />
+                        <span className="participants-data">
+                          <div className="participants-name">
+                            {item.first_name} {item.last_name}
+                          </div>
+                        </span>
+                      </>
+                    }
+                    content={
+                      <div className="participants-content">
+                        <div className="participants-content-data">
+                          <div className="participants-content-data-box">
+                            <div className="participants-content-data-name">E-Mail</div>
+                            <div>{item.email ? item.email : item.parent_email}</div>
+                          </div>
+                          {item.birthday && (
+                            <div className="participants-content-data-box">
+                              <div className="participants-content-data-name">Geboren am</div>
+                              <div>{item.birthday}</div>
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                }
-              />
-            ))}
+                      </div>
+                    }
+                  />
+                  {key + 1 < activityParticipants.participants.length && <hr className="light" />}
+                </div>
+              ))}
+              {activityParticipants.participants.length === 0 && (
+                <span className="participants-empty-disclaimer">
+                  <b>Noch keine Teilnehmer:innen haben sich die Aktivität gemerkt.</b>
+                </span>
+              )}
+            </div>
           </>
         );
       }

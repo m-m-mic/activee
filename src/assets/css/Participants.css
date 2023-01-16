@@ -1,3 +1,17 @@
+.participants-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.participants-title span {
+    margin: 0 10px;
+    font-size: 20px;
+}
+.participant-list {
+    display: flex;
+    flex-flow: column;
+}
+
 .participants-data {
     flex: 1;
     min-width: 0;
@@ -9,21 +23,22 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.participants-icon {
-    flex: 0 0 32px;
-    width: 32px;
-    height: 32px;
+.participants-image {
+    flex: 0 0 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--light-mode-cs-disabled);
 }
 .participants-content {
     display: flex;
     flex-flow: column;
-    margin: 10px 0 10px 5px;
+    margin: 12px 5px;
     gap: 10px;
 }
 .participants-content-data {
     display: flex;
     flex-flow: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .participants-content-data-name {
@@ -34,4 +49,10 @@
     display: flex;
     flex-flow: row;
     justify-content: space-between;
+}
+
+.participants-empty-disclaimer {
+    margin: 0 20px;
+    text-align: center;
+
 }

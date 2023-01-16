@@ -2,12 +2,10 @@
   display: flex;
   flex-flow: column;
   gap: 15px;
-  font-family: var(--h3-typeface);
-  font-size: var(--h3-size);
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 30px;
+  margin: 0 20px;
 }
 .search-no-results-image{
   width: 120px;

@@ -23,6 +23,7 @@
   --light-mode-warning: #e1786c;
   --light-mode-warning-active: #f38c80;
   --light-mode-caution: #ecc300;
+  --light-mode-hr-light: #d0d0d0;
   /* Elevations */
   --light-mode-elevation-1: 2px 3px 15px -8px rgba(0, 0, 0, 0.06);
   --light-mode-elevation-2: 1px 2px 9px -5px rgba(0, 0, 0, 0.09);
@@ -177,10 +178,6 @@ a {
   color: var(--light-mode-typeface);
 }
 
-hr {
-  margin: 0;
-}
-
 input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -260,7 +257,11 @@ a {
 
 hr {
   border: 0;
+  margin: 12px 0;
   border-top: 1px solid var(--light-mode-typeface);
+}
+hr.light {
+  border-top: 1px solid var(--light-mode-hr-light);
 }
 
 details > summary {

@@ -155,39 +155,41 @@ export function Profiles() {
               <div>Hauptprofil</div>
             </span>
           </div>
-          <hr />
+          <hr className="light" />
           {accountInfo.related_accounts.map((item, key) => (
-            <ActiveeDetails
-              key={key}
-              summary={
-                <>
-                  <img
-                    className="profiles-child-image"
-                    src={`${backendUrl}/images/profiles/${item._id}.jpg`}
-                    onError={({ currentTarget }) => {
-                      currentTarget.onerror = null; // prevents looping
-                      currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                    }}
-                    alt="Account icon"
-                  />
-                  <span className="profiles-child-data">
-                    <div className="profiles-child-name">
-                      {item.first_name} {item.last_name}
-                    </div>
-                  </span>
-                </>
-              }
-              content={
-                <div className="profiles-details-content">
-                  <ActiveeButton onClick={() => changeProfile(item._id)} buttonType="primary">
-                    Wechseln
-                  </ActiveeButton>
-                  <ActiveeButton onClick={() => handleWarningOpen(item._id)} buttonType="warning">
-                    Profil löschen
-                  </ActiveeButton>
-                </div>
-              }
-            />
+            <div key={item._id}>
+              <ActiveeDetails
+                summary={
+                  <>
+                    <img
+                      className="profiles-child-image"
+                      src={`${backendUrl}/images/profiles/${item._id}.jpg`}
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                      }}
+                      alt="Account icon"
+                    />
+                    <span className="profiles-child-data">
+                      <div className="profiles-child-name">
+                        {item.first_name} {item.last_name}
+                      </div>
+                    </span>
+                  </>
+                }
+                content={
+                  <div className="profiles-details-content">
+                    <ActiveeButton onClick={() => changeProfile(item._id)} buttonType="primary">
+                      Wechseln
+                    </ActiveeButton>
+                    <ActiveeButton onClick={() => handleWarningOpen(item._id)} buttonType="warning">
+                      Profil löschen
+                    </ActiveeButton>
+                  </div>
+                }
+              />
+              {key + 1 < accountInfo.related_accounts.length && <hr className="light" />}
+            </div>
           ))}
           {accountInfo.related_accounts.length < 4 && (
             <div className="profiles-add-button">

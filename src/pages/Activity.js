@@ -220,7 +220,7 @@ export function Activity() {
         </>
       )}
       {isOwner && (
-        <div>
+        <div className="activity-participants-button">
           <ActiveeButton buttonType="primary" onClick={() => navigate(`/activity/${id}/participants`)}>
             Interessentenliste
           </ActiveeButton>

@@ -74,7 +74,10 @@
 .activity-coach-message-button {
   margin-top: 15px;
 }
-
+.activity-participants-button {
+  display: flex;
+  justify-content: right;
+}
 .activity-remember-button {
   position: sticky;
   bottom: 15px;

@@ -159,7 +159,7 @@ export function Search() {
       {!loading && results.length === 0 && (
         <div className="search-no-results">
           <img className="search-no-results-image" src={NotFoundSmiley} alt="not found smiley" />
-          Es konnten keine Ergebnisse gefunden werden.
+          <b>Es konnten keine Ergebnisse gefunden werden.</b>
         </div>
       )}
       {loading && <LoadingAnimation />}
