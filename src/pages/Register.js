@@ -17,6 +17,7 @@ import { useCookies } from "react-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 import { backendUrl } from "../index";
 import { handleCookieChange } from "../scripts/handleCookieChange";
+import FetchingAnimation from "../assets/apngs/fetching_100px.png";
 
 /**
  * Seite, auf welcher man sich bei activee registrieren kann
@@ -30,6 +31,7 @@ export function Register() {
   const [validation, setValidation] = useState(NewAccountInputValidator);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [setDisclaimer, setSetDisclaimer] = useState("Error");
+  const [isFetching, setIsFetching] = useState(false);
 
   // Fügt Keydown EventListener bei ComponentMount hinzu und entfernt ihn wieder bei Unmount
   useEffect(() => {
@@ -49,10 +51,12 @@ export function Register() {
   // Zuerst wird die Validität der Nutzereingaben überprüft. Sind diese valide, wird ein neuer Account erstellt und
   // ein Token, sowie andere wichtige Informationen zurückgegeben
   const registerAccount = () => {
+    setIsFetching(true);
     for (const [key, value] of Object.entries(validation)) {
       if (value === false) {
         setSetDisclaimer("Bitte überprüfe deine Angaben.");
         setIsDisclaimerVisible(true);
+        setIsFetching(false);
         return;
       }
     }
@@ -69,9 +73,13 @@ export function Register() {
         response
           .json()
           .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-          .then(() => navigate("/profile"));
+          .then(() => {
+            setIsFetching(false);
+            navigate("/profile");
+          });
       } else {
         setSetDisclaimer("Es ist ein Fehler beim Erstellen des Accounts aufgetreten");
+        setIsFetching(false);
         return setIsDisclaimerVisible(true);
       }
     });
@@ -159,7 +167,11 @@ export function Register() {
           <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible}>{setDisclaimer}</ActiveeDisclaimer>
         </div>
         <div className="register-button">
-          <ActiveeButton buttonType="primary" onClick={() => registerAccount()}>
+          <ActiveeButton
+            buttonType="primary"
+            isDisabled={isFetching}
+            iconSrc={isFetching ? FetchingAnimation : null}
+            onClick={() => registerAccount()}>
             Registrieren
           </ActiveeButton>
         </div>

@@ -15,9 +15,7 @@ export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabl
   // Struktur, wenn ein Icon mitgegeben wird
   if (iconSrc != null) {
     return (
-      <button
-        onClick={onClick}
-        className={`activee-button ${buttonType} ${isDisabled ? "disabled" : ""} ${children ? "gap" : ""}`}>
+      <button onClick={onClick} disabled={isDisabled} className={`activee-button ${buttonType} ${children ? "gap" : ""}`}>
         <img className="activee-button-icon" src={iconSrc} alt="Button icon" />
         <span>{children}</span>
       </button>
@@ -25,10 +23,7 @@ export function ActiveeButton({ onClick, buttonType, iconSrc, children, isDisabl
   } else {
     // Struktur ohne Icon
     return (
-      <button
-        onClick={onClick}
-        className={isDisabled ? "activee-button disabled" : `activee-button ${buttonType}`}
-        disabled={isDisabled}>
+      <button onClick={onClick} className={`activee-button ${buttonType}`} disabled={isDisabled}>
         {children}
       </button>
     );

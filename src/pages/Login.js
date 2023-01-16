@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
+import FetchingAnimation from "../assets/apngs/fetching_100px.png";
 
 /**
  * Login Seite
@@ -21,6 +22,7 @@ export function Login() {
   const [passwordWarning, setPasswordWarning] = useState(false);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [disclaimerMessage, setDisclaimerMessage] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   // Fügt Keydown EventListener bei ComponentMount hinzu und entfernt ihn wieder bei Unmount
   useEffect(() => {
@@ -39,6 +41,7 @@ export function Login() {
   // Versucht Nutzer einzuloggen. Bei Erfolg gibt das Backend einen Token, Nutzer-ID, Nutzer-Typ und Nutzer-Tier zurück,
   // welche in die Cookies geschrieben werden
   const handleLogin = (email, password) => {
+    setIsFetching(true);
     const url = backendUrl + "/account/login";
     const requestOptions = {
       method: "POST",
@@ -51,18 +54,23 @@ export function Login() {
         setIsDisclaimerVisible(true);
         setDisclaimerMessage("E-Mail konnte nicht gefunden werden");
         setEmailWarning(true);
+        setIsFetching(false);
         return;
       } else if (response.status === 403) {
         // Error-Handling für falsche Password
         setIsDisclaimerVisible(true);
         setDisclaimerMessage("Es wurde ein falsches Password eingegeben");
         setPasswordWarning(true);
+        setIsFetching(false);
         return;
       }
       response
         .json()
         .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-        .then(() => navigate(-1));
+        .then(() => {
+          setIsFetching(false);
+          navigate(-1);
+        });
     });
   };
 
@@ -96,8 +104,9 @@ export function Login() {
           <div className="login-buttons">
             <ActiveeButton
               buttonType="primary"
+              iconSrc={isFetching ? FetchingAnimation : null}
               onClick={() => handleLogin(emailInput, passwordInput)}
-              isDisabled={emailInput === "" || passwordInput === ""}>
+              isDisabled={emailInput === "" || passwordInput === "" || isFetching}>
               Anmelden
             </ActiveeButton>
           </div>
