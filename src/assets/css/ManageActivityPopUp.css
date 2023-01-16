@@ -42,12 +42,12 @@
 .manage-activity-pop-up-list {
   display: flex;
   flex-flow: column;
-  gap: 20px;
 }
 
 /* Komponenten-Items */
 .manage-activity-pop-up-item {
   -webkit-appearance: none;
+  width: 100%;
   display: flex;
   flex-flow: row;
   padding: 0;
@@ -105,7 +105,8 @@
 /* Speichern-Button */
 .manage-activity-pop-up-options {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   justify-content: right;
+  align-items: center;
   gap: 15px;
 }

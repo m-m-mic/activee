@@ -32,13 +32,13 @@
 .profile-selection-list {
   display: flex;
   flex-flow: column;
-  gap: 20px;
 }
 .profile-selection-item {
   -webkit-appearance: none;
   display: flex;
   flex-flow: row;
   padding: 0;
+  width: 100%;
   justify-content: left;
   align-items: center;
   gap: 17px;

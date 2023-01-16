@@ -7,6 +7,7 @@ import { ActiveeButton } from "./ActiveeButton";
 import { useNavigate } from "react-router-dom";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
+import { LoadingAnimation } from "./LoadingAnimation";
 
 /**
  * Pop-up, mit welchen der Nutzer zwischen Profilen wechseln kann.
@@ -93,33 +94,33 @@ export function ProfileSelection({ ProfileSelectionVisible, setProfileSelectionV
         </div>
         <div className="profile-selection-list">
           {profileList.map((item, key) => (
-            <button
-              className="profile-selection-item"
-              key={key}
-              value={item._id}
-              onClick={() => handleActiveAccountChange(item._id, key)}>
-              <img
-                className="profile-selection-item-image"
-                src={`${backendUrl}/images/profiles/${item._id}.jpg`}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                }}
-                alt="Account icon"
-              />
-              <span className="profile-selection-item-container">
-                <div className="profile-selection-item-name">
-                  {item.first_name} {item.last_name}
-                </div>
-                <div className="profile-selection-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
-              </span>
-              <img
-                className={key === activeIndex ? "profile-selection-item-icon" : "profile-selection-item-icon hidden"}
-                src={AcceptIconBlack}
-                alt="Active Icon"
-              />
-            </button>
+            <div key={item._id}>
+              <button className="profile-selection-item" onClick={() => handleActiveAccountChange(item._id, key)}>
+                <img
+                  className="profile-selection-item-image"
+                  src={`${backendUrl}/images/profiles/${item._id}.jpg`}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                  }}
+                  alt="Account icon"
+                />
+                <span className="profile-selection-item-container">
+                  <div className="profile-selection-item-name">
+                    {item.first_name} {item.last_name}
+                  </div>
+                  <div className="profile-selection-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
+                </span>
+                <img
+                  className={key === activeIndex ? "profile-selection-item-icon" : "profile-selection-item-icon hidden"}
+                  src={AcceptIconBlack}
+                  alt="Active Icon"
+                />
+              </button>
+              {key + 1 < profileList.length && <hr className="light" />}
+            </div>
           ))}
+          {profileList.length === 0 && <LoadingAnimation />}
         </div>
         <div className="profile-selection-options">
           {cookies.userTier === "parent" && (

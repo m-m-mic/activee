@@ -4,6 +4,7 @@ import "../assets/css/ManageActivityPopUp.css";
 import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
+import { CautionDisclaimer } from "./CautionDisclaimer";
 
 /**
  * Pop-up für Aktivitäten merken auf Activity.js. Nutzer können unter all ihren Profilen auswählen,
@@ -146,37 +147,39 @@ export function ManageActivityPopUp({
           </div>
           <div className="manage-activity-pop-up-list">
             {profileList.map((item, key) => (
-              <button
-                className="manage-activity-pop-up-item"
-                key={item._id}
-                onClick={() => {
-                  setCheckedAndChangedAccountLists(item._id);
-                }}>
-                <img
-                  className="manage-activity-pop-up-item-image"
-                  src={`${backendUrl}/images/profiles/${item._id}.jpg`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
-                  }}
-                  alt="Account icon"
-                />
-                <span className="manage-activity-pop-up-item-container">
-                  <div className="manage-activity-pop-up-item-name">
-                    {item.first_name} {item.last_name}
-                  </div>
-                  <div className="manage-activity-pop-up-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
-                </span>
-                <img
-                  className={
-                    checkedAccounts.includes(item._id)
-                      ? "manage-activity-pop-up-item-icon"
-                      : "manage-activity-pop-up-item-icon hidden"
-                  }
-                  src={AcceptIconBlack}
-                  alt="Active Icon"
-                />
-              </button>
+              <div key={item._id}>
+                <button
+                  className="manage-activity-pop-up-item"
+                  onClick={() => {
+                    setCheckedAndChangedAccountLists(item._id);
+                  }}>
+                  <img
+                    className="manage-activity-pop-up-item-image"
+                    src={`${backendUrl}/images/profiles/${item._id}.jpg`}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src = `${backendUrl}/images/profiles/default_account_icon.svg`;
+                    }}
+                    alt="Account icon"
+                  />
+                  <span className="manage-activity-pop-up-item-container">
+                    <div className="manage-activity-pop-up-item-name">
+                      {item.first_name} {item.last_name}
+                    </div>
+                    <div className="manage-activity-pop-up-item-type">{item.main_profile ? "Hauptprofil" : "Unterprofil"}</div>
+                  </span>
+                  <img
+                    className={
+                      checkedAccounts.includes(item._id)
+                        ? "manage-activity-pop-up-item-icon"
+                        : "manage-activity-pop-up-item-icon hidden"
+                    }
+                    src={AcceptIconBlack}
+                    alt="Active Icon"
+                  />
+                </button>
+                {key + 1 < profileList.length && <hr className="light" />}
+              </div>
             ))}
           </div>
           <div className="manage-activity-pop-up-options">
