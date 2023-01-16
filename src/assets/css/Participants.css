@@ -1,0 +1,37 @@
+.participants-data {
+    flex: 1;
+    min-width: 0;
+}
+.participants-name {
+    font-family: var(--h3-typeface);
+    font-size: var(--h3-size);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.participants-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+}
+.participants-content {
+    display: flex;
+    flex-flow: column;
+    margin: 10px 0 10px 5px;
+    gap: 10px;
+}
+.participants-content-data {
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+}
+
+.participants-content-data-name {
+    font-family: Inter Bold, sans-serif;
+}
+
+.participants-content-data-box {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
