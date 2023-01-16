@@ -107,7 +107,7 @@ export function Login() {
               iconSrc={isFetching ? FetchingAnimation : null}
               onClick={() => handleLogin(emailInput, passwordInput)}
               isDisabled={emailInput === "" || passwordInput === "" || isFetching}>
-              Anmelden
+              {!isFetching && "Anmelden"}
             </ActiveeButton>
           </div>
         </div>

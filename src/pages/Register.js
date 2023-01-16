@@ -172,7 +172,7 @@ export function Register() {
             isDisabled={isFetching}
             iconSrc={isFetching ? FetchingAnimation : null}
             onClick={() => registerAccount()}>
-            Registrieren
+            {!isFetching && "Registrieren"}
           </ActiveeButton>
         </div>
       </>

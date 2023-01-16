@@ -76,6 +76,11 @@
   color: var(--light-mode-typeface-disabled);
   background: var(--light-mode-cs-disabled);
 }
+.activee-button:active:disabled {
+  cursor: not-allowed;
+  color: var(--light-mode-typeface-disabled);
+  background: var(--light-mode-cs-disabled);
+}
 /* Spezifisch für RegisterBanner */
 .activee-button.register {
   box-shadow: none;
