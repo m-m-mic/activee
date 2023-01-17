@@ -115,9 +115,17 @@ export function LandingPage() {
             </div>
             <div className="landing-page-suggestions-title">Viel Auswahl, z.B...</div>
             <div className="landing-page-activities">
-              {sports[sportIndex].activities.map((activity) => (
-                <ActiveeCard item={activity} compact key={activity._id} />
-              ))}
+              <div className="landing-page-activities-inner" style={{ transform: `translateX(-${sportIndex * 100}%)` }}>
+                {sports.map((sport) => (
+                  <div className="landing-page-activities-item-container">
+                    <div className="landing-page-activities-item">
+                      {sport.activities.map((activity) => (
+                        <ActiveeCard item={activity} compact key={activity._id} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
