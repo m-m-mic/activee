@@ -113,7 +113,7 @@ export function LandingPage() {
                 </HorizontalButton>
               ))}
             </div>
-            <div className="landing-page-suggestions-title">Viel Auswahl, z.B...</div>
+            <div className="landing-page-suggestions-title">So viele Möglichkeiten!</div>
             <div className="landing-page-activities">
               <div className="landing-page-activities-inner" style={{ transform: `translateX(-${sportIndex * 100}%)` }}>
                 {sports.map((sport) => (

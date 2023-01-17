@@ -24,6 +24,7 @@ import Select from "react-select";
 import { createSelectArray } from "../scripts/createSelectArray";
 import { MultiValueLanguage, MultiValueSport, MultiValueStyles } from "../scripts/reactSelect";
 import { CautionDisclaimer } from "../components/CautionDisclaimer";
+import { Subtitle } from "../components/Subtitle";
 
 /**
  * Seite, auf welchen Nutzer ihre Profileingaben bearbeiten können
@@ -183,7 +184,7 @@ export function EditProfile() {
             </div>
           </span>
         </div>
-        {cookies.userType === "organisation" && <div className="profile-club-name"> {accountInfo.club} </div>}
+        {cookies.userType === "organisation" && <Subtitle>{accountInfo.club}</Subtitle>}
         <h2>Deine Angaben</h2>
         <div className="profile-general-info">
           <div className="profile-general-info-container">

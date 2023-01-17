@@ -48,11 +48,6 @@
   width: 32px;
 }
 /* Weitere Angaben des Nutzers */
-.profile-club-name {
-  font-family: var(--h1-subtitle-typeface);
-  font-size: var(--h1-subtitle-size);
-  margin: 20px 0;
-}
 .profile-general-info {
   display: flex;
   flex-flow: column;
