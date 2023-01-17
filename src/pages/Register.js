@@ -67,7 +67,6 @@ export function Register() {
       body: JSON.stringify(accountInfo),
     };
     fetch(url, requestOptions).then((response) => {
-      console.log(response.json());
       if (response.status === 201) {
         setIsDisclaimerVisible(false);
         response
