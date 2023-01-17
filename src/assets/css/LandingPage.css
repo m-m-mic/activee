@@ -45,12 +45,35 @@
   right: 0;
   z-index: -5;
 }
-.activee-cta {
-}
 
 .action-buttons {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
   margin-bottom: 15px;
+}
+
+.landing-page-suggestions{
+  display: flex;
+  flex-flow: column;
+  gap: var(--component-spacing);
+}
+
+.landing-page-suggestions-title{
+  font-family: Inter SemiBold, sans-serif;
+  font-size: var(--h3-size);
+}
+
+.landing-page-sports {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.landing-page-activities {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
 }
