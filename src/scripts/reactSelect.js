@@ -81,6 +81,10 @@ export const MultiValueStyles = {
         ? `var(--light-mode-typeface-inverted)`
         : `` || (state.isDisabled && `var(--light-mode-typeface-disabled)`),
   }),
+  menu: (base) => ({
+    ...base,
+    zIndex: `6`,
+  }),
 };
 
 // Custom Styling für SingleValue Dropdown
@@ -110,5 +114,9 @@ export const SingleValueStyles = {
       (state.isSelected || state.isFocused) && !state.isDisabled
         ? `var(--light-mode-typeface-inverted)`
         : `` || (state.isDisabled && `var(--light-mode-typeface-disabled)`),
+  }),
+  menu: (base) => ({
+    ...base,
+    zIndex: `6`,
   }),
 };

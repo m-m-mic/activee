@@ -67,7 +67,6 @@ export function ManageActivityPopUp({
       .then((response) => response.json())
       .then((data) => {
         setProfileList(data);
-        getCheckedAccounts(data);
       });
     // TODO: error-handling
   };
@@ -106,6 +105,10 @@ export function ManageActivityPopUp({
       if (participants.includes(profile._id)) {
         checkedProfiles.push(profile._id);
       }
+    }
+    if (checkedProfiles.length === 0 && profileList.length === 1) {
+      checkedProfiles.push(profileList[0]._id);
+      setToBeChangedAccounts([...toBeChangedAccounts, profileList[0]._id]);
     }
     setCheckedAccounts(checkedProfiles);
   };

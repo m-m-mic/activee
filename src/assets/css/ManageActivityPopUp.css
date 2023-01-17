@@ -67,6 +67,7 @@
 }
 
 .manage-activity-pop-up-item-container {
+  color: var(--light-mode-typeface);
   flex: 1;
   text-align: left;
   display: flex;

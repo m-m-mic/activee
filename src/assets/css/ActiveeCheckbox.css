@@ -1,9 +1,7 @@
 .activee-checkbox-container {
   display: inline-flex;
-  cursor: pointer;
   align-items: center;
   gap: 10px;
-  margin: 7px 8px;
 }
 .activee-checkbox-container input {
   position: absolute;
@@ -15,6 +13,12 @@
   width: 0;
   /* Focus state doesn't work if we just do display: none */
 }
+
+.activee-checkbox-wrapper {
+  cursor: pointer;
+  padding: 7px;
+}
+
 /* activee-checkbox */
 .activee-checkbox {
   box-sizing: border-box;
@@ -29,17 +33,17 @@
   align-items: center;
   transition: 200ms ease-out;
 }
-.activee-checkbox-container .activee-checkbox.unselected.enabled {
+.activee-checkbox-wrapper .activee-checkbox.unselected.enabled {
   border: 2px solid var(--light-mode-typeface);
   background: none;
 }
 /* Unselected, Disabled */
-.activee-checkbox-container .activee-checkbox.unselected.disabled {
+.activee-checkbox-wrapper .activee-checkbox.unselected.disabled {
   background: none;
   border: 3px solid var(--light-mode-typeface-disabled);
 }
 /* Unselected, Hovered */
-.activee-checkbox-container:hover .activee-checkbox.unselected.enabled {
+.activee-checkbox-wrapper:hover .activee-checkbox.unselected.enabled {
   background: var(--light-mode-cs-unselected);
   border: 2px solid var(--light-mode-typeface);
 }
@@ -49,22 +53,22 @@ input:focus + .activee-checkbox.unselected.enabled {
   border: 2px solid var(--light-mode-typeface);
 }
 /* Unselected, Pressed */
-.activee-checkbox-container:active .activee-checkbox.unselected.enabled {
+.activee-checkbox-wrapper:active .activee-checkbox.unselected.enabled {
   background: none;
   border: 2px solid var(--light-mode-cs-primary);
 }
 /* Selected, Enabled */
-.activee-checkbox-container .activee-checkbox.selected.enabled {
+.activee-checkbox-wrapper .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-primary);
   border: 2px solid var(--light-mode-cs-primary);
 }
 /* Selected, Disabled */
-.activee-checkbox-container .activee-checkbox.selected.disabled {
+.activee-checkbox-wrapper .activee-checkbox.selected.disabled {
   background: var(--light-mode-typeface-disabled);
   border: 2px solid var(--light-mode-typeface-disabled);
 }
 /* Selected, Hovered */
-.activee-checkbox-container:hover .activee-checkbox.selected.enabled {
+.activee-checkbox-wrapper:hover .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-cs-secondary);
 }
@@ -74,7 +78,7 @@ input:focus + .activee-checkbox.selected.enabled {
   border: 2px solid var(--light-mode-cs-secondary);
 }
 /* Selected, Pressed */
-.activee-checkbox-container:active .activee-checkbox.selected.enabled {
+.activee-checkbox-wrapper:active .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-typeface);
 }

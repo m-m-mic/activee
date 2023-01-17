@@ -184,7 +184,10 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   }
   return (
     <>
-      <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible} setIsDisclaimerVisible={setIsDisclaimerVisible} closable>
+      <ActiveeDisclaimer
+        isDisclaimerVisible={isDisclaimerVisible}
+        setIsDisclaimerVisible={setIsDisclaimerVisible}
+        type="closable">
         Bitte überprüfe deine Angaben
       </ActiveeDisclaimer>
       {isWarningModalVisible && (

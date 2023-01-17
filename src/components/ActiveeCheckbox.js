@@ -25,11 +25,13 @@ export function ActiveeCheckbox({ onChange, defaultValue, disabled, children }) 
   };
 
   return (
-    <div className="activee-checkbox-container" onClick={handleCheck}>
-      <input type="checkbox" onChange={onChange} />
-      <span className={`activee-checkbox ${checked ? "selected" : "unselected"} ${disabled ? "disabled" : "enabled"}`}>
-        <img className={`activee-checkmark ${checked ? "selected" : "unselected"}`} src={CheckmarkIconWhite} alt="Checkmark" />
-      </span>
+    <div className="activee-checkbox-container">
+      <div className="activee-checkbox-wrapper" onClick={handleCheck}>
+        <input type="checkbox" onChange={onChange} />
+        <span className={`activee-checkbox ${checked ? "selected" : "unselected"} ${disabled ? "disabled" : "enabled"}`}>
+          <img className={`activee-checkmark ${checked ? "selected" : "unselected"}`} src={CheckmarkIconWhite} alt="Checkmark" />
+        </span>
+      </div>
       <span className="activee-checkbox-label">{children}</span>
     </div>
   );
