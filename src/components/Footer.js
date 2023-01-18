@@ -5,8 +5,12 @@ import { NavLink } from "react-router-dom";
 export function Footer() {
   return (
     <div id="footer">
-      <NavLink to="/about">Über uns</NavLink>
-      <NavLink to="/impressum">Impressum</NavLink>
+      <div className="footer-section">
+        <NavLink to="/about-us">Über uns</NavLink>
+      </div>
+      <div className="footer-section">
+        <NavLink to="/impressum">Impressum</NavLink>
+      </div>
     </div>
   );
 }

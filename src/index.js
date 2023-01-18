@@ -22,6 +22,8 @@ import { LandingPage } from "./pages/LandingPage";
 import WelcomeLayout from "./layouts/WelcomeLayout";
 import { Sport } from "./pages/Sport";
 import { Participants } from "./pages/Participants";
+import { AboutUs } from "./pages/AboutUs";
+import { Impressum } from "./pages/Impressum";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
 export const backendUrl = "https://api-activee.onrender.com";
@@ -52,6 +54,8 @@ export default function App() {
           <Route exact path="settings" element={<Settings />} />
           <Route exact path="settings/profiles" element={<Profiles />} />
           <Route exact path="search" element={<Search />} />
+          <Route exact path="about-us" element={<AboutUs />} />
+          <Route exact path="impressum" element={<Impressum />} />
         </Route>
       </Routes>
     </HashRouter>

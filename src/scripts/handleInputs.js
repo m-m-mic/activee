@@ -1,5 +1,7 @@
 // Validator Objekte, welche verwendet werden, um die Validität von Nutzereingaben auf Create und Edit Pages zu prüfen.
 // Sämtliche Keys in den Objekten müssen auf true stehen, damit der POST oder PATCH Request ausgeführt werden kann.
+import { parse } from "uuid";
+
 export const NewAccountInputValidator = {
   first_name: false,
   last_name: false,
@@ -367,11 +369,20 @@ export const setDateEndingTime = (index, input, data, setData) => {
   setData({ ...data, dates: data.dates });
 };
 
+// Überprüft Validität einer Terminangabe. Tag und Uhrzeiten müssen ausgefüllt sein, Endzeit darf nicht früher sein als
+// Startzeit
 export const isDateValid = (date) => {
   if (date.day.value && date.day.label) {
     if (date.starting_time.match(timePattern)) {
       if (date.ending_time.match(timePattern)) {
-        return true;
+        const splitStart = date.starting_time.split(":");
+        const splitEnd = date.ending_time.split(":");
+        if (
+          parseInt(splitEnd[0]) > parseInt(splitStart[0]) ||
+          (parseInt(splitEnd[0]) === parseInt(splitStart[0]) && parseInt(splitEnd[1]) > parseInt(splitStart[1]))
+        ) {
+          return true;
+        }
       }
     }
   } else {
