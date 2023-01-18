@@ -48,6 +48,7 @@ export function Sport() {
           <h1>{sportInfo.name}</h1>
         </div>
         <h2>Anleitung</h2>
+        {id === "basketball" && <></>}
         <div className="sport-instruction">{sportInfo.description.instruction}</div>
         <h2>Geschichte</h2>
         <div className="sport-history">{sportInfo.description.history}</div>
