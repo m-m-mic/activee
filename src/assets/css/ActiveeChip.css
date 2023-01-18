@@ -4,6 +4,7 @@
   display: inline-flex;
   flex-flow: row;
   align-items: center;
+  text-align: center;
   min-height: 18px;
   background: var(--light-mode-cs-dark);
   gap: 5px;

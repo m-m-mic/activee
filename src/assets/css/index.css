@@ -284,7 +284,7 @@ details > summary::-webkit-details-marker {
 #content-body {
   flex: 1;
   gap: var(--component-spacing);
-  margin: 0 12px 15px 12px;
+  margin: 0 12px 25px 12px;
   display: flex;
   flex-flow: column;
 }
