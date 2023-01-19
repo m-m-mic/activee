@@ -47,11 +47,37 @@ export function Sport() {
           />
           <h1>{sportInfo.name}</h1>
         </div>
-        <h2>Anleitung</h2>
-        {id === "basketball" && <></>}
-        <div className="sport-instruction">{sportInfo.description.instruction}</div>
+        <h2>Beschreibung</h2>
+        {id === "basketball" && (
+          <div className="sport-basketball-desc">
+            <div className="sport-basketball-desc-team">
+              Basketball ist eine Hallensportart bei der 2 Teams mit jeweils max. 12 Spieler:innen gegeneinander spielen.
+            </div>
+            <img className="sport-basketball-desc-team-img" src="basketball-desc-teams.png" alt="basketball teams" />
+            <div className="sport-basketball-desc-field">
+              Auf dem Spielfeld spielen 5 Spieler:innen der einen Mannschaft gegen 5 der Anderen.
+            </div>
+            <img className="sport-basketball-desc-field-img" src="basketball-desc-field.png" alt="basketball field" />
+            <div className="sport-basketball-desc-goal">
+              Das Ziel eines Angriffs ist es, den Ball in den gegnerischen Korb zu werfen, dabei zählt ein regulärer Treffer 2
+              Punkte. Gewonnen hat das Team, welches nach 4x10 Minuten die meisten Punkte erziehlt.
+            </div>
+            <img className="sport-basketball-desc-goal-img" src="basketball-desc-goal.png" alt="basketball goal" />
+          </div>
+        )}
+        {id !== "basketball" && <div className="sport-instruction">{sportInfo.description.instruction}</div>}
         <h2>Geschichte</h2>
-        <div className="sport-history">{sportInfo.description.history}</div>
+        {id === "basketball" && (
+          <>
+            <span className="sport-basketball-history">
+              Basketball wurde von James Naismith 1891 erfunden, einem kanadischen Arzt und Pädagogen. Naismith wollte einen
+              Winter-Hallensport für seine Studierenden entwickeln, bei dem sie sich kaum verletzten würden. Für die ersten Spiele
+              befestigte er Pfirsichkörbe an den Balkons der Sporthalle, daher der Name Basketball (eng. “basket” im dt. “Korb”).
+            </span>
+            <img className="sport-basketball-history-img" src="basketball-history.png" alt="basketball history" />
+          </>
+        )}
+        {id !== "basketball" && <div className="sport-history">{sportInfo.description.history}</div>}
         <h2>{sportInfo.name} in deiner Nähe</h2>
         <div className="activity-list">
           {sportInfo.activities.map((item, key) => (

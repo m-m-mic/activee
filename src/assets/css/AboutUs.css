@@ -1,0 +1,27 @@
+.about-us-pixels {
+    display: inline-flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.pixel-alex-img {
+    height: 100px;
+}
+
+.pixel-bella-img {
+    height: 100px;
+}
+
+.pixel-evi-img {
+    height: 100px;
+}
+
+.pixel-melli-img {
+    height: 100px;
+}
+
+.pixel-michi-img {
+    height: 100px;
+}
