@@ -1,9 +1,9 @@
+/* Styling für AboutUs.js */
 .about-us-pixels {
     display: inline-flex;
     flex-flow: wrap;
     justify-content: center;
     align-items: center;
-    overflow: auto;
 }
 
 .pixel-alex-img {
@@ -24,4 +24,17 @@
 
 .pixel-michi-img {
     height: 100px;
+}
+
+.about-us-text {
+    text-align: center;
+    line-height: 25px;
+}
+
+.about-us-buttons {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }

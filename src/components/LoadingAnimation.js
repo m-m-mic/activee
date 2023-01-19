@@ -10,7 +10,7 @@ import "../assets/css/LoadingAnimation.css";
 export function LoadingAnimation() {
   return (
     <div className="loading-animation-container">
-      <img src={LoadingApng} className="loading-animation" />
+      <img src={LoadingApng} className="loading-animation" alt="loading" />
     </div>
   );
 }

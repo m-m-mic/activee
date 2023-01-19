@@ -1,6 +1,5 @@
 // Validator Objekte, welche verwendet werden, um die Validität von Nutzereingaben auf Create und Edit Pages zu prüfen.
 // Sämtliche Keys in den Objekten müssen auf true stehen, damit der POST oder PATCH Request ausgeführt werden kann.
-import { parse } from "uuid";
 
 export const NewAccountInputValidator = {
   first_name: false,

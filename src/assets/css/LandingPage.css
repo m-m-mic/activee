@@ -1,4 +1,4 @@
-/* Styling der Landing Page für nicht angemeldete Nutzer */
+/* Styling von LandingPage.js */
 .activee-banner {
   margin: 25px 0 75px;
   height: 75px;
@@ -8,27 +8,33 @@
   align-items: center;
   gap: 15px;
 }
+
 .landing-page-activee-logo {
   width: 50px;
   height: 50px;
 }
+
 .activee-name-large {
   font-family: var(--logo-typeface);
   font-size: 60px;
 }
+
 .landing-page {
   display: flex;
   flex-flow: column;
   gap: var(--component-spacing);
   padding: 0 10px;
 }
+
 .activee-introduction {
   display: flex;
   justify-content: space-between;
 }
+
 .activee-image-1 {
   width: 110px;
 }
+
 .activee-desc {
   max-width: 270px;
   box-sizing: border-box;
@@ -39,6 +45,7 @@
   gap: 8px;
   line-height: 27px;
 }
+
 .activee-pictures {
   position: absolute;
   top: 136px;
@@ -75,15 +82,18 @@
   padding: 0 22px;
   margin: 0 -22px;
 }
+
 .landing-page-activities-inner {
   white-space: nowrap;
   transition: 200ms ease-out;
   margin: 0 -22px;
 }
+
 .landing-page-activities-item-container {
   width: 100%;
   display: inline-flex;
 }
+
 .landing-page-activities-item {
   margin: 0 22px;
   width: 100%;

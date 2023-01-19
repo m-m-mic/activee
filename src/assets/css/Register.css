@@ -1,3 +1,4 @@
+/* Styling für Register.js */
 .register-type {
   display: inline-flex;
   flex-flow: column;
@@ -12,13 +13,16 @@
   gap: 20px;
   margin: 10px;
 }
+
 .register-names {
   display: flex;
   gap: 10px;
 }
+
 .register-mandatory-disclaimer {
   font-family: Inter Bold, sans-serif;
 }
+
 .register-button {
   display: flex;
   justify-content: center;

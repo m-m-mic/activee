@@ -16,7 +16,7 @@ import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
  */
 export default function CreateActivity() {
   const [cookies, setCookies] = useCookies(["userToken", "userType", "userId"]);
-  const [activityInfo, setActivityInfo] = useState();
+  const [activityInfo, setActivityInfo] = useState(null);
   const [inputValidation, setInputValidation] = useState(newActivityInputValidator);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [disclaimer, setDisclaimer] = useState("");

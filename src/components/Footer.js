@@ -2,6 +2,11 @@ import React from "react";
 import "../assets/css/Footer.css";
 import { NavLink } from "react-router-dom";
 
+/**
+ * Footer von Activee
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Footer() {
   return (
     <div id="footer">

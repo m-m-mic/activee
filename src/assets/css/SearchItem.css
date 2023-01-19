@@ -1,3 +1,4 @@
+/* Styling von SearchItem.js */
 .search-item {
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-primary);
@@ -6,6 +7,7 @@
   cursor: pointer;
   overflow: hidden;
 }
+
 .search-item-image {
   min-width: 0;
   width: 100%;
@@ -19,18 +21,21 @@
   flex-flow: column;
   gap: 10px;
 }
+
 .search-item-primary {
   display: flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
 }
+
 .search-item-secondary {
   min-width: 0;
   display: flex;
   align-items: center;
   gap: 7px;
 }
+
 .search-item-club,
 .search-item-league,
 .search-item-name {
@@ -38,30 +43,36 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .search-item-club {
   font-family: var(--h1-subtitle-typeface)
 }
+
 .search-item-name {
   font-family: var(--h2-typeface);
   font-size: var(--h2-size);
 }
+
 .search-item-sport-icon {
   flex: 0 0 24px;
   width: 24px;
   height: 24px;
 }
+
 .search-item-detail {
   display: flex;
   align-items: center;
   gap: 5px;
   min-width: 0;
 }
+
 .search-item-detail span {
   flex: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .search-item-detail-image {
   flex: 0 0 24px;
   width: 24px;

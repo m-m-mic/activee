@@ -123,7 +123,9 @@ export function Activity() {
       <div className="activity-information-tags">
         <ActiveeChip
           iconUrl={`${backendUrl}/icons/sports/${activityInfo.sport._id}_icon.svg`}
-          onClick={() => navigate(`/sport/${activityInfo.sport._id}`)}>
+          onClick={() => {
+            if (cookies.userToken) navigate(`/sport/${activityInfo.sport._id}`);
+          }}>
           {activityInfo.sport.name}
         </ActiveeChip>
         <ActiveeChip iconUrl={`${backendUrl}/icons/genders/${activityInfo.gender._id}_icon.svg`}>

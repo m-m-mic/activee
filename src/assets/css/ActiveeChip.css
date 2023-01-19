@@ -1,5 +1,5 @@
 /* Styling für activeeChip.js */
-.activee-tag {
+.activee-chip {
   font-family: var(--text-typeface);
   display: inline-flex;
   flex-flow: row;
@@ -13,21 +13,21 @@
 }
 
 /* Anderes Padding für Tags ohne Icon */
-.activee-tag.without-icon {
+.activee-chip.without-icon {
   padding: 3px 7px;
 }
 
-.activee-tag.primary {
+.activee-chip.primary {
   background: var(--light-mode-cs-primary);
 }
 
-.activee-tag-icon {
+.activee-chip-icon {
   width: 18px;
   height: 18px;
   border-radius: 50%;
 }
 
-.activee-tag-text {
+.activee-chip-text {
   color: var(--light-mode-typeface-inverted);
   font-size: 12px;
 }

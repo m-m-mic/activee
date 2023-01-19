@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
 }
+
 .edit-controls {
   background: var(--light-mode-cs-primary);
   display: inline-flex;
@@ -15,13 +16,16 @@
   border-radius: 8px;
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .edit-controls-icon {
   width: 32px;
   display: block;
 }
+
 .edit-controls-link {
   cursor: pointer;
 }
+
 .edit-controls-divider {
   background: var(--light-mode-typeface-inverted);
   width: 2px;

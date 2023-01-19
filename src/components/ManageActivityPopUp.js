@@ -4,7 +4,6 @@ import "../assets/css/ManageActivityPopUp.css";
 import CancelIconBlack from "../assets/svgs/cancel_icon_black.svg";
 import AcceptIconBlack from "../assets/svgs/accept_icon_black.svg";
 import { ActiveeButton } from "./ActiveeButton";
-import { CautionDisclaimer } from "./CautionDisclaimer";
 
 /**
  * Pop-up für Aktivitäten merken auf Activity.js. Nutzer können unter all ihren Profilen auswählen,

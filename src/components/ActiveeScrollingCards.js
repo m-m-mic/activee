@@ -18,7 +18,9 @@ export function ActiveeScrollingCards({ items, type }) {
         <img className="general-sports-image" alt="general sports icon" src={`${backendUrl}/icons/sports/general_icon.svg`} />
         <div className="no-activities-text">
           <div>Du hast dir noch keine Aktivität gemerkt.</div>
-          <NavLink to="/search">Schau doch mal hier...</NavLink>
+          <NavLink className="no-activities-search" to="/search">
+            Schau doch mal hier...
+          </NavLink>
         </div>
       </div>
     );

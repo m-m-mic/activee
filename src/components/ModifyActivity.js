@@ -20,7 +20,7 @@ import {
 import { useCookies } from "react-cookie";
 import { createSelectArray, createSelectObject } from "../scripts/createSelectArray";
 import Select from "react-select";
-import { accountTemplate, agePreselect, genderPreselect } from "../scripts/inputTemplates";
+import { agePreselect, genderPreselect } from "../scripts/inputTemplates";
 import { DatePicker } from "./DatePicker";
 import { AddressPicker } from "./AddressPicker";
 import { useNavigate } from "react-router-dom";

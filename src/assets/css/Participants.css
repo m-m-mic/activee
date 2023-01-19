@@ -1,12 +1,15 @@
+/* Styling für Participants.js */
 .participants-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .participants-title span {
     margin: 0 10px;
     font-size: 20px;
 }
+
 .participant-list {
     display: flex;
     flex-flow: column;
@@ -16,6 +19,7 @@
     flex: 1;
     min-width: 0;
 }
+
 .participants-name {
     font-family: var(--h3-typeface);
     font-size: var(--h3-size);
@@ -23,18 +27,21 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .participants-image {
     flex: 0 0 52px;
     height: 52px;
     border-radius: 50%;
     background: var(--light-mode-cs-disabled);
 }
+
 .participants-content {
     display: flex;
     flex-flow: column;
     margin: 12px 5px;
     gap: 10px;
 }
+
 .participants-content-data {
     display: flex;
     flex-flow: column;

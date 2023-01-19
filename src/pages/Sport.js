@@ -5,11 +5,20 @@ import { backendUrl } from "../index";
 import { LoadingAnimation } from "../components/LoadingAnimation";
 import "../assets/css/Sport.css";
 import { ActiveeCard } from "../components/ActiveeCard";
+import ExpandIconBlack from "../assets/svgs/expand_icon_black.svg";
+import parse from "html-react-parser";
 
+/**
+ * Seite, auf welcher Details zu der in der ID übergeben Sportart stehen
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Sport() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
   const [sportInfo, setSportInfo] = useState();
+  const [expandInstruction, setExpandInstruction] = useState(false);
+  const [expandHistory, setExpandHistory] = useState(false);
 
   let { id } = useParams();
 
@@ -48,36 +57,30 @@ export function Sport() {
           <h1>{sportInfo.name}</h1>
         </div>
         <h2>Beschreibung</h2>
-        {id === "basketball" && (
-          <div className="sport-basketball-desc">
-            <div className="sport-basketball-desc-team">
-              Basketball ist eine Hallensportart bei der 2 Teams mit jeweils max. 12 Spieler:innen gegeneinander spielen.
-            </div>
-            <img className="sport-basketball-desc-team-img" src="basketball-desc-teams.png" alt="basketball teams" />
-            <div className="sport-basketball-desc-field">
-              Auf dem Spielfeld spielen 5 Spieler:innen der einen Mannschaft gegen 5 der Anderen.
-            </div>
-            <img className="sport-basketball-desc-field-img" src="basketball-desc-field.png" alt="basketball field" />
-            <div className="sport-basketball-desc-goal">
-              Das Ziel eines Angriffs ist es, den Ball in den gegnerischen Korb zu werfen, dabei zählt ein regulärer Treffer 2
-              Punkte. Gewonnen hat das Team, welches nach 4x10 Minuten die meisten Punkte erziehlt.
-            </div>
-            <img className="sport-basketball-desc-goal-img" src="basketball-desc-goal.png" alt="basketball goal" />
-          </div>
-        )}
-        {id !== "basketball" && <div className="sport-instruction">{sportInfo.description.instruction}</div>}
+
+        <div className="sport-instruction">
+          {parse(sportInfo.description.instruction.short)}
+          {expandInstruction && parse(sportInfo.description.instruction.full)}
+        </div>
+        <div className="sport-description-expand" onClick={() => setExpandInstruction(!expandInstruction)}>
+          <img
+            className={`sport-description-expand-icon ${expandInstruction ? "expanded" : ""}`}
+            src={ExpandIconBlack}
+            alt="expand"
+          />
+        </div>
         <h2>Geschichte</h2>
-        {id === "basketball" && (
-          <>
-            <span className="sport-basketball-history">
-              Basketball wurde von James Naismith 1891 erfunden, einem kanadischen Arzt und Pädagogen. Naismith wollte einen
-              Winter-Hallensport für seine Studierenden entwickeln, bei dem sie sich kaum verletzten würden. Für die ersten Spiele
-              befestigte er Pfirsichkörbe an den Balkons der Sporthalle, daher der Name Basketball (eng. “basket” im dt. “Korb”).
-            </span>
-            <img className="sport-basketball-history-img" src="basketball-history.png" alt="basketball history" />
-          </>
-        )}
-        {id !== "basketball" && <div className="sport-history">{sportInfo.description.history}</div>}
+        <div className="sport-history">
+          {parse(sportInfo.description.history.short)}
+          {expandHistory && parse(sportInfo.description.history.full)}
+        </div>
+        <div className="sport-description-expand" onClick={() => setExpandHistory(!expandHistory)}>
+          <img
+            className={`sport-description-expand-icon ${expandHistory ? "expanded" : ""}`}
+            src={ExpandIconBlack}
+            alt="expand"
+          />
+        </div>
         <h2>{sportInfo.name} in deiner Nähe</h2>
         <div className="activity-list">
           {sportInfo.activities.map((item, key) => (

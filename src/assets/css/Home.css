@@ -1,8 +1,10 @@
+/* Styling für Home.js */
 .home-sports {
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 1fr;
 }
+
 .home-add-button {
   display: flex;
   align-items: center;

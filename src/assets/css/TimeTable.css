@@ -9,32 +9,39 @@
   padding: 0;
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .time-table th {
   border: var(--light-mode-background) solid 1px;
   flex: 1;
 }
+
 .time-bracket {
   border-top: none !important;
   border-bottom: none !important;
 }
+
 .time-bracket-first {
   border-right: none !important;
   border-bottom: none !important;
 }
+
 .time-day {
   border-left: none !important;
   border-right: none !important;
 }
+
 .time-table tr {
   display: none;
   line-height: 28px;
   padding: 0;
 }
+
 .time-table tr#table-header {
   visibility: visible;
   background: var(--light-mode-cs-primary);
   display: flex;
 }
+
 .time-table tr th:first-child {
   flex: 30px;
   background: var(--light-mode-cs-primary);

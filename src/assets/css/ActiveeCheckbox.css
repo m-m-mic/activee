@@ -1,3 +1,4 @@
+/* Styling für ActiveeCheckbox.js */
 .activee-checkbox-container {
   display: inline-flex;
   align-items: center;
@@ -11,7 +12,6 @@
   cursor: pointer;
   height: 0;
   width: 0;
-  /* Focus state doesn't work if we just do display: none */
 }
 
 .activee-checkbox-wrapper {
@@ -33,61 +33,74 @@
   align-items: center;
   transition: 200ms ease-out;
 }
+
 .activee-checkbox-wrapper .activee-checkbox.unselected.enabled {
   border: 2px solid var(--light-mode-typeface);
   background: none;
 }
+
+/* State styling */
 /* Unselected, Disabled */
 .activee-checkbox-wrapper .activee-checkbox.unselected.disabled {
   background: none;
   border: 3px solid var(--light-mode-typeface-disabled);
 }
+
 /* Unselected, Hovered */
 .activee-checkbox-wrapper:hover .activee-checkbox.unselected.enabled {
   background: var(--light-mode-cs-unselected);
   border: 2px solid var(--light-mode-typeface);
 }
+
 /* Unselected, Focused */
 input:focus + .activee-checkbox.unselected.enabled {
   background: var(--light-mode-cs-unselected);
   border: 2px solid var(--light-mode-typeface);
 }
+
 /* Unselected, Pressed */
 .activee-checkbox-wrapper:active .activee-checkbox.unselected.enabled {
   background: none;
   border: 2px solid var(--light-mode-cs-primary);
 }
+
 /* Selected, Enabled */
 .activee-checkbox-wrapper .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-primary);
   border: 2px solid var(--light-mode-cs-primary);
 }
+
 /* Selected, Disabled */
 .activee-checkbox-wrapper .activee-checkbox.selected.disabled {
   background: var(--light-mode-typeface-disabled);
   border: 2px solid var(--light-mode-typeface-disabled);
 }
+
 /* Selected, Hovered */
 .activee-checkbox-wrapper:hover .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-cs-secondary);
 }
+
 /* Selected, Focused */
 input:focus + .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-cs-secondary);
 }
+
 /* Selected, Pressed */
 .activee-checkbox-wrapper:active .activee-checkbox.selected.enabled {
   background: var(--light-mode-cs-secondary);
   border: 2px solid var(--light-mode-typeface);
 }
+
 /* activee-checkmark */
 .activee-checkmark {
   width: 16px;
   height: 16px;
   display: none;
 }
+
 /* Selected */
 .activee-checkmark.selected {
   display: unset;

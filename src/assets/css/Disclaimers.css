@@ -1,9 +1,10 @@
-/* Styling der Warnmeldung für ungültige Nutzerangaben */
+/* Styling für diverse Disclaimer von activee */
 .disclaimer-container {
   visibility: unset;
   transition: 200ms ease-out;
   width: 100%;
 }
+
 .disclaimer-container.closable {
   position: fixed;
   left: 50%;
@@ -11,16 +12,20 @@
   transform: translate(-50%, 0%);
   z-index: 42;
 }
+
 .disclaimer-container.fixed {
   display: unset;
 }
+
 .disclaimer-container.fixed.hidden {
   display: none;
 }
+
 .disclaimer-container.hidden {
   visibility: hidden;
   top: -65px;
 }
+
 .disclaimer {
   box-sizing: border-box;
   padding: 12px;
@@ -32,33 +37,41 @@
   border-radius: 8px;
   transition: 200ms ease-out;
 }
+
+/* Types */
 .disclaimer.warning {
   background: var(--light-mode-warning-active);
 }
+
 .disclaimer.confirmed {
   background: var(--light-mode-cs-unselected);
 }
+
 .disclaimer.closable {
   box-shadow: var(--light-mode-elevation-4);
   margin: 0 12px;
 }
+
 .disclaimer.hidden {
   display: none;
 }
+
 .disclaimer-icon {
   flex: 0 0 32px;
   width: 32px;
 }
+
 .disclaimer-icon.pointer {
   cursor: pointer;
 }
+
 .disclaimer-text {
   flex: 1;
   text-align: center;
   font-family: Inter SemiBold, sans-serif;
 }
 
-/* Styling für die Achtung-Meldung */
+/* Styling für den Caution-Disclaimer */
 .caution-disclaimer {
   font-family: var(--annotation-typeface);
   font-size: var(--annotation-size);

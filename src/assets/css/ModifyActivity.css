@@ -1,3 +1,4 @@
+/*Styling für ModifyActivity.js */
 .modify-activity-name {
   font-family: var(--h1-typeface);
   font-size: var(--h1-size);
@@ -5,31 +6,37 @@
   width: 100%;
   box-sizing: border-box;
 }
+
 .modify-activity-club {
   font-family: var(--h1-subtitle-typeface);
   font-size: var(--h1-subtitle-size);
   margin: 10px 0 15px;
 }
+
 .modify-activity-general-info {
   display: flex;
   flex-flow: column;
   gap: 15px;
 }
+
 .modify-activity-general-info-container {
   display: flex;
   flex-flow: row;
   gap: 30px;
   justify-content: space-between;
 }
+
 .modify-activity-general-info-container.language {
   display: flex;
   flex-flow: column;
   gap: 10px;
   justify-content: space-between;
 }
+
 .modify-activity-general-info-name {
   font-family: Inter Bold, sans-serif;
 }
+
 .modify-activity-general-info-data {
   flex: 1 1;
   justify-content: right;
@@ -42,6 +49,7 @@
   justify-content: right;
   flex-flow: column;
 }
+
 .modify-activity-select {
   display: inline-block;
   text-align: left;
@@ -49,34 +57,43 @@
   font-size: var(--text-size);
   width: 100%;
 }
+
 .modify-activity-select.sport,
 .modify-activity-select.gender {
   max-width: 160px;
 }
+
 .modify-activity-select.age-direction {
   max-width: 150px;
 }
+
 .modify-activity-select.languages {
   max-width: 320px;
 }
+
 .modify-activity-age {
   max-width: 60px;
 }
+
 .modify-activity-league {
   max-width: 210px;
 }
+
 .modify-activity-count {
   max-width: 60px;
 }
+
 .modify-activity-membership-fee {
   height: 64px;
 }
+
 .modify-activity-trainer-checkboxes {
   display: flex;
   flex-flow: column;
   margin: 10px 0;
   gap: 5px;
 }
+
 .modify-activity-button {
   display: flex;
   justify-content: right;

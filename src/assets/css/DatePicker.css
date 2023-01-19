@@ -1,3 +1,4 @@
+/* Styling für DatePicker.js */
 .date-picker {
   display: flex;
   flex-flow: column;
@@ -5,6 +6,7 @@
   align-items: center;
   gap: 15px;
 }
+
 .date-picker-item {
   width: 100%;
   display: flex;
@@ -13,26 +15,32 @@
   justify-content: center;
   gap: 15px;
 }
+
+/* Andere Anordnung ab 450px Breite */
 @media only screen and (min-width: 450px) {
   .date-picker-inputs {
     display: flex;
     gap: 10px;
     justify-content: left;
   }
+
   .date-picker-day {
     width: 100%;
     max-width: 250px;
   }
+
   .date-picker-times {
     flex: 0 0 200px;
     width: 100%;
     min-width: 200px;
   }
 }
+
 .date-picker-inputs {
   max-width: 600px;
   flex: 1;
 }
+
 .date-picker-times {
   width: 100%;
   min-width: 0;
@@ -40,9 +48,11 @@
   gap: 5px;
   display: flex;
 }
+
 .date-picker-time {
   min-width: 0 !important;
 }
+
 .date-picker-delete {
   flex: 0 0 54px;
 }

@@ -1,9 +1,11 @@
+/* Styling für Activity.js */
 .activity-image {
   height: 230px;
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
 }
+
 .activity-header {
   display: flex;
   gap: 8px;
@@ -11,17 +13,21 @@
   align-items: center;
   min-width: 0;
 }
+
 .activity-name {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .activity-edit-link {
   flex: 0 0 32px;
 }
+
 .activity-edit-icon {
   width: 32px;
 }
+
 .activity-information-tags {
   display: flex;
   flex-flow: row wrap;
@@ -33,15 +39,18 @@
   flex-flow: row wrap;
   gap: 15px;
 }
+
 .activity-dates-list {
   line-height: 24px;
 }
+
 .activity-coach {
   display: flex;
   flex-flow: row;
   align-items: center;
   gap: 15px;
 }
+
 .activity-coach-info {
   min-width: 0;
   flex: 1;
@@ -51,6 +60,7 @@
   font-family: var(--h4-typeface);
 }
 
+/* Wenn Informationen abgeschnitten werden müssen, werden sie mit ... abgekürzt */
 .activity-coach-email {
   overflow: hidden;
   white-space: nowrap;
@@ -74,10 +84,12 @@
 .activity-coach-message-button {
   margin-top: 15px;
 }
+
 .activity-participants-button {
   display: flex;
   justify-content: right;
 }
+
 .activity-remember-button {
   position: sticky;
   bottom: 15px;

@@ -6,20 +6,24 @@
   align-items: center;
   text-align: center;
 }
+
 .not-found-smiley {
   margin-top: 80px;
   max-width: 320px;
   padding: 20px;
 }
+
 .not-found-hero {
   font-family: Inter Black, sans-serif;
   font-size: 34px;
   margin: 20px auto 10px;
 }
+
 .not-found-subtitle {
   font-family: Inter SemiBold Italic, sans-serif;
   font-size: 20px;
 }
+
 .not-found-link {
   padding: 25px;
   text-decoration: underline;

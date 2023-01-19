@@ -7,6 +7,7 @@ import { backendUrl } from "../index";
  * Card-Komponente von Activee
  * @param item
  * @param sport
+ * @param compact
  * @returns {JSX.Element}
  * @constructor
  */

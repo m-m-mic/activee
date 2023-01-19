@@ -7,6 +7,11 @@ import { LoadingAnimation } from "../components/LoadingAnimation";
 import { Subtitle } from "../components/Subtitle";
 import { ActiveeDetails } from "../components/ActiveeDetails";
 
+/**
+ * Seite, auf welchen Übungsleiter die Interessenten ihrer Aktivitäten einsehen können
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function Participants() {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);

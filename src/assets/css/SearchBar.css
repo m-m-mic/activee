@@ -27,15 +27,18 @@
   border: none;
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .search-input:hover {
   outline: none;
   border: none;
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .search-input::placeholder {
   font-family: var(--text-typeface);
 }
 
+/* Button Styling */
 .search-button {
   text-decoration: none;
   appearance: none;
@@ -52,10 +55,12 @@
   border-radius: 50%;
   transition: 200ms ease-out;
 }
+
 .search-button:active {
   background: var(--light-mode-cs-secondary);
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .search-button-image {
   width: 24px;
   height: 24px;

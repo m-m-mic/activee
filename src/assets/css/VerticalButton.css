@@ -10,13 +10,16 @@
   padding: 10px 0;
   border-radius: 8px;
 }
+
 .vertical-button.unchecked {
   background: var(--light-mode-cs-unselected);
 }
+
 .vertical-button-icon {
   width: 32px;
   height: 32px;
 }
+
 .vertical-button-title {
   color: var(--light-mode-background);
   font-family: var(--button-typeface);

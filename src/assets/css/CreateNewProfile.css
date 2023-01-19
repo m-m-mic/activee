@@ -1,3 +1,4 @@
+/* Styling für CreateNewProfile.js */
 .create-sub-account-modal {
   position: fixed;
   left: 50%;
@@ -9,6 +10,7 @@
   max-width: 420px;
   width: 100%;
 }
+
 .create-sub-account-container {
   margin: 0 20px;
   padding: 20px;
@@ -19,6 +21,7 @@
   background: var(--light-mode-background);
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .create-sub-account-header {
   display: flex;
   justify-content: space-between;
@@ -26,9 +29,11 @@
   font-family: var(--h2-typeface);
   font-size: var(--h2-size);
 }
+
 .create-sub-account-exit {
   cursor: pointer;
 }
+
 .create-sub-account-names {
   font-family: Inter Bold, sans-serif;
   font-size: 24px;
@@ -38,12 +43,14 @@
   display: flex;
   gap: 10px;
 }
+
 .create-sub-account-input {
   font-family: Inter Bold, sans-serif;
   font-size: 20px;
   width: 100%;
   max-width: 200px;
 }
+
 .create-sub-account-options {
   display: flex;
   flex-flow: row wrap;

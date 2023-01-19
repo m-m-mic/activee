@@ -1,3 +1,4 @@
+/* Styling für WarningModal.js */
 .warning-modal {
   position: fixed;
   left: 50%;
@@ -9,6 +10,7 @@
   max-width: 420px;
   width: 100%;
 }
+
 .warning-modal-container {
   margin: 0 20px;
   padding: 20px;
@@ -19,6 +21,7 @@
   background: var(--light-mode-background);
   box-shadow: var(--light-mode-elevation-4);
 }
+
 .warning-modal-header {
   display: flex;
   justify-content: space-between;
@@ -26,9 +29,11 @@
   font-family: var(--h2-typeface);
   font-size: var(--h2-size);
 }
+
 .warning-modal-exit {
   cursor: pointer;
 }
+
 .warning-modal-options {
   display: flex;
   flex-flow: row wrap;

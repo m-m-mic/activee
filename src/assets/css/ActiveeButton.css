@@ -19,9 +19,11 @@
   transition: 200ms ease-out;
   height: 42px;
 }
+
 .activee-button.gap {
   gap: 7px;
 }
+
 .activee-button-icon {
   width: 24px;
 }
@@ -31,71 +33,88 @@
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-primary);
 }
+
 .activee-button.primary:active {
   background: var(--light-mode-cs-secondary);
 }
+
 .activee-button.secondary {
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-secondary);
 }
+
 .activee-button.secondary:active {
   background: var(--light-mode-cs-unselected);
 }
+
 .activee-button.unselected {
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-unselected);
 }
+
 .activee-button.unselected:active {
   background: var(--light-mode-cs-disabled);
 }
+
 .activee-button.blank {
   background: var(--light-mode-blank);
   box-shadow: none;
 }
+
 .activee-button.blank:active {
   background: var(--light-mode-blank-active);
 }
+
 .activee-button.warning {
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-warning);
 }
+
 .activee-button.warning:active {
   background: var(--light-mode-warning-active);
 }
+
 .activee-button.outline {
   background: var(--light-mode-background);
   border: 3px solid var(--light-mode-cs-primary);
   color: var(--light-mode-cs-primary);
 }
+
 .activee-button.outline:active {
   border: 3px solid var(--light-mode-cs-secondary);
   color: var(--light-mode-cs-secondary);
 }
+
 .activee-button:disabled {
   cursor: not-allowed;
   color: var(--light-mode-typeface-disabled);
   background: var(--light-mode-cs-disabled);
 }
+
 .activee-button:active:disabled {
   cursor: not-allowed;
   color: var(--light-mode-typeface-disabled);
   background: var(--light-mode-cs-disabled);
 }
+
 /* Spezifisch für RegisterBanner */
 .activee-button.register {
   box-shadow: none;
   color: var(--light-mode-typeface-inverted);
   background: var(--light-mode-cs-primary);
 }
+
 .activee-button.register:active {
   background: var(--light-mode-cs-secondary);
 }
+
 .activee-button.login {
   background: none;
   color: var(--light-mode-cs-primary);
   box-shadow: none;
   border: 3px solid var(--light-mode-cs-primary);
 }
+
 .activee-button.login:active {
   border: 3px solid var(--light-mode-cs-secondary);
 }

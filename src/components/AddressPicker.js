@@ -8,7 +8,7 @@ import {
 } from "../scripts/handleInputs";
 
 /**
- * Address-Picker, wird auf ModifyActivity.js und EditProfile.js eingesetzt.
+ * Address-Picker, wird auf ModifyActivity.js und EditProfile.js eingesetzt
  * @param data
  * @param setData
  * @param validation

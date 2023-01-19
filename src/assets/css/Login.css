@@ -1,16 +1,18 @@
-/* Styling für die Loginseite */
+/* Styling für Login.js */
 .login-buttons {
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
   justify-content: center;
 }
+
 .login-hero {
   font-family: Inter Black, sans-serif;
   font-size: 34px;
   text-align: center;
   margin: 60px auto;
 }
+
 .login-wrapper {
   background: var(--light-mode-cs-secondary);
   padding: 20px;
@@ -19,6 +21,7 @@
   gap: 20px;
   border-radius: 12px;
 }
+
 .login-input-wrapper {
   display: flex;
   flex-flow: column;
@@ -26,6 +29,7 @@
   align-items: center;
   gap: 15px;
 }
+
 .login-input {
   box-sizing: border-box;
   width: 100%;
@@ -41,6 +45,7 @@
   text-align: center;
   margin: 30px 0;
 }
+
 .login-no-account-button {
   text-decoration: underline;
 }

@@ -40,10 +40,12 @@
   font-family: var(--button-typeface);
   font-size: var(--button-size);
 }
+
 .activee-card-icon {
   width: 24px;
   height: 24px;
 }
+
 .activee-card-name {
   flex: 1;
   overflow: hidden;
@@ -69,6 +71,11 @@
   gap: 20px;
   margin: 20px 10px;
 }
+
+.no-activities-search {
+text-decoration: underline;
+}
+
 .no-activities-text {
   display: flex;
   flex-flow: column;
@@ -77,6 +84,7 @@
   text-align: center;
   gap: 8px;
 }
+
 .general-sports-image {
   width: 70px;
   height: 70px;
