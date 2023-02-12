@@ -67,7 +67,7 @@
 }
 
 .landing-page-suggestions-title{
-  font-family: Inter SemiBold, sans-serif;
+  font-weight: var(--bold-weight);
   font-size: var(--h3-size);
 }
 

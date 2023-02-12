@@ -121,13 +121,13 @@ export function Login() {
         <div className="login-options">
           <h3>Testprofile</h3>
           <div className="login-option">
-            <h4>Teilnehmer</h4>
+            <h4>Teilnehmer:in</h4>
             <div>E-Mail: roza.kovaci@gmail.com</div>
             <div>Passwort: password</div>
           </div>
           <div className="login-option">
-            <h4>Teilnehmer</h4>
-            <div>E-Mail: roza.kovaci@tsv-muenchen.de</div>
+            <h4>Übungsleiter:in</h4>
+            <div>E-Mail: adele.vogt@tsv-muenchen.de</div>
             <div>Passwort: password</div>
           </div>
         </div>

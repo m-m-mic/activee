@@ -263,25 +263,3 @@ details > summary::-webkit-details-marker {
   background: rgba(0, 0, 0, 0.5);
   z-index: 45;
 }
-
-/* Temporäre Klassen für Entwicklung */
-.filler-div {
-  height: 300vh;
-  background: #c7a4a4;
-}
-
-.under-construction {
-  font-family: Inter SemiBold Italic, sans-serif;
-  font-size: 20px;
-  height: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffe5a0;
-  border-radius: 8px;
-  gap: 8px;
-}
-
-.under-construction-icon {
-  width: 32px;
-}
