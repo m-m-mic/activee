@@ -7,6 +7,7 @@ import { ActiveeDisclaimer } from "../components/ActiveeDisclaimer";
 import { handleCookieChange } from "../scripts/handleCookieChange";
 import { backendUrl } from "../index";
 import FetchingAnimation from "../assets/apngs/fetching_100px.png";
+import { CautionDisclaimer } from "../components/CautionDisclaimer";
 
 /**
  * Login Seite
@@ -116,6 +117,19 @@ export function Login() {
           <NavLink to="/register" className="login-no-account-button">
             Noch kein Konto?
           </NavLink>
+        </div>
+        <div className="login-options">
+          <h3>Testprofile</h3>
+          <div className="login-option">
+            <h4>Teilnehmer</h4>
+            <div>E-Mail: roza.kovaci@gmail.com</div>
+            <div>Passwort: password</div>
+          </div>
+          <div className="login-option">
+            <h4>Teilnehmer</h4>
+            <div>E-Mail: roza.kovaci@tsv-muenchen.de</div>
+            <div>Passwort: password</div>
+          </div>
         </div>
       </>
     );

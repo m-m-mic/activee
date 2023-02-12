@@ -29,7 +29,7 @@
 }
 
 .profiles-parent-name {
-  font-family: var(--h2-typeface);
+  font-weight: var(--h2-weight);
   font-size: var(--h2-size);
   overflow: hidden;
   white-space: nowrap;
@@ -42,7 +42,7 @@
 }
 
 .profiles-child-name {
-  font-family: var(--h3-typeface);
+  font-weight: var(--h3-weight);
   font-size: var(--h3-size);
   overflow: hidden;
   white-space: nowrap;

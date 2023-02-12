@@ -1,6 +1,6 @@
 /*Styling für ModifyActivity.js */
 .modify-activity-name {
-  font-family: var(--h1-typeface);
+  font-weight: var(--h1-weight);
   font-size: var(--h1-size);
   min-width: 0;
   width: 100%;
@@ -53,8 +53,6 @@
 .modify-activity-select {
   display: inline-block;
   text-align: left;
-  font-family: var(--text-typeface);
-  font-size: var(--text-size);
   width: 100%;
 }
 

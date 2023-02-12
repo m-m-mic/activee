@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--h2-typeface);
+  font-weight: var(--h2-weight);
   font-size: var(--h2-size);
 }
 
@@ -71,8 +71,9 @@
 }
 
 .profile-selection-item-name {
-  font-family: var(--h3-typeface);
+  font-family: var(--text-typeface);
   font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -81,6 +82,7 @@
 .profile-selection-item-type {
   font-family: var(--text-typeface);
   font-size: var(--text-size);
+  font-weight: var(--text-weight);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

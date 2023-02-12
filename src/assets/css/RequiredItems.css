@@ -39,7 +39,7 @@
 }
 
 .required-item-expanded {
-  font-family: Inter Bold, sans-serif;
+  font-weight: var(--button-weight);
   color: var(--light-mode-typeface-inverted);
   align-items: center;
   display: flex;

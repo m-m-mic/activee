@@ -49,7 +49,7 @@
 }
 
 .search-item-name {
-  font-family: var(--h2-typeface);
+  font-weight: var(--h2-weight);
   font-size: var(--h2-size);
 }
 

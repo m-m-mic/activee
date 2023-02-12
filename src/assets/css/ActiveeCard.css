@@ -37,7 +37,7 @@
   padding: 10px;
   gap: 8px;
   color: var(--light-mode-typeface-inverted);
-  font-family: var(--button-typeface);
+  font-weight: var(--button-weight);
   font-size: var(--button-size);
 }
 

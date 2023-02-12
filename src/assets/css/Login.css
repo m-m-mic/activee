@@ -7,7 +7,7 @@
 }
 
 .login-hero {
-  font-family: Inter Black, sans-serif;
+  font-weight: var(--hero-weight);
   font-size: 34px;
   text-align: center;
   margin: 60px auto;
@@ -48,4 +48,17 @@
 
 .login-no-account-button {
   text-decoration: underline;
+}
+.login-options {
+  padding: 10px;
+  border-radius: 8px;
+  background: #ffedc1;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+.login-option {
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
 }

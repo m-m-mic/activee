@@ -57,7 +57,7 @@
 }
 
 .activity-coach-name {
-  font-family: var(--h4-typeface);
+  font-weight: var(--h4-weight);
 }
 
 /* Wenn Informationen abgeschnitten werden müssen, werden sie mit ... abgekürzt */

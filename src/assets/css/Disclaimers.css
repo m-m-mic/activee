@@ -73,7 +73,7 @@
 
 /* Styling für den Caution-Disclaimer */
 .caution-disclaimer {
-  font-family: var(--annotation-typeface);
+  font-weight: var(--annotation-weight);
   font-size: var(--annotation-size);
   border: 2px solid var(--light-mode-caution);
   border-radius: 8px;

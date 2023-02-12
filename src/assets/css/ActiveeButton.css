@@ -6,10 +6,9 @@
   -webkit-box-sizing: border-box;
   border: none;
   border-radius: 8px;
+  font-family: var(--text-typeface);
   box-shadow: var(--light-mode-elevation-4);
-  font-family: var(--button-typeface);
   color: var(--light-mode-typeface);
-  font-size: var(--button-size);
   padding: 10px 15px;
   cursor: pointer;
   display: inline-flex;

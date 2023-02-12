@@ -22,7 +22,7 @@
 
 .vertical-button-title {
   color: var(--light-mode-background);
-  font-family: var(--button-typeface);
+  font-weight: var(--button-weight);
 }
 
 /* Verkleinerung der Schriftgröße unter 375px um ungewolltes Clipping zu verhindern */

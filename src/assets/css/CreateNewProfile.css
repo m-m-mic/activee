@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--h2-typeface);
+  font-weight: var(--h2-weight);
   font-size: var(--h2-size);
 }
 
@@ -35,8 +35,6 @@
 }
 
 .create-sub-account-names {
-  font-family: Inter Bold, sans-serif;
-  font-size: 24px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -45,8 +43,8 @@
 }
 
 .create-sub-account-input {
-  font-family: Inter Bold, sans-serif;
-  font-size: 20px;
+  font-weight: var(--h3-weight);
+  font-size: var(--h3-size);
   width: 100%;
   max-width: 200px;
 }

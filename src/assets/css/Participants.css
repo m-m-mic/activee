@@ -21,7 +21,7 @@
 }
 
 .participants-name {
-    font-family: var(--h3-typeface);
+    font-weight: var(--h3-weight);
     font-size: var(--h3-size);
     overflow: hidden;
     white-space: nowrap;
@@ -49,7 +49,7 @@
 }
 
 .participants-content-data-name {
-    font-family: Inter Bold, sans-serif;
+    font-weight: var(--h4-weight);
 }
 
 .participants-content-data-box {

@@ -20,7 +20,7 @@
 }
 
 .register-mandatory-disclaimer {
-  font-family: Inter Bold, sans-serif;
+  font-weight: var(--h4-weight);
 }
 
 .register-button {

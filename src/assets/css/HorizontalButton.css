@@ -35,7 +35,7 @@
 .horizontal-button-title {
   flex: 1;
   color: var(--light-mode-background);
-  font-family: var(--button-typeface);
+  font-weight: var(--button-weight);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
