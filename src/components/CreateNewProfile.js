@@ -23,6 +23,7 @@ import { backendUrl } from "../index";
 export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccountVisible, firstName, lastName, address, email }) {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken", "userId", "userType"]);
+  const [disclaimer, setDisclaimer] = useState("Error");
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
   const [newProfileInfo, setNewProfileInfo] = useState({
     first_name: "",
@@ -54,6 +55,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
   const createNewProfile = () => {
     for (const [key, value] of Object.entries(inputValidation)) {
       if (value === false) {
+        setDisclaimer("Überprüfe deine Angaben");
         setIsDisclaimerVisible(true);
         return;
       }
@@ -64,11 +66,20 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${cookies.userToken}` },
       body: JSON.stringify(newProfileInfo),
     };
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
-      .then(() => navigate("/profile"));
-    // TODO: error-handling
+    fetch(url, requestOptions).then((response) => {
+      if (response.status === 201) {
+        response
+          .json()
+          .then((data) => handleCookieChange(setCookie, data.token, data.id, data.type, data.tier))
+          .then(() => navigate("/profile"));
+      } else if (response.status === 503) {
+        setDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        return setIsDisclaimerVisible(true);
+      } else {
+        setIsDisclaimerVisible(true);
+        setDisclaimer("Profil konnte nicht gelöscht werden");
+      }
+    });
   };
 
   return (
@@ -85,7 +96,7 @@ export function CreateNewProfile({ isCreateSubAccountVisible, setCreateSubAccoun
             />
           </div>
           <ActiveeDisclaimer isDisclaimerVisible={isDisclaimerVisible} type="fixed">
-            Überprüfe deine Angaben
+            {disclaimer}
           </ActiveeDisclaimer>
           <div className="create-sub-account-names">
             <input

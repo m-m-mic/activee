@@ -76,6 +76,10 @@ export function Register() {
             setIsFetching(false);
             navigate("/profile");
           });
+      } else if (response.status === 503) {
+        setSetDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        setIsFetching(false);
+        return setIsDisclaimerVisible(true);
       } else {
         setSetDisclaimer("Es ist ein Fehler beim Erstellen des Accounts aufgetreten");
         setIsFetching(false);

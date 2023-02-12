@@ -84,10 +84,15 @@ export function Profiles() {
       if (response.status === 200) {
         setWarningModalVisible(false);
         getAccountInfo();
-        return;
+      } else if (response.status === 503) {
+        setDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        setWarningModalVisible(false);
+        return setIsDisclaimerVisible(true);
+      } else {
+        setIsDisclaimerVisible(true);
+        setWarningModalVisible(false);
+        setDisclaimer("Profil konnte nicht gelöscht werden");
       }
-      setIsDisclaimerVisible(true);
-      setDisclaimer("Profil konnte nicht gelöscht werden");
     });
   };
 
@@ -116,6 +121,12 @@ export function Profiles() {
     }
     return (
       <>
+        <ActiveeDisclaimer
+          isDisclaimerVisible={isDisclaimerVisible}
+          setIsDisclaimerVisible={setIsDisclaimerVisible}
+          type="closable">
+          {disclaimer}
+        </ActiveeDisclaimer>
         {isCreateSubAccountVisible && (
           <CreateNewProfile
             isCreateSubAccountVisible={isCreateSubAccountVisible}

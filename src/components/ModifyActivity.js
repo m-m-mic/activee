@@ -48,6 +48,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["userToken"]);
   const [isDisclaimerVisible, setIsDisclaimerVisible] = useState(false);
+  const [disclaimer, setDisclaimer] = useState("Error");
   const [isWarningModalVisible, setWarningModalVisible] = useState(false);
   const [defaultValues, setDefaultValues] = useState({});
   const [languages, setLanguages] = useState();
@@ -81,6 +82,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     // Validiert alle Einträge des validators-States
     for (const [key, value] of Object.entries(validators)) {
       if (value === false) {
+        setDisclaimer("Bitte überprüfe deine Angaben");
         return setIsDisclaimerVisible(true);
       }
     }
@@ -108,9 +110,12 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     fetch(url, requestOptions).then((response) => {
       if (response.status === 201 || response.status === 200) {
         response.json().then((data) => navigate(`/activity/${data._id}`));
+      } else if (response.status === 503) {
+        setDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        return setIsDisclaimerVisible(true);
       } else {
-        // TODO: error-handling
-        console.log("Error while modifying activity.");
+        setDisclaimer("Es ist ein Fehler beim Modifizieren der Aktivität aufgetreten");
+        return setIsDisclaimerVisible(true);
       }
     });
   };
@@ -125,9 +130,14 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
     fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         navigate(`/`);
+      } else if (response.status === 503) {
+        setDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        setWarningModalVisible(false);
+        return setIsDisclaimerVisible(true);
       } else {
-        console.log("Error while creating activity.");
-        // TODO: error-handling
+        setWarningModalVisible(false);
+        setDisclaimer("Es ist ein Fehler beim Löschen der Aktivität aufgetreten");
+        return setIsDisclaimerVisible(true);
       }
     });
   };
@@ -188,7 +198,7 @@ export function ModifyActivity({ editMode = false, activityInfo, setActivityInfo
         isDisclaimerVisible={isDisclaimerVisible}
         setIsDisclaimerVisible={setIsDisclaimerVisible}
         type="closable">
-        Bitte überprüfe deine Angaben
+        {disclaimer}
       </ActiveeDisclaimer>
       {isWarningModalVisible && (
         <>

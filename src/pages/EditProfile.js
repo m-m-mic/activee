@@ -110,6 +110,9 @@ export function EditProfile() {
     fetch(url, requestOptions).then((response) => {
       if (response.status === 200) {
         navigate("/profile");
+      } else if (response.status === 503) {
+        setDisclaimer("Das Hinzufügen oder Verändern von Daten ist aufgrund von datenschutzrechtlichen Gründen deaktiviert");
+        return setIsDisclaimerVisible(true);
       } else {
         setIsDisclaimerVisible(true);
         setDisclaimer("Profil konnte nicht aktualisiert werden");
