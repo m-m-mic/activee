@@ -48,7 +48,7 @@ export const activityTemplate = {
   only_logged_in: false,
 };
 
-// React-select preselects für ModifyActivity.js, welche nicht im Backend gespeichert werden
+// React-select preselects für ModifyActivity.jsx, welche nicht im Backend gespeichert werden
 
 export const agePreselect = [
   { value: "youngerThan", label: "oder jünger" },

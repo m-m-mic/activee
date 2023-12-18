@@ -78,7 +78,7 @@ const houseNumberPattern = /^[1-9]\d*(?:[ -]?(?:[a-zA-Z]+|[1-9]\d*))?$/;
 
 // Input Handling- und Validator-Funktionen
 
-// Für Register & EditProfile.js
+// Für Register & EditProfile.jsx
 
 // Names müssen mindestens ein Zeichen enthalten und dürfen keine Sonderzeichen enthalten.
 export const setFirstNameInput = (input, data, setData, validation, setValidation) => {
@@ -193,7 +193,7 @@ export const setDistanceInput = (input, data, setData, validation, setValidation
   }
 };
 
-// Für ModifyActivity.js
+// Für ModifyActivity.jsx
 
 // Name muss mindestens 1 Zeichen oder 30 Zeichen lang sein und darf keine Sonderzeichen enthalten.
 export const setNameInput = (input, data, setData, validation, setValidation) => {
@@ -346,7 +346,7 @@ export const setShowPhoneNumberInput = (input, index, data, setData) => {
   setData({ ...data, trainers: trainerList });
 };
 
-// DatePicker.js
+// DatePicker.jsx
 
 // Keine Validierung der Eingaben, sie werden nur hinzugefügt. Da eine variable Anzahl an Dates vom Nutzer eingefügt
 // werden können, werden diese erst vorm Absenden des Requests geprüft
@@ -389,7 +389,7 @@ export const isDateValid = (date) => {
   }
 };
 
-// AddressPicker.js
+// AddressPicker.jsx
 
 // Adressen sind für Aktivitäten ein Pflichtfeld, weshalb keine leeren Felder akzeptiert werden, falls isActivity = true ist
 

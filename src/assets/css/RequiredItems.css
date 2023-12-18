@@ -1,4 +1,4 @@
-/* Styling für RequiredItems.js */
+/* Styling für RequiredItems.jsx */
 .required-items {
   margin-top: var(--component-spacing);
   display: grid;
