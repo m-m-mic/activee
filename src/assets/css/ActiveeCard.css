@@ -1,4 +1,4 @@
-/* Styling for ActiveeCard.js */
+/* Styling for ActiveeCard.jsx */
 .activee-card {
   display: inline-flex;
   flex-flow: column;
@@ -53,7 +53,7 @@
   text-overflow: ellipsis;
 }
 
-/* Styling für ActiveeScrollingCards.js */
+/* Styling für ActiveeScrollingCards.jsx */
 .activee-scrolling-cards {
   display: flex;
   flex-flow: row;
