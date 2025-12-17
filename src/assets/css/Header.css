@@ -1,6 +1,8 @@
 /* Styling für Header und beinhaltete Elemente */
 /* Header bleibt aufgrund von 'position: sticky' und 'top: 0' immer am oberen Bildschirmrand */
 .header {
+  width: 100%;
+  box-sizing: border-box;
   z-index: 40;
   position: sticky;
   top: 0;

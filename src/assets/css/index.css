@@ -78,7 +78,6 @@
   src: url(../fonts/FredokaOne-Regular.ttf);
 }
 
-/* Festlegung des body-Stylings. 'min-width' verhindert das weitere Schrumpfen unter 320px Seitenbreite. */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -86,7 +85,6 @@ html {
 
 body {
   width: 100%;
-  min-width: 320px;
   margin: 0;
   font-family: var(--text-typeface);
   font-weight: var(--text-weight);
@@ -241,15 +239,29 @@ details > summary::-webkit-details-marker {
   min-height: 100vh;
   display: flex;
   flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 /* Aufgrund von flex: 1 nimmt der Seiteninhalt im content-body immer sämtlichen freien Platz im Viewport ein */
 #content-body {
   flex: 1;
   gap: var(--component-spacing);
-  margin: 0 12px 25px 12px;
+  padding: 0 12px 25px 12px;
+  box-sizing: border-box;
   display: flex;
   flex-flow: column;
+  width: 100%;
 }
 
 /* Modal Background */
