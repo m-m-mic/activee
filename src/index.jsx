@@ -26,7 +26,7 @@ import { AboutUs } from "./pages/AboutUs.jsx";
 import { Impressum } from "./pages/Impressum.jsx";
 
 // Production backend: "https://api-activee.onrender.com" // Local backend: "http://localhost:3033"
-export const backendUrl = "https://api.activee.micbu.com";
+export const backendUrl = "https://api.activee.micbu.de";
 
 // React-Router Struktur unseres Projekts, nicht existierende Pfade werden zu 404 weitergeleitet
 export default function App() {
